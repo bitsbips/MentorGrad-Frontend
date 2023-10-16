@@ -1,0 +1,42 @@
+.wrapper {
+    position:relative;
+  }
+
+.has-search .form-control {
+    padding-left: 1.575rem;
+    width: 100%;
+    align-self: center;
+   
+}
+.form-group input:focus {
+    outline: none;
+    box-shadow: none;
+}
+@media (max-width: 750px) {
+    .has-search .form-control {
+        padding-left: 2.575rem;
+        width: 19.375rem;
+    
+    }
+    
+    }
+    /* @media screen and (min-width: 1280px) and (min-height: 800px) {
+        .has-search .form-control {
+            padding-left: 1.575rem;
+            width: 23.175rem;
+            align-self: center;
+           
+        }    }
+    */
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    border-width: 0px;
+}
