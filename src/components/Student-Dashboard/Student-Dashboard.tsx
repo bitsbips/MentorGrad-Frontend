@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { Context } from "../../Context/ContextStates";
-import { Border, Container, ContainerDa, PositionProfile, RightContainer, RightContainerDash1 } from "../../components/StudentProfileDetails/StudentProfileStyles";
-import { ActiveLabel, BackActive, BackInActive, InActiveLabel } from "./TestDahboardStyles";
+import { Border, Container, ContainerDa, PositionProfile, RightContainer, RightContainerDash1 } from "../StudentProfileDetails/StudentProfileStyles";
+import { ActiveLabel, BackActive, BackInActive, InActiveLabel } from "./StudentDahboardStyles";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Icon } from "@mui/material";
 import HeaderUserinfo from "../StudentDashboard/HeaderUserinfo";

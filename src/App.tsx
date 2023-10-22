@@ -24,6 +24,8 @@ import StudentDashboardMain from "./pages/StudentDahboard/StudentDahboard.Main";
 import AuthGuard from "./pages/AuthFlow/auth-guard";
 import { jwtDecode } from "./helper-functions";
 import { userTypes } from "./Data/Data";
+import MentorReviews from "./pages/Mentor/MentorReviews";
+import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
 
 function App() {
   const navigate = useNavigate();
@@ -71,6 +73,8 @@ function App() {
   const mentorRoutes = (
     <Routes>
       <Route path="/mentor/signup" element={<MentorForm />} />
+      <Route path="/mentor" element={<Mentor />} />
+      <Route path="/dashboard" element={<MentorDashboardMain />} />
     </Routes>
   );
 

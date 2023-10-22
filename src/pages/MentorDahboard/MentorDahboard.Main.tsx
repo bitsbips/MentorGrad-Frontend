@@ -3,16 +3,16 @@ import { Container } from "../AuthFlow/AuthStyles";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer";
 import Sidebarcompo from "../../components/SideBar/Sidebarcompo";
-import TestDashboard from "../../components/Student-Dashboard/Student-Dashboard";
 import HeaderDashboard from "../../components/Header/HeaderDashboard";
+import Mentor_Dashboard from "../../components/Mentor-Dashboard/Mentor-Dashboard";
 
-const StudentDashboardMain = () => {
+const MentorDashboardMain = () => {
     return (
         <Container>
             <HeaderDashboard />
-            <TestDashboard/>
+            <Mentor_Dashboard/>
             <Footer />
         </Container>
     )
 }
-export default StudentDashboardMain;
+export default MentorDashboardMain;
