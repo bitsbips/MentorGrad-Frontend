@@ -131,7 +131,7 @@ const MentorReviews = (): JSX.Element => {
                   flexDirection={"row"}
                   sx={{ justifyContent: "flex-end" }}
                 >
-                  {new Array(review?.rating).fill(<StarIcon />)}
+                  {new Array(review?.rating).fill(<StarIcon sx={{color:"#f2e644"}}/>)}
                   {new Array(5 - review?.rating).fill(<StarBorderIcon />)}
                 </Stack>
               </>
