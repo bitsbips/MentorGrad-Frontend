@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, ExperticeText } from "./MentorStyles";
 import useMediaQuery from "../../hooks/MediaQuery";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,9 @@ import Rectangle from "../../Assets/Images/Rectangle.png";
 import { makeStyles } from "@material-ui/core";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { getBlogs } from "../../api";
+import { formatDate, jwtDecode } from "../../helper-functions";
+import { notifyError } from "../../components/Toastifycom";
 
 const useStyles = makeStyles({
   container: {
@@ -57,15 +60,44 @@ const useStyles = makeStyles({
   },
 });
 
+type Blog = {
+  updatedAt: string;
+  title: string;
+  description: string;
+  Image: string;
+};
+
+type Blogs = Blog[];
+
 const MentorBlogs = (): JSX.Element => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   const navigate = useNavigate();
   const classes = useStyles();
 
+  // Get the user from your authentication system or local storage
+  const userId: String = jwtDecode(
+    localStorage.getItem("@storage_Key")
+  )?.userId;
+
   const [tabs, setTabs] = React.useState(0);
+  const [blogs, setBlogs] = React.useState<Blogs>([]);
+
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabs(newValue);
+  };
+
+  const getAllBlogs = () => {
+    getBlogs(userId)
+      .then((res) => {
+        setBlogs(res);
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
   };
 
   const numTimes = 6; // Change this to the number of times you want to render the content
@@ -91,18 +123,19 @@ const MentorBlogs = (): JSX.Element => {
       <hr />
       <Grid item lg={12}>
         <Grid container spacing={2}>
-          {contentArray.map((index) => (
-            <Grid item lg={4}>
+          {blogs.map((blog, index) => (
+            <Grid item lg={4} key={index}>
               <Stack className={classes.container}>
                 <img src={Rectangle} />
                 <Stack className={classes.subContainer}>
-                  <Typography className={classes.date}>02 Oct 2023</Typography>
+                  <Typography className={classes.date}>
+                    {formatDate(blog?.updatedAt, "dd MMM yyyy")}
+                  </Typography>
                   <Typography variant="h6" fontWeight={600} textAlign={"left"}>
-                    This is the Title of Blog
+                    {blog?.title}
                   </Typography>
                   <Typography textAlign={"left"}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt...
+                    {blog?.description}
                   </Typography>
                   <Stack
                     flexDirection={"row"}

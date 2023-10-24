@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
+import { jwtDecode } from "./helper-functions";
 // const URL = 'http://localhost:5001/api/v1/'
 // const URL = "http://mentorgrad.com:5001/api/v1/";
 const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
@@ -337,7 +338,6 @@ export async function GetAllContries() {
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, "response");
     return response.data;
   } catch (e) {
     // saving error
@@ -352,7 +352,6 @@ export async function GetNationality() {
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, "response");
     return response.data;
   } catch (e) {
     // saving error
@@ -368,7 +367,82 @@ export async function GetCountryList() {
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, "response");
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getBlogs(id) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `blog/getBlogById/${id}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getReviews(id) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `review/getReciepentReviews`,
+    method: "POST",
+    headers: headersList,
+    data: {
+      recipient: id,
+    },
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getInvioces() {
+  const token = localStorage.getItem("@storage_Key");
+    // Get the user from your authentication system or local storage
+    const userId = jwtDecode(
+      localStorage.getItem("@storage_Key")
+    )?.userId;
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `invoice/getByReceiverId/${userId}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
     return response.data;
   } catch (e) {
     // saving error
