@@ -103,6 +103,15 @@ const MentorBlogs = (): JSX.Element => {
   const numTimes = 6; // Change this to the number of times you want to render the content
   const contentArray = Array.from({ length: numTimes }, (_, index) => index);
 
+  function TruncateString(text: string, maxLength: number) {
+    if (text.length <= maxLength) {
+      return <span>{text}</span>;
+    } else {
+      const truncatedText = text.slice(0, maxLength) + "...";
+      return <span>{truncatedText}</span>;
+    }
+  }
+
   return (
     <>
       <Grid item xs={12} sm={12} lg={12}>
@@ -135,7 +144,7 @@ const MentorBlogs = (): JSX.Element => {
                     {blog?.title}
                   </Typography>
                   <Typography textAlign={"left"}>
-                    {blog?.description}
+                    {TruncateString(blog?.description, 30)}
                   </Typography>
                   <Stack
                     flexDirection={"row"}

@@ -102,6 +102,7 @@ const MentorReviews = (): JSX.Element => {
         </Typography>
       </Grid>
       {reviews?.map((review, index) => (
+        <>
         <Grid container className={classes.container} key={index}>
           <Grid item xs={12} sm={12} lg={6}>
             <Stack flexDirection={"row"}>
@@ -149,6 +150,8 @@ const MentorReviews = (): JSX.Element => {
             </Typography>
           </Grid>
         </Grid>
+        <br/>
+        </>
       ))}
     </>
   );

@@ -383,7 +383,7 @@ export async function getBlogs(id) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `blog/getBlogById/${id}`,
+    url: URL + `blog/getAllBlogsOfUser/${id}`,
     method: "GET",
     headers: headersList,
   };
