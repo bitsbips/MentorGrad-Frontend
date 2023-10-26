@@ -28,6 +28,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import MentorReviews from "../../pages/Mentor/MentorReviews";
 import TableComponentDashboard from "../StudentDashboard/TableComponent";
 import MentorBlogs from "../../pages/Mentor/MentorBlog";
+import MentorProfile from "../../pages/MentorProfile/MentorProfile";
+import { MentorBooking } from "../../pages/Mentor/MentorBookings";
 const style = {
   width: "30%",
   bgcolor: "#F2F5F9",
@@ -89,7 +91,6 @@ const Mentor_Dashboard: FC = () => {
     },
     {
       id: 8,
-
       name: "Profile",
       icon: DashboardIcon,
     },
@@ -127,11 +128,17 @@ const Mentor_Dashboard: FC = () => {
         </div>
       );
     }
-    if (profilestep === "2") {
+    if (tab === "2") {
       return (
-        <div>
-          <p>No Result</p>
-        </div>
+        <>
+          <Typography
+            variant="h5"
+            sx={{ textAlign: "left", paddingBottom: "20px" }}
+          >
+            Booking Summary
+          </Typography>
+          <MentorBooking />
+        </>
       );
     }
     if (profilestep === "3") {
@@ -157,7 +164,7 @@ const Mentor_Dashboard: FC = () => {
           >
             Invoices
           </Typography>
-          <TableComponentDashboard type="Invoice"/>
+          <TableComponentDashboard type="Invoice" />
         </>
       );
     }
@@ -169,12 +176,25 @@ const Mentor_Dashboard: FC = () => {
       );
     }
     if (tab === "7") {
-        return (
-          <div>
-            <MentorBlogs />
-          </div>
-        );
-      }
+      return (
+        <div>
+          <MentorBlogs />
+        </div>
+      );
+    }
+    if (tab === "8") {
+      return (
+        <div>
+          <Typography
+            variant="h5"
+            sx={{ textAlign: "left", paddingBottom: "20px" }}
+          >
+            Mentor Profile
+          </Typography>
+          <MentorProfile />
+        </div>
+      );
+    }
   };
 
   // Actions

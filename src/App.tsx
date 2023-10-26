@@ -26,6 +26,8 @@ import { jwtDecode } from "./helper-functions";
 import { userTypes } from "./Data/Data";
 import MentorReviews from "./pages/Mentor/MentorReviews";
 import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
+import MentorProfile from "./pages/MentorProfile/MentorProfile";
+import Main from "./pages/MentorChat/Main";
 
 function App() {
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ function App() {
     <Routes>
       <Route path="/dashboard" element={<StudentDashboardMain />} />
       <Route path="/studentForm" element={<StudentForm />} />
-      <Route path="/studentProfile" element={<StudentProfile />} />
+      <Route path="/profile" element={<StudentProfile />} />
       <Route path="/paymentPlan" element={<PaymentPlan />} />
       <Route path="/paymentPage" element={<PaymentPage />} />
     </Routes>
@@ -75,6 +77,9 @@ function App() {
       <Route path="/mentor/signup" element={<MentorForm />} />
       <Route path="/mentor" element={<Mentor />} />
       <Route path="/dashboard" element={<MentorDashboardMain />} />
+      <Route path="/profile" element={<MentorProfile />} />
+      <Route path="/messages" element={<Main />} />
+
     </Routes>
   );
 

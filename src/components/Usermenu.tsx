@@ -26,7 +26,7 @@ const UserMenu = () => {
   };
 
   const handleUserProfileClick = () => {
-    navigate('/studentProfile')
+    navigate('/profile')
   };
   const handleLogoutClick = () => {
     setIsLoading(true); 
