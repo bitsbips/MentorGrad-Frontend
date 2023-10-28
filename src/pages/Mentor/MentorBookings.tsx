@@ -1,6 +1,7 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Card, Grid, Stack, Typography } from "@mui/material";
 import styled from "styled-components";
+import clockIcon from "../../Assets/Images/clock.png";
 
 const StyledBox = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ const StyledBox = styled.div`
   /* Media query for small screens */
   @media (max-width: 768px) {
     & .group {
-      padding: 0 10px; /* Add padding for smaller screens */
+      max-width: 100%; /* Adjust the max-width for smaller screens */
     }
   }
 
@@ -321,87 +322,89 @@ const StyledBox = styled.div`
 export const MentorBooking = (): JSX.Element => {
   return (
     <Grid container>
-      <Grid item lg={12}>
-        <StyledBox>
-          <div className="group">
-            <div className="overlap">
-              <div className="overlap-group-wrapper">
-                <div className="overlap-group">
-                  <div className="text-wrapper">Introduction to Computing</div>
-                  <p className="div">
+      <Grid item xs={12} lg={12}>
+        <Card>
+          <Grid item xs={12} lg={12}>
+            <Grid container gap={2}>
+              <Grid item xs={12} lg={1}>
+                <Stack
+                  flexDirection={"column"}
+                  justifyContent={"space-around"}
+                  sx={{
+                    background: "#5F61BE",
+                    borderRadius: "20px",
+                    color: "#fff",
+                    height: "160px",
+                  }}
+                >
+                  <Typography>Jun</Typography>
+                  <Typography fontWeight={600}>17</Typography>
+                  <Typography>Mon</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                lg={5}
+                sx={{ pt: 2, pb: 2, display: "flex" }}
+                flexDirection={"row"}
+              >
+                <Stack flexDirection={"column"}>
+                  <Typography variant="h6" fontWeight={600}>
+                    Introduction to Computing
+                  </Typography>
+                  <Typography textAlign={"left"}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Phasellus id magna consectetur, sodales lorem convallis,
                     mollis urna.
-                  </p>
-                  <img
-                    className="icons-ic-location"
-                    alt="Icons ic location"
-                    src="https://c.animaapp.com/2kY30kB9/img/icons-ic-location.svg"
-                  />
-                  <div className="jun-mon-wrapper">
-                    <p className="jun-mon">
-                      <span className="span">
-                        Jun
-                        <br />
-                        <br />
-                      </span>
-                      <span className="text-wrapper-2">
-                        17
-                        <br />
-                      </span>
-                      <span className="span">
-                        <br />
-                        Mon
-                      </span>
-                    </p>
+                  </Typography>
+                </Stack>
+                <div
+                  style={{
+                    borderLeft: "1px solid #000",
+                    height: "100%",
+                  }}
+                ></div>
+              </Grid>
+
+              {/* <Grid item xs={12} lg={1} sx={{ pt: 2, pb: 2 }}> */}
+
+              {/* </Grid> */}
+
+              <Grid
+                item
+                xs={12}
+                lg={2}
+                sx={{ pt: 5.5, pb: 2 }} 
+              >
+                <Stack flexDirection={"column"} alignItems={"center"}>
+                  <Typography fontWeight={600}>30 Minutes</Typography>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      padding: "10px",
+                      background: "#cccdfc",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <img src={clockIcon} width="15px" height="15px" />
+                    <Typography
+                      textAlign={"left"}
+                      noWrap
+                      sx={{ ml: 1 }}
+                      fontSize={"small"}
+                    >
+                      01:00 PM - 01:30 PM
+                    </Typography>
                   </div>
-                  <img
-                    className="img-avatar"
-                    alt="Img avatar"
-                    src="https://c.animaapp.com/2kY30kB9/img/-img-avatar-1@2x.png"
-                  />
-                  <div className="text-wrapper-3">Baji Darakshan</div>
-                  <div className="overlap-2">
-                    <div className="text-wrapper-4">Tuddiwala, Faisalabad</div>
-                    <div className="text-wrapper-5">test@test.com</div>
-                  </div>
-                  <div className="text-wrapper-6">30 Minutes</div>
-                  <div className="overlap-3">
-                    <p className="p">01:00 PM - 01:30 PM</p>
-                    <img
-                      className="clock"
-                      alt="Clock"
-                      src="https://c.animaapp.com/2kY30kB9/img/clock--1--1@2x.png"
-                    />
-                  </div>
-                  <div className="overlap-4">
-                    <div className="rectangle" />
-                    <img
-                      className="eye"
-                      alt="Eye"
-                      src="https://c.animaapp.com/2kY30kB9/img/eye--1--1@2x.png"
-                    />
-                    <div className="text-wrapper-7">view</div>
-                  </div>
-                  <div className="overlap-5">
-                    <div className="rectangle-2" />
-                    <div className="text-wrapper-8">cancel</div>
-                  </div>
-                </div>
-              </div>
-              <img
-                className="line"
-                alt="Line"
-                src="https://c.animaapp.com/2kY30kB9/img/line-59.svg"
-              />
-              <img
-                className="img"
-                alt="Line"
-                src="https://c.animaapp.com/2kY30kB9/img/line-59.svg"
-              />
-            </div>
-          </div>
-        </StyledBox>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Card>
       </Grid>
     </Grid>
   );

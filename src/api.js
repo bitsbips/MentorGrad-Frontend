@@ -1,11 +1,16 @@
 import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
-// const URL = 'http://localhost:5001/api/v1/'
+const URL = "http://localhost:5001/api/v1/";
 // const URL = "http://mentorgrad.com:5001/api/v1/";
-const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+// const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const IMGURL = "http://mentorgrad.com:5001/images/";
 // export const IMGURL = 'http://localhost:5001/images/'
+
+// Chat Urls
+export const http = "http://localhost:5001/";
+export const ws = "ws://localhost:5001/graphql";
+export const file = "http://localhost:5001/";
 
 const getData = async () => {
   try {
@@ -113,12 +118,12 @@ export async function GoogoleLogin() {
 export async function GetGoogoleUser() {
   try {
     const response = await axios.get(URL + "auth/login/success");
-    console.log(response.data);
-    return response.data;
+    console.log(response?.data);
+    return response?.data;
   } catch (e) {
-    console.log(e.response.data);
+    console.log(e?.response?.data);
 
-    return e.response.data;
+    return e?.response?.data;
   }
 }
 
@@ -425,10 +430,8 @@ export async function getReviews(id) {
 
 export async function getInvioces() {
   const token = localStorage.getItem("@storage_Key");
-    // Get the user from your authentication system or local storage
-    const userId = jwtDecode(
-      localStorage.getItem("@storage_Key")
-    )?.userId;
+  // Get the user from your authentication system or local storage
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
 
   let headersList = {
     Accept: "*/*",

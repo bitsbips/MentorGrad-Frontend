@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Register from "./pages/AuthFlow/Register/Register";
@@ -28,6 +27,7 @@ import MentorReviews from "./pages/Mentor/MentorReviews";
 import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
 import MentorProfile from "./pages/MentorProfile/MentorProfile";
 import Main from "./pages/MentorChat/Main";
+import MessagesConfig from "./MessagesConfig";
 
 function App() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function App() {
   const [nationality, setNationality] = useState([]);
 
   // Get the user's role from your authentication system or local storage
-  const user: String = jwtDecode(
+  const user: string = jwtDecode(
     localStorage.getItem("@storage_Key")
   )?.userType;
 
@@ -79,7 +79,6 @@ function App() {
       <Route path="/dashboard" element={<MentorDashboardMain />} />
       <Route path="/profile" element={<MentorProfile />} />
       <Route path="/messages" element={<Main />} />
-
     </Routes>
   );
 
@@ -122,6 +121,7 @@ function App() {
         </Routes>
       </Context.Provider>
       <Toast />
+      <MessagesConfig />
     </div>
   );
 }

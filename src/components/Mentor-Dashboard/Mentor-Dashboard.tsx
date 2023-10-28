@@ -30,6 +30,15 @@ import TableComponentDashboard from "../StudentDashboard/TableComponent";
 import MentorBlogs from "../../pages/Mentor/MentorBlog";
 import MentorProfile from "../../pages/MentorProfile/MentorProfile";
 import { MentorBooking } from "../../pages/Mentor/MentorBookings";
+import Main from "../../pages/MentorChat/Main";
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import ChatIcon from '@mui/icons-material/Chat';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import TypeSpecimenIcon from '@mui/icons-material/TypeSpecimen';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import LogoutIcon from '@mui/icons-material/Logout';
 const style = {
   width: "30%",
   bgcolor: "#F2F5F9",
@@ -60,45 +69,45 @@ const Mentor_Dashboard: FC = () => {
     {
       id: 2,
       name: "Bookings",
-      icon: DashboardIcon,
+      icon: BookOnlineIcon,
     },
     {
       id: 3,
       name: "Schedule Timings",
-      icon: DashboardIcon,
+      icon: ScheduleIcon,
     },
     {
       id: 4,
       name: "Messages",
-      icon: DashboardIcon,
+      icon: ChatIcon,
     },
     {
       id: 5,
       name: "Invoices",
-      icon: DashboardIcon,
+      icon: ReceiptIcon,
     },
     {
       id: 6,
       name: "Reviews",
-      icon: DashboardIcon,
+      icon: RateReviewIcon,
       url: "/mentor/reviews",
     },
     {
       id: 7,
 
       name: "Blog",
-      icon: DashboardIcon,
+      icon: TypeSpecimenIcon,
     },
     {
       id: 8,
       name: "Profile",
-      icon: DashboardIcon,
+      icon: ContactPageIcon,
     },
     {
       id: 9,
 
       name: "Logout",
-      icon: DashboardIcon,
+      icon: LogoutIcon,
     },
   ];
   useEffect(() => {
@@ -148,10 +157,10 @@ const Mentor_Dashboard: FC = () => {
         </div>
       );
     }
-    if (profilestep === "4") {
+    if (tab === "4") {
       return (
         <div>
-          <p>No Result</p>
+          <Main />
         </div>
       );
     }
