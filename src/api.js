@@ -8,12 +8,9 @@ export const IMGURL = "http://mentorgrad.com:5001/images/";
 // export const IMGURL = 'http://localhost:5001/images/'
 
 // Chat Urls
-export const http =
-  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const ws =
-  "ws://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/graphql";
-export const file =
-  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const http = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const ws = "wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/graphql";
+export const file = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 
 const getData = async () => {
   try {
