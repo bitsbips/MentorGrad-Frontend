@@ -28,6 +28,13 @@ import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
 import MentorProfile from "./pages/MentorProfile/MentorProfile";
 import Main from "./pages/MentorChat/Main";
 import MessagesConfig from "./MessagesConfig";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Inter", "sans-serif"].join(","),
+  },
+});
 
 function App() {
   const navigate = useNavigate();
@@ -85,43 +92,45 @@ function App() {
   const adminRoutes = <Routes>{/* Add admin-specific routes here */}</Routes>;
   return (
     <div className="App">
-      <Context.Provider
-        value={{
-          priceRangeValue,
-          setPriceRangeValue,
-          value,
-          setValue,
-          profilestep,
-          setProfileStep,
-          countryData,
-          setCountryData,
-          countryList,
-          setCountryList,
-          nationality,
-          setNationality,
-        }}
-      >
-        <Routes>
-          <Route
-            path="/*"
-            element={
-              <AuthGuard>
-                {user === userTypes.student && studentRoutes}
-                {user === userTypes.mentor && mentorRoutes}
-                {user === userTypes.admin && adminRoutes}
-              </AuthGuard>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgetEmail" element={<ForgetEmail />} />
-          <Route path="/reset-Password/:id" element={<ForgetPassword />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </Context.Provider>
-      <Toast />
-      <MessagesConfig />
+      <ThemeProvider theme={theme}>
+        <Context.Provider
+          value={{
+            priceRangeValue,
+            setPriceRangeValue,
+            value,
+            setValue,
+            profilestep,
+            setProfileStep,
+            countryData,
+            setCountryData,
+            countryList,
+            setCountryList,
+            nationality,
+            setNationality,
+          }}
+        >
+          <Routes>
+            <Route
+              path="/*"
+              element={
+                <AuthGuard>
+                  {user === userTypes.student && studentRoutes}
+                  {user === userTypes.mentor && mentorRoutes}
+                  {user === userTypes.admin && adminRoutes}
+                </AuthGuard>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgetEmail" element={<ForgetEmail />} />
+            <Route path="/reset-Password/:id" element={<ForgetPassword />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Context.Provider>
+        <Toast />
+        <MessagesConfig />
+      </ThemeProvider>
     </div>
   );
 }

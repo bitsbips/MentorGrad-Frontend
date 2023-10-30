@@ -428,6 +428,30 @@ export async function getReviews(id) {
   }
 }
 
+
+export async function getBookings() {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `booking/getAllBooking`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
 export async function getInvioces() {
   const token = localStorage.getItem("@storage_Key");
   // Get the user from your authentication system or local storage

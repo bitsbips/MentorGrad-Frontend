@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 export const ContainerDa = styled.div`
   background-color: #F2F5F9;
-  width: 80%;
+  width: 90%;
   margin: 0 auto !important;
   margin-top: 2% !important;
   
@@ -72,7 +72,7 @@ export const RightContainer = styled.div`
 
 `;
 export const RightContainerDash1 = styled.div`
-  width: 80%;
+  width: 100%;
   margin-bottom:5%;
   @media (max-width: 950px) {
    width: 100%;
