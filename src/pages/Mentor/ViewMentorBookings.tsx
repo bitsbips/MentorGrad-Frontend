@@ -175,7 +175,8 @@ export const ViewMentorBooking = ({
           </Box>
         </DialogContent>
         <DialogActions>
-          {data?.bookingStatus !== "COMPLETED" && (
+          {(data?.bookingStatus !== "COMPLETED" ||
+            data?.bookingStatus !== "CANCELLED") && (
             <Button
               size="large"
               variant="contained"

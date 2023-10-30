@@ -9,7 +9,7 @@ export const IMGURL = "http://mentorgrad.com:5001/images/";
 
 // Chat Urls
 export const http = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const ws = "wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/graphql";
+export const ws = "wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql";
 export const file = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 
 const getData = async () => {
@@ -368,6 +368,77 @@ export async function GetCountryList() {
   let reqOptions = {
     url: URL + "allcountries",
     method: "GET",
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getProfileDetails(id) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `profile/getProfileById/${id}`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data[0];
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function updateProfileDetails(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `profile/updateProfile/${payload?.id}`,
+    method: "put",
+    headers: headersList,
+    data: payload
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function updateUserPassword(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `profile/resetPassword`,
+    method: "put",
+    headers: headersList,
+    data: payload
   };
 
   let response = await axios.request(reqOptions);

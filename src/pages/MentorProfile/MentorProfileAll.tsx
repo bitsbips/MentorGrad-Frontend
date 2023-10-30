@@ -9,6 +9,9 @@ import useMediaQuery from "../../hooks/MediaQuery";
 import { Container } from "@material-ui/core";
 import ChangePassword from "./ChangePassword";
 import { Card } from "@mui/material";
+import { getProfileDetails } from "../../api";
+import { jwtDecode } from "../../helper-functions";
+import { notifyError } from "../../components/Toastifycom";
 
 const style = {
   width: "30%",
@@ -48,15 +51,58 @@ const inactiveListItemStyle = {
   borderLeft: "1.2px solid #D6D6D6", // Change the color for inactive items
 };
 
+type profileData = {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  nationality: string;
+  isDeactivated: boolean;
+  profilePic: object;
+};
+
 const MentorProfileAll: FC = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
+
+  // Get the user from your authentication system or local storage
+  const userId: String = jwtDecode(
+    localStorage.getItem("@storage_Key")
+  )?.userId;
+
+  const initialProfile: profileData = {
+    _id: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    nationality: "",
+    isDeactivated:false,
+    profilePic: {
+      path: "",
+    },
+  };
+
+  const [profile, setProfile] = useState<profileData>(initialProfile);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const getProfile = async () => {
+    getProfileDetails(userId)
+      .then((res) => {
+        setProfile(res);
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
 
   return (
     <Card sx={{ background: "#F6FAFF" }}>
       <Container>
-        <Basicinfo />
-        <br/>
-        <br/>
+        <Basicinfo profileData={profile} />
+        <br />
+        <br />
         <ChangePassword />
       </Container>
     </Card>

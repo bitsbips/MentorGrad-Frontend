@@ -46,7 +46,16 @@ import DropdownCompo from "../../components/Dropdown";
 import profile from "../../Assets/Images/person.jpeg";
 import { FiEdit } from "react-icons/fi";
 
-const Basicinfo = () => {
+type profileData = {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  nationality: string;
+  isDeactivated: boolean;
+};
+
+const Basicinfo = ({ profileData }: { profileData: profileData }) => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -59,11 +68,10 @@ const Basicinfo = () => {
   const [email, setEmail] = useState("");
   const [load, setLoad] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const { nationality, setNationality } = useContext(Context);
+  const [isActive, setIsActive] = useState(false);
   const [selectedNationality, setSelectedNationality] = useState<string>("");
-  const { countryData, setCountryData } = useContext(Context);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  console.log(selectedCountry, "ccc");
+
   const handleCountryChange = (_: any, newValue: any) => {
     setSelectedCountry(newValue);
   };
@@ -78,29 +86,14 @@ const Basicinfo = () => {
 
   useEffect(() => {
     setLoading(true);
-
-    GetUserData()
-      .then((e) => {
-        setSelectedCountry(e.personalDetails.current_country);
-        console.log(e.personalDetails.current_country.name, "ccc");
-        setAddress(e.personalDetails.address);
-        setPhone(e.personalDetails.phone_no);
-        setQualification(e.personalDetails.current_qualification);
-        setFirstname(e.profileDetails.first_name);
-        setLastname(e.profileDetails.last_name);
-        setEmail(e.profileDetails.email);
-        setSelectedNationality(e.personalDetails.nationality);
-        fetchImagesBLOB(e.profileDetails.profilePic.filename).then((e) => {
-          console.log(URL.createObjectURL(e));
-          setImage(URL.createObjectURL(e));
-        });
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-        setLoading(false);
-      });
-  }, [refresh]);
+    if (profileData) {
+      setFirstname(profileData.first_name);
+      setLastname(profileData.last_name);
+      setEmail(profileData.email);
+      setIsActive(profileData?.isDeactivated);
+    }
+    setLoading(false);
+  }, [profileData]);
   // Handle changes to input fields
 
   // UploadImage
@@ -205,9 +198,9 @@ const Basicinfo = () => {
               paddingLeft={"20px"}
             >
               <Typography fontWeight={600} fontSize={20}>
-                Mike Miller
+                {firstname + lastname}
               </Typography>
-              <Typography>mentor@profile.com</Typography>
+              <Typography>{email}</Typography>
             </Stack>
           </Stack>
           <input
@@ -245,7 +238,6 @@ const Basicinfo = () => {
                 <LabelProfileb>First Name</LabelProfileb>
                 <TextInput
                   width={"100%"}
-                  editable
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
@@ -254,7 +246,6 @@ const Basicinfo = () => {
                 <LabelProfileb>Last Name</LabelProfileb>
                 <TextInput
                   width={"100%"}
-                  editable
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 />
@@ -279,13 +270,13 @@ const Basicinfo = () => {
                 <Stack flexDirection={"row"}>
                   <Stack flexDirection={"row"} alignItems={"center"}>
                     <IconButton>
-                      <Radio />
+                      <Radio checked={profileData.isDeactivated} />
                     </IconButton>
                     <LabelProfileb>Active</LabelProfileb>
                   </Stack>
                   <Stack flexDirection={"row"} alignItems={"center"}>
                     <IconButton>
-                      <Radio />
+                      <Radio checked={!profileData.isDeactivated} />
                     </IconButton>
                     <LabelProfileb>In-Active</LabelProfileb>
                   </Stack>
