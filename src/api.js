@@ -8,11 +8,14 @@ export const IMGURL = "http://mentorgrad.com:5001/images/";
 // export const IMGURL = 'http://localhost:5001/images/'
 
 // Chat Urls
-export const http = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const ws = "ws://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/graphql";
-export const file = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const http =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const ws =
+  "ws://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/graphql";
+export const file =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 
-const getData = async () => { 
+const getData = async () => {
   try {
     const value = await localStorage.getItem("@storage_Key");
     if (value !== null) {
@@ -428,7 +431,6 @@ export async function getReviews(id) {
   }
 }
 
-
 export async function getBookings() {
   const token = localStorage.getItem("@storage_Key");
 
@@ -441,6 +443,30 @@ export async function getBookings() {
     url: URL + `booking/getAllBooking`,
     method: "get",
     headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function changesBookingStatus(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `booking/updateStatus`,
+    method: "put",
+    headers: headersList,
+    data: payload,
   };
 
   let response = await axios.request(reqOptions);

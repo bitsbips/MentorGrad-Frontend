@@ -5,6 +5,8 @@ import {
   Card,
   Grid,
   Stack,
+  Tab,
+  Tabs,
   Typography,
   useMediaQuery,
   useTheme,
@@ -16,16 +18,19 @@ import { BsEye } from "react-icons/bs";
 import Cancel from "@mui/icons-material/Cancel";
 import Visibility from "@mui/icons-material/Visibility";
 import { ViewMentorBooking } from "./ViewMentorBookings";
-import { getBookings } from "../../api";
-import { notifyError } from "../../components/Toastifycom";
+import { changesBookingStatus, getBookings } from "../../api";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
 import { format } from "date-fns";
+import { StatusMentorBooking } from "./StatusMentorBookings";
 
 type booking = {
+  _id: string;
   bookingDate: string;
   bookingSubject: string;
   description: string;
   time: string;
   duration: string;
+  bookingStatus: string;
   student: [
     {
       first_name: string;
@@ -42,13 +47,28 @@ export const MentorBooking = (): JSX.Element => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [tabs, setTabs] = React.useState("ALL");
   const [bookings, setBookings] = useState<Bookings>([]);
+  const [tempBookings, setTempBookings] = useState<Bookings>([]);
   const [showDetails, setShowDetails] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
+  const [reason, setReason] = useState("");
+  const [statusModal, setStatusModal] = useState(false);
 
   useEffect(() => {
     getAllBookings();
   }, []);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    if (newValue === "ALL") {
+      setBookings(tempBookings);
+      setTabs(newValue);
+      return;
+    }
+    let filteredBooking = bookings.filter((x) => x.bookingStatus === tabs);
+    setBookings(filteredBooking);
+    setTabs(newValue);
+  };
 
   const handleShowDetails = (booking: object) => {
     setBookingDetails(booking);
@@ -79,14 +99,48 @@ export const MentorBooking = (): JSX.Element => {
   const getAllBookings = async () => {
     getBookings()
       .then((res) => {
+        setTempBookings(res);
         setBookings(res);
       })
       .catch((err) => {
         notifyError(err?.message);
       });
   };
+
+  const handleStatusChange = () => {
+    changesBookingStatus({
+      bookingId: bookingDetails,
+      newBookingStatus: "CANCELLED",
+      message: reason,
+    })
+      .then((res) => {
+        notifySuccess("Booking Cancelled!");
+        getAllBookings();
+        setStatusModal(false);
+        setBookingDetails({});
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
+
   return (
     <>
+      <Grid item xs={12} sm={12} lg={12}>
+        <Card>
+          <Tabs
+            value={tabs}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="All" value={"ALL"} />
+            <Tab label="Booked" value={"COMPLETED"} />
+            <Tab label="Upcoming" value={"UPCOMING"} />
+            <Tab label="Canceled" value={"CANCELLED"} />
+          </Tabs>
+        </Card>
+      </Grid>
+      <br />
       {bookings.map((booking, index) => (
         <Box
           display="grid"
@@ -266,18 +320,24 @@ export const MentorBooking = (): JSX.Element => {
               >
                 View
               </Button>
-              <Button
-                size="small"
-                sx={{
-                  background: "rgba(255, 0, 0, 0.70)",
-                  width: "90px",
-                  p: 0,
-                }}
-                variant="contained"
-                startIcon={<Cancel fontSize="small" />}
-              >
-                Cancel
-              </Button>
+              {booking?.bookingStatus !== "CANCELLED" && (
+                <Button
+                  onClick={() => {
+                    setBookingDetails(booking?._id);
+                    setStatusModal(true);
+                  }}
+                  size="small"
+                  sx={{
+                    background: "rgba(255, 0, 0, 0.70)",
+                    width: "90px",
+                    p: 0,
+                  }}
+                  variant="contained"
+                  startIcon={<Cancel fontSize="small" />}
+                >
+                  Cancel
+                </Button>
+              )}
             </Stack>
           </Stack>
         </Box>
@@ -288,6 +348,17 @@ export const MentorBooking = (): JSX.Element => {
           open={showDetails}
           setShowDetails={setShowDetails}
           data={bookingDetails}
+          getAllBookings={getAllBookings}
+        />
+      )}
+
+      {statusModal && (
+        <StatusMentorBooking
+          open={statusModal}
+          setShowDetails={setStatusModal}
+          setReason={setReason}
+          reason={reason}
+          handleStatusChange={handleStatusChange}
         />
       )}
     </>
