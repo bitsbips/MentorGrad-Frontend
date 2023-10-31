@@ -31,6 +31,7 @@ import {
   IMGURL,
   PersonalDetails,
   fetchImagesBLOB,
+  updateProfileDetails,
   uploadprofilepic,
 } from "../../api";
 import { add } from "lodash";
@@ -53,36 +54,25 @@ type profileData = {
   email: string;
   nationality: string;
   isDeactivated: boolean;
+  hourlyRate: number;
 };
 
-const Basicinfo = ({ profileData }: { profileData: profileData }) => {
+const Basicinfo = ({
+  profileData,
+  profileImg,
+}: {
+  profileData: profileData;
+  profileImg: any;
+}) => {
   const isMobile = useMediaQuery("(min-width: 950px)");
-  const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [currentCountry, setCurrentCountry] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [qualification, setQualification] = useState("");
+  const [hourlyRate, setHourlyRate] = useState(0);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [load, setLoad] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [selectedNationality, setSelectedNationality] = useState<string>("");
-  const [selectedCountry, setSelectedCountry] = useState<string>("");
-
-  const handleCountryChange = (_: any, newValue: any) => {
-    setSelectedCountry(newValue);
-  };
-
-  const [json, setJson] = useState({
-    current_country: "",
-    address: "",
-    phone_no: "",
-    current_qualification: "",
-    nationality: "",
-  });
+  const [isActive, setIsActive] = useState("Activated");
 
   useEffect(() => {
     setLoading(true);
@@ -90,7 +80,9 @@ const Basicinfo = ({ profileData }: { profileData: profileData }) => {
       setFirstname(profileData.first_name);
       setLastname(profileData.last_name);
       setEmail(profileData.email);
-      setIsActive(profileData?.isDeactivated);
+      setHourlyRate(profileData?.hourlyRate);
+      setIsActive(profileData?.isDeactivated ? "DeActivated" : "Activated");
+      setImage(profileImg);
     }
     setLoading(false);
   }, [profileData]);
@@ -117,43 +109,25 @@ const Basicinfo = ({ profileData }: { profileData: profileData }) => {
     } else {
       alert("Please select a valid image file.");
     }
-    const form = new FormData();
-    if (file) {
-      form.append("profile", file);
-      console.log(form.getAll("profile"));
-
-      uploadprofilepic(form).then((e) => {
-        console.log(e, "33");
-        if (e.status === true) {
-          setLoad(false);
-          notifySuccess(e.message);
-          setTimeout(() => {
-            setRefresh(!refresh);
-          }, 2000);
-        } else {
-          setLoad(false);
-          notifyError(e.message);
-        }
-      });
-    }
   };
-  const handleSubmit = () => {
-    json.address = address;
-    json.current_country = selectedCountry;
-    json.current_qualification = qualification;
-    json.phone_no = phone;
-    json.nationality = selectedNationality;
 
-    console.log(json);
+  const handleSubmit = () => {
     setLoad(true);
-    PersonalDetails(json).then((e) => {
+    let payload = {
+      id: profileData._id,
+      email: email,
+      userName: firstname,
+      firstName: firstname,
+      lastName: lastname,
+      hourlyRate: hourlyRate,
+      isActive: isActive === "Activated" ? true : false,
+      profileImage: image,
+    };
+    updateProfileDetails(payload).then((e) => {
       console.log(e);
       if (e.success === true) {
         setLoad(false);
         notifySuccess(e.message);
-        setTimeout(() => {
-          setRefresh(!refresh);
-        }, 2000);
       } else {
         setLoad(false);
         notifyError(e.message);
@@ -258,8 +232,8 @@ const Basicinfo = ({ profileData }: { profileData: profileData }) => {
                 <TextInput
                   type={"number"}
                   width={"100%"}
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
+                  value={hourlyRate}
+                  onChange={(e) => setHourlyRate(e.target.value)}
                 />
               </ColumnStudentForm>
             </PositionProfileForm>
@@ -270,13 +244,27 @@ const Basicinfo = ({ profileData }: { profileData: profileData }) => {
                 <Stack flexDirection={"row"}>
                   <Stack flexDirection={"row"} alignItems={"center"}>
                     <IconButton>
-                      <Radio checked={profileData.isDeactivated} />
+                      <Radio
+                        checked={isActive === "Activated"}
+                        onChange={(event) =>
+                          setIsActive(
+                            event.target.checked ? "Activated" : "DeActivated"
+                          )
+                        }
+                      />
                     </IconButton>
                     <LabelProfileb>Active</LabelProfileb>
                   </Stack>
                   <Stack flexDirection={"row"} alignItems={"center"}>
                     <IconButton>
-                      <Radio checked={!profileData.isDeactivated} />
+                      <Radio
+                        checked={isActive === "DeActivated"}
+                        onChange={(event) =>
+                          setIsActive(
+                            event.target.checked ? "DeActivated" : "Activated"
+                          )
+                        }
+                      />
                     </IconButton>
                     <LabelProfileb>In-Active</LabelProfileb>
                   </Stack>

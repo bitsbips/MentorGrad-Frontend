@@ -59,6 +59,8 @@ type profileData = {
   nationality: string;
   isDeactivated: boolean;
   profilePic: object;
+  profileImage: string;
+  hourlyRate: number;
 };
 
 const MentorProfileAll: FC = () => {
@@ -75,7 +77,9 @@ const MentorProfileAll: FC = () => {
     last_name: "",
     email: "",
     nationality: "",
-    isDeactivated:false,
+    isDeactivated: false,
+    profileImage: "",
+    hourlyRate: 0,
     profilePic: {
       path: "",
     },
@@ -100,7 +104,7 @@ const MentorProfileAll: FC = () => {
   return (
     <Card sx={{ background: "#F6FAFF" }}>
       <Container>
-        <Basicinfo profileData={profile} />
+        <Basicinfo profileData={profile} profileImg={profile.profileImage} />
         <br />
         <br />
         <ChangePassword />

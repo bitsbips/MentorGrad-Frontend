@@ -50,7 +50,7 @@ export const ViewMentorBooking = ({
     })
       .then((res) => {
         notifySuccess("Booking Accepted Successfully!");
-        getAllBookings();
+        getAllBookings("ALL");
         setStatusModal(false);
         setShowDetails(false);
       })
@@ -175,8 +175,8 @@ export const ViewMentorBooking = ({
           </Box>
         </DialogContent>
         <DialogActions>
-          {(data?.bookingStatus !== "COMPLETED" ||
-            data?.bookingStatus !== "CANCELLED") && (
+          {data?.bookingStatus !== "COMPLETED" &&
+          data?.bookingStatus !== "CANCELLED" ? (
             <Button
               size="large"
               variant="contained"
@@ -185,6 +185,8 @@ export const ViewMentorBooking = ({
             >
               Accept
             </Button>
+          ) : (
+            ""
           )}
           <Button
             variant="outlined"

@@ -56,17 +56,11 @@ export const MentorBooking = (): JSX.Element => {
   const [statusModal, setStatusModal] = useState(false);
 
   useEffect(() => {
-    getAllBookings();
+    getAllBookings("ALL");
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    if (newValue === "ALL") {
-      setBookings(tempBookings);
-      setTabs(newValue);
-      return;
-    }
-    let filteredBooking = bookings.filter((x) => x.bookingStatus === tabs);
-    setBookings(filteredBooking);
+    getAllBookings(newValue);
     setTabs(newValue);
   };
 
@@ -96,8 +90,8 @@ export const MentorBooking = (): JSX.Element => {
     }
   }
 
-  const getAllBookings = async () => {
-    getBookings()
+  const getAllBookings = async (type: string) => {
+    getBookings(type)
       .then((res) => {
         setTempBookings(res);
         setBookings(res);
@@ -115,7 +109,7 @@ export const MentorBooking = (): JSX.Element => {
     })
       .then((res) => {
         notifySuccess("Booking Cancelled!");
-        getAllBookings();
+        getAllBookings("ALL");
         setStatusModal(false);
         setBookingDetails({});
       })
@@ -142,6 +136,7 @@ export const MentorBooking = (): JSX.Element => {
       </Grid>
       <br />
       {bookings.map((booking, index) => (
+        <>
         <Box
           display="grid"
           gridTemplateColumns={!isMobile ? "3fr 2fr 2fr" : "repeat(1, 1fr)"}
@@ -341,6 +336,9 @@ export const MentorBooking = (): JSX.Element => {
             </Stack>
           </Stack>
         </Box>
+        <br/>
+        <br/>
+        </>
       ))}
 
       {showDetails && (

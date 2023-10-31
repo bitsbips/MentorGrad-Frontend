@@ -4,13 +4,15 @@ import { jwtDecode } from "./helper-functions";
 // const URL = "http://localhost:5001/api/v1/";
 // const URL = "http://mentorgrad.com:5001/api/v1/";
 const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const IMGURL = "http://mentorgrad.com:5001/images/";
-// export const IMGURL = 'http://localhost:5001/images/'
+export const IMGURL =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 
 // Chat Urls
-export const http = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const ws = "wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql";
-export const file = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const http =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const ws = "ws://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql";
+export const file =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 
 const getData = async () => {
   try {
@@ -414,7 +416,7 @@ export async function updateProfileDetails(payload) {
     url: URL + `profile/updateProfile/${payload?.id}`,
     method: "put",
     headers: headersList,
-    data: payload
+    data: payload,
   };
 
   let response = await axios.request(reqOptions);
@@ -438,7 +440,7 @@ export async function updateUserPassword(payload) {
     url: URL + `profile/resetPassword`,
     method: "put",
     headers: headersList,
-    data: payload
+    data: payload,
   };
 
   let response = await axios.request(reqOptions);
@@ -499,7 +501,7 @@ export async function getReviews(id) {
   }
 }
 
-export async function getBookings() {
+export async function getBookings(type) {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -508,7 +510,7 @@ export async function getBookings() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `booking/getAllBooking`,
+    url: URL + `booking/getAllBooking?type=${type}`,
     method: "get",
     headers: headersList,
   };

@@ -13,6 +13,8 @@ import {
   TopText,
 } from "../../components/StudentProfileDetails/StudentProfileStyles";
 import { Grid } from "@mui/material";
+import { updateUserPassword } from "../../api";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
 
 const ChangePassword: FC = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
@@ -37,61 +39,78 @@ const ChangePassword: FC = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log("values", values);
+      let payload = {
+        password: values.oldpassword,
+        newPassword: values.password,
+      };
+      updateUserPassword(payload).then((e) => {
+        console.log(e);
+        if (e.success === true) {
+          notifySuccess(e.message);
+        } else {
+          notifyError(e.message);
+        }
+      });
     },
   });
 
   return (
     <>
       <Grid item lg={4}>
-          <TopText>Change Password</TopText>
-          <ContainerForm>
-            <form onSubmit={handleSubmit}>
-              <InputHolder>
-                <LabelProfile>Old Password</LabelProfile>
-                <PasswordInput
-                  id={"oldpassword"}
-                  value={values.oldpassword}
-                  onChange={handleChange}
-                  label={"Old Password"}
-                  placeholder={"Enter your old Password"}
-                  style={{ marginTop: 5 }}
-                />
-                <ErrorText>{errors.oldpassword}</ErrorText>
-              </InputHolder>
-              <InputHolder>
-                <LabelProfile>New Password</LabelProfile>
-                <PasswordInput
-                  id={"password"}
-                  value={values.password}
-                  onChange={handleChange}
-                  label={"New Password"}
-                  placeholder={"Enter your New Password"}
-                  style={{ marginTop: 5 }}
-                />
-                <ErrorText>{errors.password}</ErrorText>
-              </InputHolder>
-              <InputHolder>
-                <LabelProfile>Confirm Password</LabelProfile>
-                <PasswordInput
-                  id={"confirmpass"}
-                  value={values.confirmpass}
-                  onChange={handleChange}
-                  label={"Confirm Password"}
-                  placeholder={"Confirm Password"}
-                  style={{ marginTop: 5 }}
-                />
-                <ErrorText>{errors.confirmpass}</ErrorText>
-              </InputHolder>
-            </form>
-            <ButtonComp
-              style={{ marginTop: "4%", padding: "8px", marginBottom: "5%", float:"right" }}
-              fontSize={"12px"}
-              width={isMobile ? "20%" : "60%"}
-              title="Changes Password"
-              onClick={() => handleSubmit()}
-            />
-          </ContainerForm>
-        </Grid>
+        <TopText>Change Password</TopText>
+        <ContainerForm>
+          <form onSubmit={handleSubmit}>
+            <InputHolder>
+              <LabelProfile>Old Password</LabelProfile>
+              <PasswordInput
+                id={"oldpassword"}
+                value={values.oldpassword}
+                onChange={handleChange}
+                label={"Old Password"}
+                placeholder={"Enter your old Password"}
+                style={{ marginTop: 5 }}
+              />
+              <ErrorText>{errors.oldpassword}</ErrorText>
+            </InputHolder>
+            <InputHolder>
+              <LabelProfile>New Password</LabelProfile>
+              <PasswordInput
+                id={"password"}
+                value={values.password}
+                onChange={handleChange}
+                label={"New Password"}
+                placeholder={"Enter your New Password"}
+                style={{ marginTop: 5 }}
+              />
+              <ErrorText>{errors.password}</ErrorText>
+            </InputHolder>
+            <InputHolder>
+              <LabelProfile>Confirm Password</LabelProfile>
+              <PasswordInput
+                id={"confirmpass"}
+                value={values.confirmpass}
+                onChange={handleChange}
+                label={"Confirm Password"}
+                placeholder={"Confirm Password"}
+                style={{ marginTop: 5 }}
+              />
+              <ErrorText>{errors.confirmpass}</ErrorText>
+            </InputHolder>
+          </form>
+          <ButtonComp
+            style={{
+              marginTop: "4%",
+              padding: "8px",
+              marginBottom: "5%",
+              float: "right",
+            }}
+            fontSize={"12px"}
+            width={isMobile ? "20%" : "60%"}
+            title="Changes Password"
+            onClick={() => handleSubmit()}
+          />
+        </ContainerForm>
+      </Grid>
     </>
   );
 };

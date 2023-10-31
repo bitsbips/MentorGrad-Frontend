@@ -47,15 +47,14 @@ const Login = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values", values);
       Myuser.setEmail(values.email);
       Myuser.setPassword(values.password);
       setLoad(true);
       LoginUser(values).then((e) => {
-        if (e.status === false) {
+        if (e?.status === false) {
           setLoad(false);
           notifyError(e.message);
-          if (e.response.status === 401) {
+          if (e?.response?.status === 401) {
             // Token expired, navigate to the login page
             navigate("/Login");
           }
