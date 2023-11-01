@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,18 +10,18 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import styled from "styled-components";
-import clockIcon from "../../Assets/Images/clock.png";
-import personImg from "../../Assets/Images/person.jpeg";
-import { BsEye } from "react-icons/bs";
-import Cancel from "@mui/icons-material/Cancel";
-import Visibility from "@mui/icons-material/Visibility";
-import { ViewMentorBooking } from "./ViewMentorBookings";
-import { changesBookingStatus, getBookings } from "../../api";
-import { notifyError, notifySuccess } from "../../components/Toastifycom";
-import { format } from "date-fns";
-import { StatusMentorBooking } from "./StatusMentorBookings";
+} from '@mui/material';
+import styled from 'styled-components';
+import clockIcon from '../../Assets/Images/clock.png';
+import personImg from '../../Assets/Images/person.jpeg';
+import { BsEye } from 'react-icons/bs';
+import Cancel from '@mui/icons-material/Cancel';
+import Visibility from '@mui/icons-material/Visibility';
+import { ViewMentorBooking } from './ViewMentorBookings';
+import { changesBookingStatus, getBookings } from '../../api';
+import { notifyError, notifySuccess } from '../../components/Toastifycom';
+import { format } from 'date-fns';
+import { StatusMentorBooking } from './StatusMentorBookings';
 
 type booking = {
   _id: string;
@@ -45,18 +45,18 @@ type Bookings = booking[];
 
 export const MentorBooking = (): JSX.Element => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [tabs, setTabs] = React.useState("ALL");
+  const [tabs, setTabs] = React.useState('ALL');
   const [bookings, setBookings] = useState<Bookings>([]);
   const [tempBookings, setTempBookings] = useState<Bookings>([]);
   const [showDetails, setShowDetails] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
-  const [reason, setReason] = useState("");
+  const [reason, setReason] = useState('');
   const [statusModal, setStatusModal] = useState(false);
 
   useEffect(() => {
-    getAllBookings("ALL");
+    getAllBookings('ALL');
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -77,14 +77,14 @@ export const MentorBooking = (): JSX.Element => {
     const date = new Date(dateString);
 
     switch (component) {
-      case "day":
-        return format(date, "d"); // Day of the month.
-      case "month":
-        return format(date, "MMM");
-      case "year":
-        return format(date, "y"); // Year.
-      case "dayName":
-        return format(date, "E"); // Abbreviated day name (e.g., "Mon").
+      case 'day':
+        return format(date, 'd'); // Day of the month.
+      case 'month':
+        return format(date, 'MMM');
+      case 'year':
+        return format(date, 'y'); // Year.
+      case 'dayName':
+        return format(date, 'E'); // Abbreviated day name (e.g., "Mon").
       default:
         return null;
     }
@@ -104,12 +104,12 @@ export const MentorBooking = (): JSX.Element => {
   const handleStatusChange = () => {
     changesBookingStatus({
       bookingId: bookingDetails,
-      newBookingStatus: "CANCELLED",
+      newBookingStatus: 'CANCELLED',
       message: reason,
     })
       .then((res) => {
-        notifySuccess("Booking Cancelled!");
-        getAllBookings("ALL");
+        notifySuccess('Booking Cancelled!');
+        getAllBookings('ALL');
         setStatusModal(false);
         setBookingDetails({});
       })
@@ -127,217 +127,232 @@ export const MentorBooking = (): JSX.Element => {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="All" value={"ALL"} />
-            <Tab label="Booked" value={"COMPLETED"} />
-            <Tab label="Upcoming" value={"UPCOMING"} />
-            <Tab label="Canceled" value={"CANCELLED"} />
+            <Tab label="All" value={'ALL'} />
+            <Tab label="Booked" value={'COMPLETED'} />
+            <Tab label="Upcoming" value={'UPCOMING'} />
+            <Tab label="Canceled" value={'CANCELLED'} />
           </Tabs>
         </Card>
       </Grid>
       <br />
       {bookings.map((booking, index) => (
         <>
-        <Box
-          display="grid"
-          gridTemplateColumns={!isMobile ? "3fr 2fr 2fr" : "repeat(1, 1fr)"}
-          gap={2}
-          sx={{
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", // Add a box shadow
-            borderRadius: "8px", // Add rounded corners
-            background: "#FFFFFF", // Set the background color
-          }}
-        >
-          <Stack flexDirection={!isMobile ? "row" : "column"} gap={3}>
-            <Stack
-              flexDirection={!isMobile ? "column" : "row"}
-              justifyContent={"space-around"}
-              alignItems={"center"}
-              sx={
-                isMobile
-                  ? {
-                      background: "#5F61BE",
-                      borderRadius: "20px",
-                      color: "#fff",
-                      height: "70px",
-                    }
-                  : {
-                      background: "#5F61BE",
-                      borderRadius: "20px",
-                      color: "#fff",
-                      p: 2,
-                    }
-              }
-            >
-              <Typography>
-                {getDateString(booking?.bookingDate, "month")}
-              </Typography>
-              <Typography fontWeight={600} fontSize={"large"}>
-                {getDateString(booking?.bookingDate, "day")}
-              </Typography>
-              <Typography>
-                {" "}
-                {getDateString(booking?.bookingDate, "dayName")}
-              </Typography>
-            </Stack>
-
-            <Stack flexDirection={"column"} justifyContent={"center"}>
-              <Typography
-                textAlign={"left"}
-                variant="h6"
-                fontWeight={600}
-                noWrap
-              >
-                {booking?.bookingSubject}
-              </Typography>
-              <Typography
-                textAlign={"left"}
-                fontSize={"small"}
-                color={"#7A7A7A"}
-              >
-                {booking?.description}
-              </Typography>
-            </Stack>
-          </Stack>
-          <Stack
-            flexDirection={!isMobile ? "row" : "column"}
-            justifyContent={"space-around"}
-            alignItems={"center"}
-          >
-            <div
-              style={
-                !isMobile
-                  ? {
-                      borderLeft: "1px solid #7A7A7A",
-                      padding: "10px",
-                      height: "80%",
-                    }
-                  : {
-                      borderTop: "1px solid #7A7A7A",
-                      padding: "10px",
-                      width: "80%",
-                    }
-              }
-            ></div>
-
-            <Stack flexDirection={"column"} alignItems={"center"}>
-              <Typography fontWeight={600} noWrap>
-                {booking?.duration} Minutes
-              </Typography>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  padding: "5px",
-                  background: "#cccdfc",
-                  borderRadius: "10px",
-                }}
-              >
-                <img src={clockIcon} width="15px" height="15px" />
-                <Typography
-                  textAlign={"left"}
-                  noWrap
-                  sx={{ ml: 1 }}
-                  fontSize={"small"}
-                >
-                  {booking?.time}
-                </Typography>
-              </div>
-            </Stack>
-          </Stack>
-
-          <Stack
-            flexDirection={!isMobile ? "row" : "column"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
+          <Box
+            display="grid"
+            gridTemplateColumns={!isMobile ? '3fr 2fr 2fr' : 'repeat(1, 1fr)'}
             gap={2}
+            sx={{
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Add a box shadow
+              borderRadius: '20px', // Add rounded corners
+              background: '#FFFFFF', // Set the background color
+            }}
           >
-            <div
-              style={
-                !isMobile
-                  ? {
-                      borderLeft: "1px solid #7A7A7A",
-                      padding: "10px",
-                      height: "80%",
-                    }
-                  : {
-                      borderTop: "1px solid #7A7A7A",
-                      padding: "10px",
-                      width: "80%",
-                    }
-              }
-            ></div>
-
-            <Stack
-              flexDirection={"column"}
-              alignItems={"center"}
-              sx={!isMobile ? { pt: 1, pb: 1 } : {}}
-            >
-              <img
-                src={personImg}
-                style={{ width: "50px", borderRadius: "10px" }}
-              />
-              <Typography
-                noWrap
-                variant="h6"
-                fontSize={"medium"}
-                fontWeight={600}
+            <Stack flexDirection={!isMobile ? 'row' : 'column'} gap={2}>
+              <Stack
+                flexDirection={!isMobile ? 'column' : 'row'}
+                justifyContent={'space-around'}
+                alignItems={'center'}
+                sx={
+                  isMobile
+                    ? {
+                        background: '#5F61BE',
+                        borderRadius: '20px',
+                        color: '#fff',
+                        height: '70px',
+                      }
+                    : {
+                        background: '#5F61BE',
+                        borderRadius: '20px',
+                        color: '#fff',
+                        p: 2,
+                      }
+                }
               >
-                {booking?.student[0]?.first_name +
-                  booking?.student[0]?.last_name}
-              </Typography>
-              <Typography noWrap color={"#7A7A7A"} fontSize={"small"}>
-                {booking?.student[0]?.email}
-              </Typography>
-              <Typography noWrap color={"#7A7A7A"} fontSize={"small"}>
-                {booking?.student[0]?.location}
-              </Typography>
+                <Typography>
+                  {getDateString(booking?.bookingDate, 'month')}
+                </Typography>
+                <Typography fontWeight={600} sx={{ fontSize: '32px' }}>
+                  {getDateString(booking?.bookingDate, 'day')}
+                </Typography>
+                <Typography>
+                  {' '}
+                  {getDateString(booking?.bookingDate, 'dayName')}
+                </Typography>
+              </Stack>
+
+              <Stack flexDirection={'column'} justifyContent={'center'}>
+                <Typography
+                  textAlign={!isMobile ? 'left' : 'center'}
+                  variant="h6"
+                  fontWeight={600}
+                  noWrap
+                >
+                  {booking?.bookingSubject}
+                </Typography>
+                <Typography
+                  textAlign={!isMobile ? 'left' : 'center'}
+                  fontSize={'small'}
+                  color={'#7A7A7A'}
+                >
+                  {booking?.description}
+                </Typography>
+              </Stack>
+            </Stack>
+            <Stack
+              flexDirection={!isMobile ? 'row' : 'column'}
+              justifyContent={'space-around'}
+              alignItems={'center'}
+              gap={2}
+            >
+              <div
+                style={
+                  !isMobile
+                    ? {
+                        borderLeft: '1px solid #7A7A7A',
+                        padding: '10px',
+                        height: '80%',
+                      }
+                    : {
+                        borderTop: '1px solid #7A7A7A',
+                        padding: '10px',
+                        width: '80%',
+                      }
+                }
+              ></div>
+
+              <Stack
+                sx={{
+                  display: 'flex',
+
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Box sx={{ width: 'fit-content' }}>
+                  <Typography fontWeight={600} noWrap>
+                    {booking?.duration} Minutes
+                  </Typography>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '5px 10px 5px 10px',
+                      background: '#cccdfc',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    <img src={clockIcon} width="12px" height="12px" />
+                    <Typography
+                      textAlign={'left'}
+                      noWrap
+                      sx={{ ml: 1, fontSize: '10px' }}
+                      fontSize={'small'}
+                    >
+                      {booking?.time}
+                    </Typography>
+                  </div>
+                </Box>
+              </Stack>
             </Stack>
 
             <Stack
-              flexDirection={!isMobile ? "column" : "row"}
-              justifyContent={isMobile ? "flex-end" : ""}
-              alignItems={"center"}
-              sx={isMobile ? { width: "100%" } : { padding: "0 20px 0 0" }}
-              gap={1}
+              flexDirection={!isMobile ? 'row' : 'column'}
+              justifyContent={'space-between'}
+              alignItems={'center'}
             >
-              <Button
-                onClick={() => handleShowDetails(booking)}
-                size="small"
-                sx={{
-                  background: "#ECECEC",
-                  color: "black",
-                  width: "90px",
-                  p: 0,
-                }}
-                variant="contained"
-                startIcon={<Visibility fontSize="small" />}
+              <div
+                style={
+                  !isMobile
+                    ? {
+                        borderLeft: '1px solid #7A7A7A',
+                        padding: '10px',
+                        height: '80%',
+                      }
+                    : {
+                        borderTop: '1px solid #7A7A7A',
+                        padding: '10px',
+                        width: '80%',
+                      }
+                }
+              ></div>
+
+              <Stack
+                flexDirection={'column'}
+                alignItems={'center'}
+                sx={!isMobile ? { pt: 1, pb: 1 } : {}}
               >
-                View
-              </Button>
-              {booking?.bookingStatus !== "CANCELLED" && (
+                <img
+                  src={personImg}
+                  style={{ width: '50px', borderRadius: '10px' }}
+                />
+                <Typography
+                  noWrap
+                  variant="h6"
+                  fontSize={'medium'}
+                  fontWeight={600}
+                >
+                  {booking?.student[0]?.first_name +
+                    booking?.student[0]?.last_name}
+                </Typography>
+                <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
+                  {booking?.student[0]?.email}
+                </Typography>
+                <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
+                  {booking?.student[0]?.location}
+                </Typography>
+              </Stack>
+
+              <Stack
+                flexDirection={!isMobile ? 'column' : 'row'}
+                justifyContent={isMobile ? 'flex-end' : ''}
+                alignItems={'center'}
+                sx={
+                  isMobile
+                    ? { width: '100%', pt: '20px' }
+                    : { padding: '0 20px 0 10px' }
+                }
+                gap={1}
+              >
                 <Button
-                  onClick={() => {
-                    setBookingDetails(booking?._id);
-                    setStatusModal(true);
-                  }}
+                  onClick={() => handleShowDetails(booking)}
                   size="small"
                   sx={{
-                    background: "rgba(255, 0, 0, 0.70)",
-                    width: "90px",
+                    background: '#ECECEC',
+                    color: 'black',
+                    width: '90px',
                     p: 0,
                   }}
                   variant="contained"
-                  startIcon={<Cancel fontSize="small" />}
+                  startIcon={<Visibility fontSize="small" />}
                 >
-                  Cancel
+                  View
                 </Button>
-              )}
+                {booking?.bookingStatus !== 'CANCELLED' && (
+                  <Button
+                    onClick={() => {
+                      setBookingDetails(booking?._id);
+                      setStatusModal(true);
+                    }}
+                    size="small"
+                    sx={{
+                      background: 'rgba(255, 0, 0, 0.70)',
+                      width: '90px',
+                      p: 0,
+                    }}
+                    variant="contained"
+                    startIcon={<Cancel fontSize="small" />}
+                  >
+                    Cancel
+                  </Button>
+                )}
+              </Stack>
             </Stack>
-          </Stack>
-        </Box>
-        <br/>
-        <br/>
+          </Box>
+          <br />
+          <br />
         </>
       ))}
 
