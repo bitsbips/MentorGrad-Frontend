@@ -4,6 +4,7 @@ import useMediaQuery from "../../hooks/MediaQuery";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
+  Button,
   Divider,
   Grid,
   Stack,
@@ -15,9 +16,10 @@ import Rectangle from "../../Assets/Images/Rectangle.png";
 import { makeStyles } from "@material-ui/core";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { getBlogs } from "../../api";
+import { getBlogs, updateBlog } from "../../api";
 import { formatDate, jwtDecode } from "../../helper-functions";
-import { notifyError } from "../../components/Toastifycom";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const useStyles = makeStyles({
   container: {
@@ -61,10 +63,13 @@ const useStyles = makeStyles({
 });
 
 type Blog = {
+  _id: string;
   updatedAt: string;
   title: string;
   description: string;
+  shortDescription: string;
   Image: string;
+  coverImage: string;
 };
 
 type Blogs = Blog[];
@@ -79,19 +84,20 @@ const MentorBlogs = (): JSX.Element => {
     localStorage.getItem("@storage_Key")
   )?.userId;
 
-  const [tabs, setTabs] = React.useState(0);
+  const [tabs, setTabs] = React.useState("Active");
   const [blogs, setBlogs] = React.useState<Blogs>([]);
 
   useEffect(() => {
-    getAllBlogs();
+    getAllBlogs("Active");
   }, []);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    getAllBlogs(newValue);
     setTabs(newValue);
   };
 
-  const getAllBlogs = () => {
-    getBlogs(userId)
+  const getAllBlogs = (type: string) => {
+    getBlogs(userId, type)
       .then((res) => {
         setBlogs(res);
       })
@@ -112,12 +118,38 @@ const MentorBlogs = (): JSX.Element => {
     }
   }
 
+  const deleteBlog = (data: object) => {
+    let payload = {
+      ...data,
+      category: "inActive",
+    };
+    updateBlog(payload)
+      .then((res) => {
+        getAllBlogs("Active")
+        notifySuccess(res);
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
+
   return (
     <>
       <Grid item xs={12} sm={12} lg={12}>
-        <Typography variant="h5" className={classes.pageTitle}>
-          Blog
-        </Typography>
+        <Stack flexDirection={"row"} justifyContent={"space-between"}>
+          <Typography variant="h5" className={classes.pageTitle}>
+            Blog
+          </Typography>
+          <Button
+            onClick={() => navigate("/dashboard?tab=10")}
+            sx={{ background: "#7476D1" }}
+            size="small"
+            variant="contained"
+            startIcon={<EditNoteIcon fontSize="small" />}
+          >
+            Craete Blog
+          </Button>
+        </Stack>
       </Grid>
       <Grid item xs={12} sm={12} lg={12}>
         <Tabs
@@ -125,8 +157,8 @@ const MentorBlogs = (): JSX.Element => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Active Blog" />
-          <Tab label="InActive Blog" />
+          <Tab label="Active Blog" value={"Active"} />
+          <Tab label="InActive Blog" value={"inActive"} />
         </Tabs>
       </Grid>
       <hr />
@@ -135,7 +167,7 @@ const MentorBlogs = (): JSX.Element => {
           {blogs.map((blog, index) => (
             <Grid item lg={4} key={index}>
               <Stack className={classes.container}>
-                <img src={Rectangle} />
+                <img src={blog?.coverImage || Rectangle} height={"160"} />
                 <Stack className={classes.subContainer}>
                   <Typography className={classes.date}>
                     {formatDate(blog?.updatedAt, "dd MMM yyyy")}
@@ -144,7 +176,7 @@ const MentorBlogs = (): JSX.Element => {
                     {blog?.title}
                   </Typography>
                   <Typography textAlign={"left"}>
-                    {TruncateString(blog?.description, 30)}
+                    {TruncateString(blog?.shortDescription, 30)}
                   </Typography>
                   <Stack
                     flexDirection={"row"}
@@ -157,6 +189,10 @@ const MentorBlogs = (): JSX.Element => {
                       alignItems={"center"}
                       justifyContent={"space-between"}
                       width={50}
+                      sx={{ cursor: "pointer" }}
+                      onClick={() =>
+                        navigate(`/dashboard?tab=10&edit=true&id=${blog?._id}`)
+                      }
                     >
                       <Stack>
                         <svg
@@ -179,6 +215,8 @@ const MentorBlogs = (): JSX.Element => {
                       flexDirection={"row"}
                       alignItems={"center"}
                       justifyContent={"space-between"}
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => deleteBlog(blog)}
                     >
                       <Stack>
                         <svg

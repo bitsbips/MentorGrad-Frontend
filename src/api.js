@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
+
 // const URL = "http://localhost:5001/api/v1/";
-// const URL = "http://mentorgrad.com:5001/api/v1/";
+// export const IMGURL = "http://localhost:5001/api/v1/";
 const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const IMGURL =
   "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
@@ -13,6 +14,10 @@ export const http =
 export const ws = "wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql";
 export const file =
   "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+
+// export const http = "http://localhost:5001/api/v1/";
+// export const ws = "ws://localhost:5001/graphql";
+// export const file = "http://localhost:5001/api/v1/";
 
 const getData = async () => {
   try {
@@ -452,7 +457,7 @@ export async function updateUserPassword(payload) {
   }
 }
 
-export async function getBlogs(id) {
+export async function getBlogs(id, type) {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -461,7 +466,7 @@ export async function getBlogs(id) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `blog/getAllBlogsOfUser/${id}`,
+    url: URL + `blog/getAllBlogsOfUser/${id}?type=${type}`,
     method: "GET",
     headers: headersList,
   };
@@ -469,6 +474,77 @@ export async function getBlogs(id) {
   let response = await axios.request(reqOptions);
   try {
     return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function addBlog(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `blog/addBlog`,
+    method: "POST",
+    headers: headersList,
+    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function updateBlog(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `blog/updateBlog`,
+    method: "POST",
+    headers: headersList,
+    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getBlogsById(id) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `blog/getBlogById/${id}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data[0];
   } catch (e) {
     // saving error
     return e.response.data;

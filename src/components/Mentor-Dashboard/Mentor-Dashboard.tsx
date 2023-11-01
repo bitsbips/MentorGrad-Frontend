@@ -31,14 +31,15 @@ import MentorBlogs from "../../pages/Mentor/MentorBlog";
 import MentorProfile from "../../pages/MentorProfile/MentorProfile";
 import { MentorBooking } from "../../pages/Mentor/MentorBookings";
 import Main from "../../pages/MentorChat/Main";
-import BookOnlineIcon from '@mui/icons-material/BookOnline';
-import ScheduleIcon from '@mui/icons-material/Schedule';
-import ChatIcon from '@mui/icons-material/Chat';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import RateReviewIcon from '@mui/icons-material/RateReview';
-import TypeSpecimenIcon from '@mui/icons-material/TypeSpecimen';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
-import LogoutIcon from '@mui/icons-material/Logout';
+import BookOnlineIcon from "@mui/icons-material/BookOnline";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import ChatIcon from "@mui/icons-material/Chat";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import TypeSpecimenIcon from "@mui/icons-material/TypeSpecimen";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MentorCreateBlogs from "../../pages/Mentor/MentorCreateBlog";
 const style = {
   width: "30%",
   bgcolor: "#F2F5F9",
@@ -108,6 +109,12 @@ const Mentor_Dashboard: FC = () => {
 
       name: "Logout",
       icon: LogoutIcon,
+    },
+    {
+      id: 10,
+      name: "CreateBlog",
+      show: false,
+      icon: TypeSpecimenIcon,
     },
   ];
   useEffect(() => {
@@ -204,10 +211,18 @@ const Mentor_Dashboard: FC = () => {
         </div>
       );
     }
+    if (tab === "10") {
+      return <MentorCreateBlogs />;
+    }
   };
 
   // Actions
   const _handleComActions = (tab: string) => {
+    if (searchParams.get("edit") && searchParams.get("id")) {
+      searchParams.delete("id");
+      searchParams.delete("edit");
+      setSearchParams(searchParams);
+    }
     searchParams.set("tab", tab);
     setSearchParams(searchParams);
   };
@@ -231,35 +246,39 @@ const Mentor_Dashboard: FC = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {Data.map((data) => (
-          <ListItem
-            key={data.id}
-            onClick={() => {
-              SetStatusfunc(data.name);
-              _handleComActions(data.id.toString());
-            }}
-          >
-            {Status === data.name ? (
-              <>
-                <BackActive>
-                  {data.icon && (
-                    <data.icon style={{ color: "#fff", fontSize: "20px" }} />
-                  )}
-                </BackActive>
-                <ActiveLabel>{data.name}</ActiveLabel>
-              </>
-            ) : (
-              <>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <BackInActive>
-                    {data.icon && <data.icon style={{ fontSize: "20px" }} />}
-                  </BackInActive>
-                  <InActiveLabel>{data.name}</InActiveLabel>
-                </div>
-              </>
-            )}
-          </ListItem>
-        ))}
+        {Data.map((data) =>
+          data.name === "CreateBlog" ? (
+            ""
+          ) : (
+            <ListItem
+              key={data.id}
+              onClick={() => {
+                SetStatusfunc(data.name);
+                _handleComActions(data.id.toString());
+              }}
+            >
+              {Status === data.name ? (
+                <>
+                  <BackActive>
+                    {data.icon && (
+                      <data.icon style={{ color: "#fff", fontSize: "20px" }} />
+                    )}
+                  </BackActive>
+                  <ActiveLabel>{data.name}</ActiveLabel>
+                </>
+              ) : (
+                <>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <BackInActive>
+                      {data.icon && <data.icon style={{ fontSize: "20px" }} />}
+                    </BackInActive>
+                    <InActiveLabel>{data.name}</InActiveLabel>
+                  </div>
+                </>
+              )}
+            </ListItem>
+          )
+        )}
       </List>
     </div>
   );
@@ -272,34 +291,38 @@ const Mentor_Dashboard: FC = () => {
             {Data.map((data) => {
               return (
                 <>
-                  <div
-                    onClick={() => {
-                      SetStatusfunc(data.name);
-                      _handleComActions(data.id.toString());
-                    }}
-                  >
-                    {Status === data.name ? (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackActive>
-                          {data.icon && (
-                            <data.icon
-                              style={{ color: "#fff", fontSize: "20px" }}
-                            />
-                          )}
-                        </BackActive>
-                        <ActiveLabel>{data.name}</ActiveLabel>
-                      </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackInActive>
-                          {data.icon && (
-                            <data.icon style={{ fontSize: "20px" }} />
-                          )}
-                        </BackInActive>
-                        <InActiveLabel>{data.name}</InActiveLabel>
-                      </div>
-                    )}
-                  </div>
+                  {data.name === "CreateBlog" ? (
+                    ""
+                  ) : (
+                    <div
+                      onClick={() => {
+                        SetStatusfunc(data.name);
+                        _handleComActions(data.id.toString());
+                      }}
+                    >
+                      {Status === data.name ? (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackActive>
+                            {data.icon && (
+                              <data.icon
+                                style={{ color: "#fff", fontSize: "20px" }}
+                              />
+                            )}
+                          </BackActive>
+                          <ActiveLabel>{data.name}</ActiveLabel>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackInActive>
+                            {data.icon && (
+                              <data.icon style={{ fontSize: "20px" }} />
+                            )}
+                          </BackInActive>
+                          <InActiveLabel>{data.name}</InActiveLabel>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </>
               );
             })}
