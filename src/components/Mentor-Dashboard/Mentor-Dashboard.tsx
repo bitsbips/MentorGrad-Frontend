@@ -348,6 +348,7 @@ const Mentor_Dashboard: FC = () => {
               onClose={toggleDrawer(false)}
             >
               {/* {list} */}
+              {list}
             </Drawer>
           </>
         )}
