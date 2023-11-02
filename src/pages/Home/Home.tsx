@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BackgroundChecked1,
   BackgroundChecked2,
@@ -7,10 +7,10 @@ import {
   SubHead,
   TextChecked1,
   TopBack,
-} from "../About/AboutStyles";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer";
-import "./Home.css";
+} from '../About/AboutStyles';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer';
+import './Home.css';
 import {
   BackgroundCheckedSearch,
   BoldHeading,
@@ -45,30 +45,30 @@ import {
   WorksHeading,
   WorksImage,
   WorksSubHeading,
-} from "./HomeStyles";
-import { Works } from "../../Data/Data";
-import WorksImaage from "../../Assets/Images/backworks.svg";
-import BottomLink from "../../components/BottomLink";
-import LinkText from "../../components/LinkText";
-import MembersReview from "../../components/MembersReview";
-import SimpleAccordion from "../../components/Faqs";
-import ButtonComp from "../../components/Button";
-import OurMentors from "../../components/OurMentors/OurMentors";
-import ScrollSocial from "../../components/ScrollSocial";
-import Profile from "../../Assets/Images/user.svg";
-import RightImage from "../../components/RightImage";
-import IconSearch from "../../Assets/Images/icon_search.svg";
-import { InputAdornment, TextField } from "@mui/material";
-import useMediaQuery from "../../hooks/MediaQuery";
-import { InputHolder } from "../../components/UserForm/UserFormStyles";
-import { Link, useNavigate } from "react-router-dom";
+} from './HomeStyles';
+import { Works } from '../../Data/Data';
+import WorksImaage from '../../Assets/Images/backworks.svg';
+import BottomLink from '../../components/BottomLink';
+import LinkText from '../../components/LinkText';
+import MembersReview from '../../components/MembersReview';
+import SimpleAccordion from '../../components/Faqs';
+import ButtonComp from '../../components/Button';
+import OurMentors from '../../components/OurMentors/OurMentors';
+import ScrollSocial from '../../components/ScrollSocial';
+import Profile from '../../Assets/Images/user.svg';
+import RightImage from '../../components/RightImage';
+import IconSearch from '../../Assets/Images/icon_search.svg';
+import { InputAdornment, TextField } from '@mui/material';
+import useMediaQuery from '../../hooks/MediaQuery';
+import { InputHolder } from '../../components/UserForm/UserFormStyles';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const isMobile = useMediaQuery("(min-width: 950px)");
+  const isMobile = useMediaQuery('(min-width: 950px)');
 
   const navigate = useNavigate();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -80,7 +80,7 @@ const Home = () => {
         <TopBack>
           <BottomPosHome>
             <RowDirection>
-              <ColDirection style={{ alignSelf: "center" }}>
+              <ColDirection style={{ alignSelf: 'center' }}>
                 <LightTextPurple>Learn from the Best</LightTextPurple>
                 <HomeHeading>
                   Connect With International Student Mentors Globally.
@@ -95,24 +95,24 @@ const Home = () => {
                     style={
                       isMobile
                         ? {
-                            marginTop: "0%",
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            width: "95%",
+                            marginTop: '0%',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            width: '95%',
                           }
-                        : { display: "flex", flexDirection: "column" }
+                        : { display: 'flex', flexDirection: 'column' }
                     }
                   >
-                    <div style={{ width: "70%" }}>
+                    <div style={{ width: '70%' }}>
                       <div className="form-group has-search">
                         <span className="fa fa-search form-control-feedback">
                           <img
                             src={IconSearch}
                             style={{
-                              width: "20px",
-                              marginTop: "6px",
-                              marginLeft: "-15px",
+                              width: '20px',
+                              marginTop: '6px',
+                              marginLeft: '-15px',
                             }}
                           />
                         </span>
@@ -120,7 +120,7 @@ const Home = () => {
                           type="text"
                           className="form-control"
                           placeholder="Where do you want to study?"
-                          style={{ borderWidth: 0, backgroundColor: "#F2F5F9" }}
+                          style={{ borderWidth: 0, backgroundColor: '#F2F5F9' }}
                         />
                       </div>
                     </div>
@@ -137,20 +137,20 @@ const Home = () => {
         <BottomPosHome>
           <ColDirection>
             <SocialHeading>
-              Obtain Guidance from Current and Past{" "}
-              <SocialHeading style={{ color: "#7476D1" }}>
-                International Students!{" "}
+              Obtain Guidance from Current and Past{' '}
+              <SocialHeading style={{ color: '#7476D1' }}>
+                International Students!{' '}
               </SocialHeading>
             </SocialHeading>
             <ScrollSocial />
           </ColDirection>
         </BottomPosHome>
         <BottomPosHome>
-          <RowDirection style={{ marginTop: "4%" }}>
+          <RowDirection style={{ marginTop: '4%' }}>
             <ColDirection>
               <BoldHeading>
-                How Does It{" "}
-                <BoldHeading style={{ color: "#7476D1" }}>Work? </BoldHeading>
+                How Does It{' '}
+                <BoldHeading style={{ color: '#7476D1' }}>Work? </BoldHeading>
               </BoldHeading>
               <HomeSubHeading1>
                 Our mentors who are current international students assist in
@@ -159,8 +159,8 @@ const Home = () => {
                 tests, and scholarship opportunities available. They provide
                 guidance on which universities to apply to, which courses to
                 pursue based on personal academic goals, and even offer insights
-                into the culture and lifestyle of the host country.{" "}
-                <Link to={""}>Learn More.</Link>
+                into the culture and lifestyle of the host country.{' '}
+                <Link to={''}>Learn More.</Link>
               </HomeSubHeading1>
               {isMobile ? <WorksImage src={WorksImaage} /> : <></>}
               {isMobile ? (
@@ -168,8 +168,8 @@ const Home = () => {
                   <BackgroundChecked2>
                     <TextChecked1>Find my Mentor</TextChecked1>
                   </BackgroundChecked2>
-                  <div style={{ alignSelf: "center", marginLeft: "4%" }}>
-                    <LinkText title="Become a Mentor" onClick={() => ""} />
+                  <div style={{ alignSelf: 'center', marginLeft: '4%' }}>
+                    <LinkText title="Become a Mentor" onClick={() => ''} />
                   </div>
                 </ButtonsWidth>
               ) : (
@@ -185,9 +185,9 @@ const Home = () => {
                         <RowWorks>
                           <img
                             src={data.image}
-                            style={{ alignSelf: "center", marginLeft: "1%" }}
+                            style={{ alignSelf: 'center', marginLeft: '1%' }}
                           />
-                          <ColDirection style={{ marginLeft: "4%" }}>
+                          <ColDirection style={{ marginLeft: '4%' }}>
                             <WorksHeading>{data.label}</WorksHeading>
                             <WorksSubHeading>{data.sublabel}</WorksSubHeading>
                           </ColDirection>
@@ -198,11 +198,11 @@ const Home = () => {
                         <RowWorks>
                           <img
                             src={data.image}
-                            style={{ alignSelf: "center", marginLeft: "1%" }}
+                            style={{ alignSelf: 'center', marginLeft: '1%' }}
                           />
 
                           <ColDirection
-                            style={{ marginLeft: "4%", alignSelf: "center" }}
+                            style={{ marginLeft: '4%', alignSelf: 'center' }}
                           >
                             <WorksHeading>{data.label}</WorksHeading>
                             <WorksSubHeading>{data.sublabel}</WorksSubHeading>
@@ -221,10 +221,10 @@ const Home = () => {
                 <BackgroundChecked2>
                   <TextChecked1>Find my Mentor</TextChecked1>
                 </BackgroundChecked2>
-                <div style={{ alignSelf: "center", marginLeft: "4%" }}>
+                <div style={{ alignSelf: 'center', marginLeft: '4%' }}>
                   <LinkText
                     title="Become a Mentor"
-                    onClick={() => navigate("/mentor/signup")}
+                    onClick={() => navigate('/mentor/signup')}
                   />
                 </div>
               </ButtonsWidth>
@@ -233,29 +233,29 @@ const Home = () => {
         </BottomPosHome>
         <hr
           style={{
-            background: "#C7D4E4",
-            color: "#C7D4E4",
-            borderColor: "#C7D4E4",
-            height: "2px",
+            background: '#C7D4E4',
+            color: '#C7D4E4',
+            borderColor: '#C7D4E4',
+            height: '2px',
           }}
         />
         <OurMentors />
         <hr
           style={{
-            background: "#C7D4E4",
-            color: "#C7D4E4",
-            borderColor: "#C7D4E4",
-            height: "2px",
+            background: '#C7D4E4',
+            color: '#C7D4E4',
+            borderColor: '#C7D4E4',
+            height: '2px',
           }}
         />
         <MembersReview />
         <hr
           style={{
-            background: "#C7D4E4",
-            color: "#C7D4E4",
-            borderColor: "#C7D4E4",
-            height: "2px",
-            marginTop: "3%",
+            background: '#C7D4E4',
+            color: '#C7D4E4',
+            borderColor: '#C7D4E4',
+            height: '2px',
+            marginTop: '3%',
           }}
         />
         <InputHolder>
@@ -274,15 +274,15 @@ const Home = () => {
                 </NewsSubHeading>
               </ColDirection>
               <ButtonComp
-                fontSize={"14px"}
-                width={isMobile ? "30%" : "50%"}
+                fontSize={'14px'}
+                width={isMobile ? '30%' : '50%'}
                 style={{
-                  padding: "0.5%",
-                  alignSelf: "center",
-                  marginTop: "-3.5%",
+                  padding: '0.5%',
+                  alignSelf: 'center',
+                  marginTop: '-3.5%',
                 }}
                 title="Subscribe Now"
-                onClick={() => ""}
+                onClick={() => ''}
               />
             </RowDirectionBetween>
           </BottomNewsHome>

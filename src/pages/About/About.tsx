@@ -1,5 +1,5 @@
-import React from "react";
-import Header from "../../components/Header/Header";
+import React from 'react';
+import Header from '../../components/Header/Header';
 import {
   BackCart,
   BackgroundChecked1,
@@ -21,6 +21,7 @@ import {
   Head,
   Image1,
   Image2,
+  Image3,
   Image2Box,
   ImagePosition,
   ImagePosition1,
@@ -43,34 +44,34 @@ import {
   TopBack,
   UserImage,
   WriterName,
-} from "./AboutStyles";
-import ButtonComp from "../../components/Button";
-import LinkText from "../../components/LinkText";
-import Example from "../../Assets/Images/BackLeft.png";
-import Mask1 from "../../Assets/Images/Mask1.png";
-import Mask2 from "../../Assets/Images/Mask2.png";
+} from './AboutStyles';
+import ButtonComp from '../../components/Button';
+import LinkText from '../../components/LinkText';
+import Example from '../../Assets/Images/BackLeft.png';
+import Mask1 from '../../Assets/Images/Mask1.png';
+import Mask2 from '../../Assets/Images/Mask2.png';
 
 import {
   BackgroundChecked,
   InputHolder,
   TextChecked,
-} from "../../components/UserForm/UserFormStyles";
-import { ContentHome, Mentors } from "../../Data/Data";
-import Group1 from "../../Assets/Images/group-1.png";
-import Group2 from "../../Assets/Images/group-2.png";
-import Star from "../../Assets/Images/star-0.png";
-import Footer from "../../components/Footer";
-import HorizontalScroll from "react-scroll-horizontal";
-import { useNavigate } from "react-router-dom";
-import OurMentors from "../../components/OurMentors/OurMentors";
-import useMediaQuery from "../../hooks/MediaQuery";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styled from "styled-components";
-import { Column, Row, RowAbout } from "../Home/HomeStyles";
+} from '../../components/UserForm/UserFormStyles';
+import { ContentHome, Mentors } from '../../Data/Data';
+import Group1 from '../../Assets/Images/group-1.png';
+import Group2 from '../../Assets/Images/group-2.png';
+import Star from '../../Assets/Images/star-0.png';
+import Footer from '../../components/Footer';
+import HorizontalScroll from 'react-scroll-horizontal';
+import { useNavigate } from 'react-router-dom';
+import OurMentors from '../../components/OurMentors/OurMentors';
+import useMediaQuery from '../../hooks/MediaQuery';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import styled from 'styled-components';
+import { Column, Row, RowAbout } from '../Home/HomeStyles';
 
 const AccordionStyle = styled.div`
   background-color: #f2f5f9;
@@ -107,22 +108,22 @@ const Group = [
   {
     id: 0,
     image: Group2,
-    heading: "Our Vision",
+    heading: 'Our Vision',
     subheading:
-      "Vitae platea fermentum, in pellentesque lectus vitae. Iaculis sit viverra vulputate proin malesuada mollis. Morbi quis a, sapien, in pellentesque.",
+      'Vitae platea fermentum, in pellentesque lectus vitae. Iaculis sit viverra vulputate proin malesuada mollis. Morbi quis a, sapien, in pellentesque.',
   },
   {
     id: 1,
     image: Group1,
-    heading: "Our Mission",
+    heading: 'Our Mission',
     subheading:
-      "Vitae platea fermentum, in pellentesque lectus vitae. Iaculis sit viverra vulputate proin malesuada mollis. Morbi quis a, sapien, in pellentesque.",
+      'Vitae platea fermentum, in pellentesque lectus vitae. Iaculis sit viverra vulputate proin malesuada mollis. Morbi quis a, sapien, in pellentesque.',
   },
 ];
 
 const About = () => {
   const navigate = useNavigate();
-  const isMobile = useMediaQuery("(min-width: 950px)");
+  const isMobile = useMediaQuery('(min-width: 950px)');
 
   return (
     <Container>
@@ -139,16 +140,16 @@ const About = () => {
           <ButtonsWidth>
             <ButtonsPosition>
               <ButtonComp
-                fontSize={"14px"}
-                width={isMobile ? "50%" : "50%"}
-                style={{ padding: "2%", alignSelf: "center" }}
+                fontSize={'14px'}
+                width={isMobile ? '50%' : '50%'}
+                style={{ padding: '2%', alignSelf: 'center' }}
                 title="Find a Mentor"
-                onClick={() => ""}
+                onClick={() => ''}
               />
               <LinkText
-                style={{ marginTop: "4%" }}
+                style={{ marginTop: '4%' }}
                 title="Become a Mentor"
-                onClick={() => navigate("/mentor/signup")}
+                onClick={() => navigate('/mentor/signup')}
               />
             </ButtonsPosition>
           </ButtonsWidth>
@@ -157,7 +158,7 @@ const About = () => {
           <ImagePosition>
             <Image2 src={Mask1} />
 
-            <Image2 src={Mask2} />
+            <Image3 src={Mask2} />
             <Image2 src={Example} />
           </ImagePosition>
         </BottomPos>
@@ -174,7 +175,7 @@ const About = () => {
               <div>
                 <Image2Box src={Mask1} />
               </div>
-              <Columnpos style={{ alignSelf: "center" }}>
+              <Columnpos style={{ alignSelf: 'center' }}>
                 <Title1>
                   Building A Brighter Future Through Holistic Mentoring
                 </Title1>
@@ -189,19 +190,19 @@ const About = () => {
                     return (
                       <Accordion
                         sx={{
-                          "&:before": {
-                            display: "none",
+                          '&:before': {
+                            display: 'none',
                           },
                         }}
                         style={{
-                          backgroundColor: "#F2F5F9",
+                          backgroundColor: '#F2F5F9',
                           borderRadius: 10,
                           marginBottom: 10,
                         }}
                       >
                         <AccordionSummary
                           expandIcon={
-                            <ExpandMoreIcon style={{ color: "#7476D1" }} />
+                            <ExpandMoreIcon style={{ color: '#7476D1' }} />
                           }
                           aria-controls="panel1a-content"
                           id="panel1a-header"
@@ -220,14 +221,14 @@ const About = () => {
           </BottomPos>
         </InputHolder>
         <InputHolder>
-          <ColorContainer style={{ marginBottom: "3%" }}>
+          <ColorContainer style={{ marginBottom: '3%' }}>
             <RowAbout>
-              <LeftWidth style={{ alignSelf: "center" }}>
+              <LeftWidth style={{ alignSelf: 'center' }}>
                 <Columnpos1
                   style={
                     isMobile
-                      ? { alignSelf: "center", marginLeft: "17%" }
-                      : { alignSelf: "center", margin: "auto", width: "90%" }
+                      ? { alignSelf: 'center', marginLeft: '17%' }
+                      : { alignSelf: 'center', margin: 'auto', width: '90%' }
                   }
                 >
                   <Title1>
@@ -242,10 +243,10 @@ const About = () => {
                   </SubTitle1>
                   <hr
                     style={{
-                      background: "#D6D6D6",
-                      color: "#D6D6D6",
-                      borderColor: "#D6D6D6",
-                      height: "2px",
+                      background: '#D6D6D6',
+                      color: '#D6D6D6',
+                      borderColor: '#D6D6D6',
+                      height: '2px',
                     }}
                   />
                   {Group.map((data) => {
