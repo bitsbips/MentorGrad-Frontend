@@ -169,7 +169,10 @@ const Home = () => {
                     <TextChecked1>Find my Mentor</TextChecked1>
                   </BackgroundChecked2>
                   <div style={{ alignSelf: 'center', marginLeft: '4%' }}>
-                    <LinkText title="Become a Mentor" onClick={() => ''} />
+                    <LinkText
+                      title="Become a Mentor"
+                      onClick={() => navigate('/mentor/signup')}
+                    />
                   </div>
                 </ButtonsWidth>
               ) : (

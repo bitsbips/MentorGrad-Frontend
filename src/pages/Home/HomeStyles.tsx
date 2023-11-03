@@ -68,6 +68,7 @@ export const RowDirectionBetween = styled.div`
   margin-top: 4%;
   @media (max-width: 750px) {
     flex-direction: column;
+    margin-bottom: 4%;
   }
 `;
 export const ColDirection = styled.div`
@@ -494,6 +495,7 @@ export const MembersBack = styled.div`
   @media (max-width: 450px) {
     width: 40vh;
     margin-bottom: 3%;
+    padding: 8%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 40vh;

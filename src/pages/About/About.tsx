@@ -50,6 +50,7 @@ import LinkText from '../../components/LinkText';
 import Example from '../../Assets/Images/BackLeft.png';
 import Mask1 from '../../Assets/Images/Mask1.png';
 import Mask2 from '../../Assets/Images/Mask2.png';
+import Mask3 from '../../Assets/Images/Mask3.png';
 
 import {
   BackgroundChecked,
@@ -263,7 +264,7 @@ const About = () => {
                 </Columnpos1>
               </LeftWidth>
               <Rightimgpo>
-                <RightImage src={Mask1} />
+                <RightImage src={Mask3} />
               </Rightimgpo>
             </RowAbout>
           </ColorContainer>

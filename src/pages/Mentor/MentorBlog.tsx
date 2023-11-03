@@ -142,7 +142,14 @@ const MentorBlogs = (): JSX.Element => {
           </Typography>
           <Button
             onClick={() => navigate('/dashboard?tab=10')}
-            sx={{ background: '#7476D1', fontSize: '14px', height: '40px' }}
+            sx={{
+              background: '#7476D1',
+              fontSize: '14px',
+              height: '40px',
+              '&:hover': {
+                background: '#5f61be',
+              },
+            }}
             size="small"
             variant="contained"
             startIcon={<EditNoteIcon fontSize="large" />}

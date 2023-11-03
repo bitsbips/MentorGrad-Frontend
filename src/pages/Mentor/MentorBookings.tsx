@@ -324,6 +324,9 @@ export const MentorBooking = (): JSX.Element => {
                     color: 'black',
                     width: '90px',
                     p: 0,
+                    '&:hover': {
+                      background: '#5f61be',
+                    },
                   }}
                   variant="contained"
                   startIcon={<Visibility fontSize="small" />}
@@ -341,6 +344,9 @@ export const MentorBooking = (): JSX.Element => {
                       background: 'rgba(255, 0, 0, 0.70)',
                       width: '90px',
                       p: 0,
+                      '&:hover': {
+                        background: '#5f61be',
+                      },
                     }}
                     variant="contained"
                     startIcon={<Cancel fontSize="small" />}
