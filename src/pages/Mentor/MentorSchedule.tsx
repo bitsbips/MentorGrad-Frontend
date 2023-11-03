@@ -67,7 +67,7 @@ const useStyles = makeStyles({
 
 // Define a type for the slot object
 type timeSlots = {
-  slotHours?: string;
+  slotHours: string;
 };
 
 const MentorSchedule = (): JSX.Element => {
@@ -118,6 +118,11 @@ const MentorSchedule = (): JSX.Element => {
   const handleAddTimeSlot = (event: React.SyntheticEvent) => {
     const target = event.target as HTMLInputElement;
 
+    let checkAvailable = timeSlots.filter((x) => x.slotHours === target.value);
+    if (checkAvailable.length > 0) {
+      notifyError("Solt already selected!");
+      return;
+    }
     let slot = {
       slotHours: target.value,
       isBooked: false,
@@ -127,6 +132,21 @@ const MentorSchedule = (): JSX.Element => {
       userId: userId,
       day: selectedDay,
       timeSlot: [...timeSlots, slot],
+    };
+    saveTimeSlot(payload)
+      .then((res) => {
+        getSlotsByDay();
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
+
+  const handleDeleteTimeSlot = (slot: string) => {
+    let payload = {
+      userId: userId,
+      day: selectedDay,
+      timeSlot: timeSlots.filter((x) => x.slotHours !== slot),
     };
     saveTimeSlot(payload)
       .then((res) => {
@@ -262,7 +282,7 @@ const MentorSchedule = (): JSX.Element => {
                   <Typography noWrap fontSize={"small"}>
                     {slot?.slotHours}
                   </Typography>
-                  <Cancel sx={{ width: "15px" }} />
+                  <Cancel sx={{ width: "15px" }} onClick={() => handleDeleteTimeSlot(slot?.slotHours)}/>
                 </Stack>
               ))}
             </Box>
