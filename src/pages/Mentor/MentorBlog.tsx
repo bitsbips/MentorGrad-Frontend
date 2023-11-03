@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { Container, ExperticeText } from './MentorStyles';
-import useMediaQuery from '../../hooks/MediaQuery';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Container, ExperticeText } from "./MentorStyles";
+import useMediaQuery from "../../hooks/MediaQuery";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -11,54 +11,55 @@ import {
   Tab,
   Tabs,
   Typography,
-} from '@mui/material';
-import Rectangle from '../../Assets/Images/Rectangle.png';
-import { makeStyles } from '@material-ui/core';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { getBlogs, updateBlog } from '../../api';
-import { formatDate, jwtDecode } from '../../helper-functions';
-import { notifyError, notifySuccess } from '../../components/Toastifycom';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+} from "@mui/material";
+import Rectangle from "../../Assets/Images/Rectangle.png";
+import { makeStyles } from "@material-ui/core";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { _deleteBlog, getBlogs, updateBlog } from "../../api";
+import { formatDate, jwtDecode } from "../../helper-functions";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const useStyles = makeStyles({
   container: {
-    border: '1px solid #D6D6D6',
+    border: "1px solid #D6D6D6",
+    minWidth: "280px",
   },
   subContainer: {
-    padding: '15px',
+    padding: "15px",
   },
   pageTitle: {
-    color: '#000',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontStyle: 'bold',
+    color: "#000",
+    leadingTrim: "both",
+    textEdge: "cap",
+    fontStyle: "bold",
     fontWeight: 600,
-    lineHeight: '48px',
-    textAlign: 'left',
-    paddingBottom: '20px',
+    lineHeight: "48px",
+    textAlign: "left",
+    paddingBottom: "20px",
   },
   personImg: {
-    width: '54px',
-    height: '54px',
+    width: "54px",
+    height: "54px",
     flexShrink: 0,
-    borderRadius: '54px',
+    borderRadius: "54px",
   },
   heading: {
     fontWeight: 600,
   },
   date: {
-    color: '#858585',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontSize: '0.5rem',
-    lineHeight: '38px' /* 342.857% */,
-    textAlign: 'left',
+    color: "#858585",
+    leadingTrim: "both",
+    textEdge: "cap",
+    fontSize: "0.5rem",
+    lineHeight: "38px" /* 342.857% */,
+    textAlign: "left",
   },
   description: {
-    textAlign: 'left',
-    padding: '10px',
-    color: '#505050',
+    textAlign: "left",
+    padding: "10px",
+    color: "#505050",
   },
 });
 
@@ -75,20 +76,20 @@ type Blog = {
 type Blogs = Blog[];
 
 const MentorBlogs = (): JSX.Element => {
-  const isMobile = useMediaQuery('(min-width: 950px)');
+  const isMobile = useMediaQuery("(min-width: 950px)");
   const navigate = useNavigate();
   const classes = useStyles();
 
   // Get the user from your authentication system or local storage
   const userId: String = jwtDecode(
-    localStorage.getItem('@storage_Key')
+    localStorage.getItem("@storage_Key")
   )?.userId;
 
-  const [tabs, setTabs] = React.useState('Active');
+  const [tabs, setTabs] = React.useState("Active");
   const [blogs, setBlogs] = React.useState<Blogs>([]);
 
   useEffect(() => {
-    getAllBlogs('Active');
+    getAllBlogs("Active");
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -113,20 +114,16 @@ const MentorBlogs = (): JSX.Element => {
     if (text.length <= maxLength) {
       return <span>{text}</span>;
     } else {
-      const truncatedText = text.slice(0, maxLength) + '...';
+      const truncatedText = text.slice(0, maxLength) + "...";
       return <span>{truncatedText}</span>;
     }
   }
 
-  const deleteBlog = (data: object) => {
-    let payload = {
-      ...data,
-      category: 'inActive',
-    };
-    updateBlog(payload)
+  const deleteBlog = (id: string) => {
+    _deleteBlog(id)
       .then((res) => {
-        getAllBlogs('Active');
-        notifySuccess(res);
+        getAllBlogs("Active");
+        notifySuccess(res?.message);
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -136,13 +133,13 @@ const MentorBlogs = (): JSX.Element => {
   return (
     <>
       <Grid item xs={12} sm={12} lg={12}>
-        <Stack flexDirection={'row'} justifyContent={'space-between'}>
+        <Stack flexDirection={"row"} justifyContent={"space-between"}>
           <Typography variant="h5" className={classes.pageTitle}>
             Blog
           </Typography>
           <Button
-            onClick={() => navigate('/dashboard?tab=10')}
-            sx={{ background: '#7476D1', fontSize: '14px', height: '40px' }}
+            onClick={() => navigate("/dashboard?tab=10")}
+            sx={{ background: "#7476D1", fontSize: "14px", height: "40px" }}
             size="small"
             variant="contained"
             startIcon={<EditNoteIcon fontSize="large" />}
@@ -157,8 +154,8 @@ const MentorBlogs = (): JSX.Element => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Active Blog" value={'Active'} />
-          <Tab label="InActive Blog" value={'inActive'} />
+          <Tab label="Active Blog" value={"Active"} />
+          <Tab label="InActive Blog" value={"inActive"} />
         </Tabs>
       </Grid>
       <hr />
@@ -167,29 +164,33 @@ const MentorBlogs = (): JSX.Element => {
           {blogs.map((blog, index) => (
             <Grid item lg={4} key={index}>
               <Stack className={classes.container}>
-                <img src={blog?.coverImage || Rectangle} height={'160'} />
+                <img
+                  src={blog?.coverImage || Rectangle}
+                  height={"160"}
+                  style={{ maxWidth: "340px" }}
+                />
                 <Stack className={classes.subContainer}>
                   <Typography className={classes.date}>
-                    {formatDate(blog?.updatedAt, 'dd MMM yyyy')}
+                    {formatDate(blog?.updatedAt, "dd MMM yyyy")}
                   </Typography>
-                  <Typography variant="h6" fontWeight={600} textAlign={'left'}>
+                  <Typography variant="h6" fontWeight={600} textAlign={"left"}>
                     {blog?.title}
                   </Typography>
-                  <Typography textAlign={'left'}>
+                  <Typography textAlign={"left"}>
                     {TruncateString(blog?.shortDescription, 30)}
                   </Typography>
                   <Stack
-                    flexDirection={'row'}
-                    alignItems={'center'}
-                    justifyContent={'space-between'}
-                    sx={{ paddingTop: '10px' }}
+                    flexDirection={"row"}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                    sx={{ paddingTop: "10px" }}
                   >
                     <Stack
-                      flexDirection={'row'}
-                      alignItems={'center'}
-                      justifyContent={'space-between'}
+                      flexDirection={"row"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
                       width={50}
-                      sx={{ cursor: 'pointer' }}
+                      sx={{ cursor: "pointer" }}
                       onClick={() =>
                         navigate(`/dashboard?tab=10&edit=true&id=${blog?._id}`)
                       }
@@ -208,15 +209,15 @@ const MentorBlogs = (): JSX.Element => {
                           />
                         </svg>
                       </Stack>
-                      <Stack sx={{ color: 'green' }}>Edit</Stack>
+                      <Stack sx={{ color: "green" }}>Edit</Stack>
                     </Stack>
 
                     <Stack
-                      flexDirection={'row'}
-                      alignItems={'center'}
-                      justifyContent={'space-between'}
-                      sx={{ cursor: 'pointer' }}
-                      onClick={() => deleteBlog(blog)}
+                      flexDirection={"row"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => deleteBlog(blog?._id)}
                     >
                       <Stack>
                         <svg
@@ -232,7 +233,7 @@ const MentorBlogs = (): JSX.Element => {
                           />
                         </svg>
                       </Stack>
-                      <Stack sx={{ color: 'red' }}>Delete</Stack>
+                      <Stack sx={{ color: "red" }}>Delete</Stack>
                     </Stack>
                   </Stack>
                 </Stack>

@@ -40,6 +40,7 @@ import TypeSpecimenIcon from "@mui/icons-material/TypeSpecimen";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MentorCreateBlogs from "../../pages/Mentor/MentorCreateBlog";
+import MentorSchedule from "../../pages/Mentor/MentorSchedule";
 const style = {
   width: "30%",
   bgcolor: "#F2F5F9",
@@ -157,12 +158,8 @@ const Mentor_Dashboard: FC = () => {
         </>
       );
     }
-    if (profilestep === "3") {
-      return (
-        <div>
-          <p>No Result</p>
-        </div>
-      );
+    if (tab === "3") {
+      return <MentorSchedule />;
     }
     if (tab === "4") {
       return (
