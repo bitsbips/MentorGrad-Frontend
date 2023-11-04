@@ -349,6 +349,7 @@ export const Rightimgpo = styled.div`
   text-align: right;
   display: block;
   clear: right;
+
   @media (max-width: 450px) {
     justify-content: center;
     align-items: center;
@@ -497,7 +498,7 @@ export const BackCart = styled.div`
   /* padding: 3%; */
   @media (max-width: 750px) {
     margin: auto;
-    width: 70.8%;
+    width: 85%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     margin-left: 3%;

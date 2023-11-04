@@ -372,7 +372,13 @@ const MentorCreateBlogs = (): JSX.Element => {
             <Button
               onClick={searchParams.get('edit') ? editBlog : createBlog}
               variant="contained"
-              sx={{ background: '#7476D1', float: 'left' }}
+              sx={{
+                background: '#7476D1',
+                float: 'left',
+                '&:hover': {
+                  background: '#5f61be',
+                },
+              }}
             >
               Publish
             </Button>

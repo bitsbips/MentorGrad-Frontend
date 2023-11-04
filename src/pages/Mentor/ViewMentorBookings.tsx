@@ -185,6 +185,9 @@ export const ViewMentorBooking = ({
                 borderRadius: '8px',
                 height: '40px',
                 padding: '20px 40px',
+                '&:hover': {
+                  background: '#5f61be',
+                },
               }}
               onClick={() => setStatusModal(true)}
             >
@@ -195,7 +198,14 @@ export const ViewMentorBooking = ({
           )}
           <Button
             variant="outlined"
-            sx={{ borderRadius: '8px', height: '40px', padding: '20px 40px' }}
+            sx={{
+              borderRadius: '8px',
+              height: '40px',
+              padding: '20px 40px',
+              '&:hover': {
+                color: '#5f61be',
+              },
+            }}
             onClick={() => setShowDetails(false)}
             color="primary"
           >
