@@ -71,15 +71,14 @@ export const ViewMentorBooking = ({
           >
             <Stack
               sx={{
-                background: '#5F61BE',
-                color: 'white',
-                borderRadius: '10px',
-                p: 1,
+                color: 'black',
+                borderBottom: '3px solid #5F61BE',
+
                 gridColumn: 'span 6',
                 width: 'fit-content',
               }}
             >
-              <Typography fontWeight={600} noWrap>
+              <Typography fontWeight={700} noWrap>
                 {data?.bookingSubject}
               </Typography>
             </Stack>
@@ -107,16 +106,15 @@ export const ViewMentorBooking = ({
             >
               <Stack
                 sx={{
-                  background: '#5F61BE',
-                  color: 'white',
-                  borderRadius: '10px',
-                  p: 1,
+                  color: 'black',
+                  borderBottom: '3px solid #5F61BE',
+
                   mt: 2,
                   mb: 2,
                   width: 'fit-content',
                 }}
               >
-                <Typography>Date & Time</Typography>
+                <Typography fontWeight={700}>Date & Time</Typography>
               </Stack>
               <Typography
                 textAlign={'left'}
@@ -144,16 +142,15 @@ export const ViewMentorBooking = ({
             <Stack flexDirection={'column'}>
               <Stack
                 sx={{
-                  background: '#5F61BE',
-                  color: 'white',
-                  borderRadius: '10px',
-                  p: 1,
+                  color: 'black',
+                  borderBottom: '3px solid #5F61BE',
+
                   mt: 2,
                   mb: 2,
                   width: 'fit-content',
                 }}
               >
-                <Typography>Student Information</Typography>
+                <Typography fontWeight={700}>Student Information</Typography>
               </Stack>
               <Stack flexDirection={'row'}>
                 <Avatar />
