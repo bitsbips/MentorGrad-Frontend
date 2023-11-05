@@ -1,5 +1,5 @@
-import React, { FC, useContext, useEffect, useState } from "react";
-import { Context } from "../../Context/ContextStates";
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Context } from '../../Context/ContextStates';
 import {
   Border,
   Container,
@@ -7,61 +7,61 @@ import {
   PositionProfile,
   RightContainer,
   RightContainerDash1,
-} from "../StudentProfileDetails/StudentProfileStyles";
+} from '../StudentProfileDetails/StudentProfileStyles';
 import {
   ActiveLabel,
   BackActive,
   BackInActive,
   InActiveLabel,
-} from "./Mentor-DahboardStyles";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Icon, Typography } from "@mui/material";
-import HeaderUserinfo from "../StudentDashboard/HeaderUserinfo";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import useMediaQuery from "../../hooks/MediaQuery";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import MentorReviews from "../../pages/Mentor/MentorReviews";
-import TableComponentDashboard from "../StudentDashboard/TableComponent";
-import MentorBlogs from "../../pages/Mentor/MentorBlog";
-import MentorProfile from "../../pages/MentorProfile/MentorProfile";
-import { MentorBooking } from "../../pages/Mentor/MentorBookings";
-import Main from "../../pages/MentorChat/Main";
-import BookOnlineIcon from "@mui/icons-material/BookOnline";
-import ScheduleIcon from "@mui/icons-material/Schedule";
-import ChatIcon from "@mui/icons-material/Chat";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import RateReviewIcon from "@mui/icons-material/RateReview";
-import TypeSpecimenIcon from "@mui/icons-material/TypeSpecimen";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MentorCreateBlogs from "../../pages/Mentor/MentorCreateBlog";
-import MentorSchedule from "../../pages/Mentor/MentorSchedule";
-import { notifyError } from "../Toastifycom";
-import { getErrorMsg } from "../../helper-functions";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_USERS } from "../../graphql/queries";
+} from './Mentor-DahboardStyles';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { Icon, Typography } from '@mui/material';
+import HeaderUserinfo from '../StudentDashboard/HeaderUserinfo';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import useMediaQuery from '../../hooks/MediaQuery';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import MentorReviews from '../../pages/Mentor/MentorReviews';
+import TableComponentDashboard from '../StudentDashboard/TableComponent';
+import MentorBlogs from '../../pages/Mentor/MentorBlog';
+import MentorProfile from '../../pages/MentorProfile/MentorProfile';
+import { MentorBooking } from '../../pages/Mentor/MentorBookings';
+import Main from '../../pages/MentorChat/Main';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import ChatIcon from '@mui/icons-material/Chat';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import TypeSpecimenIcon from '@mui/icons-material/TypeSpecimen';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MentorCreateBlogs from '../../pages/Mentor/MentorCreateBlog';
+import MentorSchedule from '../../pages/Mentor/MentorSchedule';
+import { notifyError } from '../Toastifycom';
+import { getErrorMsg } from '../../helper-functions';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_USERS } from '../../graphql/queries';
 const style = {
-  width: "30%",
-  bgcolor: "#F2F5F9",
-  cursor: "pointer",
-  marginTop: "0px",
+  width: '30%',
+  bgcolor: '#F2F5F9',
+  cursor: 'pointer',
+  marginTop: '0px',
 };
 const style1 = {
-  border: "1.4px solid #D6D6D6", // Change the width and color as needed
+  border: '1.4px solid #D6D6D6', // Change the width and color as needed
 };
 
 const Mentor_Dashboard: FC = () => {
   const navigate = useNavigate();
-  const [profilestep, setProfileStep] = useState("0");
+  const [profilestep, setProfileStep] = useState('0');
   let [searchParams, setSearchParams] = useSearchParams();
-  const [Status, setStatus] = useState("");
+  const [Status, setStatus] = useState('');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isMobile = useMediaQuery("(min-width: 950px)");
+  const isMobile = useMediaQuery('(min-width: 950px)');
 
   function SetStatusfunc(ss: any) {
     setStatus(ss);
@@ -69,92 +69,92 @@ const Mentor_Dashboard: FC = () => {
   const Data = [
     {
       id: 0,
-      name: "Dashboard",
+      name: 'Dashboard',
       icon: DashboardIcon,
     },
     {
       id: 2,
-      name: "Bookings",
+      name: 'Bookings',
       icon: BookOnlineIcon,
     },
     {
       id: 3,
-      name: "Schedule Timings",
+      name: 'Schedule Timings',
       icon: ScheduleIcon,
     },
     {
       id: 4,
-      name: "Messages",
+      name: 'Messages',
       icon: ChatIcon,
     },
     {
       id: 5,
-      name: "Invoices",
+      name: 'Invoices',
       icon: ReceiptIcon,
     },
     {
       id: 6,
-      name: "Reviews",
+      name: 'Reviews',
       icon: RateReviewIcon,
-      url: "/mentor/reviews",
+      url: '/mentor/reviews',
     },
     {
       id: 7,
 
-      name: "Blog",
+      name: 'Blog',
       icon: TypeSpecimenIcon,
     },
     {
       id: 8,
-      name: "Profile",
+      name: 'Profile',
       icon: ContactPageIcon,
     },
-    {
-      id: 9,
+    // {
+    //   id: 9,
 
-      name: "Logout",
-      icon: LogoutIcon,
-    },
+    //   name: "Logout",
+    //   icon: LogoutIcon,
+    // },
     {
       id: 10,
-      name: "CreateBlog",
+      name: 'CreateBlog',
       show: false,
       icon: TypeSpecimenIcon,
     },
   ];
   useEffect(() => {
     // Set the initial Status and profile step when the component mounts
-    let tab = searchParams.get("tab");
+    let tab = searchParams.get('tab');
     if (!tab) {
-      _handleComActions("0");
+      _handleComActions('0');
     }
-    if (tab === "0") {
-      setStatus("Dashboard");
+    if (tab === '0') {
+      setStatus('Dashboard');
     }
   }, [profilestep]);
 
   const Mycomphoolder: any = () => {
-    let tab = searchParams.get("tab");
-    if (tab === "0") {
+    let tab = searchParams.get('tab');
+    if (tab === '0') {
       return (
         <div>
           <HeaderUserinfo />
         </div>
       );
     }
-    if (profilestep === "1") {
+    if (profilestep === '1') {
       return (
         <div>
           <p>No Result</p>
         </div>
       );
     }
-    if (tab === "2") {
+    if (tab === '2') {
       return (
         <>
           <Typography
             variant="h5"
-            sx={{ textAlign: "left", paddingBottom: "20px" }}
+            sx={{ textAlign: 'left', paddingBottom: '20px' }}
           >
             Booking Summary
           </Typography>
@@ -162,18 +162,18 @@ const Mentor_Dashboard: FC = () => {
         </>
       );
     }
-    if (tab === "3") {
+    if (tab === '3') {
       return <MentorSchedule />;
     }
-    if (tab === "4") {
+    if (tab === '4') {
       return <Main />;
     }
-    if (tab === "5") {
+    if (tab === '5') {
       return (
         <>
           <Typography
             variant="h5"
-            sx={{ textAlign: "left", paddingBottom: "20px" }}
+            sx={{ textAlign: 'left', paddingBottom: '20px' }}
           >
             Invoices
           </Typography>
@@ -181,26 +181,26 @@ const Mentor_Dashboard: FC = () => {
         </>
       );
     }
-    if (tab === "6") {
+    if (tab === '6') {
       return (
         <div>
           <MentorReviews />
         </div>
       );
     }
-    if (tab === "7") {
+    if (tab === '7') {
       return (
         <div>
           <MentorBlogs />
         </div>
       );
     }
-    if (tab === "8") {
+    if (tab === '8') {
       return (
         <div>
           <Typography
             variant="h5"
-            sx={{ textAlign: "left", paddingBottom: "20px" }}
+            sx={{ textAlign: 'left', paddingBottom: '20px' }}
           >
             Mentor Profile
           </Typography>
@@ -208,19 +208,19 @@ const Mentor_Dashboard: FC = () => {
         </div>
       );
     }
-    if (tab === "10") {
+    if (tab === '10') {
       return <MentorCreateBlogs />;
     }
   };
 
   // Actions
   const _handleComActions = (tab: string) => {
-    if (searchParams.get("edit") && searchParams.get("id")) {
-      searchParams.delete("id");
-      searchParams.delete("edit");
+    if (searchParams.get('edit') && searchParams.get('id')) {
+      searchParams.delete('id');
+      searchParams.delete('edit');
       setSearchParams(searchParams);
     }
-    searchParams.set("tab", tab);
+    searchParams.set('tab', tab);
     setSearchParams(searchParams);
   };
 
@@ -228,9 +228,9 @@ const Mentor_Dashboard: FC = () => {
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event &&
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
       ) {
         return;
       }
@@ -244,8 +244,8 @@ const Mentor_Dashboard: FC = () => {
     >
       <List>
         {Data.map((data) =>
-          data.name === "CreateBlog" ? (
-            ""
+          data.name === 'CreateBlog' ? (
+            ''
           ) : (
             <ListItem
               key={data.id}
@@ -258,16 +258,16 @@ const Mentor_Dashboard: FC = () => {
                 <>
                   <BackActive>
                     {data.icon && (
-                      <data.icon style={{ color: "#fff", fontSize: "20px" }} />
+                      <data.icon style={{ color: '#fff', fontSize: '20px' }} />
                     )}
                   </BackActive>
                   <ActiveLabel>{data.name}</ActiveLabel>
                 </>
               ) : (
                 <>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <BackInActive>
-                      {data.icon && <data.icon style={{ fontSize: "20px" }} />}
+                      {data.icon && <data.icon style={{ fontSize: '20px' }} />}
                     </BackInActive>
                     <InActiveLabel>{data.name}</InActiveLabel>
                   </div>
@@ -288,8 +288,8 @@ const Mentor_Dashboard: FC = () => {
             {Data.map((data) => {
               return (
                 <>
-                  {data.name === "CreateBlog" ? (
-                    ""
+                  {data.name === 'CreateBlog' ? (
+                    ''
                   ) : (
                     <div
                       onClick={() => {
@@ -298,21 +298,21 @@ const Mentor_Dashboard: FC = () => {
                       }}
                     >
                       {Status === data.name ? (
-                        <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
                           <BackActive>
                             {data.icon && (
                               <data.icon
-                                style={{ color: "#fff", fontSize: "20px" }}
+                                style={{ color: '#fff', fontSize: '20px' }}
                               />
                             )}
                           </BackActive>
                           <ActiveLabel>{data.name}</ActiveLabel>
                         </div>
                       ) : (
-                        <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
                           <BackInActive>
                             {data.icon && (
-                              <data.icon style={{ fontSize: "20px" }} />
+                              <data.icon style={{ fontSize: '20px' }} />
                             )}
                           </BackInActive>
                           <InActiveLabel>{data.name}</InActiveLabel>
@@ -330,12 +330,12 @@ const Mentor_Dashboard: FC = () => {
             <div
               onClick={toggleDrawer(true)}
               style={{
-                alignSelf: "flex-start",
-                marginLeft: "-5%",
-                marginBottom: "3%",
+                alignSelf: 'flex-start',
+                marginLeft: '-5%',
+                marginBottom: '3%',
               }}
             >
-              <MenuOpenIcon style={{ fontSize: "30px", color: "#5F61BE" }} />
+              <MenuOpenIcon style={{ fontSize: '30px', color: '#5F61BE' }} />
             </div>
 
             {/* Drawer */}

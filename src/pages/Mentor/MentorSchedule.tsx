@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Container, ExperticeText } from "./MentorStyles";
-import useMediaQuery from "../../hooks/MediaQuery";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Container, ExperticeText } from './MentorStyles';
+import useMediaQuery from '../../hooks/MediaQuery';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Divider,
@@ -10,58 +10,59 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import personImg from "../../Assets/Images/person.jpeg";
-import { makeStyles } from "@material-ui/core";
-import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { getDayTimeSlot, getReviews, saveTimeSlot } from "../../api";
-import { formatDate, jwtDecode } from "../../helper-functions";
-import { notifyError } from "../../components/Toastifycom";
-import Cancel from "@mui/icons-material/Cancel";
+} from '@mui/material';
+import personImg from '../../Assets/Images/person.jpeg';
+import { makeStyles } from '@material-ui/core';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { getDayTimeSlot, getReviews, saveTimeSlot } from '../../api';
+import { formatDate, jwtDecode } from '../../helper-functions';
+import { notifyError } from '../../components/Toastifycom';
+import Cancel from '@mui/icons-material/Cancel';
+import Spinner from '../../components/Spinner';
 
 const useStyles = makeStyles({
   container: {
-    border: "1px solid #D6D6D6",
-    padding: "20px",
+    border: '1px solid #D6D6D6',
+    padding: '20px',
   },
   container2: {
-    border: "1px solid #D6D6D6",
-    padding: "15px",
-    borderRadius: "10px",
-    marginTop: "20px",
+    border: '1px solid #D6D6D6',
+    padding: '15px',
+    borderRadius: '10px',
+    marginTop: '20px',
   },
   pageTitle: {
-    color: "#000",
-    leadingTrim: "both",
-    textEdge: "cap",
+    color: '#000',
+    leadingTrim: 'both',
+    textEdge: 'cap',
     fontWeight: 800,
-    lineHeight: "48px",
-    textAlign: "left",
-    paddingBottom: "20px",
+    lineHeight: '48px',
+    textAlign: 'left',
+    paddingBottom: '20px',
   },
   personImg: {
-    width: "54px",
-    height: "54px",
+    width: '54px',
+    height: '54px',
     flexShrink: 0,
-    borderRadius: "54px",
+    borderRadius: '54px',
   },
   heading: {
     fontWeight: 600,
   },
   date: {
-    color: "#858585",
-    leadingTrim: "both",
-    textEdge: "cap",
-    fontSize: "0.8rem",
-    fontStyle: "normal",
+    color: '#858585',
+    leadingTrim: 'both',
+    textEdge: 'cap',
+    fontSize: '0.8rem',
+    fontStyle: 'normal',
     fontWeight: 500,
-    lineHeight: "48px" /* 342.857% */,
+    lineHeight: '48px' /* 342.857% */,
   },
   description: {
-    textAlign: "left",
-    padding: "10px",
-    color: "#505050",
+    textAlign: 'left',
+    padding: '10px',
+    color: '#505050',
   },
 });
 
@@ -71,30 +72,31 @@ type timeSlots = {
 };
 
 const MentorSchedule = (): JSX.Element => {
-  const isMobile = useMediaQuery("(min-width: 950px)");
+  const isMobile = useMediaQuery('(min-width: 950px)');
   const navigate = useNavigate();
   const classes = useStyles();
 
   // Get the user from your authentication system or local storage
   const userId: String = jwtDecode(
-    localStorage.getItem("@storage_Key")
+    localStorage.getItem('@storage_Key')
   )?.userId;
 
-  const [selectedDay, setselectedDay] = useState("Monday");
+  const [selectedDay, setselectedDay] = useState('Monday');
   const [timeSlots, setTimeSlots] = useState<timeSlots[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getSlotsByDay();
   }, [selectedDay]);
 
   const week = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
   ];
 
   function generateHourRange() {
@@ -102,14 +104,14 @@ const MentorSchedule = (): JSX.Element => {
     for (let i = 0; i < 24; i++) {
       const startHour = i % 12 || 12;
       const endHour = (i + 1) % 12 || 12;
-      const amOrPmStart = i < 12 ? "AM" : "PM";
-      const amOrPmEnd = i + 1 < 12 ? "AM" : "PM";
+      const amOrPmStart = i < 12 ? 'AM' : 'PM';
+      const amOrPmEnd = i + 1 < 12 ? 'AM' : 'PM';
 
       const timeRange = `${startHour
         .toString()
-        .padStart(2, "0")}:00 ${amOrPmStart} - ${endHour
+        .padStart(2, '0')}:00 ${amOrPmStart} - ${endHour
         .toString()
-        .padStart(2, "0")}:00 ${amOrPmEnd}`;
+        .padStart(2, '0')}:00 ${amOrPmEnd}`;
       hours.push(timeRange);
     }
     return hours;
@@ -120,7 +122,7 @@ const MentorSchedule = (): JSX.Element => {
 
     let checkAvailable = timeSlots.filter((x) => x.slotHours === target.value);
     if (checkAvailable.length > 0) {
-      notifyError("Solt already selected!");
+      notifyError('Solt already selected!');
       return;
     }
     let slot = {
@@ -157,19 +159,21 @@ const MentorSchedule = (): JSX.Element => {
       });
   };
 
-  const getSlotsByDay = () => {
-    getDayTimeSlot(selectedDay)
+  const getSlotsByDay = async () => {
+    setIsLoading(true);
+    await getDayTimeSlot(selectedDay)
       .then((res) => {
         setTimeSlots(res?.timeSlot);
       })
       .catch((err) => {
         notifyError(
-          typeof (err?.response?.data === "string")
+          typeof (err?.response?.data === 'string')
             ? err?.response?.data
-            : err?.response?.data?.error || "Server Error!"
+            : err?.response?.data?.error || 'Server Error!'
         );
         setTimeSlots([]);
       });
+    setIsLoading(false);
   };
 
   return (
@@ -181,8 +185,8 @@ const MentorSchedule = (): JSX.Element => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} lg={4}>
-          <Stack flexDirection={"column"}>
-            <Typography noWrap textAlign={"left"} fontSize={"18px"}>
+          <Stack flexDirection={'column'}>
+            <Typography noWrap textAlign={'left'} fontSize={'18px'}>
               Timing Slot Duration
             </Typography>
             <TextField
@@ -204,34 +208,34 @@ const MentorSchedule = (): JSX.Element => {
             <Box
               display="grid"
               gridTemplateColumns={
-                isMobile ? "repeat(12, 1fr)" : "repeat(2, 1fr)"
+                isMobile ? 'repeat(12, 1fr)' : 'repeat(2, 1fr)'
               }
               gap={2}
             >
               {week.map((day) => (
                 <Stack
                   key={day}
-                  alignItems={"center"}
-                  justifyContent={"center"}
+                  alignItems={'center'}
+                  justifyContent={'center'}
                   sx={
                     selectedDay === day
                       ? {
-                          border: "1px solid #D6D6D6",
-                          padding: "13px",
-                          borderRadius: "5px",
-                          width: "100px",
-                          height: "30px",
-                          cursor: "pointer",
-                          background: "#5F61BE",
-                          color: "white",
+                          border: '1px solid #D6D6D6',
+                          padding: '13px',
+                          borderRadius: '5px',
+                          width: '100px',
+                          height: '30px',
+                          cursor: 'pointer',
+                          background: '#5F61BE',
+                          color: 'white',
                         }
                       : {
-                          border: "1px solid #D6D6D6",
-                          padding: "13px",
-                          borderRadius: "5px",
-                          width: "100px",
-                          height: "30px",
-                          cursor: "pointer",
+                          border: '1px solid #D6D6D6',
+                          padding: '13px',
+                          borderRadius: '5px',
+                          width: '100px',
+                          height: '30px',
+                          cursor: 'pointer',
                         }
                   }
                   onClick={() => setselectedDay(day)}
@@ -242,50 +246,58 @@ const MentorSchedule = (): JSX.Element => {
             </Box>
 
             <Grid item xs={12} sm={12} lg={12}>
-              <Divider sx={{ background: "#5F61BE", mt: 2 }} />
+              <Divider sx={{ background: '#5F61BE', mt: 2 }} />
             </Grid>
 
             <Grid item xs={12} sm={12} lg={12}>
-              {" "}
+              {' '}
               <Typography
                 noWrap
-                textAlign={"left"}
-                fontSize={"23px"}
+                textAlign={'left'}
+                fontSize={'23px'}
                 fontWeight={800}
                 mt={2}
               >
                 Time Slots
               </Typography>
             </Grid>
-
-            <Box
-              display="grid"
-              gridTemplateColumns={
-                isMobile ? "repeat(5, 1fr)" : "repeat(1 , 2fr)"
-              }
-              gap={2}
-              mt={2}
-            >
-              {timeSlots.map((slot) => (
-                <Stack
-                  flexDirection={"row"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={1}
-                  sx={{
-                    p: 1.1,
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    background: "#C9F6EF",
-                  }}
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                <Box
+                  display="grid"
+                  gridTemplateColumns={
+                    isMobile ? 'repeat(5, 1fr)' : 'repeat(1 , 2fr)'
+                  }
+                  gap={2}
+                  mt={2}
                 >
-                  <Typography noWrap fontSize={"small"}>
-                    {slot?.slotHours}
-                  </Typography>
-                  <Cancel sx={{ width: "15px" }} onClick={() => handleDeleteTimeSlot(slot?.slotHours)}/>
-                </Stack>
-              ))}
-            </Box>
+                  {timeSlots.map((slot) => (
+                    <Stack
+                      flexDirection={'row'}
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      gap={1}
+                      sx={{
+                        p: 1.1,
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                        background: '#C9F6EF',
+                      }}
+                    >
+                      <Typography noWrap fontSize={'small'}>
+                        {slot?.slotHours}
+                      </Typography>
+                      <Cancel
+                        sx={{ width: '15px' }}
+                        onClick={() => handleDeleteTimeSlot(slot?.slotHours)}
+                      />
+                    </Stack>
+                  ))}
+                </Box>
+              </>
+            )}
           </Grid>
         </Grid>
       </Grid>
