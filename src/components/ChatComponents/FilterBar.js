@@ -1,5 +1,5 @@
-import { TextField, InputAdornment } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { TextField, InputAdornment } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 const FilterBar = ({ filterValue, setFilterValue, placeholder }) => {
   return (
@@ -13,6 +13,7 @@ const FilterBar = ({ filterValue, setFilterValue, placeholder }) => {
         size="small"
         onChange={(e) => setFilterValue(e.target.value)}
         InputProps={{
+          style: { borderRadius: 20 },
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon color="primary" />

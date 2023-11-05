@@ -1,29 +1,20 @@
-import { useState } from 'react';
-import TabBar from '../../components/ChatComponents/TabBar';
-import LatestMessages from './LatestMessages';
-import Users from './Users';
-import Groups from './Groups';
-import Conversation from './Conversation';
-import { useStateContext } from '../../Context/state';
+import { useState } from "react";
+// import TabBar from "../../components/ChatComponents/TabBar";
+// import LatestMessages from "./LatestMessages";
+import Users from "./Users";
+// import Groups from "./Groups";
+import Conversation from "./Conversation";
+import { useStateContext } from "../../Context/state";
 
 const MobileMain = () => {
   const { selectedChat } = useStateContext();
-  const [tab, setTab] = useState('chat');
+  const [tab, setTab] = useState("chat");
 
   return (
     <div>
       {!selectedChat ? (
         <div>
-          <TabBar tab={tab} setTab={setTab} />
-          <div>
-            {tab === 'chat' ? (
-              <LatestMessages />
-            ) : tab === 'users' ? (
-              <Users />
-            ) : (
-              <Groups />
-            )}
-          </div>
+          <Users />
         </div>
       ) : (
         <Conversation />

@@ -29,6 +29,7 @@ import MentorProfile from "./pages/MentorProfile/MentorProfile";
 import Main from "./pages/MentorChat/Main";
 import MessagesConfig from "./MessagesConfig";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { StateProvider } from "./Context/state";
 
 const theme = createTheme({
   typography: {
@@ -48,7 +49,7 @@ function App() {
   const user: string = jwtDecode(
     localStorage.getItem("@storage_Key")
   )?.userType;
-
+  const token = localStorage.getItem("@storage_Key");
   const storedStep = localStorage.getItem("currentStep");
   const initialStep = storedStep !== null ? storedStep : "0";
   // Set the initial state
@@ -93,43 +94,45 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Context.Provider
-          value={{
-            priceRangeValue,
-            setPriceRangeValue,
-            value,
-            setValue,
-            profilestep,
-            setProfileStep,
-            countryData,
-            setCountryData,
-            countryList,
-            setCountryList,
-            nationality,
-            setNationality,
-          }}
-        >
-          <Routes>
-            <Route
-              path="/*"
-              element={
-                <AuthGuard>
-                  {user === userTypes.student && studentRoutes}
-                  {user === userTypes.mentor && mentorRoutes}
-                  {user === userTypes.admin && adminRoutes}
-                </AuthGuard>
-              }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgetEmail" element={<ForgetEmail />} />
-            <Route path="/reset-Password/:id" element={<ForgetPassword />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </Context.Provider>
-        <Toast />
-        <MessagesConfig />
+        <StateProvider>
+          <Context.Provider
+            value={{
+              priceRangeValue,
+              setPriceRangeValue,
+              value,
+              setValue,
+              profilestep,
+              setProfileStep,
+              countryData,
+              setCountryData,
+              countryList,
+              setCountryList,
+              nationality,
+              setNationality,
+            }}
+          >
+            <Routes>
+              <Route
+                path="/*"
+                element={
+                  <AuthGuard>
+                    {user === userTypes.student && studentRoutes}
+                    {user === userTypes.mentor && mentorRoutes}
+                    {user === userTypes.admin && adminRoutes}
+                  </AuthGuard>
+                }
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgetEmail" element={<ForgetEmail />} />
+              <Route path="/reset-Password/:id" element={<ForgetPassword />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </Context.Provider>
+          <Toast />
+          {token ? <MessagesConfig /> : ""}
+        </StateProvider>
       </ThemeProvider>
     </div>
   );

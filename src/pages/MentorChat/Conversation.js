@@ -31,6 +31,7 @@ import { useConversationPageStyles } from '../../styles/muiStyles';
 // import { useScreenshot } from 'use-react-screenshot'
 
 import html2canvas from "html2canvas";
+import { notifyError } from '../../components/Toastifycom';
 
 
 // import  "./index.css";
@@ -102,7 +103,7 @@ const Conversation = () => {
     { data: privateData, loading: loadingPrivate },
   ] = useLazyQuery(GET_PRIVATE_MSGS, {
     onError: (err) => {
-      notify(getErrorMsg(err), 'error');
+      notifyError(getErrorMsg(err));
     },
   });
   const [
@@ -110,7 +111,7 @@ const Conversation = () => {
     { data: groupData, loading: loadingGroup },
   ] = useLazyQuery(GET_GROUP_MSGS, {
     onError: (err) => {
-      notify(getErrorMsg(err), 'error');
+      notifyError(getErrorMsg(err), 'error');
     },
   });
   const [
@@ -118,7 +119,7 @@ const Conversation = () => {
     { data: globalData, loading: loadingGlobal },
   ] = useLazyQuery(GET_GLOBAL_MSGS, {
     onError: (err) => {
-      notify(getErrorMsg(err), 'error');
+      notifyError(getErrorMsg(err), 'error');
     },
   });
 
@@ -126,7 +127,7 @@ const Conversation = () => {
     SET_MESSAGE_SEEN,
     {
       onError: (err) => {
-        notify(getErrorMsg(err), 'error');
+        notifyError(getErrorMsg(err), 'error');
       },
     }
   );
@@ -215,13 +216,13 @@ const Conversation = () => {
         }
     },
     onError: (err) => {
-      notify(getErrorMsg(err), 'error');
+      notifyError(getErrorMsg(err), 'error');
     },
   });
 
   useEffect(() => {
     if (subscriptionError) {
-      notify(getErrorMsg(subscriptionError), 'error');
+      notifyError(getErrorMsg(subscriptionError), 'error');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subscriptionError]);
@@ -357,13 +358,13 @@ const Conversation = () => {
 
 
   const dataToDisplay = () => {
-    if (loadingPrivate || loadingGroup || loadingGlobal || !messages) {
+    if (loadingPrivate || loadingGlobal || loadingGroup || !messages) {
       return (
         <div className={classes.conversationWrapper}>
           <LoadingSpinner size={80} marginTop={200} />
         </div>
       );
-    } else if (messages.length === 0) {
+    } else if (messages?.length === 0) {
       return (
         <div className={classes.noMessages}>
           <div className={classes.infoText}>
@@ -378,7 +379,7 @@ const Conversation = () => {
     } else {
       return (
         <div className={classes.conversationWrapper}>
-          {messages.map((message, index) => {
+          {messages?.map((message, index) => {
             const isSameDay =
               index !== 0
                 ? sameDay(messages[index - 1].createdAt, message.createdAt)
@@ -396,7 +397,7 @@ const Conversation = () => {
             const lastSentMessageId = messages[messages.length - 1]?.id || null;
 
             return (
-              <div key={message.id}>
+              <div key={message .id}>
                 {!isSameDay && (
                   <div className={classes.dateInfoWrapper}>
                     <Typography variant="body2" className={classes.infoText}>

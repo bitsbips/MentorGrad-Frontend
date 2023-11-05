@@ -27,6 +27,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import AttachmentIcon from '@material-ui/icons/Attachment';
 import Calculator from '../../components/ChatComponents/Calculator';
+import { notifyError } from '../../components/Toastifycom';
 
 const SendMessage = ({ capture, selectedShots }) => {
   const classes = useConversationPageStyles();
@@ -48,7 +49,7 @@ const SendMessage = ({ capture, selectedShots }) => {
     SEND_PRIVATE_MSG,
     {
       onError: (err) => {
-        notify(getErrorMsg(err), 'error');
+        notifyError(getErrorMsg(err), 'error');
       },
     }
   );

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStateContext } from "./Context/state";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { useBodyStyles } from "./styles/muiStyles";
 import { Paper, useMediaQuery, useTheme } from "@material-ui/core/";
 import {
@@ -29,7 +29,12 @@ const MessagesConfig = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [changeOnlineStatus] = useMutation(CHANGE_STATUS, {
     onError: (err) => {
-      // notify(getErrorMsg(err), 'error');
+      notifyError(getErrorMsg(err));
+    },
+  });
+  const { data: userData, loading: loadingUsers , refetch } = useQuery(GET_ALL_USERS, {
+    onError: (err) => {
+      notifyError(getErrorMsg(err));
     },
   });
   const client = useApolloClient();
@@ -265,9 +270,9 @@ const MessagesConfig = () => {
     }
   );
 
-  useEffect(() => {
-    changeOnlineStatus({ variables: { status: true } });
-  }, []);
+    useEffect(() => {
+      changeOnlineStatus({ variables: { status: true } });
+    }, []);
 
   return(
     <>

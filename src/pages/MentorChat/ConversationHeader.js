@@ -97,7 +97,6 @@ const ConversationHeader = ({ selectedShots, setSceenshot }) => {
           )}
         </Avatar>
         <Typography
-          color="secondary"
           variant={isMobile ? 'subtitle2' : 'h6'}
           className={classes.titleText}
         >

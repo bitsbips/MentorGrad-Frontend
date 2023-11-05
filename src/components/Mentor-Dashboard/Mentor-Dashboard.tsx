@@ -41,6 +41,10 @@ import ContactPageIcon from "@mui/icons-material/ContactPage";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MentorCreateBlogs from "../../pages/Mentor/MentorCreateBlog";
 import MentorSchedule from "../../pages/Mentor/MentorSchedule";
+import { notifyError } from "../Toastifycom";
+import { getErrorMsg } from "../../helper-functions";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_USERS } from "../../graphql/queries";
 const style = {
   width: "30%",
   bgcolor: "#F2F5F9",
@@ -162,11 +166,7 @@ const Mentor_Dashboard: FC = () => {
       return <MentorSchedule />;
     }
     if (tab === "4") {
-      return (
-        <div>
-          <Main />
-        </div>
-      );
+      return <Main />;
     }
     if (tab === "5") {
       return (

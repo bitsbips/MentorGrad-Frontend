@@ -36,9 +36,9 @@ const LatestMessages = () => {
     }
   );
 
-  if (loadingUsers || loadingGroups || loadingGlobal || !userData) {
-    return <LoadingSpinner />;
-  }
+  // if (loadingUsers || loadingGroups || loadingGlobal || !userData) {
+  //   return <LoadingSpinner />;
+  // }
 
 
 
@@ -71,48 +71,27 @@ const LatestMessages = () => {
         )}
         <Divider />
         {conservations.map((chat) => (
-          chat.type == "group" ?
-            <div key={chat.id}>
-              <ListItem
-                className={classes.listItem}
-                button
-                onClick={() => selectChat(chat, 'group')}
-                selected={
-                  selectedChat?.chatType === 'group' &&
-                  chat.id === selectedChat.chatData.id
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar>
-                    <GroupIcon color="primary" />
-                  </Avatar>
-                </ListItemAvatar>
-                <LatestMessage body={chat} />
-              </ListItem>
-              <Divider />
-            </div>
-            :
-            <div key={chat.id}>
-              <ListItem
-                className={classes.listItem}
-                button
-                onClick={() => selectChat(chat, 'private')}
-                selected={
-                  selectedChat?.chatType === 'private' &&
-                  chat.id === selectedChat.chatData.id
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt={chat.username}
-                    style={chat.isLogin ? {border:"3px green solid"} : {border:"3px red solid"}}
-                    src={`https://secure.gravatar.com/avatar/${chat.id}?s=150&d=retro`}
-                  />
-                </ListItemAvatar>
-                <LatestMessage body={chat} type="user" />
-              </ListItem>
-              <Divider />
-            </div>
+          <div key={chat.id}>
+          <ListItem
+            className={classes.listItem}
+            button
+            onClick={() => selectChat(chat, 'private')}
+            selected={
+              selectedChat?.chatType === 'private' &&
+              chat.id === selectedChat.chatData.id
+            }
+          >
+            <ListItemAvatar>
+              <Avatar
+                alt={chat.username}
+                style={chat.isLogin ? {border:"3px green solid"} : {border:"3px red solid"}}
+                src={`https://secure.gravatar.com/avatar/${chat.id}?s=150&d=retro`}
+              />
+            </ListItemAvatar>
+            <LatestMessage body={chat} type="user" />
+          </ListItem>
+          <Divider />
+        </div>
         ))}
 
 
