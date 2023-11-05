@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ErrorText } from "../../pages/AuthFlow/AuthStyles";
@@ -12,7 +12,14 @@ import {
   LabelProfile,
   TopText,
 } from "../../components/StudentProfileDetails/StudentProfileStyles";
-import { Grid } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { updateUserPassword } from "../../api";
 import { notifyError, notifySuccess } from "../../components/Toastifycom";
 
@@ -34,11 +41,13 @@ const ChangePassword: FC = () => {
 
     oldpassword: Yup.string().min(8).required("Old Password is Required"),
   });
+
+  const [confirmView, setConfirmView] = useState(false);
+
   const { values, errors, handleSubmit, handleChange } = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("values", values);
       let payload = {
         password: values.oldpassword,
         newPassword: values.password,
@@ -107,10 +116,40 @@ const ChangePassword: FC = () => {
             fontSize={"12px"}
             width={isMobile ? "20%" : "60%"}
             title="Changes Password"
-            onClick={() => handleSubmit()}
+            onClick={() => setConfirmView(true)}
           />
         </ContainerForm>
       </Grid>
+
+      <Dialog open={confirmView} maxWidth={"xl"}>
+        <DialogContent>
+          <Typography>Are you sure?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            size="small"
+            variant="contained"
+            sx={{
+              background: "#7476D1",
+              borderRadius: "8px",
+              height: "40px",
+              padding: "20px 40px",
+            }}
+            onClick={() => handleSubmit()}
+          >
+            Yes
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            sx={{ borderRadius: "8px", height: "40px", padding: "20px 40px" }}
+            onClick={() => setConfirmView(false)}
+            color="primary"
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
