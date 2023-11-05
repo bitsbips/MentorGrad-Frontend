@@ -223,7 +223,7 @@ export const BoldHeading = styled.p`
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
-  line-height: 3px;
+
   text-align: left;
   display: inline-block;
 
