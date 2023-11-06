@@ -193,7 +193,7 @@ const ConversationHeader = ({ selectedShots, setSceenshot }) => {
           </DialogBox>
         )}
 
-        {isMobile && (
+        {/* {isMobile && (
           <DialogBox
             modalOpen={templatesModal}
             setModalOpen={setTemplatesModal}
@@ -210,7 +210,7 @@ const ConversationHeader = ({ selectedShots, setSceenshot }) => {
           >
             <Feed />
           </DialogBox>
-        )}
+        )} */}
 
 
 
@@ -223,7 +223,7 @@ const ConversationHeader = ({ selectedShots, setSceenshot }) => {
 
 
 
-        {selectedShots.length > 0 && (
+        {/* {selectedShots.length > 0 && (
           <DialogBox
             modalOpen={screenshotsModal}
             setModalOpen={setScreenshotsModal}
@@ -267,7 +267,7 @@ const ConversationHeader = ({ selectedShots, setSceenshot }) => {
               {isSaving ? <CircularProgress /> : "Save"}
             </Button>
           </DialogBox>
-        )}
+        )} */}
 
 
 
