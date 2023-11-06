@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useBodyStyles = makeStyles(
   (theme) => ({
     root: {
-      // width: "100vW",
-      display: "flex",
-      flexDirection: "column",
+      //width: '100vW',
+      display: 'flex',
+      flexDirection: 'column',
       flex: 1,
-      minHeight: '100vH',
+      //  minHeight: '100vH',
     },
   }),
   { index: 1 }
@@ -264,8 +264,9 @@ export const useConversationPageStyles = makeStyles(
       // maxHeight: 'calc(100vH - 165px)',
       // minHeight: 'calc(100vH - 165px)',
       [theme.breakpoints.down('sm')]: {
-        height: '100%',
-        marginTop: 112,
+        height: 'calc(100vH - 185px)',
+        //  marginTop: 112,
+        overflowY: 'scroll',
       },
     },
     noMessages: {
@@ -359,11 +360,7 @@ export const useConversationPageStyles = makeStyles(
           ? '1px solid #d3d3d320'
           : '1px solid #d3d3d395',
       [theme.breakpoints.down('sm')]: {
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        padding: '0.5em 0.2em',
-        borderBottom: `3px solid ${theme.palette.primary.main}98`,
+        background: '#F5F5F6',
       },
     },
     avatar: {

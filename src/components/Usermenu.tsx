@@ -12,12 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import BackdropLoader from './BackdropLoader';
 import LogoutIcon from '@mui/icons-material/Logout';
 const UserMenu = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
-
-  const handleMenuOpen = (event:any) => {
+  const handleMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -26,31 +25,30 @@ const UserMenu = () => {
   };
 
   const handleUserProfileClick = () => {
-    navigate('/profile')
+    navigate('/profile');
   };
   const handleLogoutClick = () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     setTimeout(() => {
-        localStorage.removeItem('@storage_Key');
+      localStorage.removeItem('@storage_Key');
 
-      setIsLoading(false); 
+      setIsLoading(false);
       navigate('/login');
-    }, 2000); 
+    }, 2000);
   };
 
-
   return (
-    <div >
+    <div>
       <IconButton
-      style={{ backgroundColor: 'transparent' }}
+        style={{ backgroundColor: 'transparent' }}
         color="inherit"
         aria-label="user menu"
         onClick={handleMenuOpen}
         disableRipple // Disable the ripple effect on click
         disableFocusRipple // Disable the ripple effect on focus
       >
-        <AccountCircleIcon fontSize="large" style={{color:'#5F61BE'}}/>
-        <ArrowDropDownIcon fontSize="small" style={{marginTop:'5px'}}/>
+        <AccountCircleIcon fontSize="large" style={{ color: '#5F61BE' }} />
+        <ArrowDropDownIcon fontSize="small" style={{ marginTop: '5px' }} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -61,15 +59,14 @@ const UserMenu = () => {
             backgroundColor: '#F2F5F9', // Set your custom background color here
           },
         }}
-       
       >
-        <MenuItem onClick={handleUserProfileClick}>
+        {/* <MenuItem onClick={handleUserProfileClick}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="User Profile" />
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
+        </MenuItem> */}
+        <MenuItem onClick={handleLogoutClick} sx={{ minWidth: 'fit-content' }}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
