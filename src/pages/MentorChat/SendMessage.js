@@ -359,21 +359,21 @@ const SendMessage = ({ capture, selectedShots }) => {
               <InputAdornment position="start">
                 <div style={{ flexDirection: "row", display: "flex" }}>
                   <EmojiPicker handleEmojiAdd={handleEmojiAdd} />
-                  <Calculator />
+                  {/* <Calculator /> */}
 
-                  {!isMobile ? <IconButton
+                  {/* {!isMobile ? <IconButton
                     size="small"
                     color="primary"
                     onClick={capture}
                     disabled={loadingPrivate || loadingGroup || loadingGlobal}
-                  >
+                  > */}
                     {/* <Badge color='primary' badgeContent={selectedShots.length}> */}
 
-                    <CropFreeIcon fontSize="small" />
+                    {/* <CropFreeIcon fontSize="small" /> */}
 
                     {/* </Badge> */}
-                  </IconButton>
-                    : ""}
+                  {/* </IconButton>
+                    : ""} */}
 
                 </div>
               </InputAdornment>
