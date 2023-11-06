@@ -231,7 +231,7 @@ const MentorCreateBlogs = (): JSX.Element => {
     <>
       <Grid item xs={12} sm={12} lg={12}>
         <Typography variant="h5" className={classes.pageTitle}>
-          Create Blog
+          {searchParams.get('edit') ? "Edit" : "Create"} Blog
         </Typography>
       </Grid>
       {isLoading ? (
