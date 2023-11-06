@@ -140,7 +140,7 @@ const MessagesConfig = () => {
 
   const { error: subscriptionError } = useSubscription(NEW_MESSAGE, {
     onSubscriptionData: ({ client, subscriptionData }) => {
-      console.log(subscriptionData);
+      console.log("NEW_MESSAGE");
       if (selectedChat == null && isMobile) {
         const newMessage = subscriptionData.data.newMessage;
         let getMsgQuery,

@@ -6,11 +6,10 @@ import {
   SEND_GLOBAL_MSG,
 } from '../../graphql/mutations';
 import { useStateContext } from '../../Context/state';
-import { useAuthContext } from '../../Context/auth';
 
 import EmojiPicker from '../../components/ChatComponents/EmojiPicker';
 import useRecorder from '../../components/ChatComponents/VoiceRecorder';
-import { getErrorMsg, jwtDecode } from '../../helper-functions';
+import { getErrorMsg } from '../../helper-functions';
 import {
   GET_PRIVATE_MSGS,
   GET_GROUP_MSGS,
@@ -31,8 +30,7 @@ import { notifyError } from '../../components/Toastifycom';
 
 const SendMessage = ({ capture, selectedShots }) => {
   const classes = useConversationPageStyles();
-  // const { user } = useAuthContext();
-  const user = jwtDecode(localStorage.getItem("@storage_Key"));
+  const user = localStorage.getItem("@storage_Key")
   const { selectedChat, notify,
       // setMessageBody,
       // messageBody
@@ -49,7 +47,7 @@ const SendMessage = ({ capture, selectedShots }) => {
     SEND_PRIVATE_MSG,
     {
       onError: (err) => {
-        notifyError(getErrorMsg(err), 'error');
+        notifyError(getErrorMsg(err));
       },
     }
   );
@@ -57,7 +55,7 @@ const SendMessage = ({ capture, selectedShots }) => {
     SEND_GROUP_MSG,
     {
       onError: (err) => {
-        notify(getErrorMsg(err), 'error');
+        notifyError(getErrorMsg(err));
       },
     }
   );
@@ -65,7 +63,7 @@ const SendMessage = ({ capture, selectedShots }) => {
     SEND_GLOBAL_MSG,
     {
       onError: (err) => {
-        notify(getErrorMsg(err), 'error');
+        notifyError(getErrorMsg(err));
       },
     }
   );

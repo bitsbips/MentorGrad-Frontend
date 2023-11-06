@@ -17,6 +17,7 @@ import { useBodyStyles, useMainPageStyles } from "../../styles/muiStyles";
 import Users from "./Users";
 import { useMediaQuery, useTheme } from "@mui/material";
 import MobileMain from "./MobileMain";
+import MessagesConfig from "../../MessagesConfig";
 
 const Main = () => {
   const classes = useMainPageStyles();

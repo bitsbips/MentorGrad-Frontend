@@ -122,6 +122,17 @@ const Mentor_Dashboard: FC = () => {
       icon: TypeSpecimenIcon,
     },
   ];
+
+  const {
+    data: userData,
+    loading: loadingUsers,
+    refetch,
+  } = useQuery(GET_ALL_USERS, {
+    onError: (err) => {
+      notifyError(getErrorMsg(err));
+    },
+  });
+
   useEffect(() => {
     // Set the initial Status and profile step when the component mounts
     let tab = searchParams.get("tab");
