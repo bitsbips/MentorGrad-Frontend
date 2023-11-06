@@ -1,13 +1,13 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useBodyStyles = makeStyles(
   (theme) => ({
     root: {
-      width: "100vW",
-      display: "flex",
-      flexDirection: "column",
+      width: '100vW',
+      display: 'flex',
+      flexDirection: 'column',
       flex: 1,
-      minHeight: "100vH",
+      minHeight: '100vH',
     },
   }),
   { index: 1 }
@@ -17,8 +17,8 @@ export const useDialogStyles = makeStyles(
   (theme) => ({
     dialogWrapper: {
       paddingBottom: 20,
-      overflow: "hidden",
-      [theme.breakpoints.down("xs")]: {
+      overflow: 'hidden',
+      [theme.breakpoints.down('xs')]: {
         padding: 0,
       },
     },
@@ -29,23 +29,23 @@ export const useDialogStyles = makeStyles(
 export const useMainPageStyles = makeStyles(
   (theme) => ({
     root: {
-      display: "flex",
+      display: 'flex',
     },
     leftPanel: {
-      width: "40%",
+      width: '40%',
       borderRight:
-        theme.palette.type === "dark"
-          ? "1px solid #d3d3d315"
-          : "1px solid #d3d3d395",
+        theme.palette.type === 'dark'
+          ? '1px solid #d3d3d315'
+          : '1px solid #d3d3d395',
       borderLeft:
-        theme.palette.type === "dark"
-          ? "1px solid #d3d3d315"
-          : "1px solid #d3d3d395",
+        theme.palette.type === 'dark'
+          ? '1px solid #d3d3d315'
+          : '1px solid #d3d3d395',
     },
     leftPanelContent: {
-      maxHeight: "calc(100vH - 111px)",
-      minHeight: "calc(100vH - 111px)",
-      overflowY: "auto",
+      maxHeight: 'calc(100vH - 111px)',
+      minHeight: 'calc(100vH - 111px)',
+      overflowY: 'auto',
     },
   }),
   { index: 1 }
@@ -54,22 +54,22 @@ export const useMainPageStyles = makeStyles(
 export const useTabBarStyles = makeStyles(
   (theme) => ({
     root: {
-      [theme.breakpoints.down("sm")]: {
-        position: "fixed",
-        width: "100%",
+      [theme.breakpoints.down('sm')]: {
+        position: 'fixed',
+        width: '100%',
         top: 51,
         zIndex: 10,
       },
     },
     tabs: {
       borderBottom:
-        theme.palette.type === "dark"
-          ? "1px solid #d3d3d320"
-          : "1px solid #d3d3d395",
+        theme.palette.type === 'dark'
+          ? '1px solid #d3d3d320'
+          : '1px solid #d3d3d395',
     },
     tab: {
-      borderRight: "lightgrey 1px solid",
-      [theme.breakpoints.up("sm")]: {
+      borderRight: 'lightgrey 1px solid',
+      [theme.breakpoints.up('sm')]: {
         minWidth: 50,
         minHeight: 56,
       },
@@ -82,53 +82,53 @@ export const useNavStyles = makeStyles(
   (theme) => ({
     leftPortion: {
       flexGrow: 1,
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
     },
     logoWrapper: {
-      marginRight: "1em",
-      [theme.breakpoints.down("xs")]: {
-        display: "flex",
-        alignItems: "center",
+      marginRight: '1em',
+      [theme.breakpoints.down('xs')]: {
+        display: 'flex',
+        alignItems: 'center',
       },
     },
     logoBtn: {
-      textTransform: "none",
-      fontSize: "1.2em",
-      padding: "0.1em",
-      marginRight: "0.3em",
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "1em",
-        marginLeft: "0.6em",
+      textTransform: 'none',
+      fontSize: '1.2em',
+      padding: '0.1em',
+      marginRight: '0.3em',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '1em',
+        marginLeft: '0.6em',
       },
     },
     appBar: {
       borderBottom: `3px solid ${theme.palette.primary.main}98`,
     },
     svgImage: {
-      width: "200px",
-      height: "50px",
-      marginRight: "5px",
-      [theme.breakpoints.down("xs")]: {
-        width: "200px",
+      width: '200px',
+      height: '50px',
+      marginRight: '5px',
+      [theme.breakpoints.down('xs')]: {
+        width: '200px',
       },
     },
     rightBtnWrapper: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
     },
     lastBtn: {
-      marginLeft: "1em",
+      marginLeft: '1em',
     },
     userInfo: {
-      display: "flex",
-      alignItems: "center",
-      paddingRight: "0.8em",
+      display: 'flex',
+      alignItems: 'center',
+      paddingRight: '0.8em',
     },
     avatar: {
       width: theme.spacing(3.8),
       height: theme.spacing(3.8),
-      marginRight: "0.4em",
+      marginRight: '0.4em',
       borderRadius: 2,
     },
   }),
@@ -138,23 +138,23 @@ export const useNavStyles = makeStyles(
 export const useMenuStyles = makeStyles(
   (theme) => ({
     avatar: {
-      marginRight: "0.2em",
+      marginRight: '0.2em',
       width: theme.spacing(2.8),
       height: theme.spacing(2.8),
     },
     moreBtn: {
-      padding: "0.35em",
+      padding: '0.35em',
     },
     userBtnMob: {
-      padding: "0.35em",
+      padding: '0.35em',
     },
     iconBtn: {
-      [theme.breakpoints.down("sm")]: {
-        padding: "0.1em",
+      [theme.breakpoints.down('sm')]: {
+        padding: '0.1em',
       },
     },
     menuIcon: {
-      marginRight: "8px",
+      marginRight: '8px',
     },
   }),
   { index: 1 }
@@ -164,35 +164,35 @@ export const useAuthFormStyles = makeStyles(
   (theme) => ({
     root: {
       // padding: '15em',
-      paddingTop: "10%",
-      [theme.breakpoints.down("xs")]: {
-        padding: "10% 0 0 0",
+      paddingTop: '10%',
+      [theme.breakpoints.down('xs')]: {
+        padding: '10% 0 0 0',
       },
     },
     form: {
-      marginTop: "3em",
+      marginTop: '3em',
     },
     inputField: {
-      marginBottom: "1.5em",
+      marginBottom: '1.5em',
     },
     submitButton: {
-      marginTop: "0.5em",
-      height: "3.1em",
-      fontSize: "1em",
+      marginTop: '0.5em',
+      height: '3.1em',
+      fontSize: '1em',
       fontWeight: 500,
     },
     title: {
-      textAlign: "center",
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "1.5em",
+      textAlign: 'center',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '1.5em',
       },
     },
     footerText: {
-      marginTop: "1em",
-      textAlign: "center",
+      marginTop: '1em',
+      textAlign: 'center',
     },
     link: {
-      cursor: "pointer",
+      cursor: 'pointer',
     },
   }),
   { index: 1 }
@@ -201,38 +201,38 @@ export const useAuthFormStyles = makeStyles(
 export const useChatListStyles = makeStyles(
   (theme) => ({
     root: {
-      width: "100%",
-      [theme.breakpoints.down("sm")]: {
+      width: '100%',
+      [theme.breakpoints.down('sm')]: {
         // marginTop: 112,
         // position: "fixed",
         top: 112,
         height: `${window.screen.height - 152}px`,
-        overflowY: "auto",
+        overflowY: 'auto',
       },
     },
     // list :{
     //   overflow:"scroll"
     // },
     listItem: {
-      display: "flex",
+      display: 'flex',
     },
     chatInfo: {
-      width: "100%",
+      width: '100%',
     },
     nameAndDate: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
     },
     greyText: {
-      color: theme.palette.type === "dark" ? "#fff" : "#555555",
+      color: theme.palette.type === 'dark' ? '#fff' : '#555555',
     },
     infoText: {
-      padding: "0.5em",
-      textAlign: "center",
+      padding: '0.5em',
+      textAlign: 'center',
     },
     searchWrapper: {
-      padding: "0.3em 0.4em",
+      padding: '0.3em 0.4em',
     },
   }),
   { index: 1 }
@@ -241,161 +241,164 @@ export const useChatListStyles = makeStyles(
 export const useConversationPageStyles = makeStyles(
   (theme) => ({
     root: {
-      width: "100%",
+      width: '100%',
       borderRight:
-        theme.palette.type === "dark"
-          ? "1px solid #d3d3d315"
-          : "1px solid #d3d3d395",
-      display: "flex",
-      flexDirection: "column",
-      [theme.breakpoints.down("sm")]: {
-        width: "auto",
-        borderRight: "none",
+        theme.palette.type === 'dark'
+          ? '1px solid #d3d3d315'
+          : '1px solid #d3d3d395',
+      display: 'flex',
+      flexDirection: 'column',
+      [theme.breakpoints.down('sm')]: {
+        width: 'auto',
+        borderRight: 'none',
       },
     },
     conversationWrapper: {
-      padding: "1em",
-      paddingTop: "0em",
-      overflowY: "auto",
+      padding: '1em',
+      paddingTop: '0em',
+      overflowY: 'scroll',
       flexGrow: 1,
+      background: '#F5F5F6',
+      marginBottom: '5px',
+      height: '200px',
       // maxHeight: 'calc(100vH - 165px)',
       // minHeight: 'calc(100vH - 165px)',
-      [theme.breakpoints.down("sm")]: {
-        height: "100%",
+      [theme.breakpoints.down('sm')]: {
+        height: '100%',
         marginTop: 112,
       },
     },
     noMessages: {
-      display: "flex",
-      height: "calc(100vH - 181px)",
-      padding: "1em",
-      paddingTop: "0em",
-      [theme.breakpoints.down("sm")]: {
-        height: "calc(100vH - 122px)",
+      display: 'flex',
+      height: 'calc(100vH - 181px)',
+      padding: '1em',
+      paddingTop: '0em',
+      [theme.breakpoints.down('sm')]: {
+        height: 'calc(100vH - 122px)',
       },
     },
     audioPlayer: {
-      backgroundColor: "transparent !important",
+      backgroundColor: 'transparent !important',
     },
     dateInfoWrapper: {
-      margin: "2em 0",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      margin: '2em 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     infoText: {
-      margin: "auto auto 1em auto",
+      margin: 'auto auto 1em auto',
       backgroundColor:
-        theme.palette.type === "dark"
+        theme.palette.type === 'dark'
           ? theme.palette.secondary.main
           : `${theme.palette.primary.main}18`,
-      color: "#333",
-      padding: "0.4em 0.8em",
+      color: '#333',
+      padding: '0.4em 0.8em',
       borderRadius: 8,
       border: `1px solid ${theme.palette.primary.main}40`,
     },
     selectChatText: {
-      margin: "auto",
+      margin: 'auto',
       backgroundColor:
-        theme.palette.type === "dark"
+        theme.palette.type === 'dark'
           ? theme.palette.secondary.main
           : `${theme.palette.primary.main}18`,
-      color: "#333",
-      padding: "0.4em 0.8em",
+      color: '#333',
+      padding: '0.4em 0.8em',
       borderRadius: 8,
       border: `1px solid ${theme.palette.primary.main}40`,
     },
     msgMarginSameUser: {
-      marginTop: "0.2em",
-      marginBottom: "0.2em",
+      marginTop: '0.2em',
+      marginBottom: '0.2em',
     },
     msgMarginDiffUser: {
-      marginTop: "1.5em",
-      marginBottom: "0.2em",
+      marginTop: '1.5em',
+      marginBottom: '0.2em',
     },
     messageWrapper: {
-      display: "flex",
+      display: 'flex',
     },
     msgTime: {
-      fontSize: "0.6em",
-      marginTop: "0.3em",
+      fontSize: '0.6em',
+      marginTop: '0.3em',
     },
     sentMsg: {
-      padding: "0.4em 1em",
-      backgroundColor: "#7476D1",
-      color: "#fff",
+      padding: '0.4em 1em',
+      backgroundColor: '#7476D1',
+      color: '#fff',
       borderRadius: 10,
-      marginLeft: "auto",
-      maxWidth: "88%",
-      display: "flex",
-      alignItems: "flex-end",
-      flexWrap: "wrap",
+      marginLeft: 'auto',
+      maxWidth: '88%',
+      display: 'flex',
+      alignItems: 'flex-end',
+      flexWrap: 'wrap',
     },
     receivedMsg: {
-      padding: "0.4em 1em",
-      backgroundColor: "#fff",
+      padding: '0.4em 1em',
+      backgroundColor: '#fff',
       borderRadius: 10,
-      marginRight: "auto",
-      maxWidth: "88%",
-      display: "flex",
-      alignItems: "flex-end",
-      flexWrap: "wrap",
+      marginRight: 'auto',
+      maxWidth: '88%',
+      display: 'flex',
+      alignItems: 'flex-end',
+      flexWrap: 'wrap',
     },
     msgText: {
-      wordWrap: "anywhere",
-      marginRight: "0.5em",
-      textAlign:"left"
+      wordWrap: 'anywhere',
+      marginRight: '0.5em',
+      textAlign: 'left',
     },
     conversationHeader: {
-      display: "flex",
-      padding: "0.5em 1em",
-      alignItems: "center",
-      justifyContent: "space-between",
+      display: 'flex',
+      padding: '0.5em 1em',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       borderBottom:
-        theme.palette.type === "dark"
-          ? "1px solid #d3d3d320"
-          : "1px solid #d3d3d395",
-      [theme.breakpoints.down("sm")]: {
-        position: "fixed",
+        theme.palette.type === 'dark'
+          ? '1px solid #d3d3d320'
+          : '1px solid #d3d3d395',
+      [theme.breakpoints.down('sm')]: {
+        position: 'fixed',
         top: 0,
-        width: "100%",
-        padding: "0.5em 0.2em",
+        width: '100%',
+        padding: '0.5em 0.2em',
         borderBottom: `3px solid ${theme.palette.primary.main}98`,
       },
     },
     avatar: {
-      [theme.breakpoints.down("sm")]: {
-        width: "1.5em",
-        height: "1.5em",
+      [theme.breakpoints.down('sm')]: {
+        width: '1.5em',
+        height: '1.5em',
       },
     },
     headerTitle: {
-      display: "flex",
-      alignItems: "center",
-      padding: "0 0.4em",
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0 0.4em',
     },
     leftBtns: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
     },
     rightHeaderBtns: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
     },
     titleText: {
-      marginLeft: "0.8em",
-      marginRight: "0.7em",
-      [theme.breakpoints.down("sm")]: {
-        marginLeft: "0.5em",
+      marginLeft: '0.8em',
+      marginRight: '0.7em',
+      [theme.breakpoints.down('sm')]: {
+        marginLeft: '0.5em',
       },
     },
     sendMsgForm: {
-      display: "flex",
-      [theme.breakpoints.down("sm")]: {
+      display: 'flex',
+      [theme.breakpoints.down('sm')]: {
         margin: 0,
         // position: "fixed",
         bottom: 0,
-        width: "100%",
+        width: '100%',
       },
     },
   }),
@@ -405,51 +408,51 @@ export const useConversationPageStyles = makeStyles(
 export const useGroupInfoStyles = makeStyles(
   (theme) => ({
     topPart: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexDirection: "column",
-      textAlign: "center",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      textAlign: 'center',
     },
     groupIcon: {
       width: 60,
       height: 60,
     },
     groupName: {
-      marginBottom: "0.5em",
-      display: "flex",
+      marginBottom: '0.5em',
+      display: 'flex',
     },
     btnGroup: {
-      display: "flex",
-      marginBottom: "0.5em",
+      display: 'flex',
+      marginBottom: '0.5em',
     },
     editBtn: {
-      marginRight: "0.7em",
+      marginRight: '0.7em',
     },
     membersListWrapper: {
-      margin: "0 auto",
-      width: "50%",
-      border: "1px solid #d3d3d3",
-      marginTop: "1.2em",
-      [theme.breakpoints.down("sm")]: {
-        width: "100%",
+      margin: '0 auto',
+      width: '50%',
+      border: '1px solid #d3d3d3',
+      marginTop: '1.2em',
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
       },
     },
     membersList: {
-      overflowY: "auto",
-      maxHeight: "250px",
-      [theme.breakpoints.down("sm")]: {
-        maxHeight: "200px",
+      overflowY: 'auto',
+      maxHeight: '250px',
+      [theme.breakpoints.down('sm')]: {
+        maxHeight: '200px',
       },
     },
     membersHeader: {
-      textAlign: "center",
-      borderBottom: "1px solid #d3d3d3",
+      textAlign: 'center',
+      borderBottom: '1px solid #d3d3d3',
     },
     updateNameBtns: {
       marginTop: 2,
-      display: "flex",
-      justifyContent: "space-between",
+      display: 'flex',
+      justifyContent: 'space-between',
     },
   }),
   { index: 1 }
@@ -458,7 +461,7 @@ export const useGroupInfoStyles = makeStyles(
 export const useAddGroupMembersStyles = makeStyles(
   (theme) => ({
     addMemberBtn: {
-      marginTop: "2em ",
+      marginTop: '2em ',
     },
   }),
   { index: 1 }
@@ -467,10 +470,10 @@ export const useAddGroupMembersStyles = makeStyles(
 export const useCreateGroupStyles = makeStyles(
   (theme) => ({
     textField: {
-      marginBottom: "1.5em",
+      marginBottom: '1.5em',
     },
     submitBtn: {
-      marginTop: "1.5em",
+      marginTop: '1.5em',
     },
   }),
   { index: 1 }
@@ -479,12 +482,12 @@ export const useCreateGroupStyles = makeStyles(
 export const useEmojiPanelStyles = makeStyles(
   (theme) => ({
     emojiWrapper: {
-      display: "grid",
-      gridTemplateColumns: "repeat(5, auto)",
-      gridGap: "5px",
+      display: 'grid',
+      gridTemplateColumns: 'repeat(5, auto)',
+      gridGap: '5px',
     },
     emojiBtn: {
-      fontSize: "1.3em",
+      fontSize: '1.3em',
     },
   }),
   { index: 1 }
