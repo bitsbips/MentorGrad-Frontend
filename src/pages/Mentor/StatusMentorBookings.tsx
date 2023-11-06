@@ -48,14 +48,13 @@ export const StatusMentorBooking = ({
         >
           <Stack
             sx={{
-              background: '#5F61BE',
-              color: 'white',
-              borderRadius: '10px',
-              p: 1,
+              color: 'black',
+              borderBottom: '3px solid #5F61BE',
+
               width: 'fit-content',
             }}
           >
-            <Typography fontWeight={600} noWrap>
+            <Typography fontWeight={700} noWrap>
               Message
             </Typography>
           </Stack>
@@ -77,7 +76,9 @@ export const StatusMentorBooking = ({
           variant="contained"
           sx={{
             background: '#7476D1',
-            borderRadius: '20px',
+            borderRadius: '8px',
+            height: '40px',
+            padding: '20px 40px',
             '&:hover': {
               background: '#5f61be',
             },
@@ -88,7 +89,17 @@ export const StatusMentorBooking = ({
         </Button>
         <Button
           variant="outlined"
-          sx={{ borderRadius: '20px' }}
+          sx={{
+            borderRadius: '8px',
+            height: '40px',
+            padding: '20px 30px',
+            color: '#5f61be',
+            borderColor: ' #5f61be',
+            '&:hover': {
+              color: '#5f61be',
+              background: 'rgba(95, 97, 190, 0.05)',
+            },
+          }}
           onClick={() => setShowDetails(false)}
           color="primary"
         >

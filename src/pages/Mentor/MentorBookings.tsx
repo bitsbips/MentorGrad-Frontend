@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   Divider,
   Grid,
   Stack,
@@ -23,6 +24,7 @@ import { changesBookingStatus, getBookings } from '../../api';
 import { notifyError, notifySuccess } from '../../components/Toastifycom';
 import { format } from 'date-fns';
 import { StatusMentorBooking } from './StatusMentorBookings';
+import Spinner from '../../components/Spinner';
 
 type booking = {
   _id: string;
@@ -55,6 +57,7 @@ export const MentorBooking = (): JSX.Element => {
   const [bookingDetails, setBookingDetails] = useState({});
   const [reason, setReason] = useState('');
   const [statusModal, setStatusModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getAllBookings('ALL');
@@ -92,10 +95,12 @@ export const MentorBooking = (): JSX.Element => {
   }
 
   const getAllBookings = async (type: string) => {
-    getBookings(type)
+    setIsLoading(true);
+    await getBookings(type)
       .then((res) => {
         setTempBookings(res);
         setBookings(res);
+        setIsLoading(false);
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -136,83 +141,87 @@ export const MentorBooking = (): JSX.Element => {
         </Card>
       </Grid>
       <br />
-      {bookings.map((booking, index) => (
+      {isLoading ? (
+        <Spinner />
+      ) : (
         <>
-          <Box
-            // display="grid"
-            // gridTemplateColumns={!isMobile ? '3fr 2fr 2fr' : 'repeat(1, 1fr)'}
-            // gap={2}
-            sx={{
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Add a box shadow
-              borderRadius: '20px', // Add rounded corners
-              background: '#FFFFFF', // Set the background color
-            }}
-          >
-            <Grid container>
-              <Grid item xs={12} lg={4.5}>
-                <Stack flexDirection={!isMobile ? 'row' : 'column'} gap={1}>
-                  <Stack
-                    flexDirection={!isMobile ? 'column' : 'row'}
-                    justifyContent={'space-around'}
-                    alignItems={'center'}
-                    sx={
-                      isMobile
-                        ? {
-                            background: '#5F61BE',
-                            borderRadius: '20px',
-                            color: '#fff',
-                            height: '70px',
-                          }
-                        : {
-                            background: '#5F61BE',
-                            borderRadius: '20px',
-                            color: '#fff',
-                            p: 2,
-                          }
-                    }
-                  >
-                    <Typography>
-                      {getDateString(booking?.bookingDate, 'month')}
-                    </Typography>
-                    <Typography fontWeight={600} sx={{ fontSize: '32px' }}>
-                      {getDateString(booking?.bookingDate, 'day')}
-                    </Typography>
-                    <Typography>
-                      {' '}
-                      {getDateString(booking?.bookingDate, 'dayName')}
-                    </Typography>
-                  </Stack>
-
-                  <Stack flexDirection={'column'} justifyContent={'center'}>
-                    <Typography
-                      textAlign={!isMobile ? 'left' : 'center'}
-                      variant="h6"
-                      fontWeight={600}
-                    >
-                      {booking?.bookingSubject}
-                    </Typography>
-                    <Typography
-                      textAlign={!isMobile ? 'left' : 'center'}
-                      fontSize={'small'}
-                      color={'#7A7A7A'}
-                    >
-                      {booking?.description}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-              <Divider
-                variant="middle"
-                orientation={isMobile ? 'horizontal' : 'vertical'}
-                flexItem
+          {bookings.map((booking, index) => (
+            <>
+              <Box
+                // display="grid"
+                // gridTemplateColumns={!isMobile ? '3fr 2fr 2fr' : 'repeat(1, 1fr)'}
+                // gap={2}
                 sx={{
-                  border: '1px solid #4C4C4C',
-                  width: { xs: '90%', lg: '' },
-                  mt: { xs: '20px', lg: '' },
-                  mb: { xs: '20px', lg: '' },
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Add a box shadow
+                  borderRadius: '20px', // Add rounded corners
+                  background: '#FFFFFF', // Set the background color
                 }}
-              />
-              {/* <Grid item xs={12} lg={1}>
+              >
+                <Grid container>
+                  <Grid item xs={12} lg={4.5}>
+                    <Stack flexDirection={!isMobile ? 'row' : 'column'} gap={1}>
+                      <Stack
+                        flexDirection={!isMobile ? 'column' : 'row'}
+                        justifyContent={'space-around'}
+                        alignItems={'center'}
+                        sx={
+                          isMobile
+                            ? {
+                                background: '#5F61BE',
+                                borderRadius: '20px',
+                                color: '#fff',
+                                height: '70px',
+                              }
+                            : {
+                                background: '#5F61BE',
+                                borderRadius: '20px',
+                                color: '#fff',
+                                p: 2,
+                              }
+                        }
+                      >
+                        <Typography>
+                          {getDateString(booking?.bookingDate, 'month')}
+                        </Typography>
+                        <Typography fontWeight={600} sx={{ fontSize: '32px' }}>
+                          {getDateString(booking?.bookingDate, 'day')}
+                        </Typography>
+                        <Typography>
+                          {' '}
+                          {getDateString(booking?.bookingDate, 'dayName')}
+                        </Typography>
+                      </Stack>
+
+                      <Stack flexDirection={'column'} justifyContent={'center'}>
+                        <Typography
+                          textAlign={!isMobile ? 'left' : 'center'}
+                          variant="h6"
+                          fontWeight={600}
+                        >
+                          {booking?.bookingSubject}
+                        </Typography>
+                        <Typography
+                          textAlign={!isMobile ? 'left' : 'center'}
+                          fontSize={'small'}
+                          color={'#7A7A7A'}
+                        >
+                          {booking?.description}
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </Grid>
+                  <Divider
+                    variant="middle"
+                    orientation={isMobile ? 'horizontal' : 'vertical'}
+                    flexItem
+                    sx={{
+                      border: '1px solid #4C4C4C',
+                      width: { xs: '90%', lg: '' },
+                      mt: { xs: '20px', lg: '' },
+                      mb: { xs: '20px', lg: '' },
+                    }}
+                  />
+                  {/* <Grid item xs={12} lg={1}>
                 {/* <div
                   style={
                     !isMobile
@@ -230,58 +239,58 @@ export const MentorBooking = (): JSX.Element => {
                 ></div> 
               </Grid> */}
 
-              <Grid
-                item
-                xs={12}
-                lg={3}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Box>
-                  <Typography fontWeight={600} noWrap>
-                    {booking?.duration} Minutes
-                  </Typography>
-                  <div
-                    style={{
+                  <Grid
+                    item
+                    xs={12}
+                    lg={3}
+                    sx={{
                       display: 'flex',
-                      flexDirection: 'row',
+                      flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      padding: '5px 10px 5px 10px',
-                      background: '#cccdfc',
-                      borderRadius: '10px',
                     }}
                   >
-                    <img src={clockIcon} width="12px" height="12px" />
-                    <Typography
-                      textAlign={'left'}
-                      noWrap
-                      sx={{ ml: 1, fontSize: '10px' }}
-                      fontSize={'small'}
-                    >
-                      {booking?.time}
-                    </Typography>
-                  </div>
-                </Box>
-              </Grid>
+                    <Box>
+                      <Typography fontWeight={600} noWrap>
+                        {booking?.duration} Minutes
+                      </Typography>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: '5px 10px 5px 10px',
+                          background: '#cccdfc',
+                          borderRadius: '10px',
+                        }}
+                      >
+                        <img src={clockIcon} width="12px" height="12px" />
+                        <Typography
+                          textAlign={'left'}
+                          noWrap
+                          sx={{ ml: 1, fontSize: '10px' }}
+                          fontSize={'small'}
+                        >
+                          {booking?.time}
+                        </Typography>
+                      </div>
+                    </Box>
+                  </Grid>
 
-              <Divider
-                variant="middle"
-                orientation={isMobile ? 'horizontal' : 'vertical'}
-                flexItem
-                sx={{
-                  border: '1px solid #4C4C4C',
-                  width: { xs: '90%', lg: '' },
-                  mt: { xs: '20px', lg: '' },
-                  mb: { xs: '20px', lg: '' },
-                }}
-              />
+                  <Divider
+                    variant="middle"
+                    orientation={isMobile ? 'horizontal' : 'vertical'}
+                    flexItem
+                    sx={{
+                      border: '1px solid #4C4C4C',
+                      width: { xs: '90%', lg: '' },
+                      mt: { xs: '20px', lg: '' },
+                      mb: { xs: '20px', lg: '' },
+                    }}
+                  />
 
-              {/* <div
+                  {/* <div
                   style={
                     !isMobile
                       ? {
@@ -297,45 +306,45 @@ export const MentorBooking = (): JSX.Element => {
                   }
                 ></div> */}
 
-              <Grid item xs={12} lg={3}>
-                <Stack
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                  sx={!isMobile ? { pt: 1, pb: 1 } : {}}
-                >
-                  <img
-                    src={personImg}
-                    style={{ width: '50px', borderRadius: '10px' }}
-                  />
-                  <Typography
-                    noWrap
-                    variant="h6"
-                    fontSize={'medium'}
-                    fontWeight={600}
+                  <Grid item xs={12} lg={3}>
+                    <Stack
+                      flexDirection={'column'}
+                      alignItems={'center'}
+                      sx={!isMobile ? { pt: 1, pb: 1 } : {}}
+                    >
+                      <img
+                        src={personImg}
+                        style={{ width: '50px', borderRadius: '10px' }}
+                      />
+                      <Typography
+                        noWrap
+                        variant="h6"
+                        fontSize={'medium'}
+                        fontWeight={600}
+                      >
+                        {booking?.student[0]?.first_name +
+                          booking?.student[0]?.last_name}
+                      </Typography>
+                      <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
+                        {booking?.student[0]?.email}
+                      </Typography>
+                      <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
+                        {booking?.student[0]?.location}
+                      </Typography>
+                    </Stack>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    lg={1}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
                   >
-                    {booking?.student[0]?.first_name +
-                      booking?.student[0]?.last_name}
-                  </Typography>
-                  <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
-                    {booking?.student[0]?.email}
-                  </Typography>
-                  <Typography noWrap color={'#7A7A7A'} fontSize={'small'}>
-                    {booking?.student[0]?.location}
-                  </Typography>
-                </Stack>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                lg={1}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* <Stack
+                    {/* <Stack
                   flexDirection={!isMobile ? 'column' : 'row'}
                   justifyContent={isMobile ? 'flex-end' : ''}
                   alignItems={'center'}
@@ -346,62 +355,64 @@ export const MentorBooking = (): JSX.Element => {
                   }
                   gap={1}
                 > */}
-                <Box
-                  sx={{
-                    mt: { xs: '20px', lg: '' },
-                    mb: { xs: '20px', lg: '' },
-                    display: 'flex',
-                    flexDirection: { xs: 'row', lg: 'column' },
-                    gap: '10px',
-                  }}
-                >
-                  <Button
-                    onClick={() => handleShowDetails(booking)}
-                    size="small"
-                    sx={{
-                      background: '#ECECEC',
-                      color: 'black',
-                      width: '90px',
-                      p: 0,
-                      '&:hover': {
-                        background: '#5f61be',
-                      },
-                    }}
-                    variant="contained"
-                    startIcon={<Visibility fontSize="small" />}
-                  >
-                    View
-                  </Button>
-                  {booking?.bookingStatus !== 'CANCELLED' && (
-                    <Button
-                      onClick={() => {
-                        setBookingDetails(booking?._id);
-                        setStatusModal(true);
-                      }}
-                      size="small"
+                    <Box
                       sx={{
-                        background: 'rgba(255, 0, 0, 0.70)',
-                        width: '90px',
-                        p: 0,
-                        '&:hover': {
-                          background: '#5f61be',
-                        },
+                        mt: { xs: '20px', lg: '' },
+                        mb: { xs: '20px', lg: '' },
+                        display: 'flex',
+                        flexDirection: { xs: 'row', lg: 'column' },
+                        gap: '10px',
                       }}
-                      variant="contained"
-                      startIcon={<Cancel fontSize="small" />}
                     >
-                      Cancel
-                    </Button>
-                  )}
-                </Box>
-                {/* </Stack> */}
-              </Grid>
-            </Grid>
-          </Box>
-          <br />
-          <br />
+                      <Button
+                        onClick={() => handleShowDetails(booking)}
+                        size="small"
+                        sx={{
+                          background: '#ECECEC',
+                          color: 'black',
+                          width: '90px',
+                          p: 0,
+                          '&:hover': {
+                            background: '#5f61be',
+                          },
+                        }}
+                        variant="contained"
+                        startIcon={<Visibility fontSize="small" />}
+                      >
+                        View
+                      </Button>
+                      {booking?.bookingStatus !== 'CANCELLED' && (
+                        <Button
+                          onClick={() => {
+                            setBookingDetails(booking?._id);
+                            setStatusModal(true);
+                          }}
+                          size="small"
+                          sx={{
+                            background: 'rgba(255, 0, 0, 0.70)',
+                            width: '90px',
+                            p: 0,
+                            '&:hover': {
+                              background: '#5f61be',
+                            },
+                          }}
+                          variant="contained"
+                          startIcon={<Cancel fontSize="small" />}
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </Box>
+                    {/* </Stack> */}
+                  </Grid>
+                </Grid>
+              </Box>
+              <br />
+              <br />
+            </>
+          ))}
         </>
-      ))}
+      )}
 
       {showDetails && (
         <ViewMentorBooking

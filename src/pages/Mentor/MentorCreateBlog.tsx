@@ -30,6 +30,7 @@ import TextInput from '../../components/StudentProfileDetails/InputProfile';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import styles
 import { BsUpload } from 'react-icons/bs';
+import Spinner from '../../components/Spinner';
 
 const useStyles = makeStyles({
   container: {
@@ -99,6 +100,7 @@ const MentorCreateBlogs = (): JSX.Element => {
   });
   const [image, setImage] = useState<string | null>(); // Initialize with null or a default image URL
   const [editorHtml, setEditorHtml] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Custom formats if needed
   const customFormats = [
@@ -153,8 +155,9 @@ const MentorCreateBlogs = (): JSX.Element => {
     }
   };
 
-  const getBlogbyId = () => {
-    getBlogsById(searchParams.get('id'))
+  const getBlogbyId = async () => {
+    setIsLoading(true);
+    await getBlogsById(searchParams.get('id'))
       .then((res) => {
         setBlog((blog) => ({
           ...blog,
@@ -168,6 +171,7 @@ const MentorCreateBlogs = (): JSX.Element => {
       .catch((err) => {
         notifyError(err?.message);
       });
+    setIsLoading(false);
   };
 
   const createBlog = () => {
@@ -184,10 +188,12 @@ const MentorCreateBlogs = (): JSX.Element => {
       description: editorHtml,
       category: blog.active,
     };
+    setIsLoading(true);
     addBlog(payload)
       .then((res) => {
+        setIsLoading(false);
+        notifySuccess('Blog Published Successfully!');
         navigate('/dashboard?tab=7');
-        notifySuccess('Blog Added Successfully!');
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -209,10 +215,12 @@ const MentorCreateBlogs = (): JSX.Element => {
       _id: searchParams.get('id'),
       category: blog.active,
     };
+    setIsLoading(true);
     updateBlog(payload)
       .then((res) => {
+        setIsLoading(false);
+        notifySuccess('Blog Updated Succesfully');
         navigate('/dashboard?tab=7');
-        notifySuccess(res);
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -226,165 +234,173 @@ const MentorCreateBlogs = (): JSX.Element => {
           Create Blog
         </Typography>
       </Grid>
-      <Grid item lg={12}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} lg={4}>
-            <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
-              Title
-            </Typography>
-            <TextField
-              size="small"
-              fullWidth
-              name="title"
-              value={blog.title}
-              onChange={handleChange}
-              sx={{
-                borderRadius: '12px',
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} lg={12}>
-            <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
-              Cover Image
-            </Typography>
-            <Stack
-              flexDirection={'column'}
-              alignItems={'center'}
-              sx={{
-                border: '1px solid grey',
-                borderRadius: '12px',
-                p: 2,
-                cursor: 'pointer',
-              }}
-              onClick={handleFileInputClick}
-            >
-              <input
-                accept="image/*"
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={handleImageUpload}
-              />
-              {image ? (
-                <img src={image} width={'100px'} />
-              ) : (
-                <>
-                  <BsUpload />
-                  <Typography fontWeight={600}>Upload</Typography>
-                </>
-              )}
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} lg={12}>
-            <Stack flexDirection={'column'} alignItems={'flex-start'}>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Grid item lg={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} lg={4}>
               <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
-                Short Description
+                Title
               </Typography>
-              <textarea
-                name="shortDescription"
-                value={blog.shortDescription}
-                rows={4}
+              <TextField
+                size="small"
+                fullWidth
+                name="title"
+                value={blog.title}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  background: '#f2f5f9',
+                sx={{
                   borderRadius: '12px',
                 }}
               />
-            </Stack>
-          </Grid>
+            </Grid>
 
-          <Grid item xs={12} lg={12}>
-            <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
-              Description
-            </Typography>
+            <Grid item xs={12} lg={12}>
+              <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
+                Cover Image
+              </Typography>
+              <Stack
+                flexDirection={'column'}
+                alignItems={'center'}
+                sx={{
+                  border: '1px solid grey',
+                  borderRadius: '12px',
+                  p: 2,
+                  cursor: 'pointer',
+                }}
+                onClick={handleFileInputClick}
+              >
+                <input
+                  accept="image/*"
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleImageUpload}
+                />
+                {image ? (
+                  <img src={image} width={'100px'} />
+                ) : (
+                  <>
+                    <BsUpload />
+                    <Typography fontWeight={600}>Upload</Typography>
+                  </>
+                )}
+              </Stack>
+            </Grid>
 
-            <ReactQuill
-              value={editorHtml}
-              onChange={handleEditorChange}
-              modules={{
-                toolbar: [
-                  [{ header: '1' }, { header: '2' }, { font: [] }],
-                  [{ size: [] }],
-                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                  [
-                    { list: 'ordered' },
-                    { list: 'bullet' },
-                    { indent: '-1' },
-                    { indent: '+1' },
+            <Grid item xs={12} lg={12}>
+              <Stack flexDirection={'column'} alignItems={'flex-start'}>
+                <Typography
+                  textAlign={'left'}
+                  fontWeight={600}
+                  marginBottom={1}
+                >
+                  Short Description
+                </Typography>
+                <textarea
+                  name="shortDescription"
+                  value={blog.shortDescription}
+                  rows={4}
+                  onChange={handleChange}
+                  style={{
+                    width: '100%',
+                    background: '#f2f5f9',
+                    borderRadius: '12px',
+                  }}
+                />
+              </Stack>
+            </Grid>
+
+            <Grid item xs={12} lg={12}>
+              <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
+                Description
+              </Typography>
+
+              <ReactQuill
+                value={editorHtml}
+                onChange={handleEditorChange}
+                modules={{
+                  toolbar: [
+                    [{ header: '1' }, { header: '2' }, { font: [] }],
+                    [{ size: [] }],
+                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                    [
+                      { list: 'ordered' },
+                      { list: 'bullet' },
+                      { indent: '-1' },
+                      { indent: '+1' },
+                    ],
+                    ['link', 'image', 'video'],
+                    ['clean'],
                   ],
-                  ['link', 'image', 'video'],
-                  ['clean'],
-                ],
-              }}
-            />
-          </Grid>
+                }}
+              />
+            </Grid>
 
-          <Grid item xs={12} lg={12}>
-            <Grid container>
-              <Grid item xs={12} lg={6}>
-                <Stack flexDirection={'column'} alignItems={'flex-start'}>
-                  <Typography
-                    textAlign={'left'}
-                    fontWeight={600}
-                    marginBottom={1}
-                  >
-                    Category
-                  </Typography>
-                  <Stack flexDirection={'row'}>
-                    <Stack flexDirection={'row'} alignItems={'center'}>
-                      <IconButton>
-                        <Radio
-                          checked={blog.active === 'Active'}
-                          onChange={(event) =>
-                            setBlog((blog) => ({
-                              ...blog,
-                              active: event.target.checked ? 'Active' : '',
-                            }))
-                          }
-                        />
-                      </IconButton>
-                      <LabelProfileb>Active</LabelProfileb>
-                    </Stack>
-                    <Stack flexDirection={'row'} alignItems={'center'}>
-                      <IconButton>
-                        <Radio
-                          checked={blog.active === 'inActive'}
-                          onChange={(event) =>
-                            setBlog((blog) => ({
-                              ...blog,
-                              active: event.target.checked ? 'inActive' : '',
-                            }))
-                          }
-                        />
-                      </IconButton>
-                      <LabelProfileb>In-Active</LabelProfileb>
+            <Grid item xs={12} lg={12}>
+              <Grid container>
+                <Grid item xs={12} lg={6}>
+                  <Stack flexDirection={'column'} alignItems={'flex-start'}>
+                    <Typography
+                      textAlign={'left'}
+                      fontWeight={600}
+                      marginBottom={1}
+                    >
+                      Category
+                    </Typography>
+                    <Stack flexDirection={'row'}>
+                      <Stack flexDirection={'row'} alignItems={'center'}>
+                        <IconButton>
+                          <Radio
+                            checked={blog.active === 'Active'}
+                            onChange={(event) =>
+                              setBlog((blog) => ({
+                                ...blog,
+                                active: event.target.checked ? 'Active' : '',
+                              }))
+                            }
+                          />
+                        </IconButton>
+                        <LabelProfileb>Active</LabelProfileb>
+                      </Stack>
+                      <Stack flexDirection={'row'} alignItems={'center'}>
+                        <IconButton>
+                          <Radio
+                            checked={blog.active === 'inActive'}
+                            onChange={(event) =>
+                              setBlog((blog) => ({
+                                ...blog,
+                                active: event.target.checked ? 'inActive' : '',
+                              }))
+                            }
+                          />
+                        </IconButton>
+                        <LabelProfileb>In-Active</LabelProfileb>
+                      </Stack>
                     </Stack>
                   </Stack>
-                </Stack>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
 
-          <Grid item xs={12} lg={12}>
-            <Button
-              onClick={searchParams.get('edit') ? editBlog : createBlog}
-              variant="contained"
-              sx={{
-                background: '#7476D1',
-                float: 'left',
-                '&:hover': {
-                  background: '#5f61be',
-                },
-              }}
-            >
-              Publish
-            </Button>
+            <Grid item xs={12} lg={12}>
+              <Button
+                onClick={searchParams.get('edit') ? editBlog : createBlog}
+                variant="contained"
+                sx={{
+                  background: '#7476D1',
+                  float: 'left',
+                  '&:hover': {
+                    background: '#5f61be',
+                  },
+                }}
+              >
+                Publish
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </>
   );
 };

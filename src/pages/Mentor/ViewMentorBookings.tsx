@@ -199,8 +199,11 @@ export const ViewMentorBooking = ({
               borderRadius: '8px',
               height: '40px',
               padding: '20px 40px',
+              color: '#5f61be',
+              borderColor: ' #5f61be',
               '&:hover': {
                 color: '#5f61be',
+                background: 'rgba(95, 97, 190, 0.05)',
               },
             }}
             onClick={() => setShowDetails(false)}
