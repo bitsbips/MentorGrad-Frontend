@@ -9,15 +9,15 @@ export const IMGURL =
   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
 
 // Chat Urls
-// export const http =
-//   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
-// export const ws = 'wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql';
-// export const file =
-//   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
+export const http =
+  'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql';
+export const ws = 'wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql';
+export const file =
+  'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql';
 
-export const http = "http://localhost:5002/api/v1/";
-export const ws = "ws://localhost:5002/graphql";
-export const file = "http://localhost:5002/api/v1/";
+// export const http = "http://localhost:5002/api/v1/";
+// export const ws = "ws://localhost:5002/graphql";
+// export const file = "http://localhost:5002/api/v1/";
 
 const getData = async () => {
   try {
@@ -738,9 +738,9 @@ export async function MentorForm(
     const response = await axios.post(URL + 'mentor/add-application', {
       universityname: university.value,
       countryofresidence: selectedCountry,
-      currentstudent: student.toLowerCase() == 'yes' ? true : false,
+      currentstudent: student.toLowerCase() === 'yes' ? true : false,
       programenrolledcurrently: programenroll,
-      currentlyworking: work.toLowerCase() == 'yes' ? true : false,
+      currentlyworking: work.toLowerCase() === 'yes' ? true : false,
       organisation: organization.value,
       mentoringarea: mentorarea,
       languages: language,
