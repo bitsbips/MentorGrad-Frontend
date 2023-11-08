@@ -1,31 +1,63 @@
 import React, { FC, useEffect } from "react";
 import SocialLogin from "./SocialLogin";
-import Google from '../Assets/Images/googlem.svg'
-import FB from '../Assets/Images/fbm.svg'
-import Linkin from '../Assets/Images/linkm.svg'
-import { LoginSocialFacebook } from 'reactjs-social-login'
-import { LoginSocialGoogle } from 'reactjs-social-login'
-import { LoginSocialLinkedin } from 'reactjs-social-login'
-import { GetGoogoleUser, GoogoleLogin } from "../api";
+import Google from "../Assets/Images/googlem.svg";
+import FB from "../Assets/Images/fbm.svg";
+import Linkin from "../Assets/Images/linkm.svg";
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { LoginSocialGoogle } from "reactjs-social-login";
+import { LoginSocialLinkedin } from "reactjs-social-login";
+import {
+  GetGoogoleUser,
+  GoogoleLogin,
+  linkedInClientId,
+  selfUrl,
+} from "../api";
+import { GoogleLogin } from "@react-oauth/google";
+import { useLinkedIn } from "react-linkedin-login-oauth2";
+import { Stack, useMediaQuery } from "@mui/material";
 
 const REDIRECT_URI = window.location.href;
 
-
-
 const AllSocial: FC = () => {
-    useEffect(() => {
-        GetGoogoleUser()
-    }, [])
+  const isMobile = useMediaQuery("(min-width: 950px)");
 
-    return (
-        <div>
-            <SocialLogin title='Sign up with Google' color={'#D0463B'} onClick={() => {
-                window.open('http://localhost:5001/api/v1/auth/google','_self')
-                }} img={Google} />
-            <SocialLogin title='Sign up with Facebook' color={'#32519B'} onClick={() => ''} img={FB} />
-            <SocialLogin title='Sign up with LinkedIn' color={'#0A66C2'} onClick={() => ''} img={Linkin} />
+  const { linkedInLogin } = useLinkedIn({
+    clientId: linkedInClientId,
+    redirectUri: `${selfUrl}validate-user`,
+    scope: "openid email profile",
+    onSuccess: (code) => {
+      debugger;
+      console.log(code);
+    },
+    onError: (error) => {
+      debugger;
+      console.log(error);
+    },
+  });
 
-            {/* <LoginSocialGoogle
+  return (
+    <Stack alignItems={"center"}>
+      <GoogleLogin
+        theme="filled_blue"
+        shape="square"
+        size="large"
+        width={isMobile ? "600px" : "280px"}
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+      <br />
+
+      <SocialLogin
+        title="Sign up with LinkedIn"
+        color={"#0A66C2"}
+        onClick={linkedInLogin}
+        img={Linkin}
+      />
+      {/* <LoginSocialGoogle
                 client_id={"751206549312-6ep4odegrc2pae9leh91jojs5126jcue.apps.googleusercontent.com"}
                 scope="openid profile email"
                 discoveryDocs="claims_supported"
@@ -63,9 +95,7 @@ const AllSocial: FC = () => {
             >
                 <SocialLogin title='Sign up with LinkedIn' color={'#0A66C2'} onClick={() => ''} img={Linkin} />
             </LoginSocialLinkedin> */}
-
-
-        </div>
-    )
-}
-export default AllSocial
+    </Stack>
+  );
+};
+export default AllSocial;

@@ -2438,6 +2438,11 @@
   dependencies:
     "@swc/helpers" "^0.5.0"
 
+"@react-oauth/google@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.npmjs.org/@react-oauth/google/-/google-0.7.3.tgz"
+  integrity sha512-sGlysUSEH5cQu6mRgXA/3deYDMl0YIn/OWM1H3QiPVVJxGNlPLACe5J6s/jKGaxVWb+8OMNrVE573+tWMJFCFw==
+
 "@remix-run/dev@npm:@vercel/remix-run-dev@1.15.0":
   version "1.15.0"
   resolved "https://registry.npmjs.org/@vercel/remix-run-dev/-/remix-run-dev-1.15.0.tgz"

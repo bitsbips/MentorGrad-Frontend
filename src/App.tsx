@@ -45,6 +45,7 @@ import {
   GET_GLOBAL_MSGS,
 } from "./graphql/queries";
 import { useMediaQuery } from "@mui/material";
+import ValidateLinkedIn from "./pages/AuthFlow/Login/ValidateLinked";
 
 const theme = createTheme({
   typography: {
@@ -258,6 +259,7 @@ function App() {
               <Route path="/reset-Password/:id" element={<ForgetPassword />} />
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/validate-user" element={<ValidateLinkedIn />} />
             </Routes>
           </Context.Provider>
           <Toast />
