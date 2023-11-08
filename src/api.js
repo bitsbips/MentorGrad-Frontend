@@ -2,24 +2,24 @@ import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
 
+// const URL = "http://localhost:5001/api/v1/";
+// export const selfUrl = "http://localhost:3000/"
+// export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "http://localhost:5001/api/v1/";
-export const selfUrl = "http://localhost:3000/"
-export const IMGURL = "http://localhost:5001/api/v1/";
-// const URL = 'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
-// export const IMGURL =
-//   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
+const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const IMGURL =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const selfUrl =
+  "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com/";
 
 // Chat Urls
-// export const http =
-//   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
-// export const ws = 'wss://mentorgrad-backend-0908e17a7a7d.herokuapp.com/graphql';
-// export const file =
-//   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
+export const http = "https://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
+export const ws = "wss://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
+export const file = "https://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
 
-export const http = "http://localhost:5002/api/v1/";
-export const ws = "ws://localhost:5002/graphql";
-export const file = "http://localhost:5002/api/v1/";
+// export const http = "http://localhost:5002/api/v1/";
+// export const ws = "ws://localhost:5002/graphql";
+// export const file = "http://localhost:5002/api/v1/";
 
 export const googleClientId =
   "890042261985-2ph8qs8emfnnu3c3e1c73b74g6kheeve.apps.googleusercontent.com";
