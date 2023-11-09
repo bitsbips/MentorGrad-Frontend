@@ -36,12 +36,12 @@ const AllSocial: FC = () => {
   });
 
   return (
-    <Stack alignItems={"center"}>
+    <Stack alignItems={"center"} gap={2}>
       <GoogleLogin
         theme="filled_blue"
         shape="square"
         size="large"
-        width={isMobile ? "600px" : "280px"}
+        width={isMobile ? "600px" : "275px"}
         onSuccess={(credentialResponse) => {
           console.log(credentialResponse);
         }}
@@ -49,7 +49,6 @@ const AllSocial: FC = () => {
           console.log("Login Failed");
         }}
       />
-      <br />
 
       <SocialLogin
         title="Sign up with LinkedIn"

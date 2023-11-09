@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Container, ExperticeText } from './MentorStyles';
-import useMediaQuery from '../../hooks/MediaQuery';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { Container, ExperticeText } from "./MentorStyles";
+import useMediaQuery from "../../hooks/MediaQuery";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -14,62 +14,62 @@ import {
   Tabs,
   TextField,
   Typography,
-} from '@mui/material';
-import Rectangle from '../../Assets/Images/Rectangle.png';
-import { makeStyles } from '@material-ui/core';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { addBlog, getBlogs, getBlogsById, updateBlog } from '../../api';
-import { formatDate, jwtDecode } from '../../helper-functions';
-import { notifyError, notifySuccess } from '../../components/Toastifycom';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import HeaderDashboard from '../../components/Header/HeaderDashboard';
-import Footer from '../../components/Footer';
-import { LabelProfileb } from '../../components/StudentProfileDetails/StudentProfileStyles';
-import TextInput from '../../components/StudentProfileDetails/InputProfile';
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import styles
-import { BsUpload } from 'react-icons/bs';
-import Spinner from '../../components/Spinner';
+} from "@mui/material";
+import Rectangle from "../../Assets/Images/Rectangle.png";
+import { makeStyles } from "@material-ui/core";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { addBlog, getBlogs, getBlogsById, updateBlog } from "../../api";
+import { formatDate, jwtDecode } from "../../helper-functions";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import HeaderDashboard from "../../components/Header/HeaderDashboard";
+import Footer from "../../components/Footer";
+import { LabelProfileb } from "../../components/StudentProfileDetails/StudentProfileStyles";
+import TextInput from "../../components/StudentProfileDetails/InputProfile";
+import ReactQuill, { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import styles
+import { BsUpload } from "react-icons/bs";
+import Spinner from "../../components/Spinner";
 
 const useStyles = makeStyles({
   container: {
-    border: '1px solid #D6D6D6',
+    border: "1px solid #D6D6D6",
   },
   subContainer: {
-    padding: '15px',
+    padding: "15px",
   },
   pageTitle: {
-    color: '#000',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontStyle: 'bold',
+    color: "#000",
+    leadingTrim: "both",
+    textEdge: "cap",
+    fontStyle: "bold",
     fontWeight: 600,
-    lineHeight: '48px',
-    textAlign: 'left',
-    paddingBottom: '20px',
+    lineHeight: "48px",
+    textAlign: "left",
+    paddingBottom: "20px",
   },
   personImg: {
-    width: '54px',
-    height: '54px',
+    width: "54px",
+    height: "54px",
     flexShrink: 0,
-    borderRadius: '54px',
+    borderRadius: "54px",
   },
   heading: {
     fontWeight: 600,
   },
   date: {
-    color: '#858585',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontSize: '0.5rem',
-    lineHeight: '38px' /* 342.857% */,
-    textAlign: 'left',
+    color: "#858585",
+    leadingTrim: "both",
+    textEdge: "cap",
+    fontSize: "0.5rem",
+    lineHeight: "38px" /* 342.857% */,
+    textAlign: "left",
   },
   description: {
-    textAlign: 'left',
-    padding: '10px',
-    color: '#505050',
+    textAlign: "left",
+    padding: "10px",
+    color: "#505050",
   },
 });
 
@@ -79,36 +79,45 @@ interface QuillEditorProps {
 }
 
 const MentorCreateBlogs = (): JSX.Element => {
-  const isMobile = useMediaQuery('(min-width: 950px)');
+  const isMobile = useMediaQuery("(min-width: 950px)");
   const navigate = useNavigate();
   const classes = useStyles();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Get the user from your authentication system or local storage
   const userId: String = jwtDecode(
-    localStorage.getItem('@storage_Key')
+    localStorage.getItem("@storage_Key")
   )?.userId;
 
   let [searchParams, setSearchParams] = useSearchParams();
 
   const [blog, setBlog] = useState({
-    id: '',
-    title: '',
-    shortDescription: '',
-    description: '',
-    active: 'Active',
+    id: "",
+    title: "",
+    shortDescription: "",
+    description: "",
+    active: "Active",
   });
   const [image, setImage] = useState<string | null>(); // Initialize with null or a default image URL
-  const [editorHtml, setEditorHtml] = useState('');
+  const [attachment, setAttachment] = useState<
+    {
+      name: string;
+      base64: string;
+      type: string;
+      attachmentPath: string;
+      file: File;
+    }[]
+  >([]);
+  const [editorHtml, setEditorHtml] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // Custom formats if needed
   const customFormats = [
     {
-      name: 'code',
-      tag: 'code',
-      class: 'code-block',
-      title: 'Code Block',
+      name: "code",
+      tag: "code",
+      class: "code-block",
+      title: "Code Block",
     },
   ];
 
@@ -118,10 +127,10 @@ const MentorCreateBlogs = (): JSX.Element => {
   });
 
   useEffect(() => {
-    if (searchParams.get('edit')) {
+    if (searchParams.get("edit")) {
       getBlogbyId();
     }
-  }, [searchParams.get('edit')]);
+  }, [searchParams.get("edit")]);
 
   const handleEditorChange = (html: string) => {
     setEditorHtml(html);
@@ -140,24 +149,61 @@ const MentorCreateBlogs = (): JSX.Element => {
     fileInputRef.current!.click(); // Use the non-null assertion operator (!)
   };
 
+  // const getFileDetails = (files) => {
+  //   Object.entries(files).map(async ([key, value]) => {
+  //     // if (value.type === 'image/png' || 'image/jpeg' || 'application/pdf') {
+  //     let reader = new FileReader()
+  //     reader.onloadend = () => {
+  //       const fileData = {
+  //         name: value.name,
+  //         base64: reader.result,
+  //         type: value.type,
+  //         attachmentPath: '',
+  //         file: value
+  //       }
+
+  //       dispatch(GLAttachments(fileData))
+  //     }
+  //     reader.readAsDataURL(value)
+  //     fileInput.current.value = ''
+  //   })
+  // }
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // Use optional chaining to access files array
-    if (file && file.type.startsWith('image/')) {
+    const file = event.target.files?.[0];
+
+    if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        setImage(e.target?.result as string);
+        const result = e.target?.result;
+
+        if (result && typeof result === "string") {
+          const fileData = [
+            {
+              name: file.name,
+              base64: result,
+              type: file.type,
+              attachmentPath: "",
+              file: file,
+            },
+          ];
+          setImage(result);
+          setAttachment(fileData);
+        } else {
+          alert("Error reading the image file.");
+        }
       };
 
       reader.readAsDataURL(file);
     } else {
-      alert('Please select a valid image file.');
+      alert("Please select a valid image file.");
     }
   };
 
   const getBlogbyId = async () => {
     setIsLoading(true);
-    await getBlogsById(searchParams.get('id'))
+    await getBlogsById(searchParams.get("id"))
       .then((res) => {
         setBlog((blog) => ({
           ...blog,
@@ -166,7 +212,8 @@ const MentorCreateBlogs = (): JSX.Element => {
           active: res?.category,
         }));
         setEditorHtml(res?.description);
-        setImage(res?.coverImage);
+        setImage(res?.attachments[0]?.attachmentPath);
+        setAttachment(res?.attachments);
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -175,25 +222,25 @@ const MentorCreateBlogs = (): JSX.Element => {
   };
 
   const createBlog = () => {
-    if (blog.title === '' && blog.shortDescription === '') {
-      notifyError('Please add Title and Short Description!');
+    if (blog.title === "" && blog.shortDescription === "") {
+      notifyError("Please add Title and Short Description!");
       return;
     }
     let payload = {
       userId: userId,
       shortDescription: blog.shortDescription,
       title: blog.title,
-      coverImage: image,
       currDate: new Date(),
       description: editorHtml,
       category: blog.active,
+      attachments: attachment,
     };
     setIsLoading(true);
     addBlog(payload)
       .then((res) => {
         setIsLoading(false);
-        notifySuccess('Blog Published Successfully!');
-        navigate('/dashboard?tab=7');
+        notifySuccess("Blog Published Successfully!");
+        navigate("/dashboard?tab=7");
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -201,26 +248,26 @@ const MentorCreateBlogs = (): JSX.Element => {
   };
 
   const editBlog = () => {
-    if (blog.title === '' && blog.shortDescription === '') {
-      notifyError('Please add Title and Short Description!');
+    if (blog.title === "" && blog.shortDescription === "") {
+      notifyError("Please add Title and Short Description!");
       return;
     }
     let payload = {
       userId: userId,
       shortDescription: blog.shortDescription,
       title: blog.title,
-      coverImage: image,
+      attachments: attachment,
       currDate: new Date(),
       description: editorHtml,
-      _id: searchParams.get('id'),
+      _id: searchParams.get("id"),
       category: blog.active,
     };
     setIsLoading(true);
     updateBlog(payload)
       .then((res) => {
         setIsLoading(false);
-        notifySuccess('Blog Updated Succesfully');
-        navigate('/dashboard?tab=7');
+        notifySuccess("Blog Updated Succesfully");
+        navigate("/dashboard?tab=7");
       })
       .catch((err) => {
         notifyError(err?.message);
@@ -231,7 +278,7 @@ const MentorCreateBlogs = (): JSX.Element => {
     <>
       <Grid item xs={12} sm={12} lg={12}>
         <Typography variant="h5" className={classes.pageTitle}>
-          {searchParams.get('edit') ? "Edit" : "Create"} Blog
+          {searchParams.get("edit") ? "Edit" : "Create"} Blog
         </Typography>
       </Grid>
       {isLoading ? (
@@ -240,7 +287,7 @@ const MentorCreateBlogs = (): JSX.Element => {
         <Grid item lg={12}>
           <Grid container spacing={2}>
             <Grid item xs={12} lg={4}>
-              <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
+              <Typography textAlign={"left"} fontWeight={600} marginBottom={1}>
                 Title
               </Typography>
               <TextField
@@ -250,23 +297,23 @@ const MentorCreateBlogs = (): JSX.Element => {
                 value={blog.title}
                 onChange={handleChange}
                 sx={{
-                  borderRadius: '12px',
+                  borderRadius: "12px",
                 }}
               />
             </Grid>
 
             <Grid item xs={12} lg={12}>
-              <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
+              <Typography textAlign={"left"} fontWeight={600} marginBottom={1}>
                 Cover Image
               </Typography>
               <Stack
-                flexDirection={'column'}
-                alignItems={'center'}
+                flexDirection={"column"}
+                alignItems={"center"}
                 sx={{
-                  border: '1px solid grey',
-                  borderRadius: '12px',
+                  border: "1px solid grey",
+                  borderRadius: "12px",
                   p: 2,
-                  cursor: 'pointer',
+                  cursor: "pointer",
                 }}
                 onClick={handleFileInputClick}
               >
@@ -274,11 +321,11 @@ const MentorCreateBlogs = (): JSX.Element => {
                   accept="image/*"
                   type="file"
                   ref={fileInputRef}
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={handleImageUpload}
                 />
                 {image ? (
-                  <img src={image} width={'100px'} />
+                  <img src={image} width={"100px"} />
                 ) : (
                   <>
                     <BsUpload />
@@ -289,9 +336,9 @@ const MentorCreateBlogs = (): JSX.Element => {
             </Grid>
 
             <Grid item xs={12} lg={12}>
-              <Stack flexDirection={'column'} alignItems={'flex-start'}>
+              <Stack flexDirection={"column"} alignItems={"flex-start"}>
                 <Typography
-                  textAlign={'left'}
+                  textAlign={"left"}
                   fontWeight={600}
                   marginBottom={1}
                 >
@@ -303,16 +350,16 @@ const MentorCreateBlogs = (): JSX.Element => {
                   rows={4}
                   onChange={handleChange}
                   style={{
-                    width: '100%',
-                    background: '#f2f5f9',
-                    borderRadius: '12px',
+                    width: "100%",
+                    background: "#f2f5f9",
+                    borderRadius: "12px",
                   }}
                 />
               </Stack>
             </Grid>
 
             <Grid item xs={12} lg={12}>
-              <Typography textAlign={'left'} fontWeight={600} marginBottom={1}>
+              <Typography textAlign={"left"} fontWeight={600} marginBottom={1}>
                 Description
               </Typography>
 
@@ -321,17 +368,17 @@ const MentorCreateBlogs = (): JSX.Element => {
                 onChange={handleEditorChange}
                 modules={{
                   toolbar: [
-                    [{ header: '1' }, { header: '2' }, { font: [] }],
+                    [{ header: "1" }, { header: "2" }, { font: [] }],
                     [{ size: [] }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                    ["bold", "italic", "underline", "strike", "blockquote"],
                     [
-                      { list: 'ordered' },
-                      { list: 'bullet' },
-                      { indent: '-1' },
-                      { indent: '+1' },
+                      { list: "ordered" },
+                      { list: "bullet" },
+                      { indent: "-1" },
+                      { indent: "+1" },
                     ],
-                    ['link', 'image', 'video'],
-                    ['clean'],
+                    ["link", "image", "video"],
+                    ["clean"],
                   ],
                 }}
               />
@@ -340,37 +387,37 @@ const MentorCreateBlogs = (): JSX.Element => {
             <Grid item xs={12} lg={12}>
               <Grid container>
                 <Grid item xs={12} lg={6}>
-                  <Stack flexDirection={'column'} alignItems={'flex-start'}>
+                  <Stack flexDirection={"column"} alignItems={"flex-start"}>
                     <Typography
-                      textAlign={'left'}
+                      textAlign={"left"}
                       fontWeight={600}
                       marginBottom={1}
                     >
                       Category
                     </Typography>
-                    <Stack flexDirection={'row'}>
-                      <Stack flexDirection={'row'} alignItems={'center'}>
+                    <Stack flexDirection={"row"}>
+                      <Stack flexDirection={"row"} alignItems={"center"}>
                         <IconButton>
                           <Radio
-                            checked={blog.active === 'Active'}
+                            checked={blog.active === "Active"}
                             onChange={(event) =>
                               setBlog((blog) => ({
                                 ...blog,
-                                active: event.target.checked ? 'Active' : '',
+                                active: event.target.checked ? "Active" : "",
                               }))
                             }
                           />
                         </IconButton>
                         <LabelProfileb>Active</LabelProfileb>
                       </Stack>
-                      <Stack flexDirection={'row'} alignItems={'center'}>
+                      <Stack flexDirection={"row"} alignItems={"center"}>
                         <IconButton>
                           <Radio
-                            checked={blog.active === 'inActive'}
+                            checked={blog.active === "inActive"}
                             onChange={(event) =>
                               setBlog((blog) => ({
                                 ...blog,
-                                active: event.target.checked ? 'inActive' : '',
+                                active: event.target.checked ? "inActive" : "",
                               }))
                             }
                           />
@@ -385,13 +432,13 @@ const MentorCreateBlogs = (): JSX.Element => {
 
             <Grid item xs={12} lg={12}>
               <Button
-                onClick={searchParams.get('edit') ? editBlog : createBlog}
+                onClick={searchParams.get("edit") ? editBlog : createBlog}
                 variant="contained"
                 sx={{
-                  background: '#7476D1',
-                  float: 'left',
-                  '&:hover': {
-                    background: '#5f61be',
+                  background: "#7476D1",
+                  float: "left",
+                  "&:hover": {
+                    background: "#5f61be",
                   },
                 }}
               >
