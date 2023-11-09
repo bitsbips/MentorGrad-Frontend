@@ -62,6 +62,7 @@ type profileData = {
   profilePic: object;
   profileImage: string;
   hourlyRate: number;
+  attachments:any;
 };
 
 const MentorProfileAll: FC = () => {
@@ -84,6 +85,8 @@ const MentorProfileAll: FC = () => {
     profilePic: {
       path: '',
     },
+    attachments:[]
+
   };
 
   const [profile, setProfile] = useState<profileData>(initialProfile);

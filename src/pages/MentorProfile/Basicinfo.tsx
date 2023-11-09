@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import {
   ColumnStudentForm,
   ContainerForm,
@@ -10,7 +10,7 @@ import {
   RightBorder,
   RightContainer,
   TopText,
-} from '../../components/StudentProfileDetails/StudentProfileStyles';
+} from "../../components/StudentProfileDetails/StudentProfileStyles";
 import {
   Autocomplete,
   Avatar,
@@ -22,11 +22,11 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import User from '../../Assets/Images/Mask1.png';
-import { Link } from 'react-router-dom';
-import { TopRightText1 } from '../../pages/AuthFlow/AuthStyles';
-import { Country, Level, Qualification, TestCountry } from '../../Data/Data';
+} from "@mui/material";
+import User from "../../Assets/Images/Mask1.png";
+import { Link } from "react-router-dom";
+import { TopRightText1 } from "../../pages/AuthFlow/AuthStyles";
+import { Country, Level, Qualification, TestCountry } from "../../Data/Data";
 import {
   GetUserData,
   IMGURL,
@@ -34,19 +34,19 @@ import {
   fetchImagesBLOB,
   updateProfileDetails,
   uploadprofilepic,
-} from '../../api';
-import { add } from 'lodash';
-import { Context } from '../../Context/ContextStates';
-import useMediaQuery from '../../hooks/MediaQuery';
-import { notifyError, notifySuccess } from '../../components/Toastifycom';
-import SkeletonProfile from '../../components/SkeletonLoader/SkeletonProfile';
-import ButtonComp from '../../components/Button';
-import TextInput from '../../components/StudentProfileDetails/InputProfile';
-import PhoneInputComp from '../../components/PhoneInput/PhoneNumberInput';
-import { InputHolder } from '../../components/UserForm/UserFormStyles';
-import DropdownCompo from '../../components/Dropdown';
-import profile from '../../Assets/Images/person.jpeg';
-import { FiEdit } from 'react-icons/fi';
+} from "../../api";
+import { add } from "lodash";
+import { Context } from "../../Context/ContextStates";
+import useMediaQuery from "../../hooks/MediaQuery";
+import { notifyError, notifySuccess } from "../../components/Toastifycom";
+import SkeletonProfile from "../../components/SkeletonLoader/SkeletonProfile";
+import ButtonComp from "../../components/Button";
+import TextInput from "../../components/StudentProfileDetails/InputProfile";
+import PhoneInputComp from "../../components/PhoneInput/PhoneNumberInput";
+import { InputHolder } from "../../components/UserForm/UserFormStyles";
+import DropdownCompo from "../../components/Dropdown";
+import profile from "../../Assets/Images/person.jpeg";
+import { FiEdit } from "react-icons/fi";
 
 type profileData = {
   _id: string;
@@ -56,6 +56,7 @@ type profileData = {
   nationality: string;
   isDeactivated: boolean;
   hourlyRate: number;
+  attachments: any;
 };
 
 const Basicinfo = ({
@@ -65,15 +66,24 @@ const Basicinfo = ({
   profileData: profileData;
   profileImg: any;
 }) => {
-  const isMobile = useMediaQuery('(min-width: 950px)');
+  const isMobile = useMediaQuery("(min-width: 950px)");
   const [loading, setLoading] = useState(false);
   const [hourlyRate, setHourlyRate] = useState(0);
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
   const [load, setLoad] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [isActive, setIsActive] = useState('Activated');
+  const [isActive, setIsActive] = useState("Activated");
+  const [attachment, setAttachment] = useState<
+    {
+      name: string;
+      base64: string;
+      type: string;
+      attachmentPath: string;
+      file: File;
+    }[]
+  >([]);
 
   useEffect(() => {
     setLoading(true);
@@ -82,8 +92,9 @@ const Basicinfo = ({
       setLastname(profileData.last_name);
       setEmail(profileData.email);
       setHourlyRate(profileData?.hourlyRate);
-      setIsActive(profileData?.isDeactivated ? 'DeActivated' : 'Activated');
-      setImage(profileImg);
+      setIsActive(profileData?.isDeactivated ? "DeActivated" : "Activated");
+      setImage(profileData?.attachments[0]?.attachmentPath);
+      setAttachment(profileData?.attachments);
     }
     setLoading(false);
   }, [profileData]);
@@ -99,16 +110,32 @@ const Basicinfo = ({
   };
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]; // Use optional chaining to access files array
-    if (file && file.type.startsWith('image/')) {
+    if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        setImage(e.target?.result as string);
+        const result = e.target?.result;
+
+        if (result && typeof result === "string") {
+          const fileData = [
+            {
+              name: file.name,
+              base64: result,
+              type: file.type,
+              attachmentPath: "",
+              file: file,
+            },
+          ];
+          setImage(result);
+          setAttachment(fileData);
+        } else {
+          alert("Error reading the image file.");
+        }
       };
 
       reader.readAsDataURL(file);
     } else {
-      alert('Please select a valid image file.');
+      alert("Please select a valid image file.");
     }
   };
 
@@ -122,8 +149,8 @@ const Basicinfo = ({
       firstName: firstname,
       lastName: lastname,
       hourlyRate: hourlyRate,
-      isActive: isActive === 'Activated' ? true : false,
-      profileImage: image,
+      isActive: isActive === "Activated" ? true : false,
+      attachments: attachment,
     };
     await updateProfileDetails(payload).then((e) => {
       console.log(e);
@@ -141,8 +168,8 @@ const Basicinfo = ({
   return (
     <>
       <div>
-        <Stack flexDirection={'row'} sx={{ padding: '20px' }}>
-          <Stack flexDirection={'row'} alignItems={'flex-end'}>
+        <Stack flexDirection={"row"} sx={{ padding: "20px" }}>
+          <Stack flexDirection={"row"} alignItems={"flex-end"}>
             <Avatar
               src={image || profile}
               alt="profile-pic"
@@ -158,13 +185,13 @@ const Basicinfo = ({
               variant="contained"
               startIcon={<FiEdit size={15} color="black" />}
               sx={{
-                height: '25px',
-                position: 'absolute',
-                marginLeft: '10px',
-                background: '#fff',
-                color: 'black',
-                '&:hover': {
-                  background: '#5f61be',
+                height: "25px",
+                position: "absolute",
+                marginLeft: "10px",
+                background: "#fff",
+                color: "black",
+                "&:hover": {
+                  background: "#5f61be",
                 },
               }}
               onClick={handleFileInputClick}
@@ -173,11 +200,11 @@ const Basicinfo = ({
             </Button>
           </Stack>
           <Stack
-            flexDirection={'column'}
-            alignContent={'center'}
-            justifyContent={'center'}
-            alignItems={'flex-start'}
-            paddingLeft={'20px'}
+            flexDirection={"column"}
+            alignContent={"center"}
+            justifyContent={"center"}
+            alignItems={"flex-start"}
+            paddingLeft={"20px"}
           >
             <Typography fontWeight={600} fontSize={20}>
               {firstname + lastname}
@@ -189,16 +216,16 @@ const Basicinfo = ({
           accept="image/*"
           type="file"
           ref={fileInputRef}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={handleImageUpload}
         />
         <TopText>Basic Information</TopText>
         <ContainerForm>
-          <PositionProfileForm style={{ marginTop: '10px' }}>
+          <PositionProfileForm style={{ marginTop: "10px" }}>
             <ColumnStudentForm>
               <LabelProfileb>Email Address</LabelProfileb>
               <TextInput
-                width={'100%'}
+                width={"100%"}
                 value={email}
                 editable
                 onChange={(e) => setEmail(e.target.value)}
@@ -208,7 +235,7 @@ const Basicinfo = ({
             <ColumnStudentForm>
               <LabelProfileb>User Name</LabelProfileb>
               <TextInput
-                width={'100%'}
+                width={"100%"}
                 editable
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
@@ -221,7 +248,7 @@ const Basicinfo = ({
             <ColumnStudentForm>
               <LabelProfileb>First Name</LabelProfileb>
               <TextInput
-                width={'100%'}
+                width={"100%"}
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
                 placeholder="First Name"
@@ -230,7 +257,7 @@ const Basicinfo = ({
             <ColumnStudentForm>
               <LabelProfileb>Last Name</LabelProfileb>
               <TextInput
-                width={'100%'}
+                width={"100%"}
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
                 placeholder="Last Name"
@@ -242,8 +269,8 @@ const Basicinfo = ({
             <ColumnStudentForm>
               <LabelProfileb>Hourly Rate</LabelProfileb>
               <TextInput
-                type={'number'}
-                width={'100%'}
+                type={"number"}
+                width={"100%"}
                 value={hourlyRate}
                 onChange={(e) => setHourlyRate(e.target.value)}
                 placeholder="Hourly Rate"
@@ -254,27 +281,27 @@ const Basicinfo = ({
           <PositionProfileForm>
             <ColumnStudentForm>
               <LabelProfileb>Account</LabelProfileb>
-              <Stack flexDirection={'row'}>
-                <Stack flexDirection={'row'} alignItems={'center'}>
+              <Stack flexDirection={"row"}>
+                <Stack flexDirection={"row"} alignItems={"center"}>
                   <IconButton>
                     <Radio
-                      checked={isActive === 'Activated'}
+                      checked={isActive === "Activated"}
                       onChange={(event) =>
                         setIsActive(
-                          event.target.checked ? 'Activated' : 'DeActivated'
+                          event.target.checked ? "Activated" : "DeActivated"
                         )
                       }
                     />
                   </IconButton>
                   <LabelProfileb>Active</LabelProfileb>
                 </Stack>
-                <Stack flexDirection={'row'} alignItems={'center'}>
+                <Stack flexDirection={"row"} alignItems={"center"}>
                   <IconButton>
                     <Radio
-                      checked={isActive === 'DeActivated'}
+                      checked={isActive === "DeActivated"}
                       onChange={(event) =>
                         setIsActive(
-                          event.target.checked ? 'DeActivated' : 'Activated'
+                          event.target.checked ? "DeActivated" : "Activated"
                         )
                       }
                     />
@@ -288,25 +315,25 @@ const Basicinfo = ({
           <Button
             variant="contained"
             sx={{
-              marginTop: '4%',
-              padding: { sx: '10px', lg: '20px' },
-              marginBottom: '5%',
-              float: 'right',
-              width: '160px',
-              background: '#5f61be',
-              borderRadius: '8px',
-              height: '40px',
-              '&:hover': {
-                background: '#5f61be',
+              marginTop: "4%",
+              padding: { sx: "10px", lg: "20px" },
+              marginBottom: "5%",
+              float: "right",
+              width: "160px",
+              background: "#5f61be",
+              borderRadius: "8px",
+              height: "40px",
+              "&:hover": {
+                background: "#5f61be",
               },
             }}
             onClick={() => handleSubmit()}
             disabled={loading}
           >
             {!loading ? (
-              'Save Changes'
+              "Save Changes"
             ) : (
-              <CircularProgress sx={{ borderColor: '#fff', color: '#fff' }} />
+              <CircularProgress sx={{ borderColor: "#fff", color: "#fff" }} />
             )}
           </Button>
 
