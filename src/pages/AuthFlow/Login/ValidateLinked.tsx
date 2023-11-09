@@ -14,7 +14,7 @@ const ValidateLinkedIn = () => {
   const [load, setLoad] = useState(true);
 
   const code: string = searchParams.get("code") as string;
-
+  console.log(code);
   let called = false;
 
   useEffect(() => {
@@ -26,7 +26,6 @@ const ValidateLinkedIn = () => {
 
   const validateUser = async () => {
     try {
-      
     } catch (error) {
       console.log(error);
     }
