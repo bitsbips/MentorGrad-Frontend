@@ -345,23 +345,25 @@ export const WorksImage = styled.img`
 export const HeaderImage = styled.img`
   /* width: 10rem;
 height: 10rem; */
-  width: 165.92px;
-  height: 193px;
+  width: 150px;
+  height: 150px;
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
   box-sizing: border-box;
+  margin-top: 40px;
+  margin-left: 10px;
 `;
 export const HeaderImageContentBack = styled.div`
   position: absolute;
   width: 125px;
-  bottom: 0px;
+  bottom: -20px;
   padding: 4%;
   align-self: flex-end;
   justify-content: center;
   align-items: center;
   text-align: center;
   z-index: 1000px;
-  right: -10px;
+  right: -20px;
 
   margin-left: 20px;
   background: rgba(255, 255, 255, 0.95);
@@ -392,7 +394,7 @@ export const HeaderImageContentBackTextb = styled.h5`
 `;
 
 export const ButtonsWidth = styled.div`
-  margin-top: 4%;
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   @media (max-width: 750px) {

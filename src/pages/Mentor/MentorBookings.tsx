@@ -370,7 +370,7 @@ export const MentorBooking = (): JSX.Element => {
                         sx={{
                           background: '#ECECEC',
                           color: 'black',
-                          width: '90px',
+                          width: { xs: '120px', lg: '90px' },
                           p: 0,
                           '&:hover': {
                             background: '#5f61be',
@@ -390,7 +390,7 @@ export const MentorBooking = (): JSX.Element => {
                           size="small"
                           sx={{
                             background: 'rgba(255, 0, 0, 0.70)',
-                            width: '90px',
+                            width: { xs: '120px', lg: '90px' },
                             p: 0,
                             '&:hover': {
                               background: '#5f61be',
