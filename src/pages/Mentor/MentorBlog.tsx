@@ -71,7 +71,11 @@ type Blog = {
   description: string;
   shortDescription: string;
   Image: string;
-  coverImage: string;
+  attachments: Array<{
+    attachmentPath: string;
+    attachmentURL: string;
+    name: string;
+  }>;
 };
 
 type Blogs = Blog[];
@@ -181,7 +185,7 @@ const MentorBlogs = (): JSX.Element => {
               <Grid item lg={4} key={index}>
                 <Stack className={classes.container}>
                   <img
-                    src={blog?.coverImage || Rectangle}
+                    src={blog?.attachments?.[0]?.attachmentURL || Rectangle}
                     height={'160'}
                     style={{ maxWidth: '340px' }}
                   />
