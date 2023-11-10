@@ -118,17 +118,31 @@ export async function ResetPasswordNew(id, value) {
 }
 
 // SocialLogin
-export async function GoogoleLogin() {
+export async function GoogoleLogin(token) {
   try {
-    const response = await axios.get(URL + "auth/google", {});
-    console.log(response.data);
+    const response = await axios.post(URL + "auth/googleAuthLogin", {
+      token
+    });
     return response.data;
   } catch (e) {
     console.log(e.response.data);
-
     return e.response.data;
   }
 }
+
+export async function LinkedInLogin(token, url) {
+  try {
+    const response = await axios.post(URL + "auth/linkedinAuthLogin", {
+      token,
+      url
+    });
+    return response.data;
+  } catch (e) {
+    console.log(e.response.data);
+    return e.response.data;
+  }
+}
+
 export async function GetGoogoleUser() {
   try {
     const response = await axios.get(URL + "auth/login/success");

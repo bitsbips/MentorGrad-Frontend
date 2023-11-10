@@ -23,7 +23,7 @@ interface Props {
 // `;
 
 const Backbtn = styled.button`
-  width: 88%;
+  width: 402px;
   border-radius: 7px;
   justify-content: "center";
   align-items: "center";
@@ -31,12 +31,11 @@ const Backbtn = styled.button`
   margin-bottom: 3%;
   text-align: center;
   align-self: center;
-  padding: 2.3%;
+  padding: 1.8%;
   cursor: pointer;
   align-self: center;
   text-decoration: "none";
   border: 0px;
-
   background-color: ${(props) => props.color};
 `;
 const Text = styled.p`
