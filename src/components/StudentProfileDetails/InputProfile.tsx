@@ -36,7 +36,6 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       }}
       onChange={props.onChange}
       id={props.id}
-      label={props.placeholder}
       variant="outlined"
     />
     // <input

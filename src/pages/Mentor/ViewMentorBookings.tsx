@@ -77,6 +77,7 @@ export const ViewMentorBooking = ({
                 gridColumn: 'span 6',
                 width: 'fit-content',
               }}
+              direction={'row'}
             >
               <Typography fontWeight={700} noWrap>
                 {data?.bookingSubject}
@@ -85,10 +86,13 @@ export const ViewMentorBooking = ({
             <Stack
               alignItems={'flex-end'}
               justifyContent={'center'}
-              sx={{ gridColumn: 'span 6' }}
+              sx={{
+                gridColumn: 'span 6',
+              }}
             >
-              <Typography fontWeight={600}>N/A</Typography>
+              <Typography fontWeight={600}>$ {data?.amount}</Typography>
             </Stack>
+
             <Stack sx={{ gridColumn: 'span 12' }}>
               <Typography
                 textAlign={'left'}
