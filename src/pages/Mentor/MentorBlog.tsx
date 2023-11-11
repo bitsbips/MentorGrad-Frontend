@@ -25,7 +25,6 @@ import Spinner from '../../components/Spinner';
 const useStyles = makeStyles({
   container: {
     border: '1px solid #D6D6D6',
-    minWidth: '280px',
   },
   subContainer: {
     padding: '15px',
@@ -182,13 +181,14 @@ const MentorBlogs = (): JSX.Element => {
         <Grid item lg={12}>
           <Grid container spacing={2}>
             {blogs.map((blog, index) => (
-              <Grid item lg={4} key={index}>
+              <Grid item xs={12} lg={4} key={index}>
                 <Stack className={classes.container}>
                   <img
                     src={blog?.attachments?.[0]?.attachmentURL || Rectangle}
-                    height={'160'}
-                    style={{ maxWidth: '340px' }}
+                    height="160"
+                    style={{ width: '100%', objectFit: 'contain' }}
                   />
+
                   <Stack className={classes.subContainer}>
                     <Typography className={classes.date}>
                       {formatDate(blog?.updatedAt, 'dd MMM yyyy')}

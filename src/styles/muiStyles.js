@@ -233,6 +233,9 @@ export const useChatListStyles = makeStyles(
     },
     searchWrapper: {
       padding: '0.3em 0.4em',
+      [theme.breakpoints.down('sm')]: {
+        paddingTop: '20px',
+      },
     },
   }),
   { index: 1 }

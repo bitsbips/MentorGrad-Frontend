@@ -3,8 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-
-body{
+body {
   font-family: 'Inter';
 }
 div {
@@ -30,8 +29,11 @@ h5 {
 }
 code {
   font-family: 'Inter'; /* Default font */
-
 }
- /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins','Montserrat','Roboto', 'Oxygen',
+/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins','Montserrat','Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
+
+.ql-editor {
+  min-height: 200px;
+}
