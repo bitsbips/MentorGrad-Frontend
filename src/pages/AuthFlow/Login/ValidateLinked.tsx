@@ -29,7 +29,7 @@ const ValidateLinkedIn = () => {
 
   const validateUser = async () => {
     try {
-      await LinkedInLogin(code, selfUrl + "validate-user")
+      await LinkedInLogin(code, `${selfUrl}/validate-user`)
         .then(async (res:any) => {
           if (res?.decodedToken) {
             await localStorage.setItem("@storage_Key", res?.decodedToken);

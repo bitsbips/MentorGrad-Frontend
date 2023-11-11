@@ -23,8 +23,8 @@ interface Props {
 // `;
 
 const Backbtn = styled.button`
-  width: 402px;
-  border-radius: 7px;
+  width: 100%;
+  border-radius: 12px;
   justify-content: "center";
   align-items: "center";
   margin: auto;

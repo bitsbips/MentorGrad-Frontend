@@ -9,15 +9,19 @@ import { LoginSocialLinkedin } from "reactjs-social-login";
 import {
   GetGoogoleUser,
   GoogoleLogin,
+  googleClientId,
+  googleSecretId,
   linkedInClientId,
   selfUrl,
 } from "../api";
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
+import { hasGrantedAllScopesGoogle } from "@react-oauth/google";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import { Stack, useMediaQuery } from "@mui/material";
 import { notifyError, notifySuccess } from "./Toastifycom";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const REDIRECT_URI = window.location.href;
 
@@ -25,9 +29,27 @@ const AllSocial: FC = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => exchangeCodeForTokens(codeResponse?.code),
+    flow: "auth-code",
+  });
+
+  const exchangeCodeForTokens = async (code: any) => {
+    const response = await axios.post("https://oauth2.googleapis.com/token", {
+      code,
+      client_id: googleClientId,
+      client_secret: googleSecretId,
+      redirect_uri: selfUrl,
+      grant_type: "authorization_code",
+    });
+    const { id_token } = response.data;
+    handleUserLogin(id_token);
+  };
+
   const { linkedInLogin } = useLinkedIn({
     clientId: linkedInClientId,
-    redirectUri: `${selfUrl}validate-user`,
+    redirectUri: `${selfUrl}/validate-user`,
     scope: "openid email profile",
     onSuccess: (code) => {
       console.log(code);
@@ -46,7 +68,7 @@ const AllSocial: FC = () => {
   const handleUserLogin = async (credentialResponse: any) => {
     debugger;
     setIsLoading(true);
-    await GoogoleLogin(credentialResponse?.credential)
+    await GoogoleLogin(credentialResponse)
       .then(async (res) => {
         await localStorage.setItem("@storage_Key", res?.decodedToken);
         navigate("/dashboard");
@@ -61,27 +83,20 @@ const AllSocial: FC = () => {
   return (
     <>
       {isLoading ? <Spinner /> : ""}
-      <Stack alignItems={"center"} gap={2}>
-        <GoogleLogin
-          theme="filled_blue"
-          shape="square"
-          size="large"
-          width={isMobile ? "595px" : "275px"}
-          onSuccess={(credentialResponse) => {
-            handleUserLogin(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+      <SocialLogin
+        title="Sign up with Google"
+        color={"#D0463B"}
+        onClick={login}
+        img={Google}
+      />
 
-        <SocialLogin
-          title="Sign up with LinkedIn"
-          color={"#0A66C2"}
-          onClick={linkedInLogin}
-          img={Linkin}
-        />
-        {/* <LoginSocialGoogle
+      <SocialLogin
+        title="Sign up with LinkedIn"
+        color={"#0A66C2"}
+        onClick={linkedInLogin}
+        img={Linkin}
+      />
+      {/* <LoginSocialGoogle
                 client_id={"751206549312-6ep4odegrc2pae9leh91jojs5126jcue.apps.googleusercontent.com"}
                 scope="openid profile email"
                 discoveryDocs="claims_supported"
@@ -119,7 +134,6 @@ const AllSocial: FC = () => {
             >
                 <SocialLogin title='Sign up with LinkedIn' color={'#0A66C2'} onClick={() => ''} img={Linkin} />
             </LoginSocialLinkedin> */}
-      </Stack>
     </>
   );
 };

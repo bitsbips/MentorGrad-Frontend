@@ -1,5 +1,5 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
-import { Context } from '../../Context/ContextStates';
+import React, { FC, useContext, useEffect, useState } from "react";
+import { Context } from "../../Context/ContextStates";
 import {
   Border,
   Container,
@@ -7,144 +7,170 @@ import {
   PositionProfile,
   RightContainer,
   RightContainerDash1,
-} from '../StudentProfileDetails/StudentProfileStyles';
+} from "../StudentProfileDetails/StudentProfileStyles";
 import {
   ActiveLabel,
   BackActive,
   BackInActive,
   InActiveLabel,
-} from './StudentDahboardStyles';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { Icon } from '@mui/material';
-import HeaderUserinfo from '../StudentDashboard/HeaderUserinfo';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import useMediaQuery from '../../hooks/MediaQuery';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+} from "./StudentDahboardStyles";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { Icon } from "@mui/material";
+import HeaderUserinfo from "../StudentDashboard/HeaderUserinfo";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import useMediaQuery from "../../hooks/MediaQuery";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import BookOnlineIcon from "@mui/icons-material/BookOnline";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import ChatIcon from "@mui/icons-material/Chat";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import { useSearchParams } from "react-router-dom";
+import { notifyError } from "../Toastifycom";
+import { getErrorMsg } from "../../helper-functions";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_USERS } from "../../graphql/queries";
+import Main from "../../pages/MentorChat/Main";
+
 const style = {
-  width: '25%',
-  bgcolor: '#F2F5F9',
-  cursor: 'pointer',
-  marginTop: '0px',
+  width: "25%",
+  bgcolor: "#F2F5F9",
+  cursor: "pointer",
+  marginTop: "0px",
 };
 const style1 = {
-  border: '1.4px solid #D6D6D6', // Change the width and color as needed
+  border: "1.4px solid #D6D6D6", // Change the width and color as needed
 };
 
 const TestDashboard: FC = () => {
-  const [profilestep, setProfileStep] = useState('0');
-  const [Status, setStatus] = useState('');
+  const [profilestep, setProfileStep] = useState("0");
+  const [Status, setStatus] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isMobile = useMediaQuery('(min-width: 950px)');
+  const isMobile = useMediaQuery("(min-width: 950px)");
+  let [searchParams, setSearchParams] = useSearchParams();
 
   function SetStatusfunc(ss: any) {
     setStatus(ss);
   }
   const Data = [
     {
-      id: 1,
-      name: 'Dashboard',
+      id: 0,
+      name: "Dashboard",
       icon: DashboardIcon,
+    },
+    {
+      id: 1,
+      name: "Bookings",
+      icon: BookOnlineIcon,
     },
     {
       id: 2,
-      name: 'Bookings',
-      icon: DashboardIcon,
+      name: "Smart Matches",
+      icon: PeopleAltIcon,
     },
     {
       id: 3,
-      name: 'Schedule Timings',
-      icon: DashboardIcon,
+      name: "Chats",
+      icon: ChatIcon,
     },
     {
       id: 4,
-      name: 'Messages',
-      icon: DashboardIcon,
+
+      name: "Invoices",
+      icon: ReceiptIcon,
     },
     {
       id: 5,
 
-      name: 'Invoices',
-      icon: DashboardIcon,
+      name: "Reporting",
+      icon: AssessmentIcon,
     },
     {
       id: 6,
 
-      name: 'Reviews',
-      icon: DashboardIcon,
+      name: "Subscription",
+      icon: SubscriptionsIcon,
     },
     {
       id: 7,
 
-      name: 'Blog',
-      icon: DashboardIcon,
-    },
-    {
-      id: 8,
-
-      name: 'Profile',
-      icon: DashboardIcon,
-    },
-    {
-      id: 9,
-
-      name: 'Logout',
-      icon: DashboardIcon,
+      name: "Profile",
+      icon: ContactPageIcon,
     },
   ];
+
+  const {
+    data: userData,
+    loading: loadingUsers,
+    refetch,
+  } = useQuery(GET_ALL_USERS, {
+    onError: (err) => {
+      notifyError(getErrorMsg(err));
+    },
+  });
+
   useEffect(() => {
     // Set the initial Status and profile step when the component mounts
-    if (profilestep === '0') {
-      setStatus('Dashboard');
+    let tab = searchParams.get("tab");
+    if (!tab) {
+      _handleComActions("0");
+    }
+    if (tab === "0") {
+      setStatus("Dashboard");
     }
   }, [profilestep]);
+
+  // Actions
+  const _handleComActions = (tab: string) => {
+    if (searchParams.get("edit") && searchParams.get("id")) {
+      searchParams.delete("id");
+      searchParams.delete("edit");
+      setSearchParams(searchParams);
+    }
+    searchParams.set("tab", tab);
+    setSearchParams(searchParams);
+  };
+
   const Mycomphoolder: any = () => {
-    if (profilestep === '0') {
+    let tab = searchParams.get("tab");
+    if (tab === "0") {
       return (
         <div>
           <HeaderUserinfo />
         </div>
       );
     }
-    if (profilestep === '1') {
+    if (profilestep === "1") {
       return (
         <div>
           <p>No Result</p>
         </div>
       );
     }
-    if (profilestep === '2') {
+    if (profilestep === "2") {
       return (
         <div>
           <p>No Result</p>
         </div>
       );
     }
-    if (profilestep === '3') {
-      return (
-        <div>
-          <p>No Result</p>
-        </div>
-      );
-    }
-    if (profilestep === '4') {
-      return (
-        <div>
-          <p>No Result</p>
-        </div>
-      );
+    if (tab === "3") {
+      return <Main />;
     }
   };
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event &&
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
       ) {
         return;
       }
@@ -160,33 +186,25 @@ const TestDashboard: FC = () => {
         {Data.map((data) => (
           <ListItem
             key={data.id}
-            onClick={() => [
-              SetStatusfunc(data.name),
-              data.id === 1
-                ? setProfileStep('0')
-                : data.id === 2
-                ? setProfileStep('1')
-                : data.id === 3
-                ? setProfileStep('2')
-                : data.id === 4
-                ? setProfileStep('3')
-                : setProfileStep('4'),
-            ]}
+            onClick={() => {
+              SetStatusfunc(data.name);
+              _handleComActions(data.id.toString());
+            }}
           >
             {Status === data.name ? (
               <>
                 <BackActive>
                   {data.icon && (
-                    <data.icon style={{ color: '#fff', fontSize: '20px' }} />
+                    <data.icon style={{ color: "#fff", fontSize: "20px" }} />
                   )}
                 </BackActive>
                 <ActiveLabel>{data.name}</ActiveLabel>
               </>
             ) : (
               <>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div style={{ display: "flex", flexDirection: "row" }}>
                   <BackInActive>
-                    {data.icon && <data.icon style={{ fontSize: '20px' }} />}
+                    {data.icon && <data.icon style={{ fontSize: "20px" }} />}
                   </BackInActive>
                   <InActiveLabel>{data.name}</InActiveLabel>
                 </div>
@@ -207,35 +225,27 @@ const TestDashboard: FC = () => {
               return (
                 <>
                   <div
-                    onClick={() => [
-                      SetStatusfunc(data.name),
-                      data.id === 1
-                        ? setProfileStep('0')
-                        : data.id === 2
-                        ? setProfileStep('1')
-                        : data.id === 3
-                        ? setProfileStep('2')
-                        : data.id === 4
-                        ? setProfileStep('3')
-                        : setProfileStep('4'),
-                    ]}
+                    onClick={() => {
+                      SetStatusfunc(data.name);
+                      _handleComActions(data.id.toString());
+                    }}
                   >
                     {Status === data.name ? (
-                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div style={{ display: "flex", flexDirection: "row" }}>
                         <BackActive>
                           {data.icon && (
                             <data.icon
-                              style={{ color: '#fff', fontSize: '20px' }}
+                              style={{ color: "#fff", fontSize: "20px" }}
                             />
                           )}
                         </BackActive>
                         <ActiveLabel>{data.name}</ActiveLabel>
                       </div>
                     ) : (
-                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div style={{ display: "flex", flexDirection: "row" }}>
                         <BackInActive>
                           {data.icon && (
-                            <data.icon style={{ fontSize: '20px' }} />
+                            <data.icon style={{ fontSize: "20px" }} />
                           )}
                         </BackInActive>
                         <InActiveLabel>{data.name}</InActiveLabel>
@@ -252,12 +262,12 @@ const TestDashboard: FC = () => {
             <div
               onClick={toggleDrawer(true)}
               style={{
-                alignSelf: 'flex-start',
-                marginLeft: '-5%',
-                marginBottom: '3%',
+                alignSelf: "flex-start",
+                marginLeft: "-5%",
+                marginBottom: "3%",
               }}
             >
-              <MenuOpenIcon style={{ fontSize: '30px', color: '#5F61BE' }} />
+              <MenuOpenIcon style={{ fontSize: "30px", color: "#5F61BE" }} />
             </div>
 
             {/* Drawer */}
