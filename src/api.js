@@ -6,16 +6,16 @@ import { jwtDecode } from "./helper-functions";
 // export const selfUrl = "http://localhost:3000"
 // export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "http://3.110.29.221/backend/api/v1/";
+const URL = "http://13.232.15.232/backend/api/v1/";
 export const IMGURL =
-  "http://3.110.29.221/backend/api/v1/";
+  "http://13.232.15.232/backend/api/v1/";
 export const selfUrl =
-  "http://3.110.29.221";
+  "http://13.232.15.232";
 
 // Chat Urls
-export const http = "http://3.110.29.221/backend/graphql";
-export const ws = "ws://3.110.29.221/backend/graphql";
-export const file = "http://3.110.29.221/backend/graphql";
+export const http = "http://13.232.15.232/backend/graphql";
+export const ws = "ws://13.232.15.232/backend/graphql";
+export const file = "http://13.232.15.232/backend/graphql";
 
 // export const http = "http://localhost:5002/api/v1/";
 // export const ws = "ws://localhost:5002/graphql";
