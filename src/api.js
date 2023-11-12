@@ -6,16 +6,17 @@ import { jwtDecode } from "./helper-functions";
 // export const selfUrl = "http://localhost:3000"
 // export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "http://13.232.15.232/backend/api/v1/";
-export const IMGURL =
-  "http://13.232.15.232/backend/api/v1/";
-export const selfUrl =
-  "http://13.232.15.232";
+const ADDRESS = "13.54.160.143";
+const MAIN_URL = `http://${ADDRESS}/`;
+
+const URL = `${MAIN_URL}backend/api/v1/`;
+export const IMGURL = `${MAIN_URL}backend/api/v1/`;
+export const selfUrl = `${MAIN_URL}`;
 
 // Chat Urls
-export const http = "http://13.232.15.232/backend/graphql";
-export const ws = "ws://13.232.15.232/backend/graphql";
-export const file = "http://13.232.15.232/backend/graphql";
+export const http = `${MAIN_URL}backend/graphql`;
+export const ws = `ws://${ADDRESS}/backend/graphql`;
+export const file = `${MAIN_URL}backend/graphql`;
 
 // export const http = "http://localhost:5002/api/v1/";
 // export const ws = "ws://localhost:5002/graphql";
