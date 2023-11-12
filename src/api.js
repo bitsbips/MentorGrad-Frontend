@@ -14,9 +14,9 @@ export const IMGURL = `${MAIN_URL}backend/api/v1/`;
 export const selfUrl = `${MAIN_URL}`;
 
 // Chat Urls
-export const http = `${MAIN_URL}backend/graphql`;
-export const ws = `ws://${ADDRESS}/backend/graphql`;
-export const file = `${MAIN_URL}backend/graphql`;
+export const http = `${MAIN_URL}chat/graphql`;
+export const ws = `ws://${ADDRESS}/chat/graphql`;
+export const file = `${MAIN_URL}chat/graphql`;
 
 // export const http = "http://localhost:5002/api/v1/";
 // export const ws = "ws://localhost:5002/graphql";
