@@ -14,7 +14,7 @@ export const selfUrl =
 
 // Chat Urls
 export const http = "http://3.110.29.221/backend/graphql";
-export const ws = "wss://3.110.29.221/backend/graphql";
+export const ws = "ws://3.110.29.221/backend/graphql";
 export const file = "http://3.110.29.221/backend/graphql";
 
 // export const http = "http://localhost:5002/api/v1/";
