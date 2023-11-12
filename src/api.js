@@ -6,16 +6,16 @@ import { jwtDecode } from "./helper-functions";
 // export const selfUrl = "http://localhost:3000"
 // export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+const URL = "http://3.110.29.221/backend/api/v1/";
 export const IMGURL =
-  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+  "http://3.110.29.221/backend/api/v1/";
 export const selfUrl =
-  "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
+  "http://3.110.29.221";
 
 // Chat Urls
-export const http = "https://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
-export const ws = "wss://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
-export const file = "https://metorgrad-chat-08185a2d2f4a.herokuapp.com/graphql";
+export const http = "http://3.110.29.221/backend/graphql";
+export const ws = "wss://3.110.29.221/backend/graphql";
+export const file = "http://3.110.29.221/backend/graphql";
 
 // export const http = "http://localhost:5002/api/v1/";
 // export const ws = "ws://localhost:5002/graphql";
