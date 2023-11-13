@@ -37,6 +37,7 @@ import { getErrorMsg } from "../../helper-functions";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "../../graphql/queries";
 import Main from "../../pages/MentorChat/Main";
+import MentorSearch from "./MentorSearch/Index";
 
 const style = {
   width: "25%",
@@ -146,17 +147,17 @@ const TestDashboard: FC = () => {
         </div>
       );
     }
-    if (profilestep === "1") {
+    if (tab === "1") {
       return (
         <div>
           <p>No Result</p>
         </div>
       );
     }
-    if (profilestep === "2") {
+    if (tab === "2") {
       return (
         <div>
-          <p>No Result</p>
+          <MentorSearch />
         </div>
       );
     }
@@ -219,7 +220,7 @@ const TestDashboard: FC = () => {
   return (
     <ContainerDa>
       <PositionProfile>
-        {isMobile ? (
+        {isMobile && searchParams.get("tab") !== "2" ? (
           <div style={style}>
             {Data.map((data) => {
               return (
@@ -258,26 +259,32 @@ const TestDashboard: FC = () => {
           </div>
         ) : (
           <>
-            {/* Burger Icon to open the drawer */}
-            <div
-              onClick={toggleDrawer(true)}
-              style={{
-                alignSelf: "flex-start",
-                marginLeft: "-5%",
-                marginBottom: "3%",
-              }}
-            >
-              <MenuOpenIcon style={{ fontSize: "30px", color: "#5F61BE" }} />
-            </div>
+            {searchParams.get("tab") !== "2" && (
+              <>
+                {/* Burger Icon to open the drawer */}
+                <div
+                  onClick={toggleDrawer(true)}
+                  style={{
+                    alignSelf: "flex-start",
+                    marginLeft: "-5%",
+                    marginBottom: "3%",
+                  }}
+                >
+                  <MenuOpenIcon
+                    style={{ fontSize: "30px", color: "#5F61BE" }}
+                  />
+                </div>
 
-            {/* Drawer */}
-            <Drawer
-              anchor="left"
-              open={isDrawerOpen}
-              onClose={toggleDrawer(false)}
-            >
-              {list}
-            </Drawer>
+                {/* Drawer */}
+                <Drawer
+                  anchor="left"
+                  open={isDrawerOpen}
+                  onClose={toggleDrawer(false)}
+                >
+                  {list}
+                </Drawer>
+              </>
+            )}
           </>
         )}
         <RightContainerDash1>{Mycomphoolder()}</RightContainerDash1>

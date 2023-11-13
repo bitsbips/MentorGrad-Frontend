@@ -46,6 +46,7 @@ import {
 } from "./graphql/queries";
 import { useMediaQuery } from "@mui/material";
 import ValidateLinkedIn from "./pages/AuthFlow/Login/ValidateLinked";
+import MentorSearch from "./components/Student-Dashboard/MentorSearch/Index";
 
 const theme = createTheme({
   typography: {
@@ -77,11 +78,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem("currentStep", value);
     GetAllContries().then((e) => {
-      console.log(e, "Countries");
       setCountryData(e);
     });
     GetCountryList().then((e) => {
-      console.log(e, "Countries");
       setCountryList(e);
     });
     GetNationality().then((e) => {
@@ -209,6 +208,7 @@ function App() {
       <Route path="/profile" element={<StudentProfile />} />
       <Route path="/paymentPlan" element={<PaymentPlan />} />
       <Route path="/paymentPage" element={<PaymentPage />} />
+      <Route path="/findMen" element={<MentorSearch />} />
     </Routes>
   );
 
