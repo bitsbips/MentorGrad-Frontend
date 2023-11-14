@@ -26,7 +26,7 @@ const SearchFilter = (props: any) => {
 
   const courses = [
     "Digital Marketer",
-    "UNIX, Calculus, Trignometry",
+    "UNIX, Calculus",
     "UI/UX Design",
     "Computer Programming",
     "ASP.NET",
@@ -35,9 +35,11 @@ const SearchFilter = (props: any) => {
 
   return (
     <RightBorderDashboard>
-      <Typography sx={{ mt: 1, mb: 1 }} textAlign={"left"} fontWeight={600}>
+      <Stack sx={{ p: 2 }} gap={2.5}>
+      <Typography textAlign={"left"} fontWeight={600}>
         Search Filter
       </Typography>
+      </Stack>
       <Divider
         variant="middle"
         orientation={"vertical"}

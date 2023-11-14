@@ -40,7 +40,7 @@ type MentorList = Mentor[];
 
 const MentorSearch = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery("(max-width: 1200px)");
   const [showFilter, setshowFilter] = useState(false);
   const [filters, setFilters] = useState({
     country: "",
@@ -74,6 +74,7 @@ const MentorSearch = () => {
   };
 
   const getMentors = () => {
+    setshowFilter(false);
     setLoading(true);
     let payload = {
       countryOfResidence: filters.country,
@@ -134,7 +135,10 @@ const MentorSearch = () => {
             {mentorList[0]?.countryOfResidence}
           </Typography>
           {isMobile && (
-            <IconButton onClick={() => setshowFilter(true)}>
+            <IconButton
+              onClick={() => setshowFilter(true)}
+              sx={{ p: 0, m: 0, mb: 0.5 }}
+            >
               <FilterAltIcon fontSize="small" sx={{ color: "#5F61BE" }} />
             </IconButton>
           )}
@@ -162,6 +166,7 @@ const MentorSearch = () => {
                       justifyContent={"space-between"}
                       flexDirection={isMobile ? "column" : "row"}
                       gap={isMobile ? 3 : 0}
+                      p={isMobile ? 2.5 : 0}
                     >
                       <Stack
                         flexDirection={"row"}
@@ -255,10 +260,17 @@ const MentorSearch = () => {
                         </Stack>
 
                         <Button
-                          fullWidth
                           size="small"
                           variant="contained"
-                          sx={{ background: "#5F61BE" }}
+                          sx={
+                            isMobile
+                              ? {
+                                  background: "#5F61BE",
+                                  width: "fit-content",
+                                  ml: 11,
+                                }
+                              : { background: "#5F61BE", width: "fit-content" }
+                          }
                         >
                           BOOK APPOINTMENT
                         </Button>
