@@ -104,6 +104,11 @@ const TestDashboard: FC = () => {
       name: "Profile",
       icon: ContactPageIcon,
     },
+    {
+      id: 8,
+      name: "FindAMentor",
+      icon: ContactPageIcon,
+    },
   ];
 
   const {
@@ -157,12 +162,15 @@ const TestDashboard: FC = () => {
     if (tab === "2") {
       return (
         <div>
-          <MentorSearch />
+          <p>No Result</p>
         </div>
       );
     }
     if (tab === "3") {
       return <Main />;
+    }
+    if (tab === "8") {
+      return <MentorSearch />;
     }
   };
   const toggleDrawer =
@@ -184,35 +192,39 @@ const TestDashboard: FC = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {Data.map((data) => (
-          <ListItem
-            key={data.id}
-            onClick={() => {
-              SetStatusfunc(data.name);
-              _handleComActions(data.id.toString());
-            }}
-          >
-            {Status === data.name ? (
-              <>
-                <BackActive>
-                  {data.icon && (
-                    <data.icon style={{ color: "#fff", fontSize: "20px" }} />
-                  )}
-                </BackActive>
-                <ActiveLabel>{data.name}</ActiveLabel>
-              </>
-            ) : (
-              <>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <BackInActive>
-                    {data.icon && <data.icon style={{ fontSize: "20px" }} />}
-                  </BackInActive>
-                  <InActiveLabel>{data.name}</InActiveLabel>
-                </div>
-              </>
-            )}
-          </ListItem>
-        ))}
+        {Data.map((data) =>
+          data.name === "FindAMentor" ? (
+            ""
+          ) : (
+            <ListItem
+              key={data.id}
+              onClick={() => {
+                SetStatusfunc(data.name);
+                _handleComActions(data.id.toString());
+              }}
+            >
+              {Status === data.name ? (
+                <>
+                  <BackActive>
+                    {data.icon && (
+                      <data.icon style={{ color: "#fff", fontSize: "20px" }} />
+                    )}
+                  </BackActive>
+                  <ActiveLabel>{data.name}</ActiveLabel>
+                </>
+              ) : (
+                <>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <BackInActive>
+                      {data.icon && <data.icon style={{ fontSize: "20px" }} />}
+                    </BackInActive>
+                    <InActiveLabel>{data.name}</InActiveLabel>
+                  </div>
+                </>
+              )}
+            </ListItem>
+          )
+        )}
       </List>
     </div>
   );
@@ -220,46 +232,50 @@ const TestDashboard: FC = () => {
   return (
     <ContainerDa>
       <PositionProfile>
-        {isMobile && searchParams.get("tab") !== "2" ? (
+        {isMobile && searchParams.get("tab") !== "8" ? (
           <div style={style}>
             {Data.map((data) => {
               return (
                 <>
-                  <div
-                    onClick={() => {
-                      SetStatusfunc(data.name);
-                      _handleComActions(data.id.toString());
-                    }}
-                  >
-                    {Status === data.name ? (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackActive>
-                          {data.icon && (
-                            <data.icon
-                              style={{ color: "#fff", fontSize: "20px" }}
-                            />
-                          )}
-                        </BackActive>
-                        <ActiveLabel>{data.name}</ActiveLabel>
-                      </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackInActive>
-                          {data.icon && (
-                            <data.icon style={{ fontSize: "20px" }} />
-                          )}
-                        </BackInActive>
-                        <InActiveLabel>{data.name}</InActiveLabel>
-                      </div>
-                    )}
-                  </div>
+                  {data.name === "FindAMentor" ? (
+                    ""
+                  ) : (
+                    <div
+                      onClick={() => {
+                        SetStatusfunc(data.name);
+                        _handleComActions(data.id.toString());
+                      }}
+                    >
+                      {Status === data.name ? (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackActive>
+                            {data.icon && (
+                              <data.icon
+                                style={{ color: "#fff", fontSize: "20px" }}
+                              />
+                            )}
+                          </BackActive>
+                          <ActiveLabel>{data.name}</ActiveLabel>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackInActive>
+                            {data.icon && (
+                              <data.icon style={{ fontSize: "20px" }} />
+                            )}
+                          </BackInActive>
+                          <InActiveLabel>{data.name}</InActiveLabel>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </>
               );
             })}
           </div>
         ) : (
           <>
-            {searchParams.get("tab") !== "2" && (
+            {searchParams.get("tab") !== "8" && (
               <>
                 {/* Burger Icon to open the drawer */}
                 <div
