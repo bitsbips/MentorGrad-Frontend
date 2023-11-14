@@ -56,57 +56,62 @@ const TestDashboard: FC = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   let [searchParams, setSearchParams] = useSearchParams();
 
+  const currentTab = searchParams.get("tab") || "0";
+
   function SetStatusfunc(ss: any) {
     setStatus(ss);
   }
   const Data = [
     {
       id: 0,
+      notShow: false,
       name: "Dashboard",
       icon: DashboardIcon,
     },
     {
       id: 1,
+      notShow: false,
       name: "Bookings",
       icon: BookOnlineIcon,
     },
     {
       id: 2,
+      notShow: false,
       name: "Smart Matches",
       icon: PeopleAltIcon,
     },
     {
       id: 3,
+      notShow: false,
       name: "Chats",
       icon: ChatIcon,
     },
     {
       id: 4,
 
+      notShow: false,
       name: "Invoices",
       icon: ReceiptIcon,
     },
     {
       id: 5,
 
+      notShow: false,
       name: "Reporting",
       icon: AssessmentIcon,
     },
     {
       id: 6,
 
+      notShow: false,
       name: "Subscription",
       icon: SubscriptionsIcon,
     },
     {
       id: 7,
 
+      notShow: false,
       name: "Profile",
-      icon: ContactPageIcon,
-    },
-    {
-      id: 8,
-      name: "FindAMentor",
       icon: ContactPageIcon,
     },
   ];
@@ -169,9 +174,6 @@ const TestDashboard: FC = () => {
     if (tab === "3") {
       return <Main />;
     }
-    if (tab === "8") {
-      return <MentorSearch />;
-    }
   };
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -193,7 +195,7 @@ const TestDashboard: FC = () => {
     >
       <List>
         {Data.map((data) =>
-          data.name === "FindAMentor" ? (
+          data.notShow ? (
             ""
           ) : (
             <ListItem
@@ -232,12 +234,12 @@ const TestDashboard: FC = () => {
   return (
     <ContainerDa>
       <PositionProfile>
-        {isMobile && searchParams.get("tab") !== "8" ? (
+        {isMobile && parseInt(currentTab) < 8 ? (
           <div style={style}>
             {Data.map((data) => {
               return (
                 <>
-                  {data.name === "FindAMentor" ? (
+                  {data.notShow  ? (
                     ""
                   ) : (
                     <div
@@ -275,7 +277,7 @@ const TestDashboard: FC = () => {
           </div>
         ) : (
           <>
-            {searchParams.get("tab") !== "8" && (
+            {parseInt(currentTab) < 8 && (
               <>
                 {/* Burger Icon to open the drawer */}
                 <div

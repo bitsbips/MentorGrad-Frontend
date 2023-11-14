@@ -51,7 +51,7 @@ const HeaderDashboard = () => {
                 <>
                   <li>
                     <NavLink
-                      to="/dashboard?tab=8"
+                      to="/findMentor"
                       style={{
                         fontFamily: "Inter",
                         color: "#47464A",
