@@ -45,8 +45,8 @@ export const Head = styled.p`
 
   color: #222222;
   @media (max-width: 750px) {
-    width: 55%;
-    font-size: 20px;
+    width: 100%;
+    font-size: 25px;
   }
 `;
 export const SubHead = styled.p`
@@ -241,6 +241,7 @@ export const Content = styled.p`
   }
 `;
 export const WriterName = styled.p`
+  font-family: 'Seaweed Script', cursive;
   font-style: normal;
   font-weight: 400;
   font-size: 26px;

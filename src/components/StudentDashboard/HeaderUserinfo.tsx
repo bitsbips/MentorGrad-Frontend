@@ -10,7 +10,7 @@ import {
   RightContainerDash,
 } from './StudentDashboardStyles';
 import { Avatar } from '@mui/material';
-import User from '../../Assets/Images/user.svg';
+//import User from '../../Assets/Images/user.svg';
 import StarRatings from 'react-star-ratings';
 import TableComponent from './TableComponent';
 import TableComponentDashboard from './TableComponent';
@@ -31,7 +31,9 @@ const HeaderUserinfo = () => {
               <div style={{ alignSelf: 'center' }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src={User}
+                  src={
+                    'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png'
+                  }
                   sx={{ width: 70, height: 70, alignSelf: 'center' }}
                 />
               </div>
