@@ -75,7 +75,9 @@ const OurMentors = () => {
             className="nav-btn"
             onClick={handlePreviousClick}
             disabled={isLeftDisabled}
-            style={{ cursor: isLeftDisabled ? 'no-drop' : 'pointer' }}
+            style={{
+              background: isLeftDisabled ? '#d2d3f7' : '',
+            }}
           >
             <ChevronLeftIcon style={{ color: '#fff' }} />
           </button>
@@ -135,14 +137,14 @@ const OurMentors = () => {
             className="nav-btn"
             onClick={handleNextClick}
             disabled={isRightDisabled}
-            style={{ cursor: isRightDisabled ? 'no-drop' : 'pointer' }}
+            style={{ background: isRightDisabled ? '#d2d3f7' : '' }}
           >
             <ChevronRightIcon style={{ color: '#fff' }} />
           </button>
         </BackCartPos>
 
         <BackgroundChecked3 onClick={() => navigate('/mentor')}>
-          <TextChecked1>Explore All</TextChecked1>
+          <TextChecked1>Explore All Mentors</TextChecked1>
         </BackgroundChecked3>
       </BottomPosHome>
     </InputHolder>

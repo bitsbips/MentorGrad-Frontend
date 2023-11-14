@@ -15,7 +15,11 @@ const Footer = () => {
 
   return (
     <MDBFooter
-      style={{ backgroundColor: '#7476D1', marginTop: '20px' }}
+      style={{
+        backgroundColor: '#7476D1',
+        marginTop: '20px',
+        paddingTop: '20px',
+      }}
       className="text-white text-center text-lg-left"
     >
       <MDBContainer className="p-0" style={{ width: '80%', margin: 'auto' }}>
@@ -33,7 +37,7 @@ const Footer = () => {
                 textAlign: 'left',
                 fontWeight: '500',
                 fontSize: 14,
-                width: '80%',
+                width: isMobile ? '80%' : '100%',
                 flexWrap: 'wrap',
               }}
             >
@@ -46,7 +50,7 @@ const Footer = () => {
 
           <MDBCol
             lg="3"
-            md="2"
+            md="6"
             className="mb-4 mb-md-0"
             style={isMobile ? { width: '20%' } : {}}
           >
@@ -265,9 +269,9 @@ const Footer = () => {
         <a
           style={{ textDecoration: 'none' }}
           className="text-white"
-          href="https://mdbootstrap.com/"
+          href="https://mentorgrad.com/"
         >
-          © 2023 BusinessName. All Rights Reserved.
+          © 2023 MentorGrad. All Rights Reserved.
         </a>
       </div>
     </MDBFooter>
