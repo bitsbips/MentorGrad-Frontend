@@ -76,13 +76,13 @@ const SearchFilter = (props: any) => {
             Gender
           </Typography>
           <FormControlLabel
-            checked={filters.gender === "male"}
+            checked={filters.gender === "Male"}
             onChange={(event) => {
               const target = event.target as HTMLInputElement;
               if (target.checked) {
                 setFilters((filters: any) => ({
                   ...filters,
-                  gender: "male",
+                  gender: "Male",
                 }));
               } else {
                 setFilters((filters: any) => ({
