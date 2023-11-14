@@ -35,18 +35,18 @@ const HeaderDashboard = () => {
           </div>
           <div className={`nav-elements  ${showNavbar && 'active'}`}>
             <ul>
-              {/* <li>
-              <NavLink to="/" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>Find a Mentor</NavLink>
+              <li>
+              <NavLink to="/dashboard?tab=8" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>Find a Mentor</NavLink>
             </li>
             <li>
               <NavLink to="/About" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>For Universities</NavLink>
             </li>
             <li>
               <NavLink to="/Mentor" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>Book a Session</NavLink>
-            </li> */}
+            </li>
               {isLoggedIn ?
                 <li>
-                  <NavLink to="/dashboard" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>Dashboard</NavLink>
+                  <NavLink to="/dashboard?tab=0" style={{ fontFamily: 'Inter', color: '#47464A', fontWeight: 600 }}>Dashboard</NavLink>
                 </li>
                 :
                 <li>
