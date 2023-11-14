@@ -30,6 +30,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MoneyIcon from "@mui/icons-material/Money";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Spinner from "../../Spinner";
+import { Container } from "../../../pages/AuthFlow/AuthStyles";
+import Footer from "../../Footer";
+import { ContainerDa } from "../../StudentProfileDetails/StudentProfileStyles";
+import HeaderDashboard from "../../Header/HeaderDashboard";
 
 type Mentor = {
   userName: string;
@@ -127,39 +131,192 @@ const MentorSearch = () => {
   return (
     <>
       {loading && <Spinner />}
-      <ContainerDashboard>
-        <Stack
-          flexDirection={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Typography
-            sx={{ mt: 1, mb: 2.5 }}
-            textAlign={"left"}
-            fontWeight={700}
-            fontSize={isMobile ? "small" : "large"}
-            noWrap
-          >
-            {mentorList.length} matches found for: Mentors{" "}
-            {filters.country === "" || filters.country === null
-              ? "OverAll"
-              : ` in 
-            ${mentorList[0]?.countryOfResidence}`}
-          </Typography>
-          {isMobile2 && (
-            <IconButton
-              onClick={() => setshowFilter(true)}
-              sx={{ p: 0, m: 0, mb: 1 }}
+      <Container>
+        <HeaderDashboard />
+        <ContainerDa>
+          <ContainerDashboard>
+            <Stack
+              flexDirection={"row"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
             >
-              <FilterAltIcon fontSize="small" sx={{ color: "#5F61BE" }} />
-            </IconButton>
-          )}
-        </Stack>
-        <RightContainerDash>
-          <Grid item sm={12} lg={12}>
-            <Grid container gap={2}>
-              {!isMobile2 && (
-                <Grid item sm={3} lg={3}>
+              <Typography
+                sx={{ mt: 1, mb: 2.5 }}
+                textAlign={"left"}
+                fontWeight={700}
+                fontSize={isMobile ? "small" : "large"}
+                noWrap
+              >
+                {mentorList.length} matches found for: Mentors{" "}
+                {filters.country === "" || filters.country === null
+                  ? "OverAll"
+                  : ` in 
+            ${mentorList[0]?.countryOfResidence}`}
+              </Typography>
+              {isMobile2 && (
+                <IconButton
+                  onClick={() => setshowFilter(true)}
+                  sx={{ p: 0, m: 0, mb: 1 }}
+                >
+                  <FilterAltIcon fontSize="small" sx={{ color: "#5F61BE" }} />
+                </IconButton>
+              )}
+            </Stack>
+            <RightContainerDash>
+              <Grid item sm={12} lg={12}>
+                <Grid container gap={2}>
+                  {!isMobile2 && (
+                    <Grid item sm={3} lg={3}>
+                      <SearchFilter
+                        setFilters={setFilters}
+                        countries={countries}
+                        filters={filters}
+                        selectedOptions={selectedOptions}
+                        handleChange={handleChange}
+                        handleCheckboxChange={handleCheckboxChange}
+                        getMentors={getMentors}
+                      />
+                    </Grid>
+                  )}
+                  <Grid item sm={12} lg={8}>
+                    {mentorList?.map((mentor, index) => (
+                      <>
+                        <RightBorderDashboard>
+                          <Stack
+                            justifyContent={"space-between"}
+                            flexDirection={isMobile ? "column" : "row"}
+                            gap={isMobile ? 3 : 0}
+                            p={isMobile ? 2.5 : 0}
+                          >
+                            <Stack
+                              flexDirection={"row"}
+                              gap={2}
+                              width={isMobile ? "100%" : "70%"}
+                            >
+                              <img
+                                style={
+                                  isMobile
+                                    ? { width: "25%", borderRadius: "10px" }
+                                    : { width: "20%", borderRadius: "10px" }
+                                }
+                                src={
+                                  mentor?.attachments[0]?.attachmentPath ||
+                                  picture
+                                }
+                              />
+                              <Stack flexDirection={"column"}>
+                                <Typography
+                                  textAlign={"left"}
+                                  noWrap
+                                  sx={{ color: "#5F61BE" }}
+                                  fontSize={"medium"}
+                                  fontWeight={600}
+                                >
+                                  {mentor?.userName}
+                                </Typography>
+                                <Typography
+                                  textAlign={"left"}
+                                  noWrap
+                                  fontSize={"small"}
+                                  sx={{ color: "#8E8E8E" }}
+                                >
+                                  Data Scientist
+                                </Typography>
+                                <Stack
+                                  flexDirection={"row"}
+                                  sx={{ mt: 2 }}
+                                  alignItems={"center"}
+                                >
+                                  {new Array(4).fill(
+                                    <StarIcon
+                                      sx={{ color: "#FFD707" }}
+                                      fontSize="small"
+                                    />
+                                  )}
+                                  {new Array(1).fill(
+                                    <StarBorderIcon fontSize="small" />
+                                  )}
+                                  <small>(17)</small>
+                                </Stack>
+                                <Typography
+                                  textAlign={"left"}
+                                  sx={{ color: "#757575" }}
+                                  fontSize={"small"}
+                                >
+                                  {mentor.countryOfResidence}
+                                </Typography>
+                              </Stack>
+                            </Stack>
+
+                            <Stack flexDirection={"column"} gap={1}>
+                              <Stack
+                                flexDirection={"row"}
+                                alignItems={"flex-end"}
+                                gap={1}
+                              >
+                                <ReviewsIcon fontSize="small" />
+                                <Typography noWrap fontSize="small">
+                                  17 Reviews
+                                </Typography>
+                              </Stack>
+
+                              <Stack
+                                flexDirection={"row"}
+                                alignItems={"flex-end"}
+                                gap={1}
+                              >
+                                <LocationOnIcon fontSize="small" />
+                                <Typography noWrap fontSize="small">
+                                  {mentor.countryOfResidence}
+                                </Typography>
+                              </Stack>
+
+                              <Stack
+                                flexDirection={"row"}
+                                alignItems={"flex-end"}
+                                gap={1}
+                              >
+                                <MoneyIcon fontSize="small" />
+                                <Typography noWrap fontSize="small">
+                                  {mentor?.hourlyRate}
+                                </Typography>
+                              </Stack>
+
+                              <Button
+                                size="small"
+                                variant="contained"
+                                sx={
+                                  isMobile
+                                    ? {
+                                        background: "#5F61BE",
+                                        width: "fit-content",
+                                        ml: 11,
+                                      }
+                                    : {
+                                        background: "#5F61BE",
+                                        width: "fit-content",
+                                      }
+                                }
+                              >
+                                BOOK APPOINTMENT
+                              </Button>
+                            </Stack>
+                          </Stack>
+                        </RightBorderDashboard>
+                        <br />
+                      </>
+                    ))}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </RightContainerDash>
+            {showFilter && (
+              <Dialog
+                open={showFilter}
+                maxWidth={"xl"}
+                sx={{ overflowX: "scroll" }}
+              >
+                <DialogContent>
                   <SearchFilter
                     setFilters={setFilters}
                     countries={countries}
@@ -169,159 +326,13 @@ const MentorSearch = () => {
                     handleCheckboxChange={handleCheckboxChange}
                     getMentors={getMentors}
                   />
-                </Grid>
-              )}
-              <Grid item sm={12} lg={8}>
-                {mentorList?.map((mentor, index) => (
-                  <>
-                    <RightBorderDashboard>
-                      <Stack
-                        justifyContent={"space-between"}
-                        flexDirection={isMobile ? "column" : "row"}
-                        gap={isMobile ? 3 : 0}
-                        p={isMobile ? 2.5 : 0}
-                      >
-                        <Stack
-                          flexDirection={"row"}
-                          gap={2}
-                          width={isMobile ? "100%" : "70%"}
-                        >
-                          <img
-                            style={
-                              isMobile
-                                ? { width: "25%", borderRadius: "10px" }
-                                : { width: "20%", borderRadius: "10px" }
-                            }
-                            src={
-                              mentor?.attachments[0]?.attachmentPath || picture
-                            }
-                          />
-                          <Stack flexDirection={"column"}>
-                            <Typography
-                              textAlign={"left"}
-                              noWrap
-                              sx={{ color: "#5F61BE" }}
-                              fontSize={"medium"}
-                              fontWeight={600}
-                            >
-                              {mentor?.userName}
-                            </Typography>
-                            <Typography
-                              textAlign={"left"}
-                              noWrap
-                              fontSize={"small"}
-                              sx={{ color: "#8E8E8E" }}
-                            >
-                              Data Scientist
-                            </Typography>
-                            <Stack
-                              flexDirection={"row"}
-                              sx={{ mt: 2 }}
-                              alignItems={"center"}
-                            >
-                              {new Array(4).fill(
-                                <StarIcon
-                                  sx={{ color: "#FFD707" }}
-                                  fontSize="small"
-                                />
-                              )}
-                              {new Array(1).fill(
-                                <StarBorderIcon fontSize="small" />
-                              )}
-                              <small>(17)</small>
-                            </Stack>
-                            <Typography
-                              textAlign={"left"}
-                              sx={{ color: "#757575" }}
-                              fontSize={"small"}
-                            >
-                              {mentor.countryOfResidence}
-                            </Typography>
-                          </Stack>
-                        </Stack>
-
-                        <Stack flexDirection={"column"} gap={1}>
-                          <Stack
-                            flexDirection={"row"}
-                            alignItems={"flex-end"}
-                            gap={1}
-                          >
-                            <ReviewsIcon fontSize="small" />
-                            <Typography noWrap fontSize="small">
-                              17 Reviews
-                            </Typography>
-                          </Stack>
-
-                          <Stack
-                            flexDirection={"row"}
-                            alignItems={"flex-end"}
-                            gap={1}
-                          >
-                            <LocationOnIcon fontSize="small" />
-                            <Typography noWrap fontSize="small">
-                              {mentor.countryOfResidence}
-                            </Typography>
-                          </Stack>
-
-                          <Stack
-                            flexDirection={"row"}
-                            alignItems={"flex-end"}
-                            gap={1}
-                          >
-                            <MoneyIcon fontSize="small" />
-                            <Typography noWrap fontSize="small">
-                              {mentor?.hourlyRate}
-                            </Typography>
-                          </Stack>
-
-                          <Button
-                            size="small"
-                            variant="contained"
-                            sx={
-                              isMobile
-                                ? {
-                                    background: "#5F61BE",
-                                    width: "fit-content",
-                                    ml: 11,
-                                  }
-                                : {
-                                    background: "#5F61BE",
-                                    width: "fit-content",
-                                  }
-                            }
-                          >
-                            BOOK APPOINTMENT
-                          </Button>
-                        </Stack>
-                      </Stack>
-                    </RightBorderDashboard>
-                    <br />
-                  </>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
-        </RightContainerDash>
-        {showFilter && (
-          <Dialog
-            open={showFilter}
-            maxWidth={"xl"}
-            sx={{ overflowX: "scroll" }}
-          >
-            <DialogContent>
-              <SearchFilter
-                setFilters={setFilters}
-                countries={countries}
-                filters={filters}
-                selectedOptions={selectedOptions}
-                handleChange={handleChange}
-                handleCheckboxChange={handleCheckboxChange}
-                getMentors={getMentors}
-              />
-            </DialogContent>
-          </Dialog>
-        )}
-      </ContainerDashboard>
+                </DialogContent>
+              </Dialog>
+            )}
+          </ContainerDashboard>
+        </ContainerDa>
+        <Footer />
+      </Container>
     </>
   );
 };
