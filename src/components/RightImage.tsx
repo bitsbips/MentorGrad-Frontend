@@ -49,7 +49,7 @@ const RightImage = () => {
                     </div>
                 )
             })} */}
-      <div>
+      <div style={{ marginLeft: '50px' }}>
         <div style={{ position: 'relative' }}>
           <HeaderImage
             src={

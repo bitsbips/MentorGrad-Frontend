@@ -40,6 +40,7 @@ import {
   SlideHolder,
   SlideImage,
   SocialHeading,
+  SocialHeading2,
   WorksBack,
   WorksBack1,
   WorksHeading,
@@ -83,7 +84,7 @@ const Home = () => {
               <ColDirection style={{ alignSelf: 'center' }}>
                 <LightTextPurple>Learn from the Best</LightTextPurple>
                 <HomeHeading>
-                  Connect With International Student Mentors Globally.
+                  Connect With Experienced Mentors In Your Field.
                 </HomeHeading>
                 <HomeSubHeading>
                   Mentorgrad platform allows you to receive guidance and support
@@ -138,9 +139,9 @@ const Home = () => {
           <ColDirection>
             <SocialHeading>
               Obtain Guidance from Current and Past{' '}
-              <SocialHeading style={{ color: '#7476D1' }}>
+              <SocialHeading2 style={{ color: '#7476D1' }}>
                 International Students!{' '}
-              </SocialHeading>
+              </SocialHeading2>
             </SocialHeading>
             <ScrollSocial />
           </ColDirection>
@@ -278,7 +279,7 @@ const Home = () => {
               </ColDirection>
               <ButtonComp
                 fontSize={'14px'}
-                width={isMobile ? '30%' : '50%'}
+                width={isMobile ? '20%' : '100%'}
                 style={{
                   padding: '0.5%',
                   alignSelf: 'center',
