@@ -220,7 +220,7 @@ function App() {
       <Route path="/profile" element={<StudentProfile />} />
       <Route path="/paymentPlan" element={<PaymentPlan />} />
       <Route path="/paymentPage" element={<PaymentPage />} />
-      <Route path="/findMen" element={<MentorSearch />} />
+      <Route path="/findMentor" element={<MentorSearch />} />
     </Routes>
   );
 
