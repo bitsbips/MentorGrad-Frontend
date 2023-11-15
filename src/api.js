@@ -6,8 +6,8 @@ import { jwtDecode } from './helper-functions';
 // export const selfUrl = "http://localhost:3000"
 // export const IMGURL = "http://localhost:5001/api/v1/";
 
-const ADDRESS = "13.54.160.143";
-const MAIN_URL = `http://${ADDRESS}/`;
+const ADDRESS = "mentorgrad.com";
+const MAIN_URL = `https://${ADDRESS}/`;
 
 const URL = `${MAIN_URL}backend/api/v1/`;
 export const IMGURL = `${MAIN_URL}backend/api/v1/`;
