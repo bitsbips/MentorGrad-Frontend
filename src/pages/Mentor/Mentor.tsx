@@ -75,11 +75,18 @@ const Mentor = () => {
                 <br />
                 Difference Made.
               </HomeHeading>
+              {isMobile && (
+                <BackgroundCheckedM>
+                  <TextChecked2>Browse Mentors</TextChecked2>
+                </BackgroundCheckedM>
+              )}
+            </ColDirection>
+            <HeaderCartCompo />
+            {!isMobile && (
               <BackgroundCheckedM>
                 <TextChecked2>Browse Mentors</TextChecked2>
               </BackgroundCheckedM>
-            </ColDirection>
-            <HeaderCartCompo />
+            )}
           </RowDirectionBetween>
         </BottomPosHome>
       </TopBack>
@@ -146,9 +153,9 @@ const Mentor = () => {
               there.
             </MentorSubHeadingbtm>
             <ButtonComp
-              fontSize={'14px'}
-              width={isMobile ? '13%' : '50%'}
-              style={{ padding: '0.3%', marginTop: '2%' }}
+              fontSize={'16px'}
+              width={isMobile ? '13%' : '100%'}
+              style={{ padding: isMobile ? ' 0.3%' : '2%', marginTop: '2%' }}
               title="Become a Mentor"
               onClick={() => navigate('/mentor/signup')}
             />

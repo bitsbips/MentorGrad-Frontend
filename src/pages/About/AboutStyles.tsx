@@ -679,9 +679,9 @@ export const BackgroundChecked3 = styled.div`
   }
 `;
 export const BackgroundCheckedM = styled.div`
-  background: #7476d1;
+  background: #6c6ebe;
   border-radius: 10px;
-  padding: 1.5%;
+  padding: 2%;
   margin-top: 2%;
   margin-bottom: 4%;
   width: 40%;
@@ -695,6 +695,8 @@ export const BackgroundCheckedM = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
+    border-radius: 5px;
+    padding: 2.5% 2%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 20vh;

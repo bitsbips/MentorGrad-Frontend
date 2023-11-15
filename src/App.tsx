@@ -226,8 +226,6 @@ function App() {
 
   const mentorRoutes = (
     <Routes>
-      <Route path="/mentor/signup" element={<MentorForm />} />
-      <Route path="/mentor" element={<Mentor />} />
       <Route path="/dashboard" element={<MentorDashboardMain />} />
       <Route path="/profile" element={<MentorProfile />} />
       <Route path="/messages" element={<Main />} />
@@ -271,6 +269,8 @@ function App() {
             <Route path="/reset-Password/:id" element={<ForgetPassword />} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/mentor" element={<Mentor />} />
+            <Route path="/mentor/signup" element={<MentorForm />} />
             <Route path="/validate-user" element={<ValidateLinkedIn />} />
           </Routes>
         </Context.Provider>

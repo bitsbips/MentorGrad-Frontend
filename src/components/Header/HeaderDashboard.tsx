@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import Hamburger from "../../Assets/Images/hamburger.png";
-import Brand from "../../Assets/Images/mentorlogo.svg";
-import "./Header.css";
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Hamburger from '../../Assets/Images/hamburger.png';
+import Brand from '../../Assets/Images/mentorlogo.svg';
+import './Header.css';
 import {
   BackgroundChecked,
   BackgroundChecked1,
   TextChecked,
   TextChecked1,
-} from "../UserForm/UserFormStyles";
-import UserMenu from "../Usermenu";
-import { jwtDecode } from "../../helper-functions";
-import { userTypes } from "../../Data/Data";
+} from '../UserForm/UserFormStyles';
+import UserMenu from '../Usermenu';
+import { jwtDecode } from '../../helper-functions';
+import { userTypes } from '../../Data/Data';
 
 const HeaderDashboard = () => {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const HeaderDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const user: string = jwtDecode(
-    localStorage.getItem("@storage_Key")
+    localStorage.getItem('@storage_Key')
   )?.userType;
 
   useEffect(() => {
-    const token = localStorage.getItem("@storage_Key");
+    const token = localStorage.getItem('@storage_Key');
     if (token) {
       setIsLoggedIn(true);
     } else {
@@ -40,12 +40,14 @@ const HeaderDashboard = () => {
       <nav className="navbar">
         <div className="container">
           <div className="logo">
-            <img src={Brand} />
+            <NavLink to="/">
+              <img src={Brand} />
+            </NavLink>
           </div>
           <div className="menu-icon" onClick={handleShowNavbar}>
             <img src={Hamburger} />
           </div>
-          <div className={`nav-elements  ${showNavbar && "active"}`}>
+          <div className={`nav-elements  ${showNavbar && 'active'}`}>
             <ul>
               {user === userTypes.student && (
                 <>
@@ -53,8 +55,8 @@ const HeaderDashboard = () => {
                     <NavLink
                       to="/findMentor"
                       style={{
-                        fontFamily: "Inter",
-                        color: "#47464A",
+                        fontFamily: 'Inter',
+                        color: '#47464A',
                         fontWeight: 600,
                       }}
                     >
@@ -65,8 +67,8 @@ const HeaderDashboard = () => {
                     <NavLink
                       to="/About"
                       style={{
-                        fontFamily: "Inter",
-                        color: "#47464A",
+                        fontFamily: 'Inter',
+                        color: '#47464A',
                         fontWeight: 600,
                       }}
                     >
@@ -77,8 +79,8 @@ const HeaderDashboard = () => {
                     <NavLink
                       to="/Mentor"
                       style={{
-                        fontFamily: "Inter",
-                        color: "#47464A",
+                        fontFamily: 'Inter',
+                        color: '#47464A',
                         fontWeight: 600,
                       }}
                     >
@@ -92,8 +94,8 @@ const HeaderDashboard = () => {
                   <NavLink
                     to="/dashboard?tab=0"
                     style={{
-                      fontFamily: "Inter",
-                      color: "#47464A",
+                      fontFamily: 'Inter',
+                      color: '#47464A',
                       fontWeight: 600,
                     }}
                   >
@@ -105,8 +107,8 @@ const HeaderDashboard = () => {
                   <NavLink
                     to="/login"
                     style={{
-                      fontFamily: "Inter",
-                      color: "#47464A",
+                      fontFamily: 'Inter',
+                      color: '#47464A',
                       fontWeight: 600,
                     }}
                   >
@@ -115,12 +117,12 @@ const HeaderDashboard = () => {
                 </li>
               )}
               {isLoggedIn ? (
-                <li style={{ alignSelf: "center" }}>
+                <li style={{ alignSelf: 'center' }}>
                   <UserMenu />
                 </li>
               ) : (
                 <li>
-                  <BackgroundChecked1 onClick={() => navigate("/register")}>
+                  <BackgroundChecked1 onClick={() => navigate('/register')}>
                     <TextChecked1>Get Started</TextChecked1>
                   </BackgroundChecked1>
                 </li>
