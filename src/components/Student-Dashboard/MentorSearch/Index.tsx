@@ -34,8 +34,10 @@ import { Container } from "../../../pages/AuthFlow/AuthStyles";
 import Footer from "../../Footer";
 import { ContainerDa } from "../../StudentProfileDetails/StudentProfileStyles";
 import HeaderDashboard from "../../Header/HeaderDashboard";
+import { useNavigate } from "react-router-dom";
 
 type Mentor = {
+  _id: string;
   userName: string;
   firstName: string;
   lastName: string;
@@ -52,6 +54,7 @@ type MentorList = Mentor[];
 
 const MentorSearch = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isMobile2 = useMediaQuery("(max-width: 1200px)");
   const [showFilter, setshowFilter] = useState(false);
@@ -130,10 +133,10 @@ const MentorSearch = () => {
 
   return (
     <>
-      {loading && <Spinner />}
       <Container>
         <HeaderDashboard />
         <ContainerDa>
+          {loading && <Spinner />}
           <ContainerDashboard>
             <Stack
               flexDirection={"row"}
@@ -285,6 +288,9 @@ const MentorSearch = () => {
                               <Button
                                 size="small"
                                 variant="contained"
+                                onClick={() =>
+                                  navigate(`/bookAppointment?id=${mentor?._id}`)
+                                }
                                 sx={
                                   isMobile
                                     ? {

@@ -52,6 +52,7 @@ import {
 import { useMediaQuery } from '@mui/material';
 import ValidateLinkedIn from './pages/AuthFlow/Login/ValidateLinked';
 import MentorSearch from './components/Student-Dashboard/MentorSearch/Index';
+import MentorAppointmentBooking from './components/Student-Dashboard/Mentor_Booking/MentorAppBook';
 
 const theme = createTheme({
   typography: {
@@ -221,6 +222,7 @@ function App() {
       <Route path="/paymentPlan" element={<PaymentPlan />} />
       <Route path="/paymentPage" element={<PaymentPage />} />
       <Route path="/findMentor" element={<MentorSearch />} />
+      <Route path="/bookAppointment" element={<MentorAppointmentBooking />} />
     </Routes>
   );
 
