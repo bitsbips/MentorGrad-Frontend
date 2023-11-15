@@ -45,11 +45,13 @@ export const Head = styled.p`
 
   color: #222222;
   @media (max-width: 750px) {
-    width: 55%;
-    font-size: 20px;
+    width: 80%;
+    font-size: 30px;
+    margin-bottom: 20px;
   }
 `;
 export const SubHead = styled.p`
+  font-family: 'Inter' !important;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -130,12 +132,13 @@ export const Image2 = styled.img`
   width: 30%;
   height: 50vh;
   border-radius: 5px;
+  object-fit: cover;
   @media (max-width: 750px) {
     margin-top: 0%;
     margin-bottom: 8%;
 
     width: 100%;
-    height: 25vh;
+    height: 30vh;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -153,12 +156,13 @@ export const Image3 = styled.img`
   width: 30%;
   height: 45vh;
   border-radius: 5px;
+  object-fit: cover;
   @media (max-width: 750px) {
     margin-top: 0%;
     margin-bottom: 8%;
 
     width: 100%;
-    height: 25vh;
+    height: 30vh;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -241,6 +245,7 @@ export const Content = styled.p`
   }
 `;
 export const WriterName = styled.p`
+  font-family: 'Seaweed Script', cursive;
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
@@ -282,13 +287,14 @@ export const SubTitle1 = styled.p`
 export const SubTitle3 = styled.p`
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 22px;
   text-align: left;
   width: 72%;
   @media (max-width: 750px) {
     font-size: 15px;
-    width: 90%;
+    width: 100%;
+    text-align: center;
   }
   /* or 186% */
 
@@ -333,6 +339,7 @@ export const Image2Box = styled.img`
   @media (max-width: 450px) {
     width: 100%;
     height: 18rem !important;
+    object-fit: cover;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -372,8 +379,8 @@ export const RightImage = styled.img`
   clear: right;
 
   @media (max-width: 750px) {
-    width: 340px !important;
-    height: 30vh;
+    width: 100%;
+    height: 369px;
     margin: auto;
     align-self: center;
   }
@@ -402,6 +409,10 @@ export const GroupRight = styled.div`
 export const LeftImage = styled.img`
   width: 8%;
   height: 8%;
+  @media (max-width: 750px) {
+    width: 10%;
+    height: 10%;
+  }
 `;
 export const GroupHeading = styled.p`
   font-style: normal;
@@ -428,7 +439,7 @@ export const BoldHeading = styled.p`
 
   @media (max-width: 750px) {
     font-size: 18px;
-    text-align: left;
+    text-align: center;
     margin-left: 0%;
     display: inline-block;
   }
@@ -634,7 +645,8 @@ export const BackgroundChecked2 = styled.div`
     width: 50%;
     margin: auto;
     margin-bottom: 4% !important;
-    padding: 2%;
+    padding: 2.5% 2%;
+    border-radius: 5px;
   }
 `;
 export const BackgroundChecked3 = styled.div`
@@ -643,7 +655,7 @@ export const BackgroundChecked3 = styled.div`
   padding: 1%;
   margin-top: 1.5%;
   margin-bottom: 1%;
-  width: 10%;
+  width: 15%;
   color: #000000;
   cursor: pointer;
   &:hover {
@@ -656,6 +668,8 @@ export const BackgroundChecked3 = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
+    border-radius: 5px;
+    padding: 2.5% 2%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -665,9 +679,9 @@ export const BackgroundChecked3 = styled.div`
   }
 `;
 export const BackgroundCheckedM = styled.div`
-  background: #7476d1;
+  background: #6c6ebe;
   border-radius: 10px;
-  padding: 1.5%;
+  padding: 2%;
   margin-top: 2%;
   margin-bottom: 4%;
   width: 40%;
@@ -681,6 +695,8 @@ export const BackgroundCheckedM = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
+    border-radius: 5px;
+    padding: 2.5% 2%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 20vh;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BottomPosHome = styled.div`
-  width: 80%;
+  width: 70%;
   margin: auto;
   @media (max-width: 750px) {
     width: 90%;
@@ -126,6 +126,8 @@ export const BackgroundCheckedSearch = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
+    padding: 2.5% 2%;
+    border-radius: 5px;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -214,8 +216,29 @@ export const SocialHeading = styled.p`
     text-align: center;
     width: 100%;
     display: inline-block;
+    line-height: 30px;
     font-size: 14px;
     margin-bottom: 0 !important;
+    margin-top: 20px;
+  }
+`;
+
+export const SocialHeading2 = styled.p`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 60px;
+  text-align: left;
+  display: inline-block;
+  text-transform: capitalize;
+
+  color: #222222;
+  @media (max-width: 750px) {
+    text-align: center;
+    width: 100%;
+    line-height: 20px;
+    display: inline-block;
+    margin-bottom: 40px;
     margin-top: 0 !important;
   }
 `;
@@ -270,6 +293,7 @@ export const NewsSubHeading = styled.p`
     width: 100%;
     color: #000000;
     font-weight: 500;
+    margin-bottom: 30px;
   }
 `;
 export const WorksBack = styled.div`

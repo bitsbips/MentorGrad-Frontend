@@ -84,14 +84,14 @@ const AllSocial: FC = () => {
     <>
       {isLoading ? <Spinner /> : ""}
       <SocialLogin
-        title="Sign up with Google"
+        title="Sign in with Google"
         color={"#D0463B"}
         onClick={login}
         img={Google}
       />
 
       <SocialLogin
-        title="Sign up with LinkedIn"
+        title="Sign in with LinkedIn"
         color={"#0A66C2"}
         onClick={linkedInLogin}
         img={Linkin}

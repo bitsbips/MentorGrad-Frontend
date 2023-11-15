@@ -10,7 +10,7 @@ import {
   Avatar,
   makeStyles,
 } from '@mui/material';
-import User from '../../Assets/Images/user.svg';
+
 import {
   ActionText,
   BackAction,
@@ -31,28 +31,32 @@ const Invoiceheaders = ['INVOICE NO', 'MENTEE', 'AMOUNT', 'PAID ON', '']; // Inv
 
 const data = [
   {
-    image: User,
+    image:
+      'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png',
     name: 'John Doe',
     email: 'john.doe@example.com',
     DATE: '02 October 2023',
     TAGS: 'PENDING',
   },
   {
-    image: User,
+    image:
+      'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png',
     name: 'John Doe',
     email: 'john.doe@example.com',
     DATE: '02 October 2023',
     TAGS: 'PENDING',
   },
   {
-    image: User,
+    image:
+      'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png',
     name: 'John Doe',
     email: 'john.doe@example.com',
     DATE: '02 October 2023',
     TAGS: 'ACCEPTED',
   },
   {
-    image: User,
+    image:
+      'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png',
     name: 'John Doe',
     email: 'john.doe@example.com',
     DATE: '02 October 2023',

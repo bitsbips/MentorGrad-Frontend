@@ -37,6 +37,7 @@ import { getErrorMsg } from "../../helper-functions";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "../../graphql/queries";
 import Main from "../../pages/MentorChat/Main";
+import MentorSearch from "./MentorSearch/Index";
 
 const style = {
   width: "25%",
@@ -55,51 +56,61 @@ const TestDashboard: FC = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   let [searchParams, setSearchParams] = useSearchParams();
 
+  const currentTab = searchParams.get("tab") || "0";
+
   function SetStatusfunc(ss: any) {
     setStatus(ss);
   }
   const Data = [
     {
       id: 0,
+      notShow: false,
       name: "Dashboard",
       icon: DashboardIcon,
     },
     {
       id: 1,
+      notShow: false,
       name: "Bookings",
       icon: BookOnlineIcon,
     },
     {
       id: 2,
+      notShow: false,
       name: "Smart Matches",
       icon: PeopleAltIcon,
     },
     {
       id: 3,
+      notShow: false,
       name: "Chats",
       icon: ChatIcon,
     },
     {
       id: 4,
 
+      notShow: false,
       name: "Invoices",
       icon: ReceiptIcon,
     },
     {
       id: 5,
 
+      notShow: false,
       name: "Reporting",
       icon: AssessmentIcon,
     },
     {
       id: 6,
 
+      notShow: false,
       name: "Subscription",
       icon: SubscriptionsIcon,
     },
     {
       id: 7,
 
+      notShow: false,
       name: "Profile",
       icon: ContactPageIcon,
     },
@@ -146,14 +157,14 @@ const TestDashboard: FC = () => {
         </div>
       );
     }
-    if (profilestep === "1") {
+    if (tab === "1") {
       return (
         <div>
           <p>No Result</p>
         </div>
       );
     }
-    if (profilestep === "2") {
+    if (tab === "2") {
       return (
         <div>
           <p>No Result</p>
@@ -183,35 +194,39 @@ const TestDashboard: FC = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {Data.map((data) => (
-          <ListItem
-            key={data.id}
-            onClick={() => {
-              SetStatusfunc(data.name);
-              _handleComActions(data.id.toString());
-            }}
-          >
-            {Status === data.name ? (
-              <>
-                <BackActive>
-                  {data.icon && (
-                    <data.icon style={{ color: "#fff", fontSize: "20px" }} />
-                  )}
-                </BackActive>
-                <ActiveLabel>{data.name}</ActiveLabel>
-              </>
-            ) : (
-              <>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <BackInActive>
-                    {data.icon && <data.icon style={{ fontSize: "20px" }} />}
-                  </BackInActive>
-                  <InActiveLabel>{data.name}</InActiveLabel>
-                </div>
-              </>
-            )}
-          </ListItem>
-        ))}
+        {Data.map((data) =>
+          data.notShow ? (
+            ""
+          ) : (
+            <ListItem
+              key={data.id}
+              onClick={() => {
+                SetStatusfunc(data.name);
+                _handleComActions(data.id.toString());
+              }}
+            >
+              {Status === data.name ? (
+                <>
+                  <BackActive>
+                    {data.icon && (
+                      <data.icon style={{ color: "#fff", fontSize: "20px" }} />
+                    )}
+                  </BackActive>
+                  <ActiveLabel>{data.name}</ActiveLabel>
+                </>
+              ) : (
+                <>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <BackInActive>
+                      {data.icon && <data.icon style={{ fontSize: "20px" }} />}
+                    </BackInActive>
+                    <InActiveLabel>{data.name}</InActiveLabel>
+                  </div>
+                </>
+              )}
+            </ListItem>
+          )
+        )}
       </List>
     </div>
   );
@@ -219,65 +234,75 @@ const TestDashboard: FC = () => {
   return (
     <ContainerDa>
       <PositionProfile>
-        {isMobile ? (
+        {isMobile && parseInt(currentTab) < 8 ? (
           <div style={style}>
             {Data.map((data) => {
               return (
                 <>
-                  <div
-                    onClick={() => {
-                      SetStatusfunc(data.name);
-                      _handleComActions(data.id.toString());
-                    }}
-                  >
-                    {Status === data.name ? (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackActive>
-                          {data.icon && (
-                            <data.icon
-                              style={{ color: "#fff", fontSize: "20px" }}
-                            />
-                          )}
-                        </BackActive>
-                        <ActiveLabel>{data.name}</ActiveLabel>
-                      </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <BackInActive>
-                          {data.icon && (
-                            <data.icon style={{ fontSize: "20px" }} />
-                          )}
-                        </BackInActive>
-                        <InActiveLabel>{data.name}</InActiveLabel>
-                      </div>
-                    )}
-                  </div>
+                  {data.notShow  ? (
+                    ""
+                  ) : (
+                    <div
+                      onClick={() => {
+                        SetStatusfunc(data.name);
+                        _handleComActions(data.id.toString());
+                      }}
+                    >
+                      {Status === data.name ? (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackActive>
+                            {data.icon && (
+                              <data.icon
+                                style={{ color: "#fff", fontSize: "20px" }}
+                              />
+                            )}
+                          </BackActive>
+                          <ActiveLabel>{data.name}</ActiveLabel>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <BackInActive>
+                            {data.icon && (
+                              <data.icon style={{ fontSize: "20px" }} />
+                            )}
+                          </BackInActive>
+                          <InActiveLabel>{data.name}</InActiveLabel>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </>
               );
             })}
           </div>
         ) : (
           <>
-            {/* Burger Icon to open the drawer */}
-            <div
-              onClick={toggleDrawer(true)}
-              style={{
-                alignSelf: "flex-start",
-                marginLeft: "-5%",
-                marginBottom: "3%",
-              }}
-            >
-              <MenuOpenIcon style={{ fontSize: "30px", color: "#5F61BE" }} />
-            </div>
+            {parseInt(currentTab) < 8 && (
+              <>
+                {/* Burger Icon to open the drawer */}
+                <div
+                  onClick={toggleDrawer(true)}
+                  style={{
+                    alignSelf: "flex-start",
+                    marginLeft: "-5%",
+                    marginBottom: "3%",
+                  }}
+                >
+                  <MenuOpenIcon
+                    style={{ fontSize: "30px", color: "#5F61BE" }}
+                  />
+                </div>
 
-            {/* Drawer */}
-            <Drawer
-              anchor="left"
-              open={isDrawerOpen}
-              onClose={toggleDrawer(false)}
-            >
-              {list}
-            </Drawer>
+                {/* Drawer */}
+                <Drawer
+                  anchor="left"
+                  open={isDrawerOpen}
+                  onClose={toggleDrawer(false)}
+                >
+                  {list}
+                </Drawer>
+              </>
+            )}
           </>
         )}
         <RightContainerDash1>{Mycomphoolder()}</RightContainerDash1>

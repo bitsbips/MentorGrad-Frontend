@@ -132,6 +132,7 @@ export const MentorBooking = (): JSX.Element => {
             value={tabs}
             onChange={handleChange}
             aria-label="basic tabs example"
+            variant="scrollable"
           >
             <Tab label="All" value={'ALL'} />
             <Tab label="Booked" value={'COMPLETED'} />
@@ -158,7 +159,7 @@ export const MentorBooking = (): JSX.Element => {
                 }}
               >
                 <Grid container>
-                  <Grid item xs={12} lg={4.5}>
+                  <Grid item xs={12} md={4.5}>
                     <Stack flexDirection={!isMobile ? 'row' : 'column'} gap={1}>
                       <Stack
                         flexDirection={!isMobile ? 'column' : 'row'}
@@ -242,7 +243,7 @@ export const MentorBooking = (): JSX.Element => {
                   <Grid
                     item
                     xs={12}
-                    lg={3}
+                    md={3}
                     sx={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -306,7 +307,7 @@ export const MentorBooking = (): JSX.Element => {
                   }
                 ></div> */}
 
-                  <Grid item xs={12} lg={3}>
+                  <Grid item xs={12} md={3}>
                     <Stack
                       flexDirection={'column'}
                       alignItems={'center'}
@@ -336,7 +337,7 @@ export const MentorBooking = (): JSX.Element => {
                   <Grid
                     item
                     xs={12}
-                    lg={1}
+                    md={1}
                     sx={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -360,7 +361,7 @@ export const MentorBooking = (): JSX.Element => {
                         mt: { xs: '20px', lg: '' },
                         mb: { xs: '20px', lg: '' },
                         display: 'flex',
-                        flexDirection: { xs: 'row', lg: 'column' },
+                        flexDirection: { xs: 'row', md: 'column' },
                         gap: '10px',
                       }}
                     >

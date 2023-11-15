@@ -15,7 +15,7 @@ import {
   InActiveLabel,
 } from './Mentor-DahboardStyles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { Icon, Typography } from '@mui/material';
+import { Box, Icon, Typography } from '@mui/material';
 import HeaderUserinfo from '../StudentDashboard/HeaderUserinfo';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -181,15 +181,21 @@ const Mentor_Dashboard: FC = () => {
     }
     if (tab === '5') {
       return (
-        <>
+        <Box sx={{ paddingRight: '15px' }}>
           <Typography
             variant="h5"
-            sx={{ textAlign: 'left', paddingBottom: '20px' }}
+            sx={{
+              textAlign: 'left',
+              paddingBottom: '20px',
+              fontWeight: 600,
+              lineHeight: '48px',
+              fontStyle: 'bold',
+            }}
           >
             Invoices
           </Typography>
           <TableComponentDashboard type="Invoice" />
-        </>
+        </Box>
       );
     }
     if (tab === '6') {
