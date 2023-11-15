@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.2ce548f6.css",
-    "main.js": "/static/js/main.07cc219a.js",
+    "main.css": "/static/css/main.28a28cff.css",
+    "main.js": "/static/js/main.c5bb4282.js",
     "static/js/787.cc634b1c.chunk.js": "/static/js/787.cc634b1c.chunk.js",
-    "static/media/user.svg": "/static/media/user.94679054cb47d5d3bc4f813071c405e6.svg",
     "static/media/Mask3.png": "/static/media/Mask3.4e04bf0564f87aba12c9.png",
     "static/media/BackLeft.png": "/static/media/BackLeft.6f91cd68b33cedeb1cfe.png",
     "static/media/Mask1.png": "/static/media/Mask1.eacca43bf913c4a538b4.png",
     "static/media/Mask2.png": "/static/media/Mask2.15260332c2c2b41c0106.png",
     "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.449ad8adf6ae0424b7ed.woff",
     "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.dea24bf5a7646d8b84e7.woff2",
+    "static/media/user.jpeg": "/static/media/user.48c891327ecdf06e7ae6.jpeg",
     "static/media/backworks.svg": "/static/media/backworks.3467214627e9efd03f87cc8e89dfb841.svg",
     "static/media/pdf.png": "/static/media/pdf.dc7ce9c185377bbb6b97.png",
     "static/media/faq.svg": "/static/media/faq.d094df8e08b2170ebf8ab6fbf0d69e6a.svg",
@@ -36,12 +36,12 @@
     "static/media/two2.svg": "/static/media/two2.a380fdd005fb31760e705695a750a219.svg",
     "static/media/blackArrow.svg": "/static/media/blackArrow.225d9339b2ddbac6c5dc2db850cb5e29.svg",
     "static/media/one1.svg": "/static/media/one1.16b90dee805a872c72cd0973f4fa58de.svg",
-    "main.2ce548f6.css.map": "/static/css/main.2ce548f6.css.map",
-    "main.07cc219a.js.map": "/static/js/main.07cc219a.js.map",
+    "main.28a28cff.css.map": "/static/css/main.28a28cff.css.map",
+    "main.c5bb4282.js.map": "/static/js/main.c5bb4282.js.map",
     "787.cc634b1c.chunk.js.map": "/static/js/787.cc634b1c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2ce548f6.css",
-    "static/js/main.07cc219a.js"
+    "static/css/main.28a28cff.css",
+    "static/js/main.c5bb4282.js"
   ]
 }
