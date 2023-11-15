@@ -182,136 +182,140 @@ const MentorSearch = () => {
                     </Grid>
                   )}
                   <Grid item sm={12} lg={8}>
-                    {mentorList?.map((mentor, index) => (
-                      <>
-                        <RightBorderDashboard>
-                          <Stack
-                            justifyContent={"space-between"}
-                            flexDirection={isMobile ? "column" : "row"}
-                            gap={isMobile ? 3 : 0}
-                            p={isMobile ? 2.5 : 0}
-                          >
+                    {loading ? (
+                      <Spinner />
+                    ) : (
+                      mentorList?.map((mentor, index) => (
+                        <Box sx={{ margin: isMobile ? "0px 15px" : "" }}>
+                          <RightBorderDashboard>
                             <Stack
-                              flexDirection={"row"}
-                              gap={2}
-                              width={isMobile ? "100%" : "70%"}
+                              justifyContent={"space-between"}
+                              flexDirection={isMobile ? "column" : "row"}
+                              gap={isMobile ? 3 : 0}
+                              p={isMobile ? 2.5 : 0}
                             >
-                              <img
-                                style={
-                                  isMobile
-                                    ? { width: "25%", borderRadius: "10px" }
-                                    : { width: "20%", borderRadius: "10px" }
-                                }
-                                src={
-                                  mentor?.attachments[0]?.attachmentPath ||
-                                  picture
-                                }
-                              />
-                              <Stack flexDirection={"column"}>
-                                <Typography
-                                  textAlign={"left"}
-                                  noWrap
-                                  sx={{ color: "#5F61BE" }}
-                                  fontSize={"medium"}
-                                  fontWeight={600}
-                                >
-                                  {mentor?.userName}
-                                </Typography>
-                                <Typography
-                                  textAlign={"left"}
-                                  noWrap
-                                  fontSize={"small"}
-                                  sx={{ color: "#8E8E8E" }}
-                                >
-                                  Data Scientist
-                                </Typography>
+                              <Stack
+                                flexDirection={"row"}
+                                gap={2}
+                                width={isMobile ? "100%" : "70%"}
+                              >
+                                <img
+                                  style={
+                                    isMobile
+                                      ? { width: "30%", borderRadius: "10px" }
+                                      : { width: "20%", borderRadius: "10px" }
+                                  }
+                                  src={
+                                    mentor?.attachments[0]?.attachmentPath ||
+                                    picture
+                                  }
+                                />
+                                <Stack flexDirection={"column"}>
+                                  <Typography
+                                    textAlign={"left"}
+                                    noWrap
+                                    sx={{ color: "#5F61BE" }}
+                                    fontSize={"medium"}
+                                    fontWeight={600}
+                                  >
+                                    {mentor?.userName}
+                                  </Typography>
+                                  <Typography
+                                    textAlign={"left"}
+                                    noWrap
+                                    fontSize={"small"}
+                                    sx={{ color: "#8E8E8E" }}
+                                  >
+                                    Data Scientist
+                                  </Typography>
+                                  <Stack
+                                    flexDirection={"row"}
+                                    sx={{ mt: 2 }}
+                                    alignItems={"center"}
+                                  >
+                                    {new Array(4).fill(
+                                      <StarIcon
+                                        sx={{ color: "#FFD707" }}
+                                        fontSize="small"
+                                      />
+                                    )}
+                                    {new Array(1).fill(
+                                      <StarBorderIcon fontSize="small" />
+                                    )}
+                                    <small>(17)</small>
+                                  </Stack>
+                                  <Typography
+                                    textAlign={"left"}
+                                    sx={{ color: "#757575" }}
+                                    fontSize={"small"}
+                                  >
+                                    {mentor.countryOfResidence}
+                                  </Typography>
+                                </Stack>
+                              </Stack>
+
+                              <Stack flexDirection={"column"} gap={1}>
                                 <Stack
                                   flexDirection={"row"}
-                                  sx={{ mt: 2 }}
-                                  alignItems={"center"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
                                 >
-                                  {new Array(4).fill(
-                                    <StarIcon
-                                      sx={{ color: "#FFD707" }}
-                                      fontSize="small"
-                                    />
-                                  )}
-                                  {new Array(1).fill(
-                                    <StarBorderIcon fontSize="small" />
-                                  )}
-                                  <small>(17)</small>
+                                  <ReviewsIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    17 Reviews
+                                  </Typography>
                                 </Stack>
-                                <Typography
-                                  textAlign={"left"}
-                                  sx={{ color: "#757575" }}
-                                  fontSize={"small"}
+
+                                <Stack
+                                  flexDirection={"row"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
                                 >
-                                  {mentor.countryOfResidence}
-                                </Typography>
+                                  <LocationOnIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    {mentor.countryOfResidence}
+                                  </Typography>
+                                </Stack>
+
+                                <Stack
+                                  flexDirection={"row"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
+                                >
+                                  <MoneyIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    {mentor?.hourlyRate}
+                                  </Typography>
+                                </Stack>
+
+                                <Button
+                                  size="small"
+                                  variant="contained"
+                                  onClick={() =>
+                                    navigate(`/bookAppointment?id=${mentor?._id}`)
+                                  }
+                                  sx={
+                                    isMobile
+                                      ? {
+                                          background: "#5F61BE",
+                                          width: "fit-content",
+                                          ml: 11,
+                                        }
+                                      : {
+                                          background: "#5F61BE",
+                                          width: "fit-content",
+                                        }
+                                  }
+                                >
+                                  BOOK APPOINTMENT
+                                </Button>
                               </Stack>
                             </Stack>
-
-                            <Stack flexDirection={"column"} gap={1}>
-                              <Stack
-                                flexDirection={"row"}
-                                alignItems={"flex-end"}
-                                gap={1}
-                              >
-                                <ReviewsIcon fontSize="small" />
-                                <Typography noWrap fontSize="small">
-                                  17 Reviews
-                                </Typography>
-                              </Stack>
-
-                              <Stack
-                                flexDirection={"row"}
-                                alignItems={"flex-end"}
-                                gap={1}
-                              >
-                                <LocationOnIcon fontSize="small" />
-                                <Typography noWrap fontSize="small">
-                                  {mentor.countryOfResidence}
-                                </Typography>
-                              </Stack>
-
-                              <Stack
-                                flexDirection={"row"}
-                                alignItems={"flex-end"}
-                                gap={1}
-                              >
-                                <MoneyIcon fontSize="small" />
-                                <Typography noWrap fontSize="small">
-                                  {mentor?.hourlyRate}
-                                </Typography>
-                              </Stack>
-
-                              <Button
-                                size="small"
-                                variant="contained"
-                                onClick={() =>
-                                  navigate(`/bookAppointment?id=${mentor?._id}`)
-                                }
-                                sx={
-                                  isMobile
-                                    ? {
-                                        background: "#5F61BE",
-                                        width: "fit-content",
-                                        ml: 11,
-                                      }
-                                    : {
-                                        background: "#5F61BE",
-                                        width: "fit-content",
-                                      }
-                                }
-                              >
-                                BOOK APPOINTMENT
-                              </Button>
-                            </Stack>
-                          </Stack>
-                        </RightBorderDashboard>
-                        <br />
-                      </>
-                    ))}
+                          </RightBorderDashboard>
+                          <br />
+                        </Box>
+                      ))
+                    )}
                   </Grid>
                 </Grid>
               </Grid>

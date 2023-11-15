@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   BackCartImage,
   BackCartImageVideo,
@@ -24,9 +24,9 @@ import {
   RowDirectionMentor,
   RowDirectionMentorWrap,
   SocialHeading,
-} from "./MentorStyles";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header/Header";
+} from './MentorStyles';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header/Header';
 import {
   BackgroundChecked2,
   BackgroundChecked3,
@@ -34,7 +34,7 @@ import {
   TextChecked1,
   TextChecked2,
   TopBack,
-} from "../About/AboutStyles";
+} from '../About/AboutStyles';
 import {
   BottomPosHome,
   ColDirection,
@@ -44,21 +44,21 @@ import {
   RowDirection,
   RowDirectionBetween,
   WorksSubHeading,
-} from "../Home/HomeStyles";
-import ScrollSocial from "../../components/ScrollSocial";
-import { InputHolder } from "../../components/UserForm/UserFormStyles";
-import profile from "../../Assets/Images/user.svg";
-import { AllMentors } from "../../Data/Data";
-import SupportCom from "../../components/SupportComponent";
-import MentorsFaq from "../../components/MentorsFaq";
-import ButtonComp from "../../components/Button";
-import HeaderCartCompo from "../../components/HeaderCart";
-import useMediaQuery from "../../hooks/MediaQuery";
-import MentorOffers from "../../components/MentorOffers";
-import { useNavigate } from "react-router-dom";
+} from '../Home/HomeStyles';
+import ScrollSocial from '../../components/ScrollSocial';
+import { InputHolder } from '../../components/UserForm/UserFormStyles';
+//import profile from "../../Assets/Images/user.svg";
+import { AllMentors } from '../../Data/Data';
+import SupportCom from '../../components/SupportComponent';
+import MentorsFaq from '../../components/MentorsFaq';
+import ButtonComp from '../../components/Button';
+import HeaderCartCompo from '../../components/HeaderCart';
+import useMediaQuery from '../../hooks/MediaQuery';
+import MentorOffers from '../../components/MentorOffers';
+import { useNavigate } from 'react-router-dom';
 
 const Mentor = () => {
-  const isMobile = useMediaQuery("(min-width: 950px)");
+  const isMobile = useMediaQuery('(min-width: 950px)');
   const navigate = useNavigate();
 
   return (
@@ -67,7 +67,7 @@ const Mentor = () => {
       <TopBack>
         <BottomPosHome>
           <RowDirectionBetween>
-            <ColDirection style={{ alignSelf: "center" }}>
+            <ColDirection style={{ alignSelf: 'center' }}>
               <HomeHeading>
                 Expertise Shared,
                 <br />
@@ -75,32 +75,39 @@ const Mentor = () => {
                 <br />
                 Difference Made.
               </HomeHeading>
+              {isMobile && (
+                <BackgroundCheckedM>
+                  <TextChecked2>Browse Mentors</TextChecked2>
+                </BackgroundCheckedM>
+              )}
+            </ColDirection>
+            <HeaderCartCompo />
+            {!isMobile && (
               <BackgroundCheckedM>
                 <TextChecked2>Browse Mentors</TextChecked2>
               </BackgroundCheckedM>
-            </ColDirection>
-            <HeaderCartCompo />
+            )}
           </RowDirectionBetween>
         </BottomPosHome>
       </TopBack>
       <BottomPosHome>
         <ColDirection>
           <SocialHeading>
-            Join Elite Network of{" "}
-            <SocialHeading style={{ color: "#7476D1" }}>
-              Educators & Leaders{" "}
+            Join Elite Network of{' '}
+            <SocialHeading style={{ color: '#7476D1' }}>
+              Educators & Leaders{' '}
             </SocialHeading>
           </SocialHeading>
           <ScrollSocial />
         </ColDirection>
       </BottomPosHome>
-      <div style={{ marginTop: "2%" }}>
+      <div style={{ marginTop: '2%' }}>
         <BottomPosHome>
           <MentorHeading>
-            Discover the Incredible Benefits that{" "}
-            <MentorHeading style={{ color: "#7476D1" }}>
+            Discover the Incredible Benefits that{' '}
+            <MentorHeading style={{ color: '#7476D1' }}>
               Mentoring
-            </MentorHeading>{" "}
+            </MentorHeading>{' '}
             Can Offer You
           </MentorHeading>
           <MentorSubHeading>
@@ -111,11 +118,11 @@ const Mentor = () => {
         </BottomPosHome>
       </div>
       <MentorOffers />
-      <div style={{ marginTop: "0.5%" }}>
+      <div style={{ marginTop: '0.5%' }}>
         <BottomPosHome>
           <MentorHeading>
-            Let's Hit the Ground Running, We're Here to{" "}
-            <MentorHeading style={{ color: "#7476D1" }}>
+            Let's Hit the Ground Running, We're Here to{' '}
+            <MentorHeading style={{ color: '#7476D1' }}>
               Support You
             </MentorHeading>
           </MentorHeading>
@@ -146,11 +153,11 @@ const Mentor = () => {
               there.
             </MentorSubHeadingbtm>
             <ButtonComp
-              fontSize={"14px"}
-              width={isMobile ? "13%" : "50%"}
-              style={{ padding: "0.3%", marginTop: "2%" }}
+              fontSize={'16px'}
+              width={isMobile ? '13%' : '100%'}
+              style={{ padding: isMobile ? ' 0.3%' : '2%', marginTop: '2%' }}
               title="Become a Mentor"
-              onClick={() => navigate("/mentor/signup")}
+              onClick={() => navigate('/mentor/signup')}
             />
           </ColDirection>
         </BottomNewsMentor>
