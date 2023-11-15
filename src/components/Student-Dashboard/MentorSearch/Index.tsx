@@ -136,7 +136,6 @@ const MentorSearch = () => {
       <Container>
         <HeaderDashboard />
         <ContainerDa>
-          {loading && <Spinner />}
           <ContainerDashboard>
             <Stack
               flexDirection={"row"}
