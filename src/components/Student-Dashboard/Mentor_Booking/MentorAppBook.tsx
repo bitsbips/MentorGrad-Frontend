@@ -66,7 +66,12 @@ type day = {
   index: number;
 };
 
-// type MentorList = Mentor;
+type slot = {
+  slotHours: string;
+  isBooked: boolean;
+  _id: string;
+  index: number;
+};
 
 const MentorAppointmentBooking = () => {
   const theme = useTheme();
@@ -75,6 +80,7 @@ const MentorAppointmentBooking = () => {
   const [loading, setLoading] = useState(false);
   const [mentor, setMentor] = useState<Mentor | null>(null);
   const [selectedDay, setselectedDay] = useState<day | null>(null);
+  const [selectedSlot, setselectedSlot] = useState<slot | null>(null);
 
   let [searchParams] = useSearchParams();
 
@@ -281,14 +287,27 @@ const MentorAppointmentBooking = () => {
                           }
                         >
                           {selectedDay?.list?.mentorAvailability?.map(
-                            (slot: any) => (
+                            (slot: any, index: number) => (
                               <Stack
-                                sx={{
-                                  background: "#C9F6EF",
-                                  borderRadius: "5px",
-                                }}
+                                sx={
+                                  selectedSlot?.index !== index
+                                    ? {
+                                        background: "#C9F6EF",
+                                        borderRadius: "5px",
+                                        cursor: "pointer",
+                                      }
+                                    : {
+                                        background: "#5F61BE",
+                                        borderRadius: "5px",
+                                        cursor: "pointer",
+                                        color:"#fff"
+                                      }
+                                }
                                 p={1}
                                 width={"fit-content"}
+                                onClick={() =>
+                                  setselectedSlot({ ...slot, index })
+                                }
                               >
                                 <Typography noWrap fontSize={"small"}>
                                   {slot?.slotHours}
