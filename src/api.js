@@ -741,6 +741,30 @@ export async function findMentors(payload) {
   }
 }
 
+export async function getMentorForBooking(payload) {
+  const token = localStorage.getItem('@storage_Key');
+
+  let headersList = {
+    Accept: '*/*',
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+  let reqOptions = {
+    url: URL + `availability/getAvailabilityOfMonth`,
+    method: 'POST',
+    headers: headersList,
+    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
 export async function getInvioces() {
   const token = localStorage.getItem('@storage_Key');
   // Get the user from your authentication system or local storage

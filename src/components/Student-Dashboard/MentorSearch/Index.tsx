@@ -38,6 +38,7 @@ import { useNavigate } from "react-router-dom";
 
 type Mentor = {
   _id: string;
+  userId: string;
   userName: string;
   firstName: string;
   lastName: string;
@@ -291,7 +292,9 @@ const MentorSearch = () => {
                                   size="small"
                                   variant="contained"
                                   onClick={() =>
-                                    navigate(`/bookAppointment?id=${mentor?._id}`)
+                                    navigate(
+                                      `/bookAppointment?id=${mentor?.userId}`
+                                    )
                                   }
                                   sx={
                                     isMobile
