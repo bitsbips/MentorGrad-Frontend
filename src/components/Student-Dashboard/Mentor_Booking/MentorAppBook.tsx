@@ -245,7 +245,10 @@ const MentorAppointmentBooking = () => {
                                       background: "#C9F6EF",
                                     }
                               }
-                              onClick={() => setselectedDay({ list, index })}
+                              onClick={() => {
+                                setselectedDay({ list, index });
+                                setselectedSlot(null);
+                              }}
                             >
                               <Typography
                                 textAlign={"left"}
@@ -300,7 +303,7 @@ const MentorAppointmentBooking = () => {
                                         background: "#5F61BE",
                                         borderRadius: "5px",
                                         cursor: "pointer",
-                                        color:"#fff"
+                                        color: "#fff",
                                       }
                                 }
                                 p={1}
