@@ -86,7 +86,7 @@ const TableComponentDashboard = ({ type }) => {
   }, []);
 
   useEffect(() => {
-    if (activeTab === "5") {
+    if (activeTab === "5" || activeTab === "4") {
       setIsLoading(true);
       getInvioces().then((res) => {
         setTableData(res);
