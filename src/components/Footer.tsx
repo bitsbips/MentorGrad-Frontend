@@ -9,6 +9,7 @@ import {
   MDBBtn,
 } from 'mdb-react-ui-kit';
 import useMediaQuery from '../hooks/MediaQuery';
+import Brand from '../Assets/Images/MG_Logo.png';
 
 const Footer = () => {
   const isMobile = useMediaQuery('(min-width: 450px)');
@@ -25,12 +26,19 @@ const Footer = () => {
       <MDBContainer className="p-0" style={{ width: '80%', margin: 'auto' }}>
         <MDBRow style={{ marginTop: '2%' }}>
           <MDBCol md="2" lg="4" xl="5" className="mx-auto mb-4">
-            <h5
+            <div style={{ width: '250px', marginLeft: '-20px' }}>
+              <img
+                src={Brand}
+                alt="Logo"
+                style={{ width: '100%', objectFit: 'cover' }}
+              />
+            </div>
+            {/* <h5
               className="text-uppercase"
               style={{ textAlign: 'left', fontWeight: 800, fontSize: 30 }}
             >
               LOGO
-            </h5>
+            </h5> */}
 
             <p
               style={{

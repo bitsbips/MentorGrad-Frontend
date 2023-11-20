@@ -56,7 +56,7 @@ import SimpleAccordion from '../../components/Faqs';
 import ButtonComp from '../../components/Button';
 import OurMentors from '../../components/OurMentors/OurMentors';
 import ScrollSocial from '../../components/ScrollSocial';
-import Profile from '../../Assets/Images/user.svg';
+//import Profile from '../../Assets/Images/user.svg';
 import RightImage from '../../components/RightImage';
 import IconSearch from '../../Assets/Images/icon_search.svg';
 import { InputAdornment, TextField } from '@mui/material';
