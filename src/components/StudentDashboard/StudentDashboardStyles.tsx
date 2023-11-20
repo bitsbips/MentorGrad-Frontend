@@ -113,6 +113,16 @@ export const DateDashboard = styled.p`
     font-size: 13px;
   }
 `;
+export const DateDashboardCustom = styled.p`
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #7476D1;
+  @media (max-width: 750px) {
+    font-size: 13px;
+  }
+`;
 export const BackAction = styled.div`
   width: 90%;
   padding: 2%;
@@ -152,6 +162,21 @@ export const BackView = styled.div`
     padding: 3%;
   }
 `;
+
+export const BackViewCustom = styled.div`
+  background-color: #A3A5E9;
+  width: 80%;
+  padding: 2%;
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  @media (max-width: 750px) {
+    width: 110%;
+    padding: 3%;
+  }
+`;
 export const ViewText = styled.p`
   font-size: 13px;
   font-weight: 500;
@@ -160,6 +185,17 @@ export const ViewText = styled.p`
   text-align: center;
   margin: auto;
   color: #7476d1;
+  margin-left: -6% !important;
+`;
+
+export const PrintText = styled.p`
+  font-size: 13px;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  color: #FFFF;
   margin-left: -6% !important;
 `;
 
