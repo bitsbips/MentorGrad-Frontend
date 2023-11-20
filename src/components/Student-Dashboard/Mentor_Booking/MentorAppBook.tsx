@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { ContainerDashboard } from '../StudentDahboardStyles';
+import React, { useEffect, useState } from "react";
+import { ContainerDashboard } from "../StudentDahboardStyles";
 import {
   PositionHeader,
   PositionImage,
   RightBorderDashboard,
   RightContainerDash,
-} from '../../StudentDashboard/StudentDashboardStyles';
+} from "../../StudentDashboard/StudentDashboardStyles";
 import {
   Box,
   Button,
@@ -18,23 +18,23 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { GetCountryList, findMentors, getMentorForBooking } from '../../../api';
-import { notifyError } from '../../Toastifycom';
-import picture from '../../../Assets/Images/user.jpeg';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ReviewsIcon from '@mui/icons-material/Reviews';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import MoneyIcon from '@mui/icons-material/Money';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import Spinner from '../../Spinner';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Container } from '../../../pages/AuthFlow/AuthStyles';
-import HeaderDashboard from '../../Header/HeaderDashboard';
-import { ContainerDa } from '../../StudentProfileDetails/StudentProfileStyles';
-import Footer from '../../Footer';
-import { format } from 'date-fns';
+} from "@mui/material";
+import { GetCountryList, findMentors, getMentorForBooking } from "../../../api";
+import { notifyError } from "../../Toastifycom";
+import picture from "../../../Assets/Images/user.jpeg";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MoneyIcon from "@mui/icons-material/Money";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Spinner from "../../Spinner";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Container } from "../../../pages/AuthFlow/AuthStyles";
+import HeaderDashboard from "../../Header/HeaderDashboard";
+import { ContainerDa } from "../../StudentProfileDetails/StudentProfileStyles";
+import Footer from "../../Footer";
+import { format } from "date-fns";
 
 type Mentor = {
   application: {
@@ -76,7 +76,7 @@ type slot = {
 const MentorAppointmentBooking = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [loading, setLoading] = useState(false);
   const [mentor, setMentor] = useState<Mentor | null>(null);
   const [selectedDay, setselectedDay] = useState<day | null>(null);
@@ -92,7 +92,7 @@ const MentorAppointmentBooking = () => {
     setLoading(true);
     try {
       getMentorForBooking({
-        mentorId: searchParams.get('id'),
+        mentorId: searchParams.get("id"),
       }).then((e) => {
         setMentor(e);
         setselectedDay({ list: e?.next30Days[0], index: 0 });
@@ -108,14 +108,14 @@ const MentorAppointmentBooking = () => {
     const date = new Date(dateString);
 
     switch (component) {
-      case 'day':
-        return format(date, 'd'); // Day of the month.
-      case 'month':
-        return format(date, 'MMM');
-      case 'year':
-        return format(date, 'y'); // Year.
-      case 'dayName':
-        return format(date, 'E'); // Abbreviated day name (e.g., "Mon").
+      case "day":
+        return format(date, "d"); // Day of the month.
+      case "month":
+        return format(date, "MMM");
+      case "year":
+        return format(date, "y"); // Year.
+      case "dayName":
+        return format(date, "E"); // Abbreviated day name (e.g., "Mon").
       default:
         return null;
     }
@@ -128,12 +128,12 @@ const MentorAppointmentBooking = () => {
         <ContainerDa>
           {loading && <Spinner />}
           <ContainerDashboard>
-            <Stack flexDirection={'row'}>
+            <Stack flexDirection={"row"}>
               <Typography
                 sx={{ mt: 1, mb: 2.5 }}
-                textAlign={'left'}
+                textAlign={"left"}
                 fontWeight={700}
-                fontSize={'large'}
+                fontSize={"large"}
                 noWrap
               >
                 Session Booking
@@ -145,37 +145,37 @@ const MentorAppointmentBooking = () => {
                   <Grid item xs={12} sm={12} lg={12}>
                     <RightBorderDashboard>
                       <Stack
-                        flexDirection={'row'}
+                        flexDirection={"row"}
                         gap={2}
-                        width={isMobile ? '100%' : '70%'}
-                        sx={{ padding: isMobile ? '15px' : '' }}
+                        width={isMobile ? "100%" : "70%"}
+                        sx={{ padding: isMobile ? "15px" : "" }}
                       >
                         <img
                           style={
                             isMobile
-                              ? { width: '25%', borderRadius: '10px' }
-                              : { width: '10%', borderRadius: '10px' }
+                              ? { width: "25%", borderRadius: "10px" }
+                              : { width: "10%", borderRadius: "10px" }
                           }
                           src={
                             mentor?.application?.attachments[0]
                               ?.attachmentPath || picture
                           }
                         />
-                        <Stack flexDirection={'column'}>
+                        <Stack flexDirection={"column"}>
                           <Typography
-                            textAlign={'left'}
+                            textAlign={"left"}
                             noWrap
-                            sx={{ color: '#5F61BE' }}
-                            fontSize={'medium'}
+                            sx={{ color: "#5F61BE" }}
+                            fontSize={"medium"}
                             fontWeight={600}
                           >
                             {mentor?.application?.userName}
                           </Typography>
 
-                          <Stack flexDirection={'row'} alignItems={'center'}>
+                          <Stack flexDirection={"row"} alignItems={"center"}>
                             {new Array(4).fill(
                               <StarIcon
-                                sx={{ color: '#FFD707' }}
+                                sx={{ color: "#FFD707" }}
                                 fontSize="small"
                               />
                             )}
@@ -186,9 +186,9 @@ const MentorAppointmentBooking = () => {
                           </Stack>
                           <Typography
                             mt={2}
-                            textAlign={'left'}
-                            sx={{ color: '#757575' }}
-                            fontSize={'small'}
+                            textAlign={"left"}
+                            sx={{ color: "#757575" }}
+                            fontSize={"small"}
                           >
                             {mentor?.application?.countryOfResidence}
                           </Typography>
@@ -201,82 +201,81 @@ const MentorAppointmentBooking = () => {
                     <RightBorderDashboard>
                       <Stack
                         gap={2}
-                        flexDirection={'column'}
-                        sx={{ padding: isMobile ? '15px' : '' }}
+                        flexDirection={"column"}
+                        sx={{ padding: isMobile ? "15px" : "" }}
                       >
                         <Typography
-                          textAlign={'left'}
-                          fontSize={'large'}
+                          textAlign={"left"}
+                          fontSize={"large"}
                           fontWeight={600}
                         >
                           Meeting information
                         </Typography>
-                        <Typography textAlign={'left'} fontSize={'small'}>
+                        <Typography textAlign={"left"} fontSize={"small"}>
                           You will be able to pick and confirm a time after the
                           booking is confirmed.
                         </Typography>
                         <Typography
-                          textAlign={'left'}
-                          fontSize={'large'}
+                          textAlign={"left"}
+                          fontSize={"large"}
                           fontWeight={700}
                         >
                           Potential availabilities (in your local time)
                         </Typography>
 
                         <Stack
-                          flexDirection={'row'}
+                          flexDirection={"row"}
                           gap={2}
-                          width={isMobile ? 350 : '100%'}
-                          sx={{ overflowX: 'scroll' }}
+                          width={isMobile ? 350 : "100%"}
+                          sx={{ overflowX: "scroll" }}
                         >
                           {mentor?.next30Days.map((list, index) => (
                             <Stack
-                              flexDirection={'column'}
-                              alignItems={'center'}
+                              flexDirection={"column"}
+                              alignItems={"center"}
                               sx={
                                 selectedDay?.index !== index
                                   ? {
-                                      border: '1px solid #D6D6D6',
-                                      borderRadius: '10px',
+                                      border: "1px solid #D6D6D6",
+                                      borderRadius: "10px",
                                       p: 2,
-                                      cursor: 'pointer',
-                                      px: '30px',
-                                      mb: '10px',
+                                      cursor: "pointer",
+                                      px: "30px",
+                                      mb: "10px",
                                     }
                                   : {
-                                      borderRadius: '10px',
+                                      borderRadius: "10px",
                                       p: 2,
-                                      cursor: 'pointer',
-                                      background: '#C9F6EF',
-                                      px: '30px',
-                                      mb: '10px',
+                                      cursor: "pointer",
+                                      background: "#C9F6EF",
+                                      px: "30px",
+                                      mb: "10px",
                                     }
                               }
                               onClick={() => {
                                 setselectedDay({ list, index });
-                                setselectedSlot(null);
                               }}
                             >
                               <Typography
-                                textAlign={'left'}
+                                textAlign={"left"}
                                 fontWeight={600}
-                                fontSize={'large'}
+                                fontSize={"large"}
                                 noWrap
                               >
-                                {getDateString(list?.date, 'dayName')}
+                                {getDateString(list?.date, "dayName")}
                               </Typography>
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
-                                {getDateString(list?.date, 'day')}{' '}
-                                {getDateString(list?.date, 'month')}
+                                {getDateString(list?.date, "day")}{" "}
+                                {getDateString(list?.date, "month")}
                               </Typography>
                               <Typography
-                                textAlign={'left'}
+                                textAlign={"left"}
                                 fontWeight={600}
-                                fontSize={'small'}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 {list?.mentorAvailability?.length} slots
@@ -286,13 +285,13 @@ const MentorAppointmentBooking = () => {
                         </Stack>
 
                         <Stack
-                          flexDirection={'row'}
+                          flexDirection={"row"}
                           gap={2}
                           sx={
                             selectedDay?.list?.mentorAvailability?.length > 4
-                              ? { overflowX: 'scroll' }
+                              ? { overflowX: "scroll" }
                               : isMobile
-                              ? { overflowX: 'scroll' }
+                              ? { overflowX: "scroll" }
                               : {}
                           }
                         >
@@ -300,28 +299,28 @@ const MentorAppointmentBooking = () => {
                             (slot: any, index: number) => (
                               <Stack
                                 sx={
-                                  selectedSlot?.index !== index
+                                  selectedSlot?._id !== slot?._id
                                     ? {
-                                        background: '#C9F6EF',
-                                        borderRadius: '5px',
-                                        cursor: 'pointer',
-                                        mb: '10px',
+                                        background: "#C9F6EF",
+                                        borderRadius: "5px",
+                                        cursor: "pointer",
+                                        mb: "10px",
                                       }
                                     : {
-                                        background: '#5F61BE',
-                                        borderRadius: '5px',
-                                        cursor: 'pointer',
-                                        color: '#fff',
-                                        mb: '10px',
+                                        background: "#5F61BE",
+                                        borderRadius: "5px",
+                                        cursor: "pointer",
+                                        color: "#fff",
+                                        mb: "10px",
                                       }
                                 }
                                 p={1}
-                                width={'fit-content'}
+                                width={"fit-content"}
                                 onClick={() =>
                                   setselectedSlot({ ...slot, index })
                                 }
                               >
-                                <Typography noWrap fontSize={'small'}>
+                                <Typography noWrap fontSize={"small"}>
                                   {slot?.slotHours}
                                 </Typography>
                               </Stack>
@@ -334,70 +333,72 @@ const MentorAppointmentBooking = () => {
 
                   <Grid item xs={12} sm={12} lg={6}>
                     <RightBorderDashboard>
-                      <Box sx={{ padding: isMobile ? '15px' : '' }}>
+                      <Box sx={{ padding: isMobile ? "15px" : "" }}>
                         <Stack
                           gap={2}
-                          flexDirection={'column'}
-                          sx={!isMobile ? { height: 309 } : { width: '100%' }}
+                          flexDirection={"column"}
+                          sx={!isMobile ? { height: 309 } : { width: "100%" }}
                         >
                           <Typography
-                            textAlign={'left'}
-                            fontSize={'large'}
+                            textAlign={"left"}
+                            fontSize={"large"}
                             fontWeight={600}
                           >
                             Your Session
                           </Typography>
-                          <Typography textAlign={'left'} fontSize={'small'}>
+                          <Typography textAlign={"left"} fontSize={"small"}>
                             Introductory call carried out by Isaac Reynolds.
                           </Typography>
 
                           <Stack
-                            flexDirection={'column'}
+                            flexDirection={"column"}
                             gap={2}
                             mt={3}
-                            width={'100%'}
+                            width={"100%"}
                           >
                             <Stack
                               gap={1}
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                              justifyContent={'space-between'}
-                              width={'100%'}
+                              flexDirection={"row"}
+                              alignItems={"center"}
+                              justifyContent={"space-between"}
+                              width={"100%"}
                             >
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 Price per session
                               </Typography>
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
-                                ${mentor?.application.hourlyRate}
+                                {selectedSlot?._id
+                                  ? `$ ${mentor?.application.hourlyRate}`
+                                  : "-"}
                               </Typography>
                             </Stack>
 
                             <Stack
                               gap={1}
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                              justifyContent={'space-between'}
-                              width={'100%'}
+                              flexDirection={"row"}
+                              alignItems={"center"}
+                              justifyContent={"space-between"}
+                              width={"100%"}
                             >
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 Duration
                               </Typography>
 
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 30 Minutes
@@ -406,22 +407,22 @@ const MentorAppointmentBooking = () => {
 
                             <Stack
                               gap={1}
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                              justifyContent={'space-between'}
-                              width={'100%'}
+                              flexDirection={"row"}
+                              alignItems={"center"}
+                              justifyContent={"space-between"}
+                              width={"100%"}
                             >
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 Promo Code
                               </Typography>
 
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 noWrap
                               >
                                 -
@@ -430,15 +431,15 @@ const MentorAppointmentBooking = () => {
 
                             <Stack
                               gap={1}
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                              justifyContent={'space-between'}
-                              width={'100%'}
+                              flexDirection={"row"}
+                              alignItems={"center"}
+                              justifyContent={"space-between"}
+                              width={"100%"}
                               mt={2}
                             >
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 fontWeight={700}
                                 noWrap
                               >
@@ -446,12 +447,14 @@ const MentorAppointmentBooking = () => {
                               </Typography>
 
                               <Typography
-                                textAlign={'left'}
-                                fontSize={'small'}
+                                textAlign={"left"}
+                                fontSize={"small"}
                                 fontWeight={700}
                                 noWrap
                               >
-                                ${mentor?.application.hourlyRate}
+                                {selectedSlot?._id
+                                  ? `$ ${mentor?.application.hourlyRate}`
+                                  : "-"}
                               </Typography>
                             </Stack>
 
