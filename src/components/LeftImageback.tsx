@@ -8,6 +8,7 @@ import {
   SubImage,
 } from '../pages/AuthFlow/AuthStyles';
 import { NavLink } from 'react-router-dom';
+import Brand from '../Assets/Images/MG_Logo.png';
 
 interface Props {
   height?: any;
@@ -27,7 +28,13 @@ const LeftImage: React.FC<Props> = (props) => {
     <BackImageS slot={props.height}>
       <ImageContent>
         <NavLink to="/" style={{ textDecoration: 'none' }}>
-          <Headimage>LOGO</Headimage>
+          <div style={{ width: '300px', marginLeft: '-20px' }}>
+            <img
+              src={Brand}
+              alt="Logo"
+              style={{ width: '100%', objectFit: 'cover' }}
+            />
+          </div>
         </NavLink>
         <SubImage>
           Mentoring programs <br /> for data-driven

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Hamburger from '../../Assets/Images/hamburger.png';
-import Brand from '../../Assets/Images/mentorlogo.svg';
+import Brand from '../../Assets/Images/MG_Logo.png';
 import './Header.css';
 import {
   BackgroundChecked,
@@ -32,11 +32,11 @@ const Header = () => {
     <div className="nav-container">
       <nav className="navbar">
         <div className="container">
-          <div className="logo">
-            <NavLink to="/">
-              <img src={Brand} />
-            </NavLink>
-          </div>
+          <NavLink to="/">
+            <div className="logo">
+              <img src={Brand} style={{ width: '100%', objectFit: 'cover' }} />
+            </div>
+          </NavLink>
           <div className="menu-icon" onClick={handleShowNavbar}>
             <img src={Hamburger} />
           </div>
