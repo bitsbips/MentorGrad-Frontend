@@ -1,5 +1,5 @@
-import React from "react";
-import { RightBorderDashboard } from "../../StudentDashboard/StudentDashboardStyles";
+import React from 'react';
+import { RightBorderDashboard } from '../../StudentDashboard/StudentDashboardStyles';
 import {
   Autocomplete,
   Box,
@@ -11,7 +11,7 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
 const SearchFilter = (props: any) => {
   const {
@@ -21,34 +21,38 @@ const SearchFilter = (props: any) => {
     setFilters,
     handleCheckboxChange,
     selectedOptions,
-    getMentors
+    getMentors,
   } = props;
 
   const courses = [
-    "Digital Marketer",
-    "UNIX, Calculus",
-    "UI/UX Design",
-    "Computer Programming",
-    "ASP.NET",
-    "HTML, CSS",
+    'University and Program Information',
+    'Travel, arrival and settling down',
+    'Application process',
+    'Student Housing',
+    'Enrollment Support',
+    'University Life',
+    'Scholarships and Tuition Discounts',
+    'Internships and Placements',
+    'Visa information and guidance',
+    'Application handling and submission',
   ];
 
   return (
     <RightBorderDashboard>
       <Stack sx={{ p: 2 }} gap={2.5}>
-      <Typography textAlign={"left"} fontWeight={600}>
-        Search Filter
-      </Typography>
+        <Typography textAlign={'left'} fontWeight={600}>
+          Search Filter
+        </Typography>
       </Stack>
       <Divider
         variant="middle"
-        orientation={"vertical"}
+        orientation={'vertical'}
         flexItem
         sx={{
-          border: "1px solid #bfbfbf",
-          width: { xs: "100%", lg: "100%" },
-          mt: { xs: "10px", lg: "" },
-          mb: { xs: "10px", lg: "" },
+          border: '1px solid #bfbfbf',
+          width: { xs: '100%', lg: '100%' },
+          mt: { xs: '10px', lg: '' },
+          mb: { xs: '10px', lg: '' },
         }}
       />
       <Stack sx={{ p: 2 }} gap={2.5}>
@@ -58,7 +62,7 @@ const SearchFilter = (props: any) => {
           onChange={(event, newValue) =>
             setFilters((filters: any) => ({
               ...filters,
-              ["country"]: newValue,
+              ['country']: newValue,
             }))
           }
           renderInput={(params) => (
@@ -72,22 +76,22 @@ const SearchFilter = (props: any) => {
         />
 
         <Stack>
-          <Typography textAlign={"left"} fontWeight={700} fontSize={"large"}>
+          <Typography textAlign={'left'} fontWeight={700} fontSize={'large'}>
             Gender
           </Typography>
           <FormControlLabel
-            checked={filters.gender === "Male"}
+            checked={filters.gender === 'Male'}
             onChange={(event) => {
               const target = event.target as HTMLInputElement;
               if (target.checked) {
                 setFilters((filters: any) => ({
                   ...filters,
-                  gender: "Male",
+                  gender: 'Male',
                 }));
               } else {
                 setFilters((filters: any) => ({
                   ...filters,
-                  gender: "",
+                  gender: '',
                 }));
               }
             }}
@@ -95,18 +99,18 @@ const SearchFilter = (props: any) => {
             label="Male"
           />
           <FormControlLabel
-            checked={filters.gender === "Female"}
+            checked={filters.gender === 'Female'}
             onChange={(event) => {
               const target = event.target as HTMLInputElement;
               if (target.checked) {
                 setFilters((filters: any) => ({
                   ...filters,
-                  gender: "Female",
+                  gender: 'Female',
                 }));
               } else {
                 setFilters((filters: any) => ({
                   ...filters,
-                  gender: "",
+                  gender: '',
                 }));
               }
             }}
@@ -116,8 +120,8 @@ const SearchFilter = (props: any) => {
         </Stack>
 
         <Stack>
-          <Typography textAlign={"left"} fontWeight={700} fontSize={"large"}>
-            Select Courses
+          <Typography textAlign={'left'} fontWeight={700} fontSize={'large'}>
+            Mentoring Area
           </Typography>
           {courses.map((list) => (
             <FormControlLabel
@@ -125,12 +129,16 @@ const SearchFilter = (props: any) => {
               name="course"
               onChange={() => handleCheckboxChange(list)}
               control={<Checkbox size="small" />}
-              style={{ fontSize: "5px" }}
+              style={{ fontSize: '5px' }}
               label={list}
             />
           ))}
         </Stack>
-        <Button variant="contained" sx={{ background: "#5F61BE" }} onClick={getMentors}>
+        <Button
+          variant="contained"
+          sx={{ background: '#5F61BE' }}
+          onClick={getMentors}
+        >
           Search
         </Button>
       </Stack>

@@ -15,7 +15,7 @@ import {
   InActiveLabel,
 } from "./StudentDahboardStyles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Icon } from "@mui/material";
+import { Box, Icon, Typography } from "@mui/material";
 import HeaderUserinfo from "../StudentDashboard/HeaderUserinfo";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -38,6 +38,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "../../graphql/queries";
 import Main from "../../pages/MentorChat/Main";
 import MentorSearch from "./MentorSearch/Index";
+import TableComponentDashboard from "../StudentDashboard/TableComponent";
 
 const style = {
   width: "25%",
@@ -173,6 +174,25 @@ const TestDashboard: FC = () => {
     }
     if (tab === "3") {
       return <Main />;
+    }
+    if (tab === '4') {
+      return (
+        <Box sx={{ paddingRight: '15px' }}>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: 'left',
+              paddingBottom: '20px',
+              fontWeight: 600,
+              lineHeight: '48px',
+              fontStyle: 'bold',
+            }}
+          >
+            Invoices
+          </Typography>
+          <TableComponentDashboard type="Invoice" />
+        </Box>
+      );
     }
   };
   const toggleDrawer =

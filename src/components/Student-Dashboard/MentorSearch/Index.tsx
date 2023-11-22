@@ -44,10 +44,12 @@ type Mentor = {
   lastName: string;
   countryOfResidence: string;
   hourlyRate: number;
-  attachments: Array<{
-    attachmentPath: string;
-    attachmentURL: string;
-    name: string;
+  user: Array<{
+    attachments: Array<{
+      attachmentPath: string;
+      attachmentURL: string;
+      name: string;
+    }>;
   }>;
 };
 
@@ -153,8 +155,10 @@ const MentorSearch = () => {
                 {mentorList.length} matches found for: Mentors{' '}
                 {filters.country === '' || filters.country === null
                   ? 'OverAll'
-                  : ` in 
-            ${mentorList[0]?.countryOfResidence}`}
+                  : filters.country === mentorList[0]?.countryOfResidence
+                  ? ` in 
+            ${mentorList[0]?.countryOfResidence}`
+                  : 'OverAll'}
               </Typography>
               {isMobile2 && (
                 <IconButton
@@ -169,7 +173,7 @@ const MentorSearch = () => {
               <Grid item sm={12} lg={12}>
                 <Grid container gap={2}>
                   {!isMobile2 && (
-                    <Grid item sm={3} lg={3}>
+                    <Grid item sm={3} lg={3.5}>
                       <SearchFilter
                         setFilters={setFilters}
                         countries={countries}
@@ -181,7 +185,7 @@ const MentorSearch = () => {
                       />
                     </Grid>
                   )}
-                  <Grid item sm={12} lg={8}>
+                  <Grid item sm={12} lg={7.5}>
                     {loading ? (
                       <Spinner />
                     ) : (
@@ -206,8 +210,10 @@ const MentorSearch = () => {
                                       : { width: '20%', borderRadius: '10px' }
                                   }
                                   src={
-                                    mentor?.attachments[0]?.attachmentPath ||
-                                    picture
+                                    mentor?.user[0]?.attachments
+                                      ? mentor?.user[0]?.attachments[0]
+                                          ?.attachmentPath
+                                      : picture
                                   }
                                 />
                                 <Stack flexDirection={'column'}>
