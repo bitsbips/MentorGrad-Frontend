@@ -190,7 +190,10 @@ const MentorSearch = () => {
                       <Spinner />
                     ) : (
                       mentorList?.map((mentor, index) => (
-                        <Box sx={{ margin: isMobile ? '0px 15px' : '' }}>
+                        <Box
+                          sx={{ margin: isMobile ? '0px 15px' : '' }}
+                          key={index}
+                        >
                           <RightBorderDashboard>
                             <Stack
                               justifyContent={'space-between'}
@@ -210,10 +213,10 @@ const MentorSearch = () => {
                                       : { width: '20%', borderRadius: '10px' }
                                   }
                                   src={
-                                    mentor?.user[0]?.attachments
+                                    mentor?.user[0]?.attachments?.length > 0
                                       ? mentor?.user[0]?.attachments[0]
                                           ?.attachmentPath
-                                      : picture
+                                      : 'https://mentorgrad.s3.us-west-2.amazonaws.com/dummy2.jpg'
                                   }
                                 />
                                 <Stack flexDirection={'column'}>
