@@ -69,17 +69,15 @@ const RightImage = () => {
           style={{ position: 'relative', marginTop: '5%', marginBottom: '8%' }}
         >
           <HeaderImage
-            src={
-              'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png'
-            }
+            src={'https://mentorgrad.s3.us-west-2.amazonaws.com/hero_2.png'}
           />
 
           <HeaderImageContentBack>
             <HeaderImageContentBackTexta>
-              Tom Walker
+              Zak Robinson
             </HeaderImageContentBackTexta>
             <HeaderImageContentBackTextb>
-              Strartup Mentor
+              Branding Expert
             </HeaderImageContentBackTextb>
           </HeaderImageContentBack>
         </div>
@@ -87,17 +85,15 @@ const RightImage = () => {
       <div style={{ alignSelf: 'center', marginLeft: '10%' }}>
         <div style={{ position: 'relative' }}>
           <HeaderImage
-            src={
-              'https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png'
-            }
+            src={'https://mentorgrad.s3.us-west-2.amazonaws.com/hero_3.png'}
           />
 
           <HeaderImageContentBack>
             <HeaderImageContentBackTexta>
-              Tom Walker
+              Karla Rojas
             </HeaderImageContentBackTexta>
             <HeaderImageContentBackTextb>
-              Strartup Mentor
+              Data Scientist
             </HeaderImageContentBackTextb>
           </HeaderImageContentBack>
         </div>
