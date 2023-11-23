@@ -35,6 +35,7 @@ import HeaderDashboard from "../../Header/HeaderDashboard";
 import { ContainerDa } from "../../StudentProfileDetails/StudentProfileStyles";
 import Footer from "../../Footer";
 import { format } from "date-fns";
+import { jwtDecode } from "../../../helper-functions";
 
 type Mentor = {
   application: {
@@ -48,6 +49,10 @@ type Mentor = {
       attachmentPath: string;
       attachmentURL: string;
       name: string;
+    }>;
+    mentoringarea: Array<{
+      title: string;
+      _id: string;
     }>;
   };
   next30Days: Array<{
@@ -77,6 +82,9 @@ const MentorAppointmentBooking = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const user: string = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
   const [loading, setLoading] = useState(false);
   const [mentor, setMentor] = useState<Mentor | null>(null);
   const [selectedDay, setselectedDay] = useState<day | null>(null);
@@ -120,6 +128,44 @@ const MentorAppointmentBooking = () => {
         return null;
     }
   }
+  // Function to calculate duration in minutes between two time slots
+  const calculateDurationInMinutes = (slotHours: string): number => {
+    const [startTime, endTime] = slotHours.split(" - ");
+
+    // Convert start and end times to Date objects
+    const startDate = new Date(`2000-01-01 ${startTime}`);
+    const endDate = new Date(`2000-01-01 ${endTime}`);
+
+    // Calculate the difference in milliseconds
+    const durationMs = endDate.getTime() - startDate.getTime();
+
+    // Convert milliseconds to minutes
+    const durationMinutes = durationMs / (1000 * 60);
+
+    return durationMinutes;
+  };
+
+  const handlePayment = async () => {
+    if (selectedSlot?.slotHours) {
+    let payload = {
+      bookingSubject: mentor?.application.mentoringarea[0].title,
+      description: "Discuss project progress of I.T",
+      bookingDate: new Date(),
+      time: selectedSlot?.slotHours,
+      studentId: user,
+      mentorId: searchParams.get("id"),
+      bookingStatus: "UPCOMING",
+      duration: selectedSlot?.slotHours
+        ? calculateDurationInMinutes(selectedSlot?.slotHours)
+        : "",
+      amount: mentor?.application.hourlyRate,
+    };
+    await localStorage.setItem("booking", JSON.stringify(payload));
+    navigate("/checkout")
+  }else{
+    notifyError("Please select slot to continue.")
+  }
+};
 
   return (
     <>
@@ -461,9 +507,7 @@ const MentorAppointmentBooking = () => {
                             <Button
                               size="small"
                               variant="contained"
-                              // onClick={() =>
-                              //   navigate(`/bookAppointment?id=${mentor?._id}`)
-                              // }
+                              onClick={handlePayment}
                             >
                               Proceed to Pay
                             </Button>

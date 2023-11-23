@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { Country, userTypes } from './Data/Data';
-import { jwtDecode } from './helper-functions';
+import axios from "axios";
+import { Country, userTypes } from "./Data/Data";
+import { jwtDecode } from "./helper-functions";
 
 // const URL = "http://localhost:5001/api/v1/";
 // export const selfUrl = "http://localhost:3000"
@@ -9,26 +9,26 @@ import { jwtDecode } from './helper-functions';
 const URL = 'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
 export const IMGURL =
   'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
-export const selfUrl = 'https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com';
+export const selfUrl = "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
 
 // Chat Urls
-export const http = 'https://metorgrad-chat-3006465673ac.herokuapp.com/graphql';
-export const ws = 'wss://metorgrad-chat-3006465673ac.herokuapp.com/graphql';
-export const file = 'https://metorgrad-chat-3006465673ac.herokuapp.com/graphql';
+export const http = "https://metorgrad-chat-3006465673ac.herokuapp.com/graphql";
+export const ws = "wss://metorgrad-chat-3006465673ac.herokuapp.com/graphql";
+export const file = "https://metorgrad-chat-3006465673ac.herokuapp.com/graphql";
 
 // export const http = "http://localhost:5002/api/v1/";
 // export const ws = "ws://localhost:5002/graphql";
 // export const file = "http://localhost:5002/api/v1/";
 
 export const googleClientId =
-  '890042261985-2ph8qs8emfnnu3c3e1c73b74g6kheeve.apps.googleusercontent.com';
-export const googleSecretId = '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';
-export const linkedInClientId = '77h51igfqoe2qb';
-export const linkedInClientSerect = 'RMDhr8dVqEqgDd3Z';
+  "890042261985-2ph8qs8emfnnu3c3e1c73b74g6kheeve.apps.googleusercontent.com";
+export const googleSecretId = "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";
+export const linkedInClientId = "77h51igfqoe2qb";
+export const linkedInClientSerect = "RMDhr8dVqEqgDd3Z";
 
 const getData = async () => {
   try {
-    const value = await localStorage.getItem('@storage_Key');
+    const value = await localStorage.getItem("@storage_Key");
     if (value !== null) {
       // value previously stored
       console.log(value);
@@ -36,17 +36,17 @@ const getData = async () => {
     }
   } catch (e) {
     // error reading value
-    console.log(e, 'errpr');
+    console.log(e, "errpr");
   }
 };
 
 export async function LoginUser(value) {
   try {
-    const response = await axios.post(URL + 'auth/login', {
+    const response = await axios.post(URL + "auth/login", {
       email: value.email,
       password: value.password,
     });
-    await localStorage.setItem('@storage_Key', response.data.token);
+    await localStorage.setItem("@storage_Key", response.data.token);
 
     return response.data;
   } catch (error) {
@@ -57,7 +57,7 @@ export async function LoginUser(value) {
 
 export async function RegisterUser(value) {
   try {
-    const response = await axios.post(URL + 'auth/register', {
+    const response = await axios.post(URL + "auth/register", {
       email: value.email,
       password: value.password,
       first_name: value.fname,
@@ -68,14 +68,14 @@ export async function RegisterUser(value) {
     return response.data;
   } catch (e) {
     console.log(e.response.data);
-    return e.response.data || 'Server Error!';
+    return e.response.data || "Server Error!";
   }
 }
 
 //   ForgetPassword
 export async function ForgetEmailNew(value) {
   try {
-    const response = await axios.post(URL + 'auth/recover-password', {
+    const response = await axios.post(URL + "auth/recover-password", {
       email: value.email,
     });
     console.log(response.data);
@@ -89,9 +89,9 @@ export async function ForgetEmailNew(value) {
 
 export async function ActivatePassword(hash, id) {
   try {
-    const response = await axios.put(URL + 'auth/activate-password-link', {
+    const response = await axios.put(URL + "auth/activate-password-link", {
       userid: id,
-      hash: hash + '&&ID=' + id,
+      hash: hash + "&&ID=" + id,
     });
     console.log(response.data);
     return response.data;
@@ -104,7 +104,7 @@ export async function ActivatePassword(hash, id) {
 
 export async function ResetPasswordNew(id, value) {
   try {
-    const response = await axios.put(URL + 'auth/reset-password', {
+    const response = await axios.put(URL + "auth/reset-password", {
       _id: id,
       password: value.password,
     });
@@ -120,7 +120,7 @@ export async function ResetPasswordNew(id, value) {
 // SocialLogin
 export async function GoogoleLogin(token) {
   try {
-    const response = await axios.post(URL + 'auth/googleAuthLogin', {
+    const response = await axios.post(URL + "auth/googleAuthLogin", {
       token,
     });
     return response.data;
@@ -132,7 +132,7 @@ export async function GoogoleLogin(token) {
 
 export async function LinkedInLogin(token, url) {
   try {
-    const response = await axios.post(URL + 'auth/linkedinAuthLogin', {
+    const response = await axios.post(URL + "auth/linkedinAuthLogin", {
       token,
       url,
     });
@@ -145,7 +145,7 @@ export async function LinkedInLogin(token, url) {
 
 export async function GetGoogoleUser() {
   try {
-    const response = await axios.get(URL + 'auth/login/success');
+    const response = await axios.get(URL + "auth/login/success");
     console.log(response?.data);
     return response?.data;
   } catch (e) {
@@ -157,16 +157,16 @@ export async function GetGoogoleUser() {
 
 // StudentForm
 export async function PersonalDetails(json) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + 'user/personal-details',
-    method: 'POST',
+    url: URL + "user/personal-details",
+    method: "POST",
     headers: headersList,
     data: json,
   };
@@ -183,16 +183,16 @@ export async function PersonalDetails(json) {
 }
 
 export async function PassportDetailsapi(json) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let data = JSON.stringify(json);
 
   const config = {
-    method: 'post',
-    url: URL + 'user/passport-details',
+    method: "post",
+    url: URL + "user/passport-details",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     data: data,
   };
@@ -206,16 +206,16 @@ export async function PassportDetailsapi(json) {
 }
 
 export async function ProgramPrefernceapi(json) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let data = JSON.stringify(json);
 
   const config = {
-    method: 'post',
-    url: URL + 'user/program-preference',
+    method: "post",
+    url: URL + "user/program-preference",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     data: data,
   };
@@ -235,8 +235,8 @@ export async function UploadDocumentsapi(
   awardsandcertificates,
   passport
 ) {
-  const token = localStorage.getItem('@storage_Key');
-  console.log(academic_degrees, ' aass');
+  const token = localStorage.getItem("@storage_Key");
+  console.log(academic_degrees, " aass");
   // let data = JSON.stringify({
   //   "academic_degrees": academic_degrees,
   //   "englishtest_results": englishtest_results,
@@ -247,11 +247,11 @@ export async function UploadDocumentsapi(
   // });
 
   const config = {
-    method: 'post',
-    url: URL + 'user/upload-documents',
+    method: "post",
+    url: URL + "user/upload-documents",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     },
     data: academic_degrees,
   };
@@ -265,23 +265,23 @@ export async function UploadDocumentsapi(
 }
 
 export async function GetUserData() {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   let reqOptions = {
-    url: URL + 'user/userdata',
-    method: 'GET',
+    url: URL + "user/userdata",
+    method: "GET",
     headers: headersList,
   };
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, 'response');
+    console.log(response.data, "response");
     return response.data;
   } catch (e) {
     // saving error
@@ -291,19 +291,19 @@ export async function GetUserData() {
 
 export async function fetchImagesBLOB(img) {
   console.log(img);
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   let reqOptions = {
     url: IMGURL + img,
-    method: 'GET',
+    method: "GET",
     headers: headersList,
-    responseType: 'blob',
+    responseType: "blob",
   };
 
   let response = await axios.request(reqOptions);
@@ -316,23 +316,23 @@ export async function fetchImagesBLOB(img) {
 }
 
 export async function UserCreate() {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   let reqOptions = {
-    url: URL + 'user/create',
-    method: 'GET',
+    url: URL + "user/create",
+    method: "GET",
     headers: headersList,
   };
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, 'response');
+    console.log(response.data, "response");
     return response.data;
   } catch (e) {
     // saving error
@@ -341,16 +341,16 @@ export async function UserCreate() {
 }
 
 export async function uploadprofilepic(json) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let data = JSON.stringify(json);
 
   const config = {
-    method: 'put',
-    url: URL + 'user/profile',
+    method: "put",
+    url: URL + "user/profile",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': '*/*',
+      "Content-Type": "*/*",
     },
     data: json,
   };
@@ -365,8 +365,8 @@ export async function uploadprofilepic(json) {
 
 export async function GetAllContries() {
   let reqOptions = {
-    url: URL + 'countries',
-    method: 'GET',
+    url: URL + "countries",
+    method: "GET",
   };
 
   let response = await axios.request(reqOptions);
@@ -379,8 +379,8 @@ export async function GetAllContries() {
 }
 export async function GetNationality() {
   let reqOptions = {
-    url: URL + 'nationality',
-    method: 'GET',
+    url: URL + "nationality",
+    method: "GET",
   };
 
   let response = await axios.request(reqOptions);
@@ -394,8 +394,8 @@ export async function GetNationality() {
 
 export async function GetCountryList() {
   let reqOptions = {
-    url: URL + 'allcountries',
-    method: 'GET',
+    url: URL + "allcountries",
+    method: "GET",
   };
 
   let response = await axios.request(reqOptions);
@@ -408,16 +408,16 @@ export async function GetCountryList() {
 }
 
 export async function getProfileDetails(id) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `profile/getProfileById/${id}`,
-    method: 'get',
+    method: "get",
     headers: headersList,
   };
 
@@ -431,16 +431,16 @@ export async function getProfileDetails(id) {
 }
 
 export async function updateProfileDetails(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `profile/updateProfile/${payload?.id}`,
-    method: 'put',
+    method: "put",
     headers: headersList,
     data: payload,
   };
@@ -455,16 +455,16 @@ export async function updateProfileDetails(payload) {
 }
 
 export async function updateUserPassword(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `profile/resetPassword`,
-    method: 'put',
+    method: "put",
     headers: headersList,
     data: payload,
   };
@@ -479,16 +479,16 @@ export async function updateUserPassword(payload) {
 }
 
 export async function getBlogs(id, type) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `blog/getAllBlogsOfUser/${id}?type=${type}`,
-    method: 'GET',
+    method: "GET",
     headers: headersList,
   };
 
@@ -502,16 +502,16 @@ export async function getBlogs(id, type) {
 }
 
 export async function addBlog(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `blog/addBlog`,
-    method: 'POST',
+    method: "POST",
     headers: headersList,
     data: payload,
   };
@@ -526,16 +526,16 @@ export async function addBlog(payload) {
 }
 
 export async function updateBlog(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `blog/updateBlog`,
-    method: 'POST',
+    method: "POST",
     headers: headersList,
     data: payload,
   };
@@ -550,16 +550,16 @@ export async function updateBlog(payload) {
 }
 
 export async function _deleteBlog(id) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `blog/deleteBlog/${id}`,
-    method: 'Delete',
+    method: "Delete",
     headers: headersList,
   };
 
@@ -573,16 +573,16 @@ export async function _deleteBlog(id) {
 }
 
 export async function getBlogsById(id) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `blog/getBlogById/${id}`,
-    method: 'GET',
+    method: "GET",
     headers: headersList,
   };
 
@@ -596,16 +596,16 @@ export async function getBlogsById(id) {
 }
 
 export async function getReviews(id) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `review/getReciepentReviews`,
-    method: 'POST',
+    method: "POST",
     headers: headersList,
     data: {
       recipient: id,
@@ -622,16 +622,16 @@ export async function getReviews(id) {
 }
 
 export async function getBookings(type) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `booking/getAllBooking?type=${type}`,
-    method: 'get',
+    method: "get",
     headers: headersList,
   };
 
@@ -644,17 +644,41 @@ export async function getBookings(type) {
   }
 }
 
-export async function changesBookingStatus(payload) {
-  const token = localStorage.getItem('@storage_Key');
+export async function addBooking(payload) {
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `booking/addBooking`,
+    method: "post",
+    headers: headersList,
+    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function changesBookingStatus(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `booking/updateStatus`,
-    method: 'put',
+    method: "put",
     headers: headersList,
     data: payload,
   };
@@ -669,16 +693,16 @@ export async function changesBookingStatus(payload) {
 }
 
 export async function saveTimeSlot(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `availability/addMentor`,
-    method: 'post',
+    method: "post",
     headers: headersList,
     data: payload,
   };
@@ -693,18 +717,18 @@ export async function saveTimeSlot(payload) {
 }
 
 export async function getDayTimeSlot(day) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
   // Get the user from your authentication system or local storage
-  const userId = jwtDecode(localStorage.getItem('@storage_Key'))?.userId;
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `availability/getDayByName/${userId}/${day}`,
-    method: 'GET',
+    method: "GET",
     headers: headersList,
   };
 
@@ -718,16 +742,16 @@ export async function getDayTimeSlot(day) {
 }
 
 export async function findMentors(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `auth/gellAllMentor`,
-    method: 'POST',
+    method: "POST",
     headers: headersList,
     data: payload,
   };
@@ -742,16 +766,16 @@ export async function findMentors(payload) {
 }
 
 export async function getMentorForBooking(payload) {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `availability/getAvailabilityOfMonth`,
-    method: 'POST',
+    method: "POST",
     headers: headersList,
     data: payload,
   };
@@ -766,18 +790,18 @@ export async function getMentorForBooking(payload) {
 }
 
 export async function getInvioces() {
-  const token = localStorage.getItem('@storage_Key');
+  const token = localStorage.getItem("@storage_Key");
   // Get the user from your authentication system or local storage
-  const userId = jwtDecode(localStorage.getItem('@storage_Key'))?.userId;
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
 
   let headersList = {
-    Accept: '*/*',
+    Accept: "*/*",
     Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   let reqOptions = {
     url: URL + `invoice/getByReceiverId/${userId}`,
-    method: 'GET',
+    method: "GET",
     headers: headersList,
   };
 
@@ -804,12 +828,12 @@ export async function MentorForm(
   mentorId
 ) {
   try {
-    const response = await axios.post(URL + 'mentor/add-application', {
+    const response = await axios.post(URL + "mentor/add-application", {
       universityname: university.value,
       countryofresidence: selectedCountry,
-      currentstudent: student.toLowerCase() == 'yes' ? true : false,
+      currentstudent: student.toLowerCase() == "yes" ? true : false,
       programenrolledcurrently: programenroll,
-      currentlyworking: work.toLowerCase() == 'yes' ? true : false,
+      currentlyworking: work.toLowerCase() == "yes" ? true : false,
       organisation: organization.value,
       mentoringarea: mentorarea,
       languages: language,
@@ -827,7 +851,7 @@ export async function MentorForm(
 
 export async function RegisterMentor(firstname, lastname, email) {
   try {
-    const response = await axios.post(URL + 'auth/register', {
+    const response = await axios.post(URL + "auth/register", {
       email: email,
       first_name: firstname,
       last_name: lastname,

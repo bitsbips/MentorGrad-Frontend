@@ -1,46 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import Register from './pages/AuthFlow/Register/Register';
-import Login from './pages/AuthFlow/Login/Login';
-import ForgetEmail from './pages/AuthFlow/ForgetPassword/ForgetEmail';
-import ForgetPassword from './pages/AuthFlow/ForgetPassword/ForgetPassword';
-import StudentForm from './pages/StudentForm/StudentForm';
-import MentorAppDetails from './components/MentorForm/MentorAppForm';
-import MentorForm from './pages/MentorForm/MentorForm';
-import About from './pages/About/About';
-import Home from './pages/Home/Home';
-import Mentor from './pages/Mentor/Mentor';
-import Response from './components/UserForm/Response';
-import { Context } from './Context/ContextStates';
-import StudentProfile from './pages/StudentProfile/SudentProfile';
-import PaymentPlan from './pages/PaymentPlan/PaymentPlan';
-import PaymentPage from './pages/Payment/Payment';
-import Toast, { notifyError } from './components/Toastifycom';
-import { GetAllContries, GetCountryList, GetNationality } from './api';
-import jwt_decode from 'jwt-decode';
-import StudentDashboardMain from './pages/StudentDahboard/StudentDahboard.Main';
-import AuthGuard from './pages/AuthFlow/auth-guard';
-import { getErrorMsg, jwtDecode } from './helper-functions';
-import { userTypes } from './Data/Data';
-import MentorReviews from './pages/Mentor/MentorReviews';
-import MentorDashboardMain from './pages/MentorDahboard/MentorDahboard.Main';
-import MentorProfile from './pages/MentorProfile/MentorProfile';
-import Main from './pages/MentorChat/Main';
-import MessagesConfig from './MessagesConfig';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { StateProvider, useStateContext } from './Context/state';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import Register from "./pages/AuthFlow/Register/Register";
+import Login from "./pages/AuthFlow/Login/Login";
+import ForgetEmail from "./pages/AuthFlow/ForgetPassword/ForgetEmail";
+import ForgetPassword from "./pages/AuthFlow/ForgetPassword/ForgetPassword";
+import StudentForm from "./pages/StudentForm/StudentForm";
+import MentorAppDetails from "./components/MentorForm/MentorAppForm";
+import MentorForm from "./pages/MentorForm/MentorForm";
+import About from "./pages/About/About";
+import Home from "./pages/Home/Home";
+import Mentor from "./pages/Mentor/Mentor";
+import Response from "./components/UserForm/Response";
+import { Context } from "./Context/ContextStates";
+import StudentProfile from "./pages/StudentProfile/SudentProfile";
+import PaymentPlan from "./pages/PaymentPlan/PaymentPlan";
+import PaymentPage from "./pages/Payment/Payment";
+import Toast, { notifyError, notifySuccess } from "./components/Toastifycom";
+import {
+  GetAllContries,
+  GetCountryList,
+  GetNationality,
+  IMGURL,
+  addBooking,
+} from "./api";
+import jwt_decode from "jwt-decode";
+import StudentDashboardMain from "./pages/StudentDahboard/StudentDahboard.Main";
+import AuthGuard from "./pages/AuthFlow/auth-guard";
+import { getErrorMsg, jwtDecode } from "./helper-functions";
+import { userTypes } from "./Data/Data";
+import MentorReviews from "./pages/Mentor/MentorReviews";
+import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
+import MentorProfile from "./pages/MentorProfile/MentorProfile";
+import Main from "./pages/MentorChat/Main";
+import MessagesConfig from "./MessagesConfig";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { StateProvider, useStateContext } from "./Context/state";
 import {
   useLazyQuery,
   useSubscription,
   useMutation,
   useQuery,
-} from '@apollo/client';
+} from "@apollo/client";
 import {
   NEW_MESSAGE_NOTIFICATION,
   USER_ONLINE_STATUS_CHANGE,
   NEW_MESSAGE,
-} from './graphql/subscriptions';
+} from "./graphql/subscriptions";
 import {
   GET_PRIVATE_MSGS,
   GET_ALL_USERS,
@@ -48,21 +54,23 @@ import {
   GET_GLOBAL_GROUP,
   GET_GROUPS,
   GET_GLOBAL_MSGS,
-} from './graphql/queries';
-import { useMediaQuery } from '@mui/material';
-import ValidateLinkedIn from './pages/AuthFlow/Login/ValidateLinked';
-import MentorSearch from './components/Student-Dashboard/MentorSearch/Index';
-import MentorAppointmentBooking from './components/Student-Dashboard/Mentor_Booking/MentorAppBook';
+} from "./graphql/queries";
+import { useMediaQuery } from "@mui/material";
+import ValidateLinkedIn from "./pages/AuthFlow/Login/ValidateLinked";
+import MentorSearch from "./components/Student-Dashboard/MentorSearch/Index";
+import MentorAppointmentBooking from "./components/Student-Dashboard/Mentor_Booking/MentorAppBook";
+import { Return } from "./pages/Payment/Return";
+import { CheckoutForm } from "./pages/Payment/Checkout";
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['Inter', 'sans-serif'].join(','),
+    fontFamily: ["Inter", "sans-serif"].join(","),
   },
   palette: {
     primary: {
-      main: '#5F61BE',
-      light: '#5F61BE',
-      dark: '#5F61BE',
+      main: "#5F61BE",
+      light: "#5F61BE",
+      dark: "#5F61BE",
     },
   },
 });
@@ -70,26 +78,28 @@ const theme = createTheme({
 function App() {
   const navigate = useNavigate();
   const [priceRangeValue, setPriceRangeValue] = useState([0, 1000]);
-  const [profilestep, setProfileStep] = useState('0');
+  const [profilestep, setProfileStep] = useState("0");
   const [countryData, setCountryData] = useState([]);
   const [countryList, setCountryList] = useState([]);
   const [nationality, setNationality] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Get the user's role from your authentication system or local storage
   const user: string = jwtDecode(
-    localStorage.getItem('@storage_Key')
+    localStorage.getItem("@storage_Key")
   )?.userType;
-  const token = localStorage.getItem('@storage_Key');
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const storedStep = localStorage.getItem('currentStep');
-  const initialStep = storedStep !== null ? storedStep : '0';
+  const token = localStorage.getItem("@storage_Key");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const storedStep = localStorage.getItem("currentStep");
+  const initialStep = storedStep !== null ? storedStep : "0";
+
   // Set the initial state
   const [value, setValue] = useState(initialStep);
 
   const { selectedChat } = useStateContext();
 
   useEffect(() => {
-    localStorage.setItem('currentStep', value);
+    localStorage.setItem("currentStep", value);
     GetAllContries().then((e) => {
       setCountryData(e);
     });
@@ -104,7 +114,7 @@ function App() {
   const { error: subscriptionError } = useSubscription(NEW_MESSAGE, {
     onSubscriptionData: ({ client, subscriptionData }) => {
       try {
-        console.log('NEW_MESSAGE');
+        console.log("NEW_MESSAGE");
         if (selectedChat == null && isMobile) {
           const newMessage = subscriptionData.data.newMessage;
           let getMsgQuery: any, // Replace 'any' with actual types
@@ -114,32 +124,32 @@ function App() {
             getLastMsgQueryName: string | null = null, // Replace 'string' with actual types
             lastMsgTargetId: string | null = null; // Replace 'string' with actual types
 
-          if (newMessage.type === 'private') {
+          if (newMessage.type === "private") {
             const otherUserId = newMessage.participants.find(
               (p: string) => p !== user
             );
 
             getMsgQuery = GET_PRIVATE_MSGS;
             getMsgVariables = { userId: otherUserId };
-            getMsgQueryName = 'getPrivateMessages';
+            getMsgQueryName = "getPrivateMessages";
             getLastMsgQuery = GET_ALL_USERS;
-            getLastMsgQueryName = 'getAllUsers';
+            getLastMsgQueryName = "getAllUsers";
             lastMsgTargetId = otherUserId;
-          } else if (newMessage.type === 'group') {
+          } else if (newMessage.type === "group") {
             const groupConversationId = newMessage.message.conversationId;
 
             getMsgQuery = GET_GROUP_MSGS;
             getMsgVariables = { conversationId: groupConversationId };
-            getMsgQueryName = 'getGroupMessages';
+            getMsgQueryName = "getGroupMessages";
             getLastMsgQuery = GET_GROUPS;
-            getLastMsgQueryName = 'getGroups';
+            getLastMsgQueryName = "getGroups";
             lastMsgTargetId = groupConversationId;
-          } else if (newMessage.type === 'public') {
+          } else if (newMessage.type === "public") {
             getMsgQuery = GET_GLOBAL_MSGS;
             getMsgVariables = null;
-            getMsgQueryName = 'getGlobalMessages';
+            getMsgQueryName = "getGlobalMessages";
             getLastMsgQuery = GET_GLOBAL_GROUP;
-            getLastMsgQueryName = 'getGlobalGroup';
+            getLastMsgQueryName = "getGlobalGroup";
           }
 
           const conversationCache = client.readQuery({
@@ -149,12 +159,12 @@ function App() {
 
           if (conversationCache) {
             const updatedConvoCache = [
-              ...(conversationCache[getMsgQueryName || ''] || []), // Provide an empty string as a default value for the key
+              ...(conversationCache[getMsgQueryName || ""] || []), // Provide an empty string as a default value for the key
               newMessage.message,
             ];
 
             const dataToUpdate = {
-              [getMsgQueryName || '']: updatedConvoCache,
+              [getMsgQueryName || ""]: updatedConvoCache,
             };
 
             if (getMsgQueryName) {
@@ -175,14 +185,14 @@ function App() {
           if (lastMsgCache) {
             let updatedLastMsgCache: Record<string, any> = {};
 
-            if (newMessage.type === 'public') {
+            if (newMessage.type === "public") {
               updatedLastMsgCache = {
-                ...(lastMsgCache[getLastMsgQueryName || ''] || {}),
+                ...(lastMsgCache[getLastMsgQueryName || ""] || {}),
                 latestMessage: newMessage.message,
               };
             } else {
               updatedLastMsgCache = (
-                lastMsgCache[getLastMsgQueryName || ''] || []
+                lastMsgCache[getLastMsgQueryName || ""] || []
               ).map((l: any) =>
                 l.id === lastMsgTargetId
                   ? { ...l, latestMessage: newMessage.message }
@@ -191,7 +201,7 @@ function App() {
             }
 
             const dataToUpdate: Record<string, any> = {
-              [getLastMsgQueryName || '']: updatedLastMsgCache,
+              [getLastMsgQueryName || ""]: updatedLastMsgCache,
             };
 
             if (getLastMsgQueryName) {
@@ -213,6 +223,7 @@ function App() {
     },
   });
 
+
   // Define role-based routes
   const studentRoutes = (
     <Routes>
@@ -223,6 +234,8 @@ function App() {
       <Route path="/paymentPage" element={<PaymentPage />} />
       <Route path="/findMentor" element={<MentorSearch />} />
       <Route path="/bookAppointment" element={<MentorAppointmentBooking />} />
+      <Route path="/checkout" element={<CheckoutForm />} />
+      <Route path="/return" element={<Return />} />
     </Routes>
   );
 
