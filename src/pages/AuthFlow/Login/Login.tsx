@@ -9,6 +9,7 @@ import {
   HeadingTop,
   Position,
   PositionCol,
+  BackGround,
 } from '../AuthStyles';
 import AllSocial from '../../../components/SocialLogins';
 import HorizontalLine from '../../../components/HorizontalLine';
@@ -72,7 +73,7 @@ const Login = () => {
   });
 
   return (
-    <Container>
+    <BackGround>
       <Position>
         {isMobile ? <LeftImage height={'auto'} /> : <></>}
         <TopRight
@@ -129,7 +130,7 @@ const Login = () => {
         </CenterContent>
       </Position>
       <Toast />
-    </Container>
+    </BackGround>
   );
 };
 
