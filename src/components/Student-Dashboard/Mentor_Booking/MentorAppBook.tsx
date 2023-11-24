@@ -147,25 +147,25 @@ const MentorAppointmentBooking = () => {
 
   const handlePayment = async () => {
     if (selectedSlot?.slotHours) {
-    let payload = {
-      bookingSubject: mentor?.application.mentoringarea[0].title,
-      description: "Discuss project progress of I.T",
-      bookingDate: new Date(),
-      time: selectedSlot?.slotHours,
-      studentId: user,
-      mentorId: searchParams.get("id"),
-      bookingStatus: "UPCOMING",
-      duration: selectedSlot?.slotHours
-        ? calculateDurationInMinutes(selectedSlot?.slotHours)
-        : "",
-      amount: mentor?.application.hourlyRate,
-    };
-    await localStorage.setItem("booking", JSON.stringify(payload));
-    navigate("/checkout")
-  }else{
-    notifyError("Please select slot to continue.")
-  }
-};
+      let payload = {
+        bookingSubject: mentor?.application.mentoringarea[0].title,
+        description: "Discuss project progress of I.T",
+        bookingDate: new Date(),
+        time: selectedSlot?.slotHours,
+        studentId: user,
+        mentorId: searchParams.get("id"),
+        bookingStatus: "UPCOMING",
+        duration: selectedSlot?.slotHours
+          ? calculateDurationInMinutes(selectedSlot?.slotHours)
+          : "",
+        amount: mentor?.application.hourlyRate,
+      };
+      await localStorage.setItem("booking", JSON.stringify(payload));
+      navigate("/checkout");
+    } else {
+      notifyError("Please select slot to continue.");
+    }
+  };
 
   return (
     <>
@@ -447,7 +447,11 @@ const MentorAppointmentBooking = () => {
                                 fontSize={"small"}
                                 noWrap
                               >
-                                30 Minutes
+                                {selectedSlot?.slotHours
+                                  ? `${calculateDurationInMinutes(
+                                      selectedSlot?.slotHours
+                                    )} Minutes`
+                                  : "-"}
                               </Typography>
                             </Stack>
 
