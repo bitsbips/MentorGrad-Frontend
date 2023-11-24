@@ -39,6 +39,8 @@ import { GET_ALL_USERS } from "../../graphql/queries";
 import Main from "../../pages/MentorChat/Main";
 import MentorSearch from "./MentorSearch/Index";
 import TableComponentDashboard from "../StudentDashboard/TableComponent";
+import UserFormAll from "../UserForm/UserForm";
+import StudentProfile from "../../pages/StudentProfile/SudentProfile";
 
 const style = {
   width: "25%",
@@ -193,6 +195,9 @@ const TestDashboard: FC = () => {
           <TableComponentDashboard type="Invoice" />
         </Box>
       );
+    }
+    if (tab === "7") {
+      return <StudentProfile/>;
     }
   };
   const toggleDrawer =
