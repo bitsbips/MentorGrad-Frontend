@@ -136,7 +136,7 @@ export const MentorBooking = (): JSX.Element => {
           >
             <Tab label="All" value={'ALL'} />
             <Tab label="Booked" value={'COMPLETED'} />
-            <Tab label="Upcoming" value={'UPCOMING'} />
+            <Tab label="Upcoming" value={'PENDING'} />
             <Tab label="Canceled" value={'CANCELLED'} />
           </Tabs>
         </Card>
