@@ -41,6 +41,7 @@ import MentorSearch from "./MentorSearch/Index";
 import TableComponentDashboard from "../StudentDashboard/TableComponent";
 import UserFormAll from "../UserForm/UserForm";
 import StudentProfile from "../../pages/StudentProfile/SudentProfile";
+import { StudentBooking } from "../../pages/Student/StudentBookings";
 
 const style = {
   width: "25%",
@@ -163,7 +164,7 @@ const TestDashboard: FC = () => {
     if (tab === "1") {
       return (
         <div>
-          <p>No Result</p>
+          <StudentBooking/>
         </div>
       );
     }

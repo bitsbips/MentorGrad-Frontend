@@ -630,7 +630,7 @@ export async function getBookings(type) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `booking/getAllBooking?type=${type}`,
+    url: `http://localhost:5001/api/v1/` + `booking/getAllBooking?type=${type}`,
     method: "get",
     headers: headersList,
   };
@@ -640,6 +640,53 @@ export async function getBookings(type) {
     return response.data;
   } catch (e) {
     // saving error
+    return e.response.data;
+  }
+}
+
+export async function getStudentBookings(type) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/` + `booking/getBookingsByStudentId?type=${type}`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getBookingsById() {
+  const token = localStorage.getItem("@storage_Key");
+  const id = jwtDecode(
+    localStorage.getItem("@storage_Key")
+  )?.userId
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/booking/getBookingById/${id}`,
+    method: "get",
+    headers: headersList,
+  };
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
     return e.response.data;
   }
 }
@@ -751,6 +798,30 @@ export async function findMentors(payload) {
   };
   let reqOptions = {
     url: URL + `auth/gellAllMentor`,
+    method: "POST",
+    headers: headersList,
+    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getMentorBySuggession(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/` + `suggession/getMentorBySuggession`,
     method: "POST",
     headers: headersList,
     data: payload,
