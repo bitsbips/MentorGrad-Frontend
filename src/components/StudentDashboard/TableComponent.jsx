@@ -89,6 +89,7 @@ const TableComponentDashboard = ({ type }) => {
     if (activeTab === '5' || activeTab === '4') {
       setIsLoading(true);
       getInvioces().then((res) => {
+        console.log(res);
         setTableData(res);
         setIsLoading(false);
       });
