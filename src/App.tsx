@@ -88,6 +88,7 @@ function App() {
   const user: string = jwtDecode(
     localStorage.getItem("@storage_Key")
   )?.userType;
+
   const token = localStorage.getItem("@storage_Key");
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const storedStep = localStorage.getItem("currentStep");
@@ -222,7 +223,6 @@ function App() {
       }
     },
   });
-
 
   // Define role-based routes
   const studentRoutes = (

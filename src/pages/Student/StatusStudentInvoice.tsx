@@ -14,14 +14,13 @@ import {
   useTheme,
 } from '@mui/material';
 import styled from 'styled-components';
-import clockIcon from '../../Assets/Images/clock.png';
-import personImg from '../../Assets/Images/person.jpeg';
 import { BsEye } from 'react-icons/bs';
 import Cancel from '@mui/icons-material/Cancel';
 import Visibility from '@mui/icons-material/Visibility';
 import { Box } from '@mui/system';
+import { formatDate } from '../../helper-functions';
 
-export const StatusStudentBooking = ({
+export const StatusStudentInvoice = ({
   open,
   setShowDetails,
   setReason,

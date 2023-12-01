@@ -630,7 +630,7 @@ export async function getBookings(type) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `booking/getAllBooking?type=${type}`,
+    url: URL + `booking/getAllBooking?type=${type}`,
     method: "get",
     headers: headersList,
   };
@@ -653,7 +653,7 @@ export async function getStudentBookings(type) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `booking/getBookingsByStudentId?type=${type}`,
+    url: URL + `booking/getBookingsByStudentId?type=${type}`,
     method: "get",
     headers: headersList,
   };
@@ -679,7 +679,7 @@ export async function getBookingsById() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/booking/getBookingById/${id}`,
+    url: `${URL}/booking/getBookingById/${id}`,
     method: "get",
     headers: headersList,
   };
@@ -812,7 +812,7 @@ export async function findMentors(payload) {
   }
 }
 
-export async function getMentorBySuggession(payload) {
+export async function getMentorBySuggession() {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -821,10 +821,78 @@ export async function getMentorBySuggession(payload) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `suggession/getMentorBySuggession`,
-    method: "POST",
+    url: `${URL}/api/v1/` + `suggession/getMentorBySuggession`,
+    method: "GET",
     headers: headersList,
-    data: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getMentorBySuggessionCountry(country) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `suggession/getMentorBySuggessionCountry/${country}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getMentorBySuggessionLanguage(language) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `suggession/getMentorBySuggessionLanguage/${language}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getMentorBySuggessionUniversity(university) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `suggession/getMentorBySuggessionUniversity/${university}`,
+    method: "GET",
+    headers: headersList,
   };
 
   let response = await axios.request(reqOptions);
@@ -872,6 +940,56 @@ export async function getInvioces() {
   };
   let reqOptions = {
     url: URL + `invoice/getByReceiverId/${userId}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getInvoiceById(invoiceId) {
+  const token = localStorage.getItem("@storage_Key");
+  // Get the user from your authentication system or local storage
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `invoice/getInvoiceById/${userId}/${invoiceId}`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getStudentInvoices() {
+  const token = localStorage.getItem("@storage_Key");
+  // Get the user from your authentication system or local storage
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `invoice/getBySenderId/${userId}`,
     method: "GET",
     headers: headersList,
   };
@@ -935,3 +1053,4 @@ export async function RegisterMentor(firstname, lastname, email) {
     return e.response.data;
   }
 }
+  
