@@ -13,20 +13,17 @@ import {
   useMediaQuery,
   useTheme,
   TextField, // Add this import
-  InputAdornment, // Add this import
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search"; // Import the SearchIcon
 import Fuse from "fuse.js";
 
 import clockIcon from "../../Assets/Images/clock.png";
 import personImg from "../../Assets/Images/person.jpeg";
 import Visibility from "@mui/icons-material/Visibility";
-import { getStudentBookings } from "../../api";
-import { notifyError, notifySuccess } from "../../components/Toastifycom";
+import { getBookingsByStudentIdforDashboard, getStudentBookings } from "../../api";
+import { notifyError } from "../../components/Toastifycom";
 import { format } from "date-fns";
-// import { StatusMentorBooking } from './StatusMentorBookings';
 import Spinner from "../../components/Spinner";
-import { ViewStudentBooking } from "./ViewStudentBookings";
+import { ViewStudentBooking } from "../../pages/Student/ViewStudentBookings";
 
 type booking = {
   _id: string;
@@ -48,7 +45,7 @@ type booking = {
 
 type Bookings = booking[];
 
-export const StudentBooking = (): JSX.Element => {
+export const DashboardRecentBookings = (): JSX.Element => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -60,51 +57,12 @@ export const StudentBooking = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getAllBookings("ALL");
+    getRecentUpcomingBookings("PENDING");
   }, []);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    getAllBookings(newValue);
-    setTabs(newValue);
-  };
 
   const handleShowDetails = (booking: object) => {
     setBookingDetails(booking);
     setShowDetails(true);
-  };
-
-  ////saerch part:
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-    performSearch(event.target.value);
-  };
-
-  const performSearch = (query: string) => {
-    if (query.trim() === "") {
-      setBookings(tempBookings);
-      return;
-    }
-  
-    const fuse = new Fuse(tempBookings, {
-      keys: [
-        "bookingStatus",
-        "bookingSubject",
-        "description",
-        "mentor.email",
-        "mentor.email",
-        "mentor.first_name",
-        "mentor.last_name",
-        "mentor.username",
-      ],
-      includeScore: true,
-    });
-  
-    const results = fuse.search(query);
-    const filteredBookings = results.map((result) => result.item);
-  
-    setBookings(filteredBookings);
   };
 
   function getDateString(dateString: string, component: string) {
@@ -124,9 +82,9 @@ export const StudentBooking = (): JSX.Element => {
     }
   }
 
-  const getAllBookings = async (type: string) => {
+  const getRecentUpcomingBookings = async (type: string) => {
     setIsLoading(true);
-    await getStudentBookings(type)
+    await getBookingsByStudentIdforDashboard(type)
       .then((res) => {
         setTempBookings(res);
         setBookings(res);
@@ -139,29 +97,6 @@ export const StudentBooking = (): JSX.Element => {
 
   return (
     <>
-      <TextField
-        label="Search Bookings"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={searchQuery}
-        onChange={handleSearchChange}
-      />
-      <Grid item xs={12} sm={12} lg={12}>
-        <Card>
-          <Tabs
-            value={tabs}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            variant="scrollable"
-          >
-            <Tab label="All" value={"ALL"} />
-            <Tab label="Booked" value={"COMPLETED"} />
-            <Tab label="Pending" value={"PENDING"} />
-            <Tab label="Canceled" value={"CANCELLED"} />
-          </Tabs>
-        </Card>
-      </Grid>
       <br />
       {isLoading ? (
         <Spinner />
@@ -368,7 +303,7 @@ export const StudentBooking = (): JSX.Element => {
               open={showDetails}
               setShowDetails={setShowDetails}
               data={bookingDetails}
-              getAllBookings={getAllBookings}
+              getAllBookings={getRecentUpcomingBookings}
             />
           )}
         </>

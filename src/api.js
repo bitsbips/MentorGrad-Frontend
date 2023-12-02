@@ -667,6 +667,29 @@ export async function getStudentBookings(type) {
   }
 }
 
+export async function getBookingsByStudentIdforDashboard(type) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/` + `booking/getBookingsByStudentIdforDashboard?type=${type}`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
 export async function getBookingsById() {
   const token = localStorage.getItem("@storage_Key");
   const id = jwtDecode(
