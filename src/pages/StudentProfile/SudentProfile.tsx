@@ -6,11 +6,9 @@ import StudentProfileAll from "../../components/StudentProfileDetails/StudentPro
 
 const StudentProfile = () => {
     return(
-       <Container>
-       <Header/>
+    
        <StudentProfileAll/>
-       <Footer/>
-       </Container>
+     
     )
 }
 export default StudentProfile;

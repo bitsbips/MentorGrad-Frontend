@@ -45,6 +45,7 @@ import { notifyError } from '../Toastifycom';
 import { getErrorMsg } from '../../helper-functions';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_USERS } from '../../graphql/queries';
+import MentorInvoices from '../../pages/Mentor/MentorInvoices';
 const style = {
   width: '30%',
   bgcolor: '#F2F5F9',
@@ -194,7 +195,7 @@ const Mentor_Dashboard: FC = () => {
           >
             Invoices
           </Typography>
-          <TableComponentDashboard type="Invoice" />
+          <MentorInvoices/>
         </Box>
       );
     }

@@ -10,6 +10,7 @@ interface TextInputProps {
   type?: any;
   id?: any;
   maxLength?: number; // Add maxLength as a prop
+  size?:any;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -26,6 +27,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   const borderColor = isHovered ? '#000' : '#D6D6D6';
   return (
     <TextField
+    size={props.size ? props.size : "large" || "large"}
       disabled={props.editable}
       fullWidth
       placeholder={props.placeholder}

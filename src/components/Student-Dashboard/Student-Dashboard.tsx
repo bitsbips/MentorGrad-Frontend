@@ -39,6 +39,11 @@ import { GET_ALL_USERS } from "../../graphql/queries";
 import Main from "../../pages/MentorChat/Main";
 import MentorSearch from "./MentorSearch/Index";
 import TableComponentDashboard from "../StudentDashboard/TableComponent";
+import UserFormAll from "../UserForm/UserForm";
+import StudentProfile from "../../pages/StudentProfile/SudentProfile";
+import { StudentBooking } from "../../pages/Student/StudentBookings";
+import StudentSmartMatches from "../../pages/StudentSmartMatches/StudentSmartMatches";
+import StudentInvoices from "../../pages/Student/StudentInvoices";
 
 const style = {
   width: "25%",
@@ -161,14 +166,14 @@ const TestDashboard: FC = () => {
     if (tab === "1") {
       return (
         <div>
-          <p>No Result</p>
+          <StudentBooking/>
         </div>
       );
     }
     if (tab === "2") {
       return (
         <div>
-          <p>No Result</p>
+          <StudentSmartMatches/>
         </div>
       );
     }
@@ -190,9 +195,12 @@ const TestDashboard: FC = () => {
           >
             Invoices
           </Typography>
-          <TableComponentDashboard type="Invoice" />
+          <StudentInvoices/>
         </Box>
       );
+    }
+    if (tab === "7") {
+      return <StudentProfile/>;
     }
   };
   const toggleDrawer =
