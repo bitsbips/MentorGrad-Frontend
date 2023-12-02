@@ -676,7 +676,7 @@ export async function getBookingsByStudentIdforDashboard(type) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `booking/getBookingsByStudentIdforDashboard?type=${type}`,
+    url: URL + `booking/getBookingsByStudentIdforDashboard?type=${type}`,
     method: "get",
     headers: headersList,
   };
@@ -694,7 +694,7 @@ export async function getBookingsById() {
   const token = localStorage.getItem("@storage_Key");
   const id = jwtDecode(
     localStorage.getItem("@storage_Key")
-  )?.userId
+    )?.userId
 
   let headersList = {
     Accept: "*/*",
@@ -1076,4 +1076,3 @@ export async function RegisterMentor(firstname, lastname, email) {
     return e.response.data;
   }
 }
-  
