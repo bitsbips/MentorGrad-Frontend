@@ -24,15 +24,33 @@ import {
   NameDashboard,
   PrintText,
 } from "../../components/StudentDashboard/StudentDashboardStyles";
+import { ViewStudentInvoice } from "../Student/ViewStudentInvoice";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import StuentInvoiceTemplate from "../Student/StudentInvoiceTemplate";
 
 const MentorInvoices = () => {
   const isMobile = useMediaQuery("(min-width: 950px)");
   const [tableHeader, setTableHeader] = React.useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+  const [invoiceDetails, setInvoiceDetails] = useState({});
   const [tableData, setTableData] = React.useState([]);
   let [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
   let activeTab = searchParams.get("tab");
+
+  const handleShowDetails = (invoice: object) => {
+    setInvoiceDetails(invoice);
+    setShowDetails(true);
+  };
+
+  const getAllInvoices = async (type: string) => {
+    setIsLoading(true);
+    await getInvioces().then((res) => {
+      setTableData(res);
+      setIsLoading(false);
+    });
+  };
 
   useEffect(() => {
     if (activeTab === "5" || activeTab === "4") {
@@ -137,7 +155,10 @@ const MentorInvoices = () => {
                       }}
                     >
                       <BackView>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div
+                          style={{ display: "flex", flexDirection: "row" }}
+                          onClick={() => handleShowDetails(row)}
+                        >
                           <RemoveRedEyeIcon
                             style={{
                               fontSize: "15px",
@@ -149,22 +170,51 @@ const MentorInvoices = () => {
                         </div>
                       </BackView>
                       <BackViewCustom>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <PrintIcon
-                            style={{
-                              fontSize: "15px",
-                              color: "#FFFF",
-                              margin: "auto",
-                            }}
-                          />
-                          <PrintText>PRINT</PrintText>
-                        </div>
+                        <PDFDownloadLink
+                          document={<StuentInvoiceTemplate data={row} />}
+                          fileName="somename.pdf"
+                        >
+                          {({ blob, url, loading, error }) =>
+                            loading ? (
+                              "Loading document..."
+                            ) : (
+                              <a
+                                href={url?.toString()}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{ textDecoration: "none" }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                  }}
+                                >
+                                  <PrintIcon
+                                    style={{
+                                      fontSize: "15px",
+                                      color: "#FFFF",
+                                      margin: "auto",
+                                    }}
+                                  />
+                                  <PrintText>PRINT</PrintText>
+                                </div>
+                              </a>
+                            )
+                          }
+                        </PDFDownloadLink>
                       </BackViewCustom>
                     </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
+            <ViewStudentInvoice
+              open={showDetails}
+              setShowDetails={setShowDetails}
+              data={invoiceDetails}
+              getAllInvoices={getAllInvoices}
+            />
           </>
         )}
       </Table>
