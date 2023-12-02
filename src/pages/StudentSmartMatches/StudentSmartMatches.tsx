@@ -3,8 +3,6 @@ import {
   Box,
   Button,
   Dialog,
-  DialogContent,
-  Divider,
   Grid,
   IconButton,
   Stack,
@@ -26,12 +24,8 @@ import {
 } from "../../components/StudentDashboard/StudentDashboardStyles";
 import Spinner from "../../components/Spinner";
 import { Container } from "../AuthFlow/AuthStyles";
-import Footer from "../../components/Footer";
 import { ContainerDa } from "../../components/StudentProfileDetails/StudentProfileStyles";
-import HeaderDashboard from "../../components/Header/HeaderDashboard";
 import {
-  getStudentBookings,
-  getMentorBySuggession,
   getMentorBySuggessionCountry,
   getMentorBySuggessionLanguage,
   getMentorBySuggessionUniversity,
@@ -610,7 +604,6 @@ const MentorSearch = () => {
             )}
           </ContainerDashboard>
         </ContainerDa>
-        <Footer />
       </Container>
     </>
   );
