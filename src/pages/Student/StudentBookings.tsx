@@ -21,12 +21,14 @@ import Fuse from "fuse.js";
 import clockIcon from "../../Assets/Images/clock.png";
 import personImg from "../../Assets/Images/person.jpeg";
 import Visibility from "@mui/icons-material/Visibility";
-import { getStudentBookings } from "../../api";
+import { getStudentBookings, getProfileDetails } from "../../api";
 import { notifyError, notifySuccess } from "../../components/Toastifycom";
 import { format } from "date-fns";
 // import { StatusMentorBooking } from './StatusMentorBookings';
 import Spinner from "../../components/Spinner";
 import { ViewStudentBooking } from "./ViewStudentBookings";
+import { jwtDecode } from '../../helper-functions';
+
 
 type booking = {
   _id: string;
@@ -61,6 +63,7 @@ export const StudentBooking = (): JSX.Element => {
 
   useEffect(() => {
     getAllBookings("ALL");
+    getAllBookingstest();
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -131,6 +134,20 @@ export const StudentBooking = (): JSX.Element => {
         setTempBookings(res);
         setBookings(res);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
+
+  const userId: String = jwtDecode(
+    localStorage.getItem('@storage_Key')
+  )?.userId;
+  const getAllBookingstest = async () => {
+    console.log("1111111111111111111111111111111")
+      await getProfileDetails(userId)
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         notifyError(err?.message);

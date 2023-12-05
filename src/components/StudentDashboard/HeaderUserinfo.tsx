@@ -28,8 +28,8 @@ const HeaderUserinfo = () => {
       <RightContainerDash>
         <RightBorderDashboard>
           <PositionHeader>
-            <PositionImage>
-              <div style={{ alignSelf: "center" }}>
+            <PositionImage >
+              <div>
                 <Avatar
                   alt="Remy Sharp"
                   src={
@@ -39,16 +39,9 @@ const HeaderUserinfo = () => {
                 />
               </div>
               <PositionTextCol>
-                <div style={{ textAlign: isMobile ? "left" : "center" }}>
-                  <StarRatings
-                    rating={rating}
-                    starRatedColor="#FFD707"
-                    numberOfStars={5}
-                    starDimension="15px"
-                    starSpacing={isMobile ? "3px" : "1px"}
-                    name="rating"
-                  />
-                </div>
+                <HeaderName style={{ fontSize: "28px" }}>
+                  Welcome Back
+                </HeaderName>
                 <HeaderName>Jonathan Doe</HeaderName>
                 <HeaderPassion>English Literature (M.A)</HeaderPassion>
               </PositionTextCol>
