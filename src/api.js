@@ -416,7 +416,7 @@ export async function getProfileDetails(id) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `profile/getProfileById/${id}`,
+    url: `http://localhost:5001/api/v1/` + `profile/getProfileById/${id}`,
     method: "get",
     headers: headersList,
   };
