@@ -690,6 +690,29 @@ export async function getBookingsByStudentIdforDashboard(type) {
   }
 }
 
+export async function calculateEmptyFieldsPercentage() {
+  const token = localStorage.getItem("@storage_Key");
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/` + `user/calculateEmptyFieldsPercentage`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
 export async function getBookingsById() {
   const token = localStorage.getItem("@storage_Key");
   const id = jwtDecode(

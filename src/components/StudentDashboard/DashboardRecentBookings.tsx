@@ -19,11 +19,12 @@ import Fuse from "fuse.js";
 import clockIcon from "../../Assets/Images/clock.png";
 import personImg from "../../Assets/Images/person.jpeg";
 import Visibility from "@mui/icons-material/Visibility";
-import { getBookingsByStudentIdforDashboard, getStudentBookings } from "../../api";
+import { getBookingsByStudentIdforDashboard, calculateEmptyFieldsPercentage } from "../../api";
 import { notifyError } from "../../components/Toastifycom";
 import { format } from "date-fns";
 import Spinner from "../../components/Spinner";
 import { ViewStudentBooking } from "../../pages/Student/ViewStudentBookings";
+import { jwtDecode } from '../../helper-functions';
 
 type booking = {
   _id: string;
@@ -48,6 +49,7 @@ type Bookings = booking[];
 export const DashboardRecentBookings = (): JSX.Element => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const user = jwtDecode(localStorage.getItem("@storage_Key"));
 
   const [tabs, setTabs] = React.useState("ALL");
   const [bookings, setBookings] = useState<Bookings>([]);
@@ -58,6 +60,7 @@ export const DashboardRecentBookings = (): JSX.Element => {
 
   useEffect(() => {
     getRecentUpcomingBookings("PENDING");
+    getRecentUpcomingBookings2();
   }, []);
 
   const handleShowDetails = (booking: object) => {
@@ -89,6 +92,17 @@ export const DashboardRecentBookings = (): JSX.Element => {
         setTempBookings(res);
         setBookings(res);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        notifyError(err?.message);
+      });
+  };
+
+  const getRecentUpcomingBookings2 = async () => {
+    setIsLoading(true);
+    await calculateEmptyFieldsPercentage()
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         notifyError(err?.message);

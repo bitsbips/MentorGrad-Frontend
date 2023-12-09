@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ContainerDashboard,
   HeaderName,
@@ -18,17 +18,25 @@ import Cardsinfo from "./Cardsinfo";
 import ProgressBarWithPercentage from "./Progressbar";
 import useMediaQuery from "../../hooks/MediaQuery";
 import { DashboardRecentBookings } from "./DashboardRecentBookings";
+import { calculateEmptyFieldsPercentage } from "../../api";
 
 const HeaderUserinfo = () => {
   const [rating, setRating] = useState(4);
   const isMobile = useMediaQuery("(min-width: 950px)");
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    calculateEmptyFieldsPercentage().then((response) => {
+      setPercentage(parseInt(response.percentageEmpty, 10));
+    });
+  }, []);
 
   return (
     <ContainerDashboard>
       <RightContainerDash>
         <RightBorderDashboard>
           <PositionHeader>
-            <PositionImage >
+            <PositionImage>
               <div>
                 <Avatar
                   alt="Remy Sharp"
@@ -46,7 +54,7 @@ const HeaderUserinfo = () => {
                 <HeaderPassion>English Literature (M.A)</HeaderPassion>
               </PositionTextCol>
             </PositionImage>
-            <ProgressBarWithPercentage percentage={75} />
+            <ProgressBarWithPercentage percentage={percentage} />
           </PositionHeader>
         </RightBorderDashboard>
       </RightContainerDash>
