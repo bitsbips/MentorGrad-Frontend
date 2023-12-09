@@ -347,7 +347,7 @@ export async function uploadprofilepic(json) {
 
   const config = {
     method: "put",
-    url: `http://localhost:5001/api/v1/` + "user/profile",
+    url: URL + "user/profile",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "*/*",
@@ -416,7 +416,7 @@ export async function getProfileDetails(id) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `profile/getProfileById/${id}`,
+    url: URL + `profile/getProfileById/${id}`,
     method: "get",
     headers: headersList,
   };
@@ -700,7 +700,7 @@ export async function calculateEmptyFieldsPercentage() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `user/calculateEmptyFieldsPercentage`,
+    url: URL + `user/calculateEmptyFieldsPercentage`,
     method: "get",
     headers: headersList,
   };

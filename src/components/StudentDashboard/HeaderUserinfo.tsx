@@ -18,17 +18,22 @@ import Cardsinfo from "./Cardsinfo";
 import ProgressBarWithPercentage from "./Progressbar";
 import useMediaQuery from "../../hooks/MediaQuery";
 import { DashboardRecentBookings } from "./DashboardRecentBookings";
-import { calculateEmptyFieldsPercentage } from "../../api";
+import { GetUserData, calculateEmptyFieldsPercentage } from "../../api";
 
 const HeaderUserinfo = () => {
   const [rating, setRating] = useState(4);
   const isMobile = useMediaQuery("(min-width: 950px)");
   const [percentage, setPercentage] = useState(0);
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     calculateEmptyFieldsPercentage().then((response) => {
       setPercentage(parseInt(response.percentageEmpty, 10));
     });
+
+    GetUserData().then((response) =>
+      setImageUrl(response.profileDetails.profilePic)
+    );
   }, []);
 
   return (
@@ -40,9 +45,7 @@ const HeaderUserinfo = () => {
               <div>
                 <Avatar
                   alt="Remy Sharp"
-                  src={
-                    "https://mentorgrad.s3.us-west-2.amazonaws.com/mature-male-ceo-listening-colleague-holding-papers-2021-09-04-09-42-09-utc+6.png"
-                  }
+                  src={imageUrl}
                   sx={{ width: 70, height: 70, alignSelf: "center" }}
                 />
               </div>
