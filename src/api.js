@@ -347,7 +347,7 @@ export async function uploadprofilepic(json) {
 
   const config = {
     method: "put",
-    url: URL + "user/profile",
+    url: `http://localhost:5001/api/v1/` + "user/profile",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "*/*",

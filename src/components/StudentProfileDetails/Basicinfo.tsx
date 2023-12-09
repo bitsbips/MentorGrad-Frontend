@@ -123,6 +123,7 @@ const Basicinfo = () => {
 
       uploadprofilepic(form).then((e) => {
         console.log(e, '33');
+        console.log("2222222222222222222222")
         if (e.status === true) {
           setLoad(false);
           notifySuccess(e.message);
