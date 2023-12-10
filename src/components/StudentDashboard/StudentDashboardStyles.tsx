@@ -6,7 +6,6 @@ export const ContainerDashboard = styled.div`
   padding: 15px;
 `;
 export const RightBorderDashboard = styled.div`
-  border: 1.2px solid #d6d6d6; /* Define the border style */
   background-color: #f2f5f9; /* Set background color */
   padding: 2%;
 
@@ -49,7 +48,8 @@ export const PositionImage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 34%;
+  align-items: center;
+  width: 28%;
   @media (max-width: 750px) {
     display: flex;
     flex-direction: column;
@@ -58,6 +58,8 @@ export const PositionImage = styled.div`
 `;
 export const PositionTextCol = styled.div`
   display: flex;
+  margin-top: 11px;
+  justify-content: center;
   flex-direction: column;
   @media (max-width: 750px) {
     margin: auto;
