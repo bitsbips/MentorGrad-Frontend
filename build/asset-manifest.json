@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.95ba08af.css",
-    "main.js": "/static/js/main.485361e8.js",
+    "main.js": "/static/js/main.a74daf9c.js",
     "static/js/787.cc634b1c.chunk.js": "/static/js/787.cc634b1c.chunk.js",
     "static/media/Mask3.png": "/static/media/Mask3.4e04bf0564f87aba12c9.png",
     "static/media/BackLeft.png": "/static/media/BackLeft.6f91cd68b33cedeb1cfe.png",
@@ -12,9 +12,9 @@
     "static/media/user.jpeg": "/static/media/user.48c891327ecdf06e7ae6.jpeg",
     "static/media/backworks.svg": "/static/media/backworks.3467214627e9efd03f87cc8e89dfb841.svg",
     "static/media/pdf.png": "/static/media/pdf.dc7ce9c185377bbb6b97.png",
-    "static/media/MG_Logo.png": "/static/media/MG_Logo.69d9d637b2f246e11c77.png",
     "static/media/faq.svg": "/static/media/faq.d094df8e08b2170ebf8ab6fbf0d69e6a.svg",
     "static/media/profile.png": "/static/media/profile.c74004ccf4e82ab86f4f.png",
+    "static/media/MG_Logo.png": "/static/media/MG_Logo.80599879f2b05b80d924.png",
     "static/media/Calculator-icon.png": "/static/media/Calculator-icon.53621c59c6f9702a66a7.png",
     "static/media/uni_8.png": "/static/media/uni_8.005eba0024acb2796cb2.png",
     "static/media/uni_5.png": "/static/media/uni_5.c0d3a146877ea248f22e.png",
@@ -35,11 +35,11 @@
     "static/media/blackArrow.svg": "/static/media/blackArrow.225d9339b2ddbac6c5dc2db850cb5e29.svg",
     "static/media/one1.svg": "/static/media/one1.16b90dee805a872c72cd0973f4fa58de.svg",
     "main.95ba08af.css.map": "/static/css/main.95ba08af.css.map",
-    "main.485361e8.js.map": "/static/js/main.485361e8.js.map",
+    "main.a74daf9c.js.map": "/static/js/main.a74daf9c.js.map",
     "787.cc634b1c.chunk.js.map": "/static/js/787.cc634b1c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.95ba08af.css",
-    "static/js/main.485361e8.js"
+    "static/js/main.a74daf9c.js"
   ]
 }
