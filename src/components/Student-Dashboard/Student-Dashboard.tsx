@@ -15,7 +15,7 @@ import {
   InActiveLabel,
 } from "./StudentDahboardStyles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Box, Icon, Typography } from "@mui/material";
+import { Box, Button, Icon, Typography } from "@mui/material";
 import HeaderUserinfo from "../StudentDashboard/HeaderUserinfo";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -44,6 +44,8 @@ import StudentProfile from "../../pages/StudentProfile/SudentProfile";
 import { StudentBooking } from "../../pages/Student/StudentBookings";
 import StudentSmartMatches from "../../pages/StudentSmartMatches/StudentSmartMatches";
 import StudentInvoices from "../../pages/Student/StudentInvoices";
+import StudentPaymentPlan from "../StudentPaymentPlan";
+import StudentSubscriptionPage from "../../pages/Student/StudentSubsciptionPage";
 
 const style = {
   width: "25%",
@@ -166,41 +168,48 @@ const TestDashboard: FC = () => {
     if (tab === "1") {
       return (
         <div>
-          <StudentBooking/>
+          <StudentBooking />
         </div>
       );
     }
     if (tab === "2") {
       return (
         <div>
-          <StudentSmartMatches/>
+          <StudentSmartMatches />
         </div>
       );
     }
     if (tab === "3") {
       return <Main />;
     }
-    if (tab === '4') {
+    if (tab === "4") {
       return (
-        <Box sx={{ paddingRight: '15px' }}>
+        <Box sx={{ paddingRight: "15px" }}>
           <Typography
             variant="h5"
             sx={{
-              textAlign: 'left',
-              paddingBottom: '20px',
+              textAlign: "left",
+              paddingBottom: "20px",
               fontWeight: 600,
-              lineHeight: '48px',
-              fontStyle: 'bold',
+              lineHeight: "48px",
+              fontStyle: "bold",
             }}
           >
             Invoices
           </Typography>
-          <StudentInvoices/>
+          <StudentInvoices />
+        </Box>
+      );
+    }
+    if (tab === "6") {
+      return (
+        <Box sx={{ paddingRight: "15px" }}>
+          <StudentSubscriptionPage />
         </Box>
       );
     }
     if (tab === "7") {
-      return <StudentProfile/>;
+      return <StudentProfile />;
     }
   };
   const toggleDrawer =
@@ -267,7 +276,7 @@ const TestDashboard: FC = () => {
             {Data.map((data) => {
               return (
                 <>
-                  {data.notShow  ? (
+                  {data.notShow ? (
                     ""
                   ) : (
                     <div

@@ -416,7 +416,7 @@ export async function getProfileDetails(id) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `profile/getProfileById/${id}`,
+    url: URL + `profile/getProfileById/${id}`,
     method: "get",
     headers: headersList,
   };
@@ -686,6 +686,29 @@ export async function getBookingsByStudentIdforDashboard(type) {
     return response.data;
   } catch (e) {
     // saving error
+    return e.response.data;
+  }
+}
+
+export async function calculateEmptyFieldsPercentage() {
+  const token = localStorage.getItem("@storage_Key");
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `user/calculateEmptyFieldsPercentage`,
+    method: "get",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
     return e.response.data;
   }
 }
