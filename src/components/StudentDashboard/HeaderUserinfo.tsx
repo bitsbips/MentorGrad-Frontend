@@ -9,7 +9,7 @@ import {
   RightBorderDashboard,
   RightContainerDash,
 } from "./StudentDashboardStyles";
-import { Avatar } from "@mui/material";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 //import User from '../../Assets/Images/user.svg';
 import StarRatings from "react-star-ratings";
 import TableComponent from "./TableComponent";
@@ -40,25 +40,40 @@ const HeaderUserinfo = () => {
     <ContainerDashboard>
       <RightContainerDash>
         <RightBorderDashboard>
-          <PositionHeader>
-            <PositionImage>
-              <div>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={imageUrl}
-                  sx={{ width: 70, height: 70, alignSelf: "center" }}
-                />
-              </div>
-              <PositionTextCol>
-                <HeaderName style={{ fontSize: "28px" }}>
-                  Welcome Back
-                </HeaderName>
-                <HeaderName>Jonathan Doe</HeaderName>
-                <HeaderPassion>English Literature (M.A)</HeaderPassion>
-              </PositionTextCol>
-            </PositionImage>
-            <ProgressBarWithPercentage percentage={percentage} />
-          </PositionHeader>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <Grid container sx={{ width: "100%" }}>
+                <Grid
+                  item
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={imageUrl}
+                    sx={{ width: 70, height: 70, alignSelf: "center" }}
+                  />
+                </Grid>
+                <Grid item sx={{ ml: 1 }}>
+                  <Typography style={{ fontSize: "1.5rem", fontWeight: 700 }}>
+                    Welcome Back
+                  </Typography>
+                  <Typography style={{ fontWeight: 600 }}>
+                    Jonathan Doe
+                  </Typography>
+                  <Typography style={{ color: "#A7A7A7", fontSize: "0.75rem" }}>
+                    English Literature (M.A)
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <ProgressBarWithPercentage percentage={percentage} />
+            </Grid>
+          </Grid>
         </RightBorderDashboard>
       </RightContainerDash>
       <div style={{ marginTop: "2%" }}>
