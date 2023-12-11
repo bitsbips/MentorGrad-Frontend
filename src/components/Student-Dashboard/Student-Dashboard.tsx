@@ -44,7 +44,6 @@ import StudentProfile from "../../pages/StudentProfile/SudentProfile";
 import { StudentBooking } from "../../pages/Student/StudentBookings";
 import StudentSmartMatches from "../../pages/StudentSmartMatches/StudentSmartMatches";
 import StudentInvoices from "../../pages/Student/StudentInvoices";
-import StudentPaymentPlan from "../StudentPaymentPlan";
 import StudentSubscriptionPage from "../../pages/Student/StudentSubsciptionPage";
 
 const style = {

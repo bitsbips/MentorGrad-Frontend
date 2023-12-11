@@ -68,18 +68,17 @@ export const ViewStudentInvoice = ({
                   lg={6}
                   sx={{
                     color: "black",
-                    borderBottom: "3px solid #5F61BE",
                     width: "fit-content",
                   }}
                   direction={"row"}
                 >
-                  <Typography fontWeight={700} noWrap>
+                  <Typography fontWeight={1000} noWrap>
                     {data?.invoiceId}
                   </Typography>
                 </Grid>
 
                 <Grid item sm={6} lg={6}>
-                  <Typography fontWeight={600} textAlign={"right"}>
+                  <Typography fontWeight={1000} textAlign={"right"}>
                     $ {data?.netAmt}
                   </Typography>
                 </Grid>
@@ -98,14 +97,12 @@ export const ViewStudentInvoice = ({
                     <Stack
                       sx={{
                         color: "black",
-                        borderBottom: "3px solid #5F61BE",
-
                         mt: 2,
                         mb: 2,
                         width: "fit-content",
                       }}
                     >
-                      <Typography fontWeight={700}>Date & Time</Typography>
+                      <Typography fontWeight={900}>Date & Time</Typography>
                     </Stack>
                     <Typography
                       textAlign={"left"}
@@ -119,14 +116,14 @@ export const ViewStudentInvoice = ({
                       fontSize={"small"}
                       color={"#7A7A7A"}
                     >
-                      {data?.createdAt.split("T")[1]}
+                      {data?.createdAt?.split("T")[1]}
                     </Typography>
                     <Typography
                       textAlign={"left"}
                       fontSize={"small"}
                       color={"#7A7A7A"}
                     >
-                      {data?.createdAt.split("T")[0]}
+                      {data?.createdAt?.split("T")[0]}
                     </Typography>
                   </Stack>
                 </Grid>
@@ -135,14 +132,13 @@ export const ViewStudentInvoice = ({
                     <Stack
                       sx={{
                         color: "black",
-                        borderBottom: "3px solid #5F61BE",
 
                         mt: 2,
                         mb: 2,
                         width: "fit-content",
                       }}
                     >
-                      <Typography fontWeight={700}>
+                      <Typography fontWeight={900}>
                         Sender Information
                       </Typography>
                     </Stack>
@@ -153,9 +149,10 @@ export const ViewStudentInvoice = ({
                           noWrap
                           variant="h6"
                           fontSize={"medium"}
-                          fontWeight={600}
+                          color={"#7A7A7A"}
                         >
-                          {data?.sender?.first_name + " " +
+                          {data?.sender?.first_name +
+                            " " +
                             data?.sender?.last_name}
                         </Typography>
                         <Typography noWrap color={"#7A7A7A"}>
@@ -170,14 +167,13 @@ export const ViewStudentInvoice = ({
                     <Stack
                       sx={{
                         color: "black",
-                        borderBottom: "3px solid #5F61BE",
 
                         mt: 2,
                         mb: 2,
                         width: "fit-content",
                       }}
                     >
-                      <Typography fontWeight={700}>
+                      <Typography fontWeight={900}>
                         Receiver Information
                       </Typography>
                     </Stack>
@@ -188,9 +184,10 @@ export const ViewStudentInvoice = ({
                           noWrap
                           variant="h6"
                           fontSize={"medium"}
-                          fontWeight={600}
+                          color={"#7A7A7A"}
                         >
-                          {data?.receiver?.first_name + " " +
+                          {data?.receiver?.first_name +
+                            " " +
                             data?.receiver?.last_name}
                         </Typography>
                         <Typography noWrap color={"#7A7A7A"}>
@@ -208,14 +205,14 @@ export const ViewStudentInvoice = ({
           <Button
             variant="outlined"
             sx={{
-              borderRadius: '8px',
-              height: '40px',
-              padding: '20px 40px',
-              color: '#5f61be',
-              borderColor: ' #5f61be',
-              '&:hover': {
-                color: '#5f61be',
-                background: 'rgba(95, 97, 190, 0.05)',
+              borderRadius: "8px",
+              height: "40px",
+              padding: "20px 40px",
+              color: "#5f61be",
+              borderColor: " #5f61be",
+              "&:hover": {
+                color: "#5f61be",
+                background: "rgba(95, 97, 190, 0.05)",
               },
             }}
             onClick={() => setShowDetails(false)}
