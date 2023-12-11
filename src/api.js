@@ -1049,6 +1049,102 @@ export async function getStudentInvoices() {
   }
 }
 
+export async function createSubscription() {
+  const token = localStorage.getItem("@storage_Key");
+
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `subscription/createSubscription`,
+    method: "POST",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function approvePayment() {
+  const token = localStorage.getItem("@storage_Key");
+
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `subscription/approvePayment`,
+    method: "put",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function getSubscriptionByUserId() {
+  const token = localStorage.getItem("@storage_Key");
+
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `subscription/getSubscriptionByUserId`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
+export async function updateSubscriptionPlan() {
+  const token = localStorage.getItem("@storage_Key");
+
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `subscription/updateSubscriptionPlan`,
+    method: "put",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    // saving error
+    return e.response.data;
+  }
+}
+
 // MentorForm
 export async function MentorForm(
   university,

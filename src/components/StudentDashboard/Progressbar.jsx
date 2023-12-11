@@ -24,12 +24,12 @@ const ProgressBarWithPercentage = ({ percentage }) => {
   return (
     <div
       style={{
-        width: isMobile ? "30%" : "100%",
+        width:"100%",
         textAlign: "center",
         position: "relative",
         bottom: 0,
         alignItems: "flex-end",
-        marginTop: "4%",
+        marginTop: "10px",
       }}
     >
       <Typography textAlign={"left"} onClick={() => navigate("/studentForm")}>
