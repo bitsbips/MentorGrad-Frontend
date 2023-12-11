@@ -119,14 +119,14 @@ export const ViewStudentInvoice = ({
                       fontSize={"small"}
                       color={"#7A7A7A"}
                     >
-                      {data?.createdAt.split("T")[1]}
+                      {data?.createdAt?.split("T")[1]}
                     </Typography>
                     <Typography
                       textAlign={"left"}
                       fontSize={"small"}
                       color={"#7A7A7A"}
                     >
-                      {data?.createdAt.split("T")[0]}
+                      {data?.createdAt?.split("T")[0]}
                     </Typography>
                   </Stack>
                 </Grid>
@@ -155,7 +155,8 @@ export const ViewStudentInvoice = ({
                           fontSize={"medium"}
                           fontWeight={600}
                         >
-                          {data?.sender?.first_name + " " +
+                          {data?.sender?.first_name +
+                            " " +
                             data?.sender?.last_name}
                         </Typography>
                         <Typography noWrap color={"#7A7A7A"}>
@@ -190,7 +191,8 @@ export const ViewStudentInvoice = ({
                           fontSize={"medium"}
                           fontWeight={600}
                         >
-                          {data?.receiver?.first_name + " " +
+                          {data?.receiver?.first_name +
+                            " " +
                             data?.receiver?.last_name}
                         </Typography>
                         <Typography noWrap color={"#7A7A7A"}>
@@ -208,14 +210,14 @@ export const ViewStudentInvoice = ({
           <Button
             variant="outlined"
             sx={{
-              borderRadius: '8px',
-              height: '40px',
-              padding: '20px 40px',
-              color: '#5f61be',
-              borderColor: ' #5f61be',
-              '&:hover': {
-                color: '#5f61be',
-                background: 'rgba(95, 97, 190, 0.05)',
+              borderRadius: "8px",
+              height: "40px",
+              padding: "20px 40px",
+              color: "#5f61be",
+              borderColor: " #5f61be",
+              "&:hover": {
+                color: "#5f61be",
+                background: "rgba(95, 97, 190, 0.05)",
               },
             }}
             onClick={() => setShowDetails(false)}

@@ -141,7 +141,11 @@ const StudentInvoices = () => {
                   </TableCell>
                   <TableCell sx={{ borderBottom: "1px solid #8C8C8C" }}>
                     <DateDashboard>
-                      {new Date(row.creationDate).toDateString()}
+                      {new Date(row.creationDate).toDateString().split(" ")[2] +
+                        " "}
+                      {new Date(row.creationDate).toDateString().split(" ")[1]},
+                      {" " +
+                        new Date(row.creationDate).toDateString().split(" ")[3]}
                     </DateDashboard>
                   </TableCell>
                   <TableCell sx={{ borderBottom: "1px solid #8C8C8C" }}>
