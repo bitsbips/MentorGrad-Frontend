@@ -1145,6 +1145,116 @@ export async function updateSubscriptionPlan() {
   }
 }
 
+export async function adminGetAllUsers() {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `admincrud/getAllUsers`,
+    method: "GET",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
+export async function admincreateUser() {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `admincrud/createUser`,
+    method: "POST",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
+export async function adminEditUser(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `admincrud/editUser/${payload}`,
+    method: "put",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
+export async function adminDeleteUser(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `admincrud/deleteUser/${payload}`,
+    method: "delete",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
+export async function adminToggleUserStatus(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  let reqOptions = {
+    url: URL + `admincrud/toggleUserStatus/${payload}`,
+    method: "put",
+    headers: headersList,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
 // MentorForm
 export async function MentorForm(
   university,
