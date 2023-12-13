@@ -34,7 +34,11 @@ import MentorDashboardMain from "./pages/MentorDahboard/MentorDahboard.Main";
 import MentorProfile from "./pages/MentorProfile/MentorProfile";
 import Main from "./pages/MentorChat/Main";
 import MessagesConfig from "./MessagesConfig";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  StyledEngineProvider,
+  ThemeProvider,
+} from "@mui/material/styles";
 import { StateProvider, useStateContext } from "./Context/state";
 import {
   useLazyQuery,
@@ -61,6 +65,14 @@ import MentorSearch from "./components/Student-Dashboard/MentorSearch/Index";
 import MentorAppointmentBooking from "./components/Student-Dashboard/Mentor_Booking/MentorAppBook";
 import { Return } from "./pages/Payment/Return";
 import { CheckoutForm } from "./pages/Payment/Checkout";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminThemeCustomization from "./pages/Admin/themes";
+import RTLLayout from "./pages/Admin/ui-component/RTLLayout";
+import MainLayout from "./pages/Admin/layout/MainLayout";
+import { Provider } from "react-redux";
+import { store } from "./pages/Admin/store";
+import { JWTProvider } from "./pages/Admin/contexts/JWTContext";
+import { IntlProvider } from "react-intl";
 
 const theme = createTheme({
   typography: {
@@ -292,6 +304,26 @@ function App() {
         <Toast />
         {/* {token ? <MessagesConfig /> : ""} */}
       </ThemeProvider>
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <Provider store={store}>
+              <JWTProvider>
+                <IntlProvider locale="en" defaultLocale="en">
+                  <AdminThemeCustomization>
+                    <RTLLayout>
+                      <MainLayout>
+                        <AdminDashboard />
+                      </MainLayout>
+                    </RTLLayout>
+                  </AdminThemeCustomization>
+                </IntlProvider>
+              </JWTProvider>
+            </Provider>
+          }
+        />
+      </Routes>
     </div>
   );
 }
