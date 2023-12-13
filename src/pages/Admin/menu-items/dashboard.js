@@ -22,8 +22,8 @@ const dashboard = {
             title: <FormattedMessage id="default" />,
             type: 'item',
             // url: '/dashboard/default',
-            url: '/admin',
-            icon: icons.IconDashboard,
+            // url: '/admin',
+            icon: "icons.IconDashboard",
             breadcrumbs: false
         },
         {
