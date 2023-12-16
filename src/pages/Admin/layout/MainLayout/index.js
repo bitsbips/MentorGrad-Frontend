@@ -19,6 +19,7 @@ import HorizontalBar from "./HorizontalBar";
 import Customization from "../Customization";
 import Breadcrumbs from "../../ui-component/extended/Breadcrumbs";
 
+
 import navigation from "../../menu-items";
 import LAYOUT_CONST from "../../constant";
 import useConfig from "../../hooks/useConfig";
@@ -168,7 +169,6 @@ const MainLayout = ({ children }) => {
             {children}
           </Container>
         </Main>
-        <Customization />
       </Box>
   );
 };

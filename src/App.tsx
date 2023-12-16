@@ -73,6 +73,8 @@ import { Provider } from "react-redux";
 import { store } from "./pages/Admin/store";
 import { JWTProvider } from "./pages/Admin/contexts/JWTContext";
 import { IntlProvider } from "react-intl";
+import AdminMentors from "./pages/Admin/AdminMentors";
+import AdminStudents from "./pages/Admin/AdminStudents";
 
 const theme = createTheme({
   typography: {
@@ -259,7 +261,64 @@ function App() {
     </Routes>
   );
 
-  const adminRoutes = <Routes>{/* Add admin-specific routes here */}</Routes>;
+  const adminRoutes = (
+    <Routes>
+      <Route
+        path="/dashboard"
+        element={
+          <Provider store={store}>
+            <JWTProvider>
+              <IntlProvider locale="en" defaultLocale="en">
+                <AdminThemeCustomization>
+                  <RTLLayout>
+                    <MainLayout>
+                      <AdminDashboard />
+                    </MainLayout>
+                  </RTLLayout>
+                </AdminThemeCustomization>
+              </IntlProvider>
+            </JWTProvider>
+          </Provider>
+        }
+      />
+      <Route
+        path="/users/mentors"
+        element={
+          <Provider store={store}>
+            <JWTProvider>
+              <IntlProvider locale="en" defaultLocale="en">
+                <AdminThemeCustomization>
+                  <RTLLayout>
+                    <MainLayout>
+                      <AdminMentors />
+                    </MainLayout>
+                  </RTLLayout>
+                </AdminThemeCustomization>
+              </IntlProvider>
+            </JWTProvider>
+          </Provider>
+        }
+      />
+      <Route
+        path="/users/students"
+        element={
+          <Provider store={store}>
+            <JWTProvider>
+              <IntlProvider locale="en" defaultLocale="en">
+                <AdminThemeCustomization>
+                  <RTLLayout>
+                    <MainLayout>
+                      <AdminStudents />
+                    </MainLayout>
+                  </RTLLayout>
+                </AdminThemeCustomization>
+              </IntlProvider>
+            </JWTProvider>
+          </Provider>
+        }
+      />
+    </Routes>
+  );
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -304,26 +363,6 @@ function App() {
         <Toast />
         {/* {token ? <MessagesConfig /> : ""} */}
       </ThemeProvider>
-      <Routes>
-        <Route
-          path="/admin"
-          element={
-            <Provider store={store}>
-              <JWTProvider>
-                <IntlProvider locale="en" defaultLocale="en">
-                  <AdminThemeCustomization>
-                    <RTLLayout>
-                      <MainLayout>
-                        <AdminDashboard />
-                      </MainLayout>
-                    </RTLLayout>
-                  </AdminThemeCustomization>
-                </IntlProvider>
-              </JWTProvider>
-            </Provider>
-          }
-        />
-      </Routes>
     </div>
   );
 }

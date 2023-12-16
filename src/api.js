@@ -717,7 +717,7 @@ export async function getBookingsById() {
   const token = localStorage.getItem("@storage_Key");
   const id = jwtDecode(
     localStorage.getItem("@storage_Key")
-    )?.userId
+  )?.userId
 
   let headersList = {
     Accept: "*/*",
@@ -1123,8 +1123,6 @@ export async function getSubscriptionByUserId() {
 
 export async function updateSubscriptionPlan() {
   const token = localStorage.getItem("@storage_Key");
-
-
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -1145,7 +1143,30 @@ export async function updateSubscriptionPlan() {
   }
 }
 
-export async function adminGetAllUsers() {
+export async function adminGetAllUsers(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'http://localhost:5001/api/v1/admincrud/getAllUsers',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    data: {
+      x: "Hassan"
+    }
+  };
+
+  const response = await axios.request(config)
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
+export async function getUserById(payload) {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -1154,7 +1175,7 @@ export async function adminGetAllUsers() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `admincrud/getAllUsers`,
+    url: `http://localhost:5001/api/v1/` + `admincrud/getUserById/${payload}`,
     method: "GET",
     headers: headersList,
   };
@@ -1166,6 +1187,7 @@ export async function adminGetAllUsers() {
     return e.response.data;
   }
 }
+
 
 export async function admincreateUser() {
   const token = localStorage.getItem("@storage_Key");
@@ -1189,7 +1211,7 @@ export async function admincreateUser() {
   }
 }
 
-export async function adminEditUser(payload) {
+export async function adminEditUser(id, payload) {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -1198,9 +1220,10 @@ export async function adminEditUser(payload) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `admincrud/editUser/${payload}`,
+    url: "http://localhost:5001/api/v1/" + `admincrud/editUser/${id}`,
     method: "put",
     headers: headersList,
+    data: payload
   };
 
   let response = await axios.request(reqOptions);
