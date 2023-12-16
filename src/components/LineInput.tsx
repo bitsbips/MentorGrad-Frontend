@@ -21,7 +21,7 @@ interface Props {
 const _Input = styled.input`
   background-image: linear-gradient(#7476D1, #7476D1), linear-gradient(#D6D6D6, #D6D6D6);
   border: 0 none;
-  border-radius: 0;
+  border-radius: 15px;
   box-shadow: none;
   float: none;
   background-color: transparent;

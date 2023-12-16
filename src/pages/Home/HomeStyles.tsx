@@ -94,7 +94,7 @@ export const SearchBack = styled.div`
 export const SearchBar = styled.input`
   width: 32%;
   color: white;
-  border-radius: 24px;
+  border-radius: 15px;
   border-style: solid;
   border-width: 1px;
   border-color: white;
@@ -110,7 +110,7 @@ export const SearchIcon = styled.img`
 `;
 export const BackgroundCheckedSearch = styled.div`
   background: #c9f6ef;
-  border-radius: 12px;
+  border-radius: 15px;
   padding: 2%;
   width: 30%;
   align-self: 'center';
@@ -127,7 +127,7 @@ export const BackgroundCheckedSearch = styled.div`
     margin-top: 4% !important;
     margin-bottom: 4% !important;
     padding: 2.5% 2%;
-    border-radius: 5px;
+    border-radius: 15px;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
     width: 100%;
@@ -299,7 +299,7 @@ export const NewsSubHeading = styled.p`
 export const WorksBack = styled.div`
   background: #f2f5f9;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 4%;
   margin-top: 10%;
   width: 70vh;
@@ -320,7 +320,7 @@ export const WorksBack = styled.div`
 export const WorksBack1 = styled.div`
   background: #f2f5f9;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 4%;
   margin-top: 10%;
   margin-left: 4%;
@@ -446,7 +446,7 @@ export const MembersText1 = styled.p`
 export const MembersImage = styled.img`
   width: 15%;
   height: 15%;
-  border-radius: 10px;
+  border-radius: 15px;
 `;
 export const MembersRe = styled.p`
   font-style: normal;
@@ -514,7 +514,7 @@ export const MembersCard = styled.div`
 export const MembersBack = styled.div`
   background: #f2f5f9;
   border: 1px solid #7476d1;
-  border-radius: 12px;
+  border-radius: 15px;
   padding: 2%;
   width: 42%;
   margin-left: 2%;
@@ -537,7 +537,7 @@ export const BottomNewsHome = styled.div`
   margin: auto;
   padding: 1% 5%;
   background-color: #c9f6ef;
-  border-radius: 12px;
+  border-radius: 15px;
   margin-bottom: 3%;
   @media (max-width: 750px) {
     width: 100%;

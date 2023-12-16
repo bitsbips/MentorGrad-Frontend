@@ -8,11 +8,11 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 const styles = {
   root: {
     width: "100%",
-    borderRadius: "5px", // Set your desired border-radius
+    borderRadius: "15px", // Set your desired border-radius
     padding: "5px",
   },
   bar: {
-    borderRadius: "5px", // Set the same border-radius as the root
+    borderRadius: "15px", // Set the same border-radius as the root
     color: "#7476D1",
     backgroundColor: "#7476D1", // Set your desired background color for the active portion
   },

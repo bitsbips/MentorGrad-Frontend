@@ -47,7 +47,7 @@ const chartData = {
             markers: {
                 width: 16,
                 height: 16,
-                radius: 5
+                radius: 15
             },
             itemMargin: {
                 horizontal: 15,

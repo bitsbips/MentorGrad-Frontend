@@ -101,7 +101,7 @@ export const BottomPos = styled.div`
 export const Image1 = styled.img`
   height: 56vh;
   width: 30%;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-top: -3.5%;
 
   @media (max-width: 450px) {
@@ -122,7 +122,7 @@ export const MobImg = styled.img`
   margin-top: -20px !important;
   width: 90% !important;
 
-  border-radius: 5px;
+  border-radius: 15px;
   align-self: center !important;
   text-align: center;
   justify-content: center;
@@ -131,7 +131,7 @@ export const MobImg = styled.img`
 export const Image2 = styled.img`
   width: 30%;
   height: 50vh;
-  border-radius: 5px;
+  border-radius: 15px;
   object-fit: cover;
   @media (max-width: 750px) {
     margin-top: 0%;
@@ -155,7 +155,7 @@ export const Image2 = styled.img`
 export const Image3 = styled.img`
   width: 30%;
   height: 45vh;
-  border-radius: 5px;
+  border-radius: 15px;
   object-fit: cover;
   @media (max-width: 750px) {
     margin-top: 0%;
@@ -317,7 +317,7 @@ export const SubTitle2 = styled.p`
 `;
 export const Box = styled.div`
   border: 1px solid #d6d6d6;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 1.5%;
   margin-bottom: 2%;
   width: 60%;
@@ -335,7 +335,7 @@ export const BoxText = styled.div`
 export const Image2Box = styled.img`
   margin: 0;
   height: 80vh !important;
-  border-radius: 5px;
+  border-radius: 15px;
   @media (max-width: 450px) {
     width: 100%;
     height: 18rem !important;
@@ -502,7 +502,7 @@ export const BackCart12 = styled.div`
 export const BackCart = styled.div`
   background-color: #f2f5f9;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
-  border-radius: 12px;
+  border-radius: 15px;
   width: 23.8%;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -608,13 +608,13 @@ export const UserImage = styled.img`
   align-items: center;
   align-self: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
   margin-top: 4%;
 `;
 export const BackgroundChecked1 = styled.div`
   background: #c9f6ef;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 0.5%;
   margin-top: 2%;
   margin-bottom: 4%;
@@ -629,7 +629,7 @@ export const BackgroundChecked1 = styled.div`
 `;
 export const BackgroundChecked2 = styled.div`
   background: #c9f6ef;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 1.5%;
   margin-top: 2%;
   margin-bottom: 4%;
@@ -646,12 +646,12 @@ export const BackgroundChecked2 = styled.div`
     margin: auto;
     margin-bottom: 4% !important;
     padding: 2.5% 2%;
-    border-radius: 5px;
+    border-radius: 15px;
   }
 `;
 export const BackgroundChecked3 = styled.div`
   background: #c9f6ef;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 1%;
   margin-top: 1.5%;
   margin-bottom: 1%;
@@ -668,7 +668,7 @@ export const BackgroundChecked3 = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 2.5% 2%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
@@ -680,7 +680,7 @@ export const BackgroundChecked3 = styled.div`
 `;
 export const BackgroundCheckedM = styled.div`
   background: #6c6ebe;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 2%;
   margin-top: 2%;
   margin-bottom: 4%;
@@ -695,7 +695,7 @@ export const BackgroundCheckedM = styled.div`
     margin: auto;
     margin-top: 4% !important;
     margin-bottom: 4% !important;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 2.5% 2%;
   }
   @media (min-width: 451px) and (max-width: 1024px) {
