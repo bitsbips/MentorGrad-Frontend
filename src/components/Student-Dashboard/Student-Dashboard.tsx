@@ -100,13 +100,13 @@ const TestDashboard: FC = () => {
       name: "Invoices",
       icon: ReceiptIcon,
     },
-    {
-      id: 5,
+    // {
+    //   id: 5,
 
-      notShow: false,
-      name: "Reporting",
-      icon: AssessmentIcon,
-    },
+    //   notShow: false,
+    //   name: "Reporting",
+    //   icon: AssessmentIcon,
+    // },
     {
       id: 6,
 

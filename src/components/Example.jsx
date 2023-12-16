@@ -99,7 +99,7 @@ const BottomText = styled.p`
 `
 const StyledInput = styled.input`
   border: 1.5px solid #D6D6D6;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 12px 22px; /* Added padding to the right */
   background-color: #FBFBFB;
   width: 60%;
@@ -110,7 +110,7 @@ const StyledInput = styled.input`
 const StyledSelect = styled.select`
    width: 60%;
         border-width: 1.5;
-        border-radius: 8px;
+        border-radius: 15px;
         background-color: #FBFBFB;
         padding: 3%;
         border-color: #D6D6D6;
