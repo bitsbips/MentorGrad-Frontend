@@ -17,11 +17,11 @@ import TextInput from "./InputProfile";
 const customStyles = {
     // Style for the input field
     input: {
-      borderRadius: '16px', // Customize the border radius for the input
+      borderRadius: '15px', // Customize the border radius for the input
     },
     // Style for the dropdown list
     listbox: {
-      borderRadius: '16px', // Customize the border radius for the list
+      borderRadius: '15px', // Customize the border radius for the list
     },
   };
 const Passportinfo: FC = () => {

@@ -10,7 +10,7 @@ export const SubContainer = styled.div`
 
 width: 80%;
 
-  border-radius: 5px ;
+  border-radius: 15px;
   margin: auto;
   margin-top: 3% !important;
   margin-bottom: 5% !important;

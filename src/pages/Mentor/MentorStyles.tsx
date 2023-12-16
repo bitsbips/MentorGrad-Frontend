@@ -9,7 +9,7 @@ export const Container = styled.div`
 // HeaderCart
 export const HeaderCart = styled.div`
   background-color: #f2f5f9;
-  border-radius: 12px;
+  border-radius: 15px;
   width: 55%;
   margin-bottom: 2%;
   @media (max-width: 750px) {
@@ -21,7 +21,7 @@ export const HeaderCart = styled.div`
 export const IconBackHeader = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   width: 30px;
@@ -30,7 +30,7 @@ export const IconBackHeader = styled.div`
 `;
 export const ExperticeBack = styled.div`
   background-color: #ededff;
-  border-radius: 5px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -70,7 +70,7 @@ export const HeaderCartContentPostion = styled.div`
 export const IconBack = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   width: 35px;
@@ -80,7 +80,7 @@ export const IconBack = styled.div`
 `;
 export const HeaderCartimg = styled.img`
   height: 70px;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-top: -22%;
   width: 80px;
   z-index: 1000;
@@ -177,7 +177,7 @@ export const ShowMore = styled.p`
 // Sessions
 export const SessionsBack = styled.div`
   border: 1px solid #e3e3e3;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 50rem;
   align-self: center;
   padding: 1%;
@@ -189,9 +189,9 @@ export const SessionsWidth = styled.div`
 `;
 export const TimeBack = styled.div`
   border: 0.5px solid #e8e8e8;
-  border-radius: 3px;
+  border-radius: 15px;
   width: 130%;
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 10%;
   cursor: pointer;
   margin-bottom: 3%;
@@ -208,7 +208,7 @@ export const TimeP = styled.div`
 export const TimeBackActive = styled.div`
   background-color: #5f61be;
   width: 130%;
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 10%;
   cursor: pointer;
   margin-bottom: 3%;
@@ -225,7 +225,7 @@ export const TimePActive = styled.div`
 export const SessionsButton = styled.div`
   width: 100%;
   background-color: #5f61be;
-  border-radius: 5px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -240,7 +240,7 @@ export const SessionsButton = styled.div`
 export const ResponseButton = styled.div`
   width: 10%;
   background-color: #5f61be;
-  border-radius: 5px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -386,7 +386,7 @@ export const BackCartMentor = styled.div`
   &:hover {
     box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
   }
-  border-radius: 12px;
+  border-radius: 15px;
 
   @media (max-width: 750px) {
     margin: auto;
@@ -397,7 +397,7 @@ export const BackCartMentor = styled.div`
 export const BackCartMentorVideo = styled.div`
   background-color: #f2f5f9;
 
-  border-radius: 12px;
+  border-radius: 15px;
   width: 35%;
   height: 5%;
   margin-left: 5%;
@@ -413,13 +413,13 @@ export const BackCartImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px 12px 12px 12px;
+  border-radius: 15px;
 `;
 export const BackCartImageVideo = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px 12px 12px 12px;
+  border-radius: 15px;
 `;
 export const BottomTextMentor = styled.p`
   font-style: normal;
@@ -508,7 +508,7 @@ export const PlayButton = styled.img`
   padding: 12px 24px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
   z-index: 1000;
   &:hover {
@@ -521,7 +521,7 @@ export const BottomNewsMentor = styled.div`
   margin: auto;
   padding: 3%;
   background-color: #c9f6ef;
-  border-radius: 12px;
+  border-radius: 15px;
   @media (max-width: 750px) {
     width: 100%;
     margin: auto;

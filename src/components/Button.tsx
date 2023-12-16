@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Backbutton = styled.div`
-  border-radius: 10px;
+  border-radius: 15px;
   justify-content: 'center';
   align-items: 'center';
   text-align: center;
@@ -29,7 +29,7 @@ const Backbutton = styled.div`
   /* margin-top: 4%; */
 
   @media (max-width: 750px) {
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 2.5% 2%;
   }
 `;

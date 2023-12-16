@@ -93,7 +93,7 @@ export const ErrorCol = styled.div`
 export const BackActive = styled.div`
   width: 25px;
   height: 20px;
-  border-radius: 50px;
+  border-radius: 15px;
   background: #6c6ebe;
   border: 2px solid #6c6ebe;
   margin-left: 1%;
@@ -105,7 +105,7 @@ export const BackActive = styled.div`
 export const BackActiveLast = styled.div`
   width: 20px;
   height: 20px;
-  border-radius: 50px;
+  border-radius: 15px;
   background: #6c6ebe;
   border: 2px solid #6c6ebe;
   margin-left: 1%;
@@ -114,7 +114,7 @@ export const BackActiveLast = styled.div`
 export const BackInActive = styled.div`
   width: 25px;
   height: 20px;
-  border-radius: 50px;
+  border-radius: 15px;
   background: #f5f5f5;
   border: 2px solid #6c6ebe;
   margin-left: 1% !important;
@@ -126,7 +126,7 @@ export const BackInActive = styled.div`
 export const BackInActiveLast = styled.div`
   width: 20px;
   height: 20px;
-  border-radius: 50px;
+  border-radius: 15px;
   background: #f5f5f5;
   border: 2px solid #6c6ebe;
   margin-left: 1% !important;
@@ -227,14 +227,14 @@ export const CheckedPosition = styled.div`
 `;
 export const BackgroundChecked = styled.div`
   background: #c9f6ef;
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 4px 20px;
   margin-left: 0.5%;
   margin-top: 1%;
 `;
 export const BackgroundChecked1 = styled.div`
   background: #c9f6ef;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 8%;
   margin-top: 8%;
   width: 150%;

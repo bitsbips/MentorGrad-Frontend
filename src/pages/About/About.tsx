@@ -77,7 +77,7 @@ import { Column, Row, RowAbout } from '../Home/HomeStyles';
 const AccordionStyle = styled.div`
   background-color: #f2f5f9;
   width: 98%;
-  border-radius: 20px;
+  border-radius: 15px;
 
   @media (max-width: 750px) {
     width: 100%;

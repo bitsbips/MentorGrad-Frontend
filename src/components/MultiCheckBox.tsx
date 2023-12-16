@@ -11,7 +11,7 @@ interface Props {
 const CheckBox = styled.input`
   margin: 8px 16px 5.8px 3px;
   width: 5%;
-  border-radius: 2px;
+  border-radius: 15px;
   border: solid 1px #c6c4d2;
   float: left;
   background: ${(porps) => (porps.checked ? '#482474' : '#fbfcff')};

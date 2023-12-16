@@ -24,7 +24,7 @@ interface Props {
 
 const Backbtn = styled.button`
   width: 100%;
-  border-radius: 12px;
+  border-radius: 15px;
   justify-content: "center";
   align-items: "center";
   margin: auto;

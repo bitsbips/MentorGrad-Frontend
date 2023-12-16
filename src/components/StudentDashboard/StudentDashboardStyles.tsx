@@ -128,7 +128,7 @@ export const DateDashboardCustom = styled.p`
 export const BackAction = styled.div`
   width: 90%;
   padding: 2%;
-  border-radius: 3px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -154,7 +154,7 @@ export const BackView = styled.div`
   background-color: #c9f6ef;
   width: 80%;
   padding: 2%;
-  border-radius: 3px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -169,7 +169,7 @@ export const BackViewCustom = styled.div`
   background-color: #A3A5E9;
   width: 80%;
   padding: 2%;
-  border-radius: 3px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -232,7 +232,7 @@ export const CardPosition = styled.div`
 export const BackIconinfo = styled.div`
   width: 22%;
   padding: 4%;
-  border-radius: 10px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
