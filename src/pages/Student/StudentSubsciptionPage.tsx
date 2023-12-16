@@ -107,7 +107,7 @@ const StudentSubscriptionPage: FC = () => {
               justifyContent: "center",
             }}
           >
-            <Button variant="contained" sx={{ width: "100%" }}>
+            <Button variant="contained" sx={{ width: "100%", backgroundColor:'red' }}>
               Cancel Plan
             </Button>
           </Grid>
