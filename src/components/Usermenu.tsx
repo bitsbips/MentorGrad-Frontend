@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IconButton,
   Menu,
@@ -11,11 +11,33 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate } from 'react-router-dom';
 import BackdropLoader from './BackdropLoader';
 import LogoutIcon from '@mui/icons-material/Logout';
+
+import userAvatarImage from '../../src/Assets/Images/clock.png';
+import { jwtDecode } from '../helper-functions';
+import {GetUserData} from '../api'
+
 const UserMenu = () => {
+  const user = jwtDecode(localStorage.getItem("@storage_Key"));
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [userImage, setUserImage] = useState("");
 
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        GetUserData().then((response) =>
+        setUserImage(response.profileDetails.profilePic)
+      );
+      console.log(userImage)
+      } catch (error) {
+        console.error("Error fetching user data:", (error as Error).message);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -47,8 +69,11 @@ const UserMenu = () => {
         disableRipple // Disable the ripple effect on click
         disableFocusRipple // Disable the ripple effect on focus
       >
-        <AccountCircleIcon fontSize="large" style={{ color: '#5F61BE' }} />
-        <ArrowDropDownIcon fontSize="small" style={{ marginTop: '5px' }} />
+        {userImage ? (
+          <img src={userImage} alt="User Avatar" style={{ borderRadius: '15px', width: '40px', height: '40px' }} />
+        ) : (
+          <AccountCircleIcon fontSize="large" style={{ color: '#5F61BE' }} />
+        )}        <ArrowDropDownIcon fontSize="small" style={{ marginTop: '5px' }} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}

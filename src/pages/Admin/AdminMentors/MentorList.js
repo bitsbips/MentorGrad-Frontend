@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -43,6 +43,8 @@ const UserList = () => {
     const [data, setData] = React.useState([]);
     const [open, setOpen] = React.useState(false)
 
+    const [idToUpdate, setIdToUpdate] = useState("");
+
     // React.useEffect(() => {
     //     setData(usersS1);
     // }, [usersS1]);
@@ -58,7 +60,7 @@ const UserList = () => {
 
     const getAllUsers = () => {
         adminGetAllUsers({
-            page: 2,
+            page: 1,
             limit: 10,
             userType: "Mentor"
         }).then(response => {
@@ -88,10 +90,10 @@ const UserList = () => {
                     </TableRow>
                 </TableHead> */}
                 <TableBody>
+                    <AdminMentorModal id={idToUpdate} open={open} setOpen={setOpen} />
                     {data &&
                         data.map((row, index) => (
                             <TableRow hover key={index}>
-                                <AdminMentorModal id={row._id} open={open} setOpen={setOpen} />
                                 <TableCell>
                                     <Grid container spacing={2} alignItems="center">
                                         <Grid item>
@@ -138,7 +140,12 @@ const UserList = () => {
                                     </Grid>
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant='contained' sx={{ m: 0.2 }} onClick={() => setOpen(true)}>
+                                    <Button variant='contained' sx={{ m: 0.2 }} onClick={
+                                        () => {
+                                            setOpen(true);
+                                            setIdToUpdate(row._id);
+                                        }
+                                    }>
                                         <EditIcon />
                                     </Button>
                                     <Button variant='contained' sx={{ m: 0.2 }} color='error'

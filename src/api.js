@@ -1146,19 +1146,20 @@ export async function updateSubscriptionPlan() {
 export async function adminGetAllUsers(payload) {
   const token = localStorage.getItem("@storage_Key");
 
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'http://localhost:5001/api/v1/admincrud/getAllUsers',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    },
-    data: {
-      x: "Hassan"
-    }
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
 
-  const response = await axios.request(config)
+  let reqOptions = {
+    url: `http://localhost:5001/api/v1/` + `admincrud/getAllUsers`,
+    method: "GET",
+    headers: headersList,
+    params: payload
+  };
+
+  let response = await axios.request(reqOptions);
   try {
     return response.data;
   } catch (e) {

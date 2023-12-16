@@ -54,7 +54,7 @@ const HeaderUserinfo = () => {
                   <Avatar
                     alt="Remy Sharp"
                     src={imageUrl}
-                    sx={{ width: 70, height: 70, alignSelf: "center" }}
+                    style={{ borderRadius: '15px', width: '70px', height: '70px', alignSelf: "center" }}
                   />
                 </Grid>
                 <Grid item sx={{ ml: 1 }}>
