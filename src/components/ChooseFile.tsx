@@ -23,7 +23,7 @@ interface Props {
 const _Input = styled.input`
   border: 1.5px solid #D6D6D6;
   font-size: 13px;
-  border-radius: 5px;
+  border-radius: 15px;
   width: ${props => props.slot};
   &:hover {
     border-color: #000;

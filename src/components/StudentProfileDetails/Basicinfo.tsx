@@ -186,7 +186,7 @@ const Basicinfo = () => {
                 <img
                   src={image}
                   alt="profile-pic"
-                  style={{ width: 70, height: 70, borderRadius: 50 }}
+                  style={{ width: 70, height: 70, borderRadius: 15 }}
                 />
               </div>
             )}
@@ -221,7 +221,7 @@ const Basicinfo = () => {
             onChange={handleImageUpload}
           />
           <ContainerForm>
-            <PositionProfileForm>
+            <PositionProfileForm style={{ marginTop: "10px" }}>
               <ColumnStudentForm>
                 <LabelProfileb>First Name</LabelProfileb>
                 <TextInput
