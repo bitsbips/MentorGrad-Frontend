@@ -157,7 +157,7 @@ const ProgramPref: FC = () => {
                         </InputHolder>
 
 
-                        <InputHolder>
+                        {/* <InputHolder>
                             <LabelProfile>Desired Institutions</LabelProfile>
                             <MultiDropComp label={'Institution'} value={insitutude} onChange={setInsititude} width={'100%'} id={'1'} data={options} />
                             <CheckedPosition>
@@ -168,7 +168,7 @@ const ProgramPref: FC = () => {
                                     </BackgroundChecked>
                                 )}
                             </CheckedPosition>
-                        </InputHolder>
+                        </InputHolder> */}
 
 
                         <ButtonComp load={load} style={{ marginTop: '4%', padding: '8px', marginBottom: '5%' }} fontSize={'12px'} width={isMobile ?'20%' :'60%'} title="Save Changes" onClick={() => handleSubmit()} />
