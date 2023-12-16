@@ -30,6 +30,7 @@ import {
   PersonalDetails,
   fetchImagesBLOB,
   uploadprofilepic,
+  getUserById,
 } from "../../api";
 import Loadercom from "../Loadercom";
 import SkeletonProfile from "../SkeletonLoader/SkeletonProfile";
@@ -37,8 +38,10 @@ import { notifyError, notifySuccess } from "../Toastifycom";
 import { add } from "lodash";
 import { Context } from "../../Context/ContextStates";
 import useMediaQuery from "../../hooks/MediaQuery";
+import { jwtDecode } from "../../helper-functions";
 
 const Basicinfo = () => {
+  const userData = jwtDecode(localStorage.getItem("@storage_Key"));
   const isMobile = useMediaQuery("(min-width: 950px)");
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,7 +58,6 @@ const Basicinfo = () => {
   const [selectedNationality, setSelectedNationality] = useState<string>("");
   const { countryData, setCountryData } = useContext(Context);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  console.log(selectedCountry, "ccc");
   const handleCountryChange = (_: any, newValue: any) => {
     setSelectedCountry(newValue);
   };
@@ -82,11 +84,23 @@ const Basicinfo = () => {
         setLastname(e.profileDetails.last_name);
         setEmail(e.profileDetails.email);
         setSelectedNationality(e.personalDetails.nationality);
+        setImage(e.profileDetails.profilePic);
         // fetchImagesBLOB(e.profileDetails.profilePic.filename).then((e) => {
         //   console.log("IMAGEEEEEEEEEEEEEEEEEEEE", URL.createObjectURL(e));
         //   setImage(URL.createObjectURL(e));
         // });
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        setLoading(false);
+      });
+
+    getUserById(userData.id)
+      .then((e) => {
+        setFirstname(e.profileDetails.first_name);
+        setLastname(e.profileDetails.last_name);
+        setEmail(e.profileDetails.email);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -122,8 +136,6 @@ const Basicinfo = () => {
       console.log(form.getAll("profile"));
 
       uploadprofilepic(form).then((e) => {
-        console.log(e, "33");
-        console.log("2222222222222222222222");
         if (e.status === true) {
           setLoad(false);
           notifySuccess(e.message);
@@ -214,7 +226,6 @@ const Basicinfo = () => {
                 <LabelProfileb>First Name</LabelProfileb>
                 <TextInput
                   width={"100%"}
-                  editable
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
@@ -223,7 +234,6 @@ const Basicinfo = () => {
                 <LabelProfileb>Last Name</LabelProfileb>
                 <TextInput
                   width={"100%"}
-                  editable
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 />

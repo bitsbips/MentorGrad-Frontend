@@ -12,7 +12,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { adminEditUser } from "../../../../api";
+import { adminEditUser, getUserById } from "../../../../api";
 
 interface ObjectToUpdate {
   first_name: string;
@@ -50,7 +50,33 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
   const isVerifiedRef = React.useRef<HTMLInputElement>(null);
   const isDeactivatedRef = React.useRef<HTMLInputElement>(null);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    console.log("2222222222222222222222222222")
+    const fetchData = async () => {
+      try {
+        const userData = await getUserById(id);
+        console.log(userData)
+        setFirstName(userData.data.first_name || ""); // Set default to empty string if undefined
+        setLastName(userData.data.last_name || ""); // Set default to empty string if undefined
+        // Set default values for the dropdowns
+        if (userTypeRef.current) {
+          userTypeRef.current.value = userData.data.userType || "Mentor";
+        }
+
+        if (isVerifiedRef.current) {
+          isVerifiedRef.current.value = userData.data.isverified ? "Verified" : "Unverified";
+        }
+
+        if (isDeactivatedRef.current) {
+          isDeactivatedRef.current.value = userData.data.isDeactivated ? "Deactivated" : "Activated";
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", (error as Error).message);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handleUpdate = () => {
     adminEditUser(id, {
@@ -82,12 +108,14 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
             <Grid item xs={11} md={5.5}>
               <Input
                 placeholder="First Name"
+                value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={11} md={5.5}>
               <Input
                 placeholder="Last Name"
+                value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </Grid>
