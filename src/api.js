@@ -1153,7 +1153,7 @@ export async function adminGetAllUsers(payload) {
   };
 
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `admincrud/getAllUsers`,
+    url: URL + `admincrud/getAllUsers`,
     method: "GET",
     headers: headersList,
     params: payload
@@ -1176,7 +1176,7 @@ export async function getUserById(payload) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `admincrud/getUserById/${payload}`,
+    url: URL + `admincrud/getUserById/${payload}`,
     method: "GET",
     headers: headersList,
   };
@@ -1221,7 +1221,7 @@ export async function adminEditUser(id, payload) {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: "http://localhost:5001/api/v1/" + `admincrud/editUser/${id}`,
+    url: URL + `admincrud/editUser/${id}`,
     method: "put",
     headers: headersList,
     data: payload
