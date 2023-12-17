@@ -27,7 +27,7 @@ const AdminMentors = () => {
             title={
                 <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
                     <Grid item>
-                        <Typography variant="h3">Students</Typography>
+                        <Typography variant="h3">Mentors</Typography>
                     </Grid>
                     <Grid item>
                         <OutlinedInput

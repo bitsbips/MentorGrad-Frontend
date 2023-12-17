@@ -199,7 +199,7 @@ export const LabelWhite = styled.p`
 
 export const InputHolder = styled.div`
   margin-top: 2%;
-
+  border-radius: 15px
   @media (max-width: 750px) {
     margin-top: 5%;
   }
@@ -219,7 +219,6 @@ export const Heading = styled.p`
 
 export const CheckedPosition = styled.div`
   margin-top: 0.2%;
-
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

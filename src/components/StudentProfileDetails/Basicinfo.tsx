@@ -39,7 +39,7 @@ import { add } from "lodash";
 import { Context } from "../../Context/ContextStates";
 import useMediaQuery from "../../hooks/MediaQuery";
 import { jwtDecode } from "../../helper-functions";
-
+import BorderRadius from "../../pages/Admin/layout/Customization/BorderRadius";
 const Basicinfo = () => {
   const userData = jwtDecode(localStorage.getItem("@storage_Key"));
   const isMobile = useMediaQuery("(min-width: 950px)");
@@ -221,7 +221,7 @@ const Basicinfo = () => {
             onChange={handleImageUpload}
           />
           <ContainerForm>
-            <PositionProfileForm style={{ marginTop: "10px" }}>
+            <PositionProfileForm style={{ marginTop: "10px"}} >
               <ColumnStudentForm>
                 <LabelProfileb>First Name</LabelProfileb>
                 <TextInput
@@ -271,9 +271,12 @@ const Basicinfo = () => {
                   borderRadius: 5,
                   backgroundColor: "#F2F5F9",
                   "& fieldset": {
-                    borderRadius: 1.5,
+                    borderRadius: "15px",
                     borderWidth: "1.5px",
                     borderColor: "#D6D6D6",
+                    paddingTop:"18px",
+                    paddingBottom:"18px",
+                    marginTop:"-7px"
                   },
                 }}
                 onChange={handleCountryChange}
@@ -300,9 +303,12 @@ const Basicinfo = () => {
                   borderRadius: 5,
                   backgroundColor: "#F2F5F9",
                   "& fieldset": {
-                    borderRadius: 1.5,
+                    borderRadius: "15px",
                     borderWidth: "1.5px",
                     borderColor: "#D6D6D6",
+                    paddingTop:"18px",
+                    paddingBottom:"18px",
+                    marginTop:"-7px"
                   },
                 }}
                 onChange={(event, selectedValue: any) =>
@@ -339,11 +345,17 @@ const Basicinfo = () => {
                 id={"1"}
                 width={"100%"}
                 type={"text"}
+                sx={{ height: "1em" }}
               />
             </InputHolder>
             <ButtonComp
               load={load}
-              style={{ marginTop: "4%", padding: "8px", marginBottom: "5%" }}
+              style={{
+                marginTop: "4%",
+                padding: "8px",
+                marginBottom: "5%",
+                borderRadius: "15px",
+              }}
               fontSize={"12px"}
               width={isMobile ? "20%" : "60%"}
               title="Save Changes"

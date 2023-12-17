@@ -153,9 +153,11 @@ const Passportinfo: FC = () => {
                                     backgroundColor: '#F2F5F9',
                                     marginTop: '1%',
                                     '& fieldset': {
-                                        borderRadius: 1.5, borderWidth: '1.5px',
+                                        borderRadius: "15px", borderWidth: '1.5px',
                                         borderColor: '#D6D6D6',
-
+                                        paddingTop:"18px",
+                                        paddingBottom:"18px",
+                                        marginTop:"-7px"
                                     }
                                 }}
                                 onChange={(event, selectedValue) => handleCountryChange(selectedValue)}

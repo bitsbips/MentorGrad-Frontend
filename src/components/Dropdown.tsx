@@ -107,11 +107,14 @@ const DropdownCompo: React.FC<Props> = (props) => {
                 textAlign: 'left', 
                 padding: props.padding,
                 '& fieldset': {
-                    borderRadius: 1.5, borderWidth: '1.5px',
+                    borderRadius: "15px", borderWidth: '1.5px',
                     borderColor: '#D6D6D6',
                     padding: '1%',
                     textAlign: 'left', 
                     fontSize: 14,
+                    paddingTop:"18px",
+                    paddingBottom:"18px",
+                    marginTop:"-5px"
                 }
             }}
         >

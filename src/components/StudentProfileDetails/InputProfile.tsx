@@ -1,5 +1,5 @@
-import { TextField } from '@mui/material';
-import React, { useState, ChangeEvent } from 'react';
+import { TextField } from "@mui/material";
+import React, { useState, ChangeEvent } from "react";
 
 interface TextInputProps {
   value: any;
@@ -10,7 +10,8 @@ interface TextInputProps {
   type?: any;
   id?: any;
   maxLength?: number; // Add maxLength as a prop
-  size?:any;
+  size?: any;
+  sx?: any;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -24,10 +25,10 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     setIsHovered(false);
   };
 
-  const borderColor = isHovered ? '#000' : '#D6D6D6';
+  const borderColor = isHovered ? "#000" : "#D6D6D6";
   return (
     <TextField
-    size={props.size ? props.size : "large" || "large"}
+      size={props.size ? props.size : "large" || "large"}
       disabled={props.editable}
       fullWidth
       placeholder={props.placeholder}
@@ -39,6 +40,16 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       onChange={props.onChange}
       id={props.id}
       variant="outlined"
+      sx={{
+        "& fieldset": {
+          borderRadius: "15px",
+          borderWidth: "1.5px",
+          borderColor: "#D6D6D6",
+          textAlign: "left",
+          fontSize: 14,
+        },
+        ...props.sx, // Keep any additional styles from props.sx
+      }}
     />
     // <input
     //   type={props.type}

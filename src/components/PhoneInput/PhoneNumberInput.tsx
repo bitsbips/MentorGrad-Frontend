@@ -25,7 +25,12 @@ const InputPhone = (props: any) => {
           specialLabel={''}
           country={'us'}
           inputStyle={{
-            borderColor: (props.touched && props.error) && "red"
+            borderColor: (props.touched && props.error) && "red",
+            borderRadius:"15px",
+            paddingTop:"16px",
+            paddingBottom:"16px",
+            // paddingLeft:"14px",
+            paddingRight:"14px"
           }}
           {...props}
         />
