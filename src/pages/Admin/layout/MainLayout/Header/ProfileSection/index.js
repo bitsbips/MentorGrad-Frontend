@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackdropLoader from '../../../../../../components/BackdropLoader';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -46,7 +47,7 @@ const ProfileSection = () => {
     const theme = useTheme();
     const { borderRadius } = useConfig();
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false);
     const [sdm, setSdm] = useState(true);
     const [value, setValue] = useState('');
     const [notification, setNotification] = useState(false);
@@ -59,7 +60,13 @@ const ProfileSection = () => {
     const anchorRef = useRef(null);
     const handleLogout = async () => {
         try {
-            await logout();
+            setIsLoading(true);
+            setTimeout(() => {
+              localStorage.removeItem('@storage_Key');
+        
+              setIsLoading(false);
+              navigate('/login');
+            }, 2000);
         } catch (err) {
             console.error(err);
         }
@@ -330,6 +337,8 @@ const ProfileSection = () => {
                     </ClickAwayListener>
                 )}
             </Popper>
+            <BackdropLoader open={isLoading} />
+
         </>
     );
 };
