@@ -40,7 +40,7 @@ const PasswordInput: React.FC<Props> = (props) => {
         },
         '& fieldset': {
           paddingLeft: (theme) => theme.spacing(2),
-          borderRadius: '6px',
+          borderRadius: '15px',
           border: '1px solid #DCDBDD',
         },
         '&::placeholder': {

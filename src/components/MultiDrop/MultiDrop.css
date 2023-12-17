@@ -17,11 +17,16 @@
 /* Remove the default border added by MultiSelect */
 .multi-drop-container .dark {
   border: none !important;
-  border-radius: none !important;
+  border-radius: 15px !important;
 }
 
 .rmsc.dark {
   --rmsc-bg: #F2F5F9;
+}
+.dropdown-container{
+  border-radius: 15px !important;
+  padding-top: 8.5px !important;
+  padding-bottom: 8.5px !important;
 }
 
   .multi-drop-container .dropdown-wrapper .item-checkbox {
