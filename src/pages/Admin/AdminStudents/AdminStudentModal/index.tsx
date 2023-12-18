@@ -46,6 +46,10 @@ const AdminMentorModal: React.FC<AdminMentorModalProps> = ({
 }) => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+  const [fetchedUserType, setFetchedUserType] = React.useState("");
+  const [fetchedVerified, setFetchedVerified] = React.useState(false);
+  const [fetchedDeactivationStatus, setFetchedDeactivationStatus] =
+    React.useState(false);
   const userTypeRef = React.useRef<HTMLInputElement>();
   const isVerifiedRef = React.useRef<HTMLInputElement>(null);
   const isDeactivatedRef = React.useRef<HTMLInputElement>(null);
@@ -57,18 +61,9 @@ const AdminMentorModal: React.FC<AdminMentorModalProps> = ({
 
         setFirstName(userData.data.first_name || ""); // Set default to empty string if undefined
         setLastName(userData.data.last_name || ""); // Set default to empty string if undefined
-        // Set default values for the dropdowns
-        if (userTypeRef.current) {
-          userTypeRef.current.value = userData.data.userType || "Mentor";
-        }
-
-        if (isVerifiedRef.current) {
-          isVerifiedRef.current.value = userData.data.isverified ? "Verified" : "Unverified";
-        }
-
-        if (isDeactivatedRef.current) {
-          isDeactivatedRef.current.value = userData.data.isDeactivated ? "Deactivated" : "Activated";
-        }
+        setFetchedVerified(userData.data.isverified);
+        setFetchedUserType(userData.data.userType);
+        setFetchedDeactivationStatus(userData.data.isDeactivated);
       } catch (error) {
         console.error("Error fetching user data:", (error as Error).message);
       }
@@ -78,20 +73,59 @@ const AdminMentorModal: React.FC<AdminMentorModalProps> = ({
   }, [id]);
 
   const handleUpdate = () => {
+    let finalUserType = fetchedUserType;
+    let finalVerificationStatus = fetchedVerified;
+    let finalDeactivationStatus = fetchedDeactivationStatus;
+
+    if (
+      ["Mentor", "Student"].includes(
+        userTypeRef.current?.innerText.split("user")[0].split("\n")[0] as string
+      )
+    ) {
+      finalUserType = userTypeRef.current?.innerText
+        .split("user")[0]
+        .split("\n")[0] as string;
+    }
+
+    if (
+      ["Verified", "Unverified"].includes(
+        isVerifiedRef.current?.innerText.split("is")[0].split("\n")[0] as string
+      )
+    ) {
+      finalVerificationStatus =
+        isVerifiedRef.current?.innerText.split("is")[0].split("\n")[0] ===
+        "Verified";
+    }
+
+    if (
+      ["Activated", "Deactivated"].includes(
+        isDeactivatedRef.current?.innerText
+          .split("Activation")[0]
+          .split("\n")[0] as string
+      )
+    ) {
+      finalDeactivationStatus =
+        isDeactivatedRef.current?.innerText
+          .split("Activation")[0]
+          .split("\n")[0] === "Deactivated";
+    }
+
+    console.log(
+      isDeactivatedRef.current?.innerText
+        .split("Activation")[0]
+        .split("\n")[0] as string
+    );
+
     adminEditUser(id, {
       first_name: firstName,
       last_name: lastName,
-      userType: userTypeRef.current?.innerText.split("user")[0].split("\n")[0],
-      isverified:
-        isVerifiedRef.current?.innerText.split("is")[0].split("\n")[0] ===
-        "Verified",
-      isDeactivated:
-        isDeactivatedRef.current?.innerText
-          .split("Activation")[0]
-          .split("\n")[0] === "Deactivate",
+      userType: finalUserType,
+      isverified: finalVerificationStatus,
+      isDeactivated: finalDeactivationStatus,
     })
       .then((response) => console.log("User updated"))
       .catch((e) => console.log(e));
+
   };
 
   return (
@@ -159,8 +193,8 @@ const AdminMentorModal: React.FC<AdminMentorModalProps> = ({
                   label="Activation Status"
                   ref={isDeactivatedRef}
                 >
-                  <MenuItem value={"Activated"}>Activate</MenuItem>
-                  <MenuItem value={"Deactivated"}>Deactivate</MenuItem>
+                  <MenuItem value={"Activated"}>Activated</MenuItem>
+                  <MenuItem value={"Deactivated"}>Deactivated</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
