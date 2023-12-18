@@ -45,7 +45,6 @@ const Sidebar = () => {
     const drawerContent = (
         <>
             <MenuList />
-            {layout === LAYOUT_CONST.VERTICAL_LAYOUT && drawerOpen && <MenuCard />}
             {layout === LAYOUT_CONST.VERTICAL_LAYOUT && drawerOpen && (
                 <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
                     <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
@@ -103,12 +102,10 @@ const Sidebar = () => {
                     ModalProps={{ keepMounted: true }}
                     color="inherit"
                 >
-                    {matchDownMd && logo}
                     {drawer}
                 </Drawer>
             ) : (
                 <MiniDrawerStyled variant="permanent" open={drawerOpen}>
-                    {logo}
                     {drawer}
                 </MiniDrawerStyled>
             )}

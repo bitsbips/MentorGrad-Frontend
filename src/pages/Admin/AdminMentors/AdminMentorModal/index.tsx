@@ -13,6 +13,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { adminEditUser, getUserById } from "../../../../api";
+import { notifyError, notifySuccess } from "../../../../components/Toastifycom";
 
 interface ObjectToUpdate {
   first_name: string;
@@ -26,6 +27,7 @@ interface AdminStudentModalProps {
   id: string;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  getAllUsers: () => void;
 }
 
 const style = {
@@ -43,6 +45,7 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
   id,
   open,
   setOpen,
+  getAllUsers,
 }) => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -124,9 +127,12 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
       isverified: finalVerificationStatus,
       isDeactivated: finalDeactivationStatus,
     })
-      .then((response) => console.log("User updated"))
-      .catch((e) => console.log(e));
-
+      .then((response) => {
+        notifySuccess("The user has been updated");
+        setOpen(false);
+        getAllUsers();
+      })
+      .catch((e) => notifyError("There was an issue updating the user"));
   };
 
   return (
