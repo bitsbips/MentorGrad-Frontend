@@ -1,57 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useTheme } from '@mui/material/styles';
-import { Button, Grid, InputAdornment, Menu, MenuItem, OutlinedInput, Pagination, Typography } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
+import {
+  Button,
+  Grid,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  OutlinedInput,
+  Pagination,
+  Typography,
+} from "@mui/material";
 
-import MentorList from './MentorList';
+import MentorList from "./MentorList";
 
-import { IconSearch } from '@tabler/icons';
-import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import MainCard from '../ui-component/cards/MainCard';
-import AdminMentorModal from './AdminMentorModal';
+import { IconSearch } from "@tabler/icons";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import MainCard from "../ui-component/cards/MainCard";
+import AdminMentorModal from "./AdminMentorModal";
 
 const AdminMentors = () => {
-    const theme = useTheme();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const theme = useTheme();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [page, setPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(1);
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    return (
-        <MainCard
-            title={
-                <Grid container alignItems="center" justifyContent="space-between" spacing={3}>
-                    <Grid item>
-                        <Typography variant="h3">Mentors</Typography>
-                    </Grid>
-                    <Grid item>
-                        <OutlinedInput
-                            id="input-search-list-style1"
-                            placeholder="Search"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <IconSearch stroke={1.5} size="16px" />
-                                </InputAdornment>
-                            }
-                            size="small"
-                        />
-                    </Grid>
-                </Grid>
-            }
-            content={false}
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <MainCard
+      title={
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          spacing={3}
         >
-            <MentorList />
-            <Grid item xs={12} sx={{ p: 3 }}>
-                <Grid container spacing={3}>
-                    <Grid item>
-                        <Pagination count={10} color="primary" />
-                    </Grid>
-                    {/* <Grid item>
+          <Grid item>
+            <Typography variant="h3">Mentors</Typography>
+          </Grid>
+          <Grid item>
+            <OutlinedInput
+              id="input-search-list-style1"
+              placeholder="Search"
+              startAdornment={
+                <InputAdornment position="start">
+                  <IconSearch stroke={1.5} size="16px" />
+                </InputAdornment>
+              }
+              size="small"
+            />
+          </Grid>
+        </Grid>
+      }
+      content={false}
+    >
+      <MentorList page={page} setMaxPages={setMaxPages} />
+      <Grid item xs={12} sx={{ p: 3 }}>
+        <Grid container spacing={3}>
+          <Grid item>
+            <Pagination count={maxPages} color="primary" page={page} />
+          </Grid>
+          {/* <Grid item>
                         <Button
                             size="large"
                             sx={{ color: theme.palette.grey[900] }}
@@ -84,10 +100,10 @@ const AdminMentors = () => {
                             </Menu>
                         )}
                     </Grid> */}
-                </Grid>
-            </Grid>
-        </MainCard>
-    );
+        </Grid>
+      </Grid>
+    </MainCard>
+  );
 };
 
 export default AdminMentors;
