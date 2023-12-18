@@ -20,7 +20,7 @@ const icons = {
 
 const application = {
     id: 'application',
-    title: <FormattedMessage id="application" />,
+    title: <FormattedMessage id=" " />,
     icon: icons.IconApps,
     type: 'group',
     children: [

@@ -69,8 +69,8 @@ const MenuList = () => {
                 if (item.url && item.id !== lastItemId) {
                     return (
                         <List key={item.id}>
-                            <NavItem item={item} level={1} isParents />
-                            {layout !== LAYOUT_CONST.HORIZONTAL_LAYOUT && <Divider sx={{ py: 0.5 }} />}
+                            {/* <NavItem item={item} level={1} isParents />
+                            {layout !== LAYOUT_CONST.HORIZONTAL_LAYOUT && <Divider sx={{ py: 0.5 }} />} */}
                         </List>
                     );
                 }
