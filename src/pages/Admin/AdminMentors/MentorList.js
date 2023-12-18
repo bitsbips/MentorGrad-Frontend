@@ -31,6 +31,7 @@ import Avatar from "../ui-component/extended/Avatar";
 import { useDispatch, useSelector } from "../store";
 import { adminDeleteUser, adminGetAllUsers } from "../../../api";
 import AdminMentorModal from "./AdminMentorModal";
+import { notifySuccess } from "../../../components/Toastifycom";
 
 const avatarImage = require.context("../assets/images/users", true);
 
@@ -72,7 +73,10 @@ const UserList = ({ page, setMaxPages }) => {
   const handleDelete = (id) => {
     console.log(`Delete ${id}`);
     adminDeleteUser(id)
-      .then(() => getAllUsers())
+      .then(() => {
+        getAllUsers();
+        notifySuccess("User has been successfully deleted");
+      })
       .catch((e) => console.log("ERROR DELETING", e));
   };
 
@@ -92,7 +96,7 @@ const UserList = ({ page, setMaxPages }) => {
                     </TableRow>
                 </TableHead> */}
         <TableBody>
-          <AdminMentorModal id={idToUpdate} open={open} setOpen={setOpen} />
+          <AdminMentorModal id={idToUpdate} open={open} setOpen={setOpen} getAllUsers={getAllUsers} />
           {data &&
             data.map((row, index) => (
               <TableRow hover key={index}>
@@ -174,7 +178,9 @@ const UserList = ({ page, setMaxPages }) => {
                     variant="contained"
                     sx={{ m: 0.2 }}
                     color="error"
-                    onClick={() => handleDelete(row._id)}
+                    onClick={() => {
+                      handleDelete(row._id);
+                    }}
                   >
                     <DeleteIcon />
                   </Button>

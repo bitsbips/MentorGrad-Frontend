@@ -31,6 +31,7 @@ import Avatar from "../ui-component/extended/Avatar";
 import { useDispatch, useSelector } from "../store";
 import { adminDeleteUser, adminGetAllUsers } from "../../../api";
 import AdminStudentModal from "./AdminStudentModal";
+import { notifyError, notifySuccess } from "../../../components/Toastifycom";
 
 const avatarImage = require.context("../assets/images/users", true);
 
@@ -72,8 +73,13 @@ const StudentList = ({ page, setMaxPages }) => {
   const handleDelete = (id) => {
     console.log(`Delete ${id}`);
     adminDeleteUser(id)
-      .then(() => getAllUsers())
-      .catch((e) => console.log("ERROR DELETING", e));
+      .then(() => {
+        notifySuccess("The user has been deleted");
+        getAllUsers();
+      })
+      .catch((e) => {
+        notifyError("There was an error deleting the user");
+      });
   };
 
   return (
@@ -92,7 +98,12 @@ const StudentList = ({ page, setMaxPages }) => {
                     </TableRow>
                 </TableHead> */}
         <TableBody>
-          <AdminStudentModal id={idToUpdate} open={open} setOpen={setOpen} />
+          <AdminStudentModal
+            id={idToUpdate}
+            open={open}
+            setOpen={setOpen}
+            getAllUsers={getAllUsers}
+          />
 
           {data &&
             data.map((row, index) => (
