@@ -83,9 +83,7 @@ const Login = () => {
           to={"/register"}
         />
         <CenterContent>
-          <HeadingTop>Sign in to Business</HeadingTop>
-          <AllSocial />
-          <HorizontalLine title="or" />
+          <HeadingTop>Sign in to Admin</HeadingTop>
           <form onSubmit={handleSubmit}>
             <div style={{ marginTop: 10 }}>
               <Input
@@ -109,10 +107,6 @@ const Login = () => {
               <ErrorText>{errors.password}</ErrorText>
             </div>
             <Position>
-              <ForgetPass onClick={() => navigate("/forgetEmail")}>
-                Forget Password?
-              </ForgetPass>
-
               <Button
                 fontSize={"14px"}
                 load={load}
