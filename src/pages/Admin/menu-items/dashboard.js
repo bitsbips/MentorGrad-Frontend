@@ -26,15 +26,15 @@ const dashboard = {
             icon: "icons.IconDashboard",
             breadcrumbs: false
         },
-        {
-            id: 'analytics',
-            title: <FormattedMessage id="analytics" />,
-            type: 'item',
-            // url: '/dashboard/analytics',
-            url: '/admin',
-            icon: icons.IconDeviceAnalytics,
-            breadcrumbs: false
-        }
+        // {
+        //     id: 'analytics',
+        //     title: <FormattedMessage id="analytics" />,
+        //     type: 'item',
+        //     // url: '/dashboard/analytics',
+        //     url: '/admin',
+        //     icon: icons.IconDeviceAnalytics,
+        //     breadcrumbs: false
+        // }
     ]
 };
 

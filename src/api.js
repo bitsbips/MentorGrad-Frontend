@@ -6,9 +6,9 @@ import { jwtDecode } from "./helper-functions";
 // export const selfUrl = "http://localhost:3000"
 // export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = 'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
+const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const IMGURL =
-  'https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/';
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const selfUrl = "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
 
 // Chat Urls
@@ -46,9 +46,46 @@ export async function LoginUser(value) {
       email: value.email,
       password: value.password,
     });
-    await localStorage.setItem("@storage_Key", response.data.token);
 
-    return response.data;
+    if (response.data.user.userType !== "Admin") {
+      console.log(response.data);
+      await localStorage.setItem("@storage_Key", response.data.token);
+      return response.data;
+    } else {
+      return {
+        message: "User is not an Admin",
+        response: {
+          status: 401,
+        },
+        status: false,
+      };
+    }
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
+  }
+}
+
+export async function LoginAdmin(value) {
+  try {
+    const response = await axios.post(URL + "auth/login", {
+      email: value.email,
+      password: value.password,
+    });
+
+    if (response.data.user.userType === "Admin") {
+      console.log(response.data);
+      await localStorage.setItem("@storage_Key", response.data.token);
+      return response.data;
+    } else {
+      return {
+        message: "Please login with admin credentials",
+        response: {
+          status: 401,
+        },
+        status: false,
+      };
+    }
   } catch (error) {
     console.log(error.response.data);
     return error.response.data;
@@ -715,9 +752,7 @@ export async function calculateEmptyFieldsPercentage() {
 
 export async function getBookingsById() {
   const token = localStorage.getItem("@storage_Key");
-  const id = jwtDecode(
-    localStorage.getItem("@storage_Key")
-  )?.userId
+  const id = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
 
   let headersList = {
     Accept: "*/*",
@@ -1052,7 +1087,6 @@ export async function getStudentInvoices() {
 export async function createSubscription() {
   const token = localStorage.getItem("@storage_Key");
 
-
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -1076,7 +1110,6 @@ export async function createSubscription() {
 export async function approvePayment() {
   const token = localStorage.getItem("@storage_Key");
 
-
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -1099,7 +1132,6 @@ export async function approvePayment() {
 
 export async function getSubscriptionByUserId() {
   const token = localStorage.getItem("@storage_Key");
-
 
   let headersList = {
     Accept: "*/*",
@@ -1156,7 +1188,7 @@ export async function adminGetAllUsers(payload) {
     url: URL + `admincrud/getAllUsers`,
     method: "GET",
     headers: headersList,
-    params: payload
+    params: payload,
   };
 
   let response = await axios.request(reqOptions);
@@ -1188,7 +1220,6 @@ export async function getUserById(payload) {
     return e.response.data;
   }
 }
-
 
 export async function admincreateUser() {
   const token = localStorage.getItem("@storage_Key");
@@ -1224,7 +1255,7 @@ export async function adminEditUser(id, payload) {
     url: URL + `admincrud/editUser/${id}`,
     method: "put",
     headers: headersList,
-    data: payload
+    data: payload,
   };
 
   let response = await axios.request(reqOptions);

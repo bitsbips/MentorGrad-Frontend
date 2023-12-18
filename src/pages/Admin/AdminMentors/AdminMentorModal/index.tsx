@@ -51,7 +51,6 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
   const isDeactivatedRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    console.log("2222222222222222222222222222")
     const fetchData = async () => {
       try {
         const userData = await getUserById(id);
