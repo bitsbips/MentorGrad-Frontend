@@ -15,9 +15,7 @@ import {
 import MentorList from "./MentorList";
 
 import { IconSearch } from "@tabler/icons";
-import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import MainCard from "../ui-component/cards/MainCard";
-import AdminMentorModal from "./AdminMentorModal";
 
 const AdminMentors = () => {
   const theme = useTheme();

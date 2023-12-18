@@ -75,6 +75,7 @@ import { JWTProvider } from "./pages/Admin/contexts/JWTContext";
 import { IntlProvider } from "react-intl";
 import AdminMentors from "./pages/Admin/AdminMentors";
 import AdminStudents from "./pages/Admin/AdminStudents";
+import AdminLogin from "./pages/Admin/AdminLogin";
 
 const theme = createTheme({
   typography: {
@@ -250,6 +251,7 @@ function App() {
       <Route path="/bookAppointment" element={<MentorAppointmentBooking />} />
       <Route path="/checkout" element={<CheckoutForm />} />
       <Route path="/return" element={<Return />} />
+      <Route path="/*" element={<>Uh-oh! Invalid or unaccessible route</>} />
     </Routes>
   );
 
@@ -258,6 +260,7 @@ function App() {
       <Route path="/dashboard" element={<MentorDashboardMain />} />
       <Route path="/profile" element={<MentorProfile />} />
       <Route path="/messages" element={<Main />} />
+      <Route path="/*" element={<>Uh-oh! Invalid or unaccessible route</>} />
     </Routes>
   );
 
@@ -317,6 +320,27 @@ function App() {
           </Provider>
         }
       />
+      <Route
+        path="/users/students"
+        element={
+          <Provider store={store}>
+            <JWTProvider>
+              <IntlProvider locale="en" defaultLocale="en">
+                <AdminThemeCustomization>
+                  <RTLLayout>
+                    <MainLayout>
+                      <Route
+                        path="/*"
+                        element={<>Uh-oh! Invalid or unaccessible route</>}
+                      />
+                    </MainLayout>
+                  </RTLLayout>
+                </AdminThemeCustomization>
+              </IntlProvider>
+            </JWTProvider>
+          </Provider>
+        }
+      />
     </Routes>
   );
   return (
@@ -358,6 +382,7 @@ function App() {
             <Route path="/mentor" element={<Mentor />} />
             <Route path="/mentor/signup" element={<MentorForm />} />
             <Route path="/validate-user" element={<ValidateLinkedIn />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
           </Routes>
         </Context.Provider>
         <Toast />
