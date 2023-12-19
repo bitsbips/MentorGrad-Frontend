@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useTheme } from "@mui/material/styles";
 import {
@@ -16,16 +16,42 @@ import MentorList from "./MentorList";
 
 import { IconSearch } from "@tabler/icons";
 import MainCard from "../ui-component/cards/MainCard";
+import { adminGetUsersSearch } from "../../../api";
+
+// ... (imports remain unchanged)
 
 const AdminMentors = () => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await adminGetUsersSearch({
+          page: page,
+          limit: 10,
+          userType: "Mentor",
+          search: search,
+        });
+        console.log("userData:", userData); // Log the userData
+
+        setMaxPages(userData.data.totalPages);
+        setFilteredData(userData.data.users);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, [search, page]);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -47,6 +73,7 @@ const AdminMentors = () => {
             <OutlinedInput
               id="input-search-list-style1"
               placeholder="Search"
+              onChange={(e) => setSearch(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
                   <IconSearch stroke={1.5} size="16px" />
@@ -59,45 +86,13 @@ const AdminMentors = () => {
       }
       content={false}
     >
-      <MentorList page={page} setMaxPages={setMaxPages} />
+      {/* Use filteredData when search is present, otherwise use the regular data */}
+      <MentorList page={page} setMaxPages={setMaxPages} SearchData={search ? filteredData : null} />
       <Grid item xs={12} sx={{ p: 3 }}>
         <Grid container spacing={3}>
           <Grid item>
-            <Pagination count={maxPages} color="primary" page={page} />
+            <Pagination count={maxPages} color="primary" page={page} onChange={(event, value) => setPage(value)} />
           </Grid>
-          {/* <Grid item>
-                        <Button
-                            size="large"
-                            sx={{ color: theme.palette.grey[900] }}
-                            color="secondary"
-                            endIcon={<ExpandMoreRoundedIcon />}
-                            onClick={handleClick}
-                        >
-                            10 Rows
-                        </Button>
-                        {anchorEl && (
-                            <Menu
-                                id="menu-user-list-style1"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                                variant="selectedMenu"
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }}
-                                transformOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'right'
-                                }}
-                            >
-                                <MenuItem onClick={handleClose}> 10 Rows</MenuItem>
-                                <MenuItem onClick={handleClose}> 20 Rows</MenuItem>
-                                <MenuItem onClick={handleClose}> 30 Rows </MenuItem>
-                            </Menu>
-                        )}
-                    </Grid> */}
         </Grid>
       </Grid>
     </MainCard>
@@ -105,3 +100,4 @@ const AdminMentors = () => {
 };
 
 export default AdminMentors;
+

@@ -37,7 +37,7 @@ const avatarImage = require.context("../assets/images/users", true);
 
 // ==============================|| USER LIST 1 ||============================== //
 
-const StudentList = ({ page, setMaxPages }) => {
+const StudentList = ({ page, setMaxPages, SearchData }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -69,6 +69,8 @@ const StudentList = ({ page, setMaxPages }) => {
       setData(response.data.users);
     });
   };
+
+  const users = SearchData || data;
 
   const handleDelete = (id) => {
     console.log(`Delete ${id}`);
@@ -105,8 +107,8 @@ const StudentList = ({ page, setMaxPages }) => {
             getAllUsers={getAllUsers}
           />
 
-          {data &&
-            data.map((row, index) => (
+          {users &&
+            users.map((row, index) => (
               <TableRow hover key={index}>
                 <TableCell>
                   <Grid container spacing={2} alignItems="center">
