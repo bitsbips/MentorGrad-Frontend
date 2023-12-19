@@ -31,6 +31,7 @@ import {
   fetchImagesBLOB,
   uploadprofilepic,
   getUserById,
+  adminEditUser
 } from "../../api";
 import Loadercom from "../Loadercom";
 import SkeletonProfile from "../SkeletonLoader/SkeletonProfile";
@@ -170,6 +171,16 @@ const Basicinfo = () => {
         setLoad(false);
         notifyError(e.message);
       }
+    });
+    adminEditUser(userData.id,{
+      first_name: firstname,
+      last_name: lastname
+    })
+    .then((e) => {
+    })
+    .catch((error) => {
+      console.error("Error updating the data", error);
+      setLoad(false);
     });
   };
 

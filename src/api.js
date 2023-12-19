@@ -1069,7 +1069,7 @@ export async function getStudentInvoices() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `invoice/getBySenderId/${userId}`,
+    url: `http://localhost:5001/api/v1/` + `invoice/getBySenderId/${userId}`,
     method: "GET",
     headers: headersList,
   };
