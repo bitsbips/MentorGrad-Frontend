@@ -26,6 +26,7 @@ import Spinner from "../../components/Spinner";
 import { Container } from "../AuthFlow/AuthStyles";
 import { ContainerDa } from "../../components/StudentProfileDetails/StudentProfileStyles";
 import {
+  findMentors,
   getMentorBySuggessionCountry,
   getMentorBySuggessionLanguage,
   getMentorBySuggessionUniversity,
@@ -78,25 +79,63 @@ const MentorSearch = () => {
   }, []);
 
   const getCountryMentors = async () => {
-    await getMentorBySuggessionCountry()
+    // await getMentorBySuggessionCountry()
+    //   .then((res) => {
+    //     setMentorListCountry(res);
+    //   })
+    //   .catch((err) => {});
+    let payload = {
+      countryOfResidence: "",
+      gender: "",
+      mentoringarea: "",
+    };
+
+    await findMentors(payload)
       .then((res) => {
         setMentorListCountry(res);
+        console.log(res);
       })
       .catch((err) => {});
   };
 
   const getLanguageMentors = async () => {
-    await getMentorBySuggessionLanguage()
+    // await getMentorBySuggessionLanguage()
+    //   .then((res) => {
+    //     setMentorListLanguage(res);
+    //   })
+    //   .catch((err) => {});
+
+    let payload = {
+      countryOfResidence: "",
+      gender: "",
+      mentoringarea: "",
+    };
+
+    await findMentors(payload)
       .then((res) => {
         setMentorListLanguage(res);
+        console.log(res);
       })
       .catch((err) => {});
   };
 
   const getUniversityMentors = async () => {
-    await getMentorBySuggessionUniversity()
+    // await getMentorBySuggessionUniversity()
+    //   .then((res) => {
+    //     setMentorListUniversity(res);
+    //   })
+    //   .catch((err) => {});
+
+    let payload = {
+      countryOfResidence: "",
+      gender: "",
+      mentoringarea: "",
+    };
+
+    await findMentors(payload)
       .then((res) => {
         setMentorListUniversity(res);
+        console.log(res);
       })
       .catch((err) => {});
   };
@@ -118,13 +157,7 @@ const MentorSearch = () => {
                 fontSize={isMobile ? "small" : "large"}
                 noWrap
               >
-                {mentorList?.length} matches found for: Mentors{" "}
-                {filters.country === "" || filters.country === null
-                  ? "OverAll"
-                  : filters.country === mentorList[0]?.countryOfResidence
-                  ? ` in 
-            ${mentorList[0]?.countryOfResidence}`
-                  : "OverAll"}
+                Smart Matches
               </Typography>
               {isMobile2 && (
                 <IconButton
@@ -136,14 +169,183 @@ const MentorSearch = () => {
               )}
             </Stack>
             <RightContainerDash>
-              <Grid item sm={12} lg={12}>
+              <Grid
+                item
+                sm={12}
+                lg={12}
+                sx={{
+                  backgroundColor: "#fff",
+                  padding: 4,
+                  border: "1px solid #D6D6D6",
+                  borderRadius: "15px",
+                }}
+              >
                 <Grid container gap={2}>
-                  <h5 style={{color: "gray"}}>Mentor you may know from same country</h5>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know from same country
+                  </h5>
                   <Grid item sm={12} lg={12}>
                     {loading ? (
                       <Spinner />
-                    ) : (   
+                    ) : (
                       mentorListCountry?.map((mentor, index) => (
+                        <Box
+                          sx={{
+                            margin: isMobile ? "0px 15px" : "",
+                          }}
+                          key={index}
+                        >
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
+                            <Stack
+                              justifyContent={"space-between"}
+                              flexDirection={isMobile ? "column" : "row"}
+                              gap={isMobile ? 3 : 0}
+                              p={isMobile ? 2.5 : 0}
+                            >
+                              <Stack
+                                flexDirection={"row"}
+                                gap={2}
+                                width={isMobile ? "100%" : "70%"}
+                              >
+                                <img
+                                  style={
+                                    isMobile
+                                      ? { width: "35%", borderRadius: "10px" }
+                                      : { width: "20%", borderRadius: "10px" }
+                                  }
+                                  src={
+                                    mentor?.attachments?.length > 0
+                                      ? mentor?.attachments[0]?.attachmentPath
+                                      : "https://mentorgrad.s3.us-west-2.amazonaws.com/dummy2.jpg"
+                                  }
+                                />
+                                <Stack flexDirection={"column"}>
+                                  <Typography
+                                    textAlign={"left"}
+                                    noWrap
+                                    sx={{ color: "#5F61BE" }}
+                                    fontSize={"medium"}
+                                    fontWeight={600}
+                                  >
+                                    {mentor?.userName}
+                                  </Typography>
+                                  <Typography
+                                    textAlign={"left"}
+                                    noWrap
+                                    fontSize={"small"}
+                                    sx={{ color: "#8E8E8E" }}
+                                  >
+                                    Data Scientist
+                                  </Typography>
+                                  <Stack
+                                    flexDirection={"row"}
+                                    sx={{ mt: 2 }}
+                                    alignItems={"center"}
+                                  >
+                                    {new Array(4).fill(
+                                      <StarIcon
+                                        sx={{ color: "#FFD707" }}
+                                        fontSize="small"
+                                      />
+                                    )}
+                                    {new Array(1).fill(
+                                      <StarBorderIcon fontSize="small" />
+                                    )}
+                                    <small>(17)</small>
+                                  </Stack>
+                                  <Typography
+                                    textAlign={"left"}
+                                    sx={{ color: "#757575" }}
+                                    fontSize={"small"}
+                                  >
+                                    {mentor?.countryOfResidence}
+                                  </Typography>
+                                </Stack>
+                              </Stack>
+
+                              <Stack flexDirection={"column"} gap={1}>
+                                <Stack
+                                  flexDirection={"row"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
+                                >
+                                  <ReviewsIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    17 Reviews
+                                  </Typography>
+                                </Stack>
+
+                                <Stack
+                                  flexDirection={"row"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
+                                >
+                                  <LocationOnIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    {mentor?.countryOfResidence}
+                                  </Typography>
+                                </Stack>
+
+                                <Stack
+                                  flexDirection={"row"}
+                                  alignItems={"flex-end"}
+                                  gap={1}
+                                >
+                                  <MoneyIcon fontSize="small" />
+                                  <Typography noWrap fontSize="small">
+                                    {mentor?.hourlyRate}
+                                  </Typography>
+                                </Stack>
+
+                                <Button
+                                  size="small"
+                                  variant="contained"
+                                  onClick={() =>
+                                    navigate(
+                                      `/bookAppointment?id=${mentor?._id}`
+                                    )
+                                  }
+                                  sx={
+                                    isMobile
+                                      ? {
+                                          background: "#5F61BE",
+                                          width: "fit-content",
+                                          mt: "10px",
+                                          ml: "15vw",
+                                          px: "10px",
+                                        }
+                                      : {
+                                          background: "#5F61BE",
+                                          width: "fit-content",
+                                          mt: "10px",
+                                        }
+                                  }
+                                >
+                                  BOOK APPOINTMENT
+                                </Button>
+                              </Stack>
+                            </Stack>
+                          </RightBorderDashboard>
+                          <br />
+                        </Box>
+                      ))
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid container gap={2} sx={{ mt: 4 }}>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know from same university
+                  </h5>
+                  <Grid item sm={12} lg={12}>
+                    {loading ? (
+                      <Spinner />
+                    ) : (
+                      mentorListUniversity?.map((mentor, index) => (
                         <Box
                           sx={{ margin: isMobile ? "0px 15px" : "" }}
                           key={index}
@@ -285,160 +487,14 @@ const MentorSearch = () => {
                     )}
                   </Grid>
                 </Grid>
-                <Grid container gap={2} sx={{mt: 4}}>
-                  <h5 style={{color: "gray"}}>Mentor you may know from same university</h5>
+                <Grid container gap={2} sx={{ mt: 4 }}>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know with similar language
+                  </h5>
                   <Grid item sm={12} lg={12}>
                     {loading ? (
                       <Spinner />
-                    ) : (   
-                      mentorListCountry?.map((mentor, index) => (
-                        <Box
-                          sx={{ margin: isMobile ? "0px 15px" : "" }}
-                          key={index}
-                        >
-                          <RightBorderDashboard>
-                            <Stack
-                              justifyContent={"space-between"}
-                              flexDirection={isMobile ? "column" : "row"}
-                              gap={isMobile ? 3 : 0}
-                              p={isMobile ? 2.5 : 0}
-                            >
-                              <Stack
-                                flexDirection={"row"}
-                                gap={2}
-                                width={isMobile ? "100%" : "70%"}
-                              >
-                                <img
-                                  style={
-                                    isMobile
-                                      ? { width: "35%", borderRadius: "10px" }
-                                      : { width: "20%", borderRadius: "10px" }
-                                  }
-                                  src={
-                                    mentor?.attachments?.length > 0
-                                      ? mentor?.attachments[0]?.attachmentPath
-                                      : "https://mentorgrad.s3.us-west-2.amazonaws.com/dummy2.jpg"
-                                  }
-                                />
-                                <Stack flexDirection={"column"}>
-                                  <Typography
-                                    textAlign={"left"}
-                                    noWrap
-                                    sx={{ color: "#5F61BE" }}
-                                    fontSize={"medium"}
-                                    fontWeight={600}
-                                  >
-                                    {mentor?.userName}
-                                  </Typography>
-                                  <Typography
-                                    textAlign={"left"}
-                                    noWrap
-                                    fontSize={"small"}
-                                    sx={{ color: "#8E8E8E" }}
-                                  >
-                                    Data Scientist
-                                  </Typography>
-                                  <Stack
-                                    flexDirection={"row"}
-                                    sx={{ mt: 2 }}
-                                    alignItems={"center"}
-                                  >
-                                    {new Array(4).fill(
-                                      <StarIcon
-                                        sx={{ color: "#FFD707" }}
-                                        fontSize="small"
-                                      />
-                                    )}
-                                    {new Array(1).fill(
-                                      <StarBorderIcon fontSize="small" />
-                                    )}
-                                    <small>(17)</small>
-                                  </Stack>
-                                  <Typography
-                                    textAlign={"left"}
-                                    sx={{ color: "#757575" }}
-                                    fontSize={"small"}
-                                  >
-                                    {mentor?.countryOfResidence}
-                                  </Typography>
-                                </Stack>
-                              </Stack>
-
-                              <Stack flexDirection={"column"} gap={1}>
-                                <Stack
-                                  flexDirection={"row"}
-                                  alignItems={"flex-end"}
-                                  gap={1}
-                                >
-                                  <ReviewsIcon fontSize="small" />
-                                  <Typography noWrap fontSize="small">
-                                    17 Reviews
-                                  </Typography>
-                                </Stack>
-
-                                <Stack
-                                  flexDirection={"row"}
-                                  alignItems={"flex-end"}
-                                  gap={1}
-                                >
-                                  <LocationOnIcon fontSize="small" />
-                                  <Typography noWrap fontSize="small">
-                                    {mentor?.countryOfResidence}
-                                  </Typography>
-                                </Stack>
-
-                                <Stack
-                                  flexDirection={"row"}
-                                  alignItems={"flex-end"}
-                                  gap={1}
-                                >
-                                  <MoneyIcon fontSize="small" />
-                                  <Typography noWrap fontSize="small">
-                                    {mentor?.hourlyRate}
-                                  </Typography>
-                                </Stack>
-
-                                <Button
-                                  size="small"
-                                  variant="contained"
-                                  onClick={() =>
-                                    navigate(
-                                      `/bookAppointment?id=${mentor?._id}`
-                                    )
-                                  }
-                                  sx={
-                                    isMobile
-                                      ? {
-                                          background: "#5F61BE",
-                                          width: "fit-content",
-                                          mt: "10px",
-                                          ml: "15vw",
-                                          px: "10px",
-                                        }
-                                      : {
-                                          background: "#5F61BE",
-                                          width: "fit-content",
-                                          mt: "10px",
-                                        }
-                                  }
-                                >
-                                  BOOK APPOINTMENT
-                                </Button>
-                              </Stack>
-                            </Stack>
-                          </RightBorderDashboard>
-                          <br />
-                        </Box>
-                      ))
-                    )}
-                  </Grid>
-                </Grid>
-                <Grid container gap={2} sx={{mt: 4}}>
-                  <h5 style={{color: "gray"}}>Mentor you may know with similar language</h5>
-                  <Grid item sm={12} lg={12}>
-                    {loading ? (
-                      <Spinner />
-                    ) : (   
+                    ) : (
                       mentorListLanguage?.map((mentor, index) => (
                         <Box
                           sx={{ margin: isMobile ? "0px 15px" : "" }}

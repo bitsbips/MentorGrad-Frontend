@@ -318,7 +318,6 @@ export async function GetUserData() {
 
   let response = await axios.request(reqOptions);
   try {
-    console.log(response.data, "response");
     return response.data;
   } catch (e) {
     // saving error
