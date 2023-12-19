@@ -26,6 +26,7 @@ import Spinner from "../../components/Spinner";
 import { Container } from "../AuthFlow/AuthStyles";
 import { ContainerDa } from "../../components/StudentProfileDetails/StudentProfileStyles";
 import {
+  findMentors,
   getMentorBySuggessionCountry,
   getMentorBySuggessionLanguage,
   getMentorBySuggessionUniversity,
@@ -118,13 +119,7 @@ const MentorSearch = () => {
                 fontSize={isMobile ? "small" : "large"}
                 noWrap
               >
-                {mentorList?.length} matches found for: Mentors{" "}
-                {filters.country === "" || filters.country === null
-                  ? "OverAll"
-                  : filters.country === mentorList[0]?.countryOfResidence
-                  ? ` in 
-            ${mentorList[0]?.countryOfResidence}`
-                  : "OverAll"}
+                Smart Matches
               </Typography>
               {isMobile2 && (
                 <IconButton
@@ -136,19 +131,38 @@ const MentorSearch = () => {
               )}
             </Stack>
             <RightContainerDash>
-              <Grid item sm={12} lg={12}>
+              <Grid
+                item
+                sm={12}
+                lg={12}
+                sx={{
+                  backgroundColor: "#fff",
+                  padding: 4,
+                  border: "1px solid #D6D6D6",
+                  borderRadius: "15px",
+                }}
+              >
                 <Grid container gap={2}>
-                  <h5 style={{color: "gray"}}>Mentor you may know from same country</h5>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know from same country
+                  </h5>
                   <Grid item sm={12} lg={12}>
                     {loading ? (
                       <Spinner />
-                    ) : (   
+                    ) : (
                       mentorListCountry?.map((mentor, index) => (
                         <Box
-                          sx={{ margin: isMobile ? "0px 15px" : "" }}
+                          sx={{
+                            margin: isMobile ? "0px 15px" : "",
+                          }}
                           key={index}
                         >
-                          <RightBorderDashboard>
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
                             <Stack
                               justifyContent={"space-between"}
                               flexDirection={isMobile ? "column" : "row"}
@@ -285,18 +299,25 @@ const MentorSearch = () => {
                     )}
                   </Grid>
                 </Grid>
-                <Grid container gap={2} sx={{mt: 4}}>
-                  <h5 style={{color: "gray"}}>Mentor you may know from same university</h5>
+                <Grid container gap={2} sx={{ mt: 4 }}>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know from same university
+                  </h5>
                   <Grid item sm={12} lg={12}>
                     {loading ? (
                       <Spinner />
-                    ) : (   
-                      mentorListCountry?.map((mentor, index) => (
+                    ) : (
+                      mentorListUniversity?.map((mentor, index) => (
                         <Box
                           sx={{ margin: isMobile ? "0px 15px" : "" }}
                           key={index}
                         >
-                          <RightBorderDashboard>
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
                             <Stack
                               justifyContent={"space-between"}
                               flexDirection={isMobile ? "column" : "row"}
@@ -433,18 +454,25 @@ const MentorSearch = () => {
                     )}
                   </Grid>
                 </Grid>
-                <Grid container gap={2} sx={{mt: 4}}>
-                  <h5 style={{color: "gray"}}>Mentor you may know with similar language</h5>
+                <Grid container gap={2} sx={{ mt: 4 }}>
+                  <h5 style={{ color: "#7A7A7A", fontWeight: 400 }}>
+                    Mentor you may know with similar language
+                  </h5>
                   <Grid item sm={12} lg={12}>
                     {loading ? (
                       <Spinner />
-                    ) : (   
+                    ) : (
                       mentorListLanguage?.map((mentor, index) => (
                         <Box
                           sx={{ margin: isMobile ? "0px 15px" : "" }}
                           key={index}
                         >
-                          <RightBorderDashboard>
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
                             <Stack
                               justifyContent={"space-between"}
                               flexDirection={isMobile ? "column" : "row"}
