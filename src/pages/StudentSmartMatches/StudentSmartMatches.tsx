@@ -79,63 +79,25 @@ const MentorSearch = () => {
   }, []);
 
   const getCountryMentors = async () => {
-    // await getMentorBySuggessionCountry()
-    //   .then((res) => {
-    //     setMentorListCountry(res);
-    //   })
-    //   .catch((err) => {});
-    let payload = {
-      countryOfResidence: "",
-      gender: "",
-      mentoringarea: "",
-    };
-
-    await findMentors(payload)
+    await getMentorBySuggessionCountry()
       .then((res) => {
         setMentorListCountry(res);
-        console.log(res);
       })
       .catch((err) => {});
   };
 
   const getLanguageMentors = async () => {
-    // await getMentorBySuggessionLanguage()
-    //   .then((res) => {
-    //     setMentorListLanguage(res);
-    //   })
-    //   .catch((err) => {});
-
-    let payload = {
-      countryOfResidence: "",
-      gender: "",
-      mentoringarea: "",
-    };
-
-    await findMentors(payload)
+    await getMentorBySuggessionLanguage()
       .then((res) => {
         setMentorListLanguage(res);
-        console.log(res);
       })
       .catch((err) => {});
   };
 
   const getUniversityMentors = async () => {
-    // await getMentorBySuggessionUniversity()
-    //   .then((res) => {
-    //     setMentorListUniversity(res);
-    //   })
-    //   .catch((err) => {});
-
-    let payload = {
-      countryOfResidence: "",
-      gender: "",
-      mentoringarea: "",
-    };
-
-    await findMentors(payload)
+    await getMentorBySuggessionUniversity()
       .then((res) => {
         setMentorListUniversity(res);
-        console.log(res);
       })
       .catch((err) => {});
   };
@@ -350,7 +312,12 @@ const MentorSearch = () => {
                           sx={{ margin: isMobile ? "0px 15px" : "" }}
                           key={index}
                         >
-                          <RightBorderDashboard>
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
                             <Stack
                               justifyContent={"space-between"}
                               flexDirection={isMobile ? "column" : "row"}
@@ -500,7 +467,12 @@ const MentorSearch = () => {
                           sx={{ margin: isMobile ? "0px 15px" : "" }}
                           key={index}
                         >
-                          <RightBorderDashboard>
+                          <RightBorderDashboard
+                            style={{
+                              border: "1px solid #D6D6D6",
+                              backgroundColor: "#FFF",
+                            }}
+                          >
                             <Stack
                               justifyContent={"space-between"}
                               flexDirection={isMobile ? "column" : "row"}
