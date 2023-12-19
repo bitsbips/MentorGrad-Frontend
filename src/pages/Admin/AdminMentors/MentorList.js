@@ -20,7 +20,7 @@ import {
 
 // project imports
 
-import { getUsersListStyle1 } from "../store/slices/user";
+import user, { getUsersListStyle1 } from "../store/slices/user";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 // assets
@@ -37,7 +37,7 @@ const avatarImage = require.context("../assets/images/users", true);
 
 // ==============================|| USER LIST 1 ||============================== //
 
-const UserList = ({ page, setMaxPages }) => {
+const UserList = ({ page, setMaxPages, SearchData}) => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -70,6 +70,9 @@ const UserList = ({ page, setMaxPages }) => {
     });
   };
 
+  const users = SearchData || data;
+  console.log(SearchData)
+
   const handleDelete = (id) => {
     console.log(`Delete ${id}`);
     adminDeleteUser(id)
@@ -97,8 +100,8 @@ const UserList = ({ page, setMaxPages }) => {
                 </TableHead> */}
         <TableBody>
           <AdminMentorModal id={idToUpdate} open={open} setOpen={setOpen} getAllUsers={getAllUsers} />
-          {data &&
-            data.map((row, index) => (
+          {users &&
+            users.map((row, index) => (
               <TableRow hover key={index}>
                 <TableCell>
                   <Grid container spacing={2} alignItems="center">

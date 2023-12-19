@@ -1198,6 +1198,30 @@ export async function adminGetAllUsers(payload) {
   }
 }
 
+export async function adminGetUsersSearch(payload) {
+  const token = localStorage.getItem("@storage_Key");
+
+  let headersList = {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+
+  let reqOptions = {
+    url: URL + `admincrud/adminGetUsersSearch`,
+    method: "GET",
+    headers: headersList,
+    params: payload,
+  };
+
+  let response = await axios.request(reqOptions);
+  try {
+    return response.data;
+  } catch (e) {
+    return e.response.data;
+  }
+}
+
 export async function getUserById(payload) {
   const token = localStorage.getItem("@storage_Key");
 
