@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 
 import { useTheme } from "@mui/material/styles";
 import {
@@ -17,40 +17,15 @@ import StudentList from "./StudentList";
 import { IconSearch } from "@tabler/icons";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import MainCard from "../ui-component/cards/MainCard";
-import { adminGetUsersSearch } from "../../../api";
-
 
 const AdminStudents = () => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await adminGetUsersSearch({
-          page: page,
-          limit: 10,
-          userType: "Student",
-          search: search,
-        });
-        console.log("userData:", userData); // Log the userData
-
-        setMaxPages(userData.data.totalPages);
-        setFilteredData(userData.data.users);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, [search, page]);
 
   return (
     <MainCard
@@ -68,7 +43,6 @@ const AdminStudents = () => {
             <OutlinedInput
               id="input-search-list-style1"
               placeholder="Search"
-              onChange={(e) => setSearch(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
                   <IconSearch stroke={1.5} size="16px" />
@@ -81,7 +55,7 @@ const AdminStudents = () => {
       }
       content={false}
     >
-      <StudentList page={page} setMaxPages={setMaxPages} SearchData={search ? filteredData : null} />
+      <StudentList page={page} setMaxPages={setMaxPages} />
       <Grid item xs={12} sx={{ p: 3 }}>
         <Grid container spacing={3}>
           <Grid item>
