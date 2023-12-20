@@ -117,7 +117,7 @@ const SearchSection = () => {
 
     return (
         <>
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            {/* <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <PopupState variant="popper" popupId="demo-popup-popper">
                     {(popupState) => (
                         <>
@@ -154,13 +154,13 @@ const SearchSection = () => {
                         </>
                     )}
                 </PopupState>
-            </Box>
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            </Box> */}
+            {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <OutlineInputStyle
                     id="input-search-header"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    placeholder="Search"
+                    placeholder="heloooooooooooo"
                     startAdornment={
                         <InputAdornment position="start">
                             <IconSearch stroke={1.5} size="16px" color={theme.palette.grey[500]} />
@@ -176,7 +176,7 @@ const SearchSection = () => {
                     aria-describedby="search-helper-text"
                     inputProps={{ 'aria-label': 'weight' }}
                 />
-            </Box>
+            </Box> */}
         </>
     );
 };
