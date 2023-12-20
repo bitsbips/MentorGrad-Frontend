@@ -61,13 +61,14 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await getUserById(id);
-        console.log(userData);
-        setFirstName(userData.data.first_name || ""); // Set default to empty string if undefined
-        setLastName(userData.data.last_name || ""); // Set default to empty string if undefined
-        setFetchedVerified(userData.data.isverified);
-        setFetchedUserType(userData.data.userType);
-        setFetchedDeactivationStatus(userData.data.isDeactivated);
+        const userData = await getUserById(id).then((result) => {
+          console.log(result.data);
+          setFirstName(result.data.first_name || ""); // Set default to empty string if undefined
+          setLastName(result.data.last_name || ""); // Set default to empty string if undefined
+          setFetchedVerified(result.data.isverified);
+          setFetchedUserType(result.data.userType);
+          setFetchedDeactivationStatus(result.data.isDeactivated);
+        })
       } catch (error) {
         console.error("Error fetching user data:", (error as Error).message);
       }
@@ -166,6 +167,11 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="userType"
+                  value={fetchedUserType}
+                  onChange={(e) => {
+                    const newUserType = e.target.value;
+                    setFetchedUserType(newUserType);
+                  }}
                   ref={userTypeRef}
                 >
                   <MenuItem value={"Mentor"}>Mentor</MenuItem>
@@ -182,6 +188,12 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="isVerified"
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    const isVerifiedValue = newValue === "Verified";
+                    setFetchedVerified(isVerifiedValue);
+                  }}
+                  value={fetchedVerified ? "Verified" : "Unverified"}
                   ref={isVerifiedRef}
                 >
                   <MenuItem value={"Verified"}>Verified</MenuItem>
@@ -198,6 +210,12 @@ const AdminMentorModal: React.FC<AdminStudentModalProps> = ({
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Activation Status"
+                  value={fetchedDeactivationStatus ? "Deactivated" : "Activated"}
+                  onChange={(e) => {
+                    const newActivationStatus = e.target.value === "Deactivated";
+                    setFetchedDeactivationStatus(newActivationStatus);
+                    // Handle any other logic you need
+                  }}
                   ref={isDeactivatedRef}
                 >
                   <MenuItem value={"Activated"}>Activated</MenuItem>
