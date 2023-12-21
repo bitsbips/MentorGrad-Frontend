@@ -16,6 +16,8 @@ import {
   Avatar,
   Button,
   CircularProgress,
+  Container,
+  Grid,
   IconButton,
   Radio,
   Skeleton,
@@ -47,16 +49,26 @@ import { InputHolder } from "../../components/UserForm/UserFormStyles";
 import DropdownCompo from "../../components/Dropdown";
 import profile from "../../Assets/Images/person.jpeg";
 import { FiEdit } from "react-icons/fi";
+import ChangePassword from "./ChangePassword";
+import PasswordInput from "../../components/PasswordInput";
+import { faGalacticSenate } from "@fortawesome/free-brands-svg-icons";
 
 type profileData = {
   _id: string;
+  userType: string;
   first_name: string;
   last_name: string;
   email: string;
   nationality: string;
   isDeactivated: boolean;
+  profilePic: string;
   hourlyRate: number;
-  attachments: any;
+  updatedAt: string;
+  password: string;
+  mentor: boolean;
+  isDeleted: boolean;
+  isverified: boolean;
+  createdAt: string;
 };
 
 const Basicinfo = ({
@@ -88,13 +100,14 @@ const Basicinfo = ({
   useEffect(() => {
     setLoading(true);
     if (profileData) {
-      setFirstname(profileData.first_name);
-      setLastname(profileData.last_name);
-      setEmail(profileData.email);
+      console.log(profileData);
+      setFirstname(profileData?.first_name);
+      setLastname(profileData?.last_name);
+      setEmail(profileData?.email);
       setHourlyRate(profileData?.hourlyRate);
       setIsActive(profileData?.isDeactivated ? "DeActivated" : "Activated");
-      setImage(profileData?.attachments[0]?.attachmentPath);
-      setAttachment(profileData?.attachments);
+      console.log("IMAGEEE", profileImg);
+      setImage(profileImg);
     }
     setLoading(false);
   }, [profileData]);
@@ -185,9 +198,9 @@ const Basicinfo = ({
               variant="contained"
               startIcon={<FiEdit size={15} color="black" />}
               sx={{
-                height: "25px",
+                height: "18px",
                 position: "absolute",
-                marginLeft: "10px",
+                marginLeft: "30px",
                 background: "#fff",
                 color: "black",
                 "&:hover": {
@@ -207,9 +220,9 @@ const Basicinfo = ({
             paddingLeft={"20px"}
           >
             <Typography fontWeight={600} fontSize={20}>
-              {firstname + lastname}
+              {firstname + " " + lastname}
             </Typography>
-            <Typography>{email}</Typography>
+            <Typography sx={{ color: "#A7A7A7" }}>{email}</Typography>
           </Stack>
         </Stack>
         <input
@@ -223,64 +236,167 @@ const Basicinfo = ({
         <ContainerForm>
           <PositionProfileForm style={{ marginTop: "10px" }}>
             <ColumnStudentForm>
-              <LabelProfileb>Email Address</LabelProfileb>
               <TextInput
                 width={"100%"}
                 value={email}
                 editable
+                label="Email Address"
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email Address"
+                sx={{ backgroundColor: "white", borderRadius: "15px" }}
               />
             </ColumnStudentForm>
             <ColumnStudentForm>
-              <LabelProfileb>User Name</LabelProfileb>
               <TextInput
                 width={"100%"}
                 editable
                 value={firstname}
+                label="Username"
                 onChange={(e) => setFirstname(e.target.value)}
-                placeholder="User Name"
+                sx={{ backgroundColor: "white", borderRadius: "15px" }}
               />
             </ColumnStudentForm>
           </PositionProfileForm>
           <br />
           <PositionProfileForm>
             <ColumnStudentForm>
-              <LabelProfileb>First Name</LabelProfileb>
               <TextInput
                 width={"100%"}
                 value={firstname}
+                label="First Name"
                 onChange={(e) => setFirstname(e.target.value)}
-                placeholder="First Name"
+                backgroundColor={"#fff"}
+                sx={{ backgroundColor: "white", borderRadius: "15px" }}
               />
             </ColumnStudentForm>
             <ColumnStudentForm>
-              <LabelProfileb>Last Name</LabelProfileb>
               <TextInput
                 width={"100%"}
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
-                placeholder="Last Name"
+                label="Last Name"
+                sx={{ backgroundColor: "white", borderRadius: "15px" }}
+              />
+            </ColumnStudentForm>
+          </PositionProfileForm>
+        </ContainerForm>
+        <br />
+        <TopText>Change Password</TopText>
+        <ContainerForm>
+          <PositionProfileForm>
+            <ColumnStudentForm>
+              <PasswordInput
+                id={"oldpassword"}
+                onChange={() => console.log("kek")}
+                placeholder={"Old Password"}
+                style={{
+                  marginTop: 2,
+                  backgroundColor: "white",
+                  borderRadius: "15px",
+                }}
               />
             </ColumnStudentForm>
           </PositionProfileForm>
           <br />
           <PositionProfileForm>
             <ColumnStudentForm>
-              <LabelProfileb>Hourly Rate</LabelProfileb>
-              <TextInput
-                type={"number"}
-                width={"100%"}
-                value={hourlyRate}
-                onChange={(e) => setHourlyRate(e.target.value)}
-                placeholder="Hourly Rate"
+              <PasswordInput
+                id={"newpassword"}
+                onChange={() => console.log("kek")}
+                placeholder={"New Password"}
+                style={{
+                  marginTop: 2,
+                  backgroundColor: "white",
+                  borderRadius: "15px",
+                }}
               />
             </ColumnStudentForm>
           </PositionProfileForm>
           <br />
           <PositionProfileForm>
             <ColumnStudentForm>
-              <LabelProfileb>Account</LabelProfileb>
+              <PasswordInput
+                id={"confirmpassword"}
+                onChange={() => console.log("kek")}
+                placeholder={"Confirm New Password"}
+                style={{
+                  marginTop: 2,
+                  backgroundColor: "white",
+                  borderRadius: "15px",
+                }}
+              />
+            </ColumnStudentForm>
+          </PositionProfileForm>
+          <br />
+          <PositionProfileForm>
+            <ColumnStudentForm>
+              <Grid container justifyContent={"flex-end"}>
+                <Grid item xs={5}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      marginTop: "4%",
+                      padding: { sx: "10px", lg: "20px" },
+                      marginBottom: "5%",
+                      float: "right",
+                      background: "#5f61be",
+                      borderRadius: "8px",
+                      height: "40px",
+                      "&:hover": {
+                        background: "#5f61be",
+                      },
+                      textTransform: "capitalize",
+                    }}
+                    onClick={() => true}
+                    disabled={false}
+                  >
+                    {!false ? (
+                      "Change Password"
+                    ) : (
+                      <>
+                        <CircularProgress
+                          sx={{ borderColor: "#fff", color: "#fff" }}
+                        />
+                      </>
+                    )}
+                  </Button>
+                </Grid>
+                <Grid item xs={5}>
+                  <Button
+                    sx={{
+                      marginTop: "4%",
+                      padding: { sx: "10px", lg: "20px" },
+                      marginBottom: "5%",
+                      float: "right",
+                      borderRadius: "8px",
+                      border: "1px solid #5f61be",
+                      height: "40px",
+                      "&:hover": {
+                        background: "#5f61be",
+                      },
+                      textTransform: "capitalize",
+                    }}
+                    onClick={() => true}
+                    disabled={false}
+                  >
+                    {!false ? (
+                      "Change Password"
+                    ) : (
+                      <>
+                        <CircularProgress
+                          sx={{ borderColor: "#fff", color: "#fff" }}
+                        />
+                      </>
+                    )}
+                  </Button>
+                </Grid>
+              </Grid>
+            </ColumnStudentForm>
+          </PositionProfileForm>
+        </ContainerForm>
+        <TopText>Account</TopText>
+        <ContainerForm>
+          <PositionProfileForm>
+            <ColumnStudentForm>
               <Stack flexDirection={"row"}>
                 <Stack flexDirection={"row"} alignItems={"center"}>
                   <IconButton>
@@ -311,43 +427,57 @@ const Basicinfo = ({
               </Stack>
             </ColumnStudentForm>
           </PositionProfileForm>
-
-          <Button
-            variant="contained"
-            sx={{
-              marginTop: "4%",
-              padding: { sx: "10px", lg: "20px" },
-              marginBottom: "5%",
-              float: "right",
-              width: "160px",
-              background: "#5f61be",
-              borderRadius: "8px",
-              height: "40px",
-              "&:hover": {
-                background: "#5f61be",
-              },
-            }}
-            onClick={() => handleSubmit()}
-            disabled={loading}
-          >
-            {!loading ? (
-              "Save Changes"
-            ) : (
-              <CircularProgress sx={{ borderColor: "#fff", color: "#fff" }} />
-            )}
-          </Button>
-
-          {/* <ButtonComp
-              style={{
-                padding: '8px',
-                float: 'right',
-              }}
-              fontSize={'12px'}
-              width={isMobile ? '20%' : '60%'}
-              title="Save Changes"
-              onClick={() => handleSubmit()}
-            /> */}
         </ContainerForm>
+        <Button
+          sx={{
+            marginTop: "4%",
+            padding: { sx: "10px", lg: "20px" },
+            marginBottom: "5%",
+            float: "right",
+            width: "160px",
+            border: "2px solid #5f61be",
+            borderRadius: "8px",
+            height: "40px",
+            "&:hover": {
+              background: "#5f61be",
+              color: "white",
+            },
+            mx: 1,
+          }}
+          onClick={() => handleSubmit()}
+          disabled={loading}
+        >
+          {!false ? (
+            "Cancel"
+          ) : (
+            <CircularProgress sx={{ borderColor: "#fff", color: "#fff" }} />
+          )}
+        </Button>
+
+        <Button
+          sx={{
+            marginTop: "4%",
+            padding: { sx: "10px", lg: "20px" },
+            marginBottom: "5%",
+            float: "right",
+            width: "160px",
+            color: "#fff",
+            background: "#5f61be",
+            borderRadius: "8px",
+            height: "40px",
+            "&:hover": {
+              background: "#5f61be",
+            },
+          }}
+          onClick={() => handleSubmit()}
+          disabled={loading}
+        >
+          {!loading ? (
+            "Save Changes"
+          ) : (
+            <CircularProgress sx={{ borderColor: "#fff", color: "#fff" }} />
+          )}
+        </Button>
       </div>
     </>
   );

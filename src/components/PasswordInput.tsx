@@ -13,11 +13,11 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 interface Props {
-  label: string;
+  label?: string;
   placeholder: string;
   icon?: any;
   onChange?: (e: any) => void;
-  value: any;
+  value?: any;
   style?: any;
   id: any;
 }
@@ -53,15 +53,12 @@ const PasswordInput: React.FC<Props> = (props) => {
       }}
       variant="outlined"
     >
-      <InputLabel htmlFor="outlined-adornment-password">
-        {props.label}
-      </InputLabel>
       <OutlinedInput
         fullWidth
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}
-        style={{ marginBottom: 10 }}
+        style={{ ...props.style }}
         id={props.id}
         type={showPassword ? "text" : "password"}
         endAdornment={

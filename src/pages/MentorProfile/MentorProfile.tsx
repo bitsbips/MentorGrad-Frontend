@@ -5,10 +5,10 @@ import Footer from "../../components/Footer";
 import MentorProfileAll from "./MentorProfileAll";
 
 const MentorProfile = () => {
-    return(
-       <Container>
-       <MentorProfileAll/>
-       </Container>
-    )
-}
+  return (
+    <Container>
+      <MentorProfileAll />
+    </Container>
+  );
+};
 export default MentorProfile;
