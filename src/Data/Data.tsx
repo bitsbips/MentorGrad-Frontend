@@ -397,7 +397,7 @@ export const PaymentData = [
     title: 'Basic',
     time: 'Monthly',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: '5',
+    price: 10,
     features: [
       {
         name: 'Lorem ipsum',
@@ -428,9 +428,9 @@ export const PaymentData = [
   {
     id: 1,
     title: 'Advance',
-    time: 'Monthly',
+    time: '6 Months',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: '50',
+    price: 48,
     features: [
       {
         name: 'Lorem ipsum',
@@ -463,7 +463,7 @@ export const PaymentData = [
     title: 'Premium',
     time: 'Yearly',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: '150',
+    price: 72,
     features: [
       {
         name: 'Lorem ipsum',

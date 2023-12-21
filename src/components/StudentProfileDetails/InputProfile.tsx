@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { AnyCnameRecord } from "dns";
 import React, { useState, ChangeEvent } from "react";
 
 interface TextInputProps {
@@ -12,6 +13,8 @@ interface TextInputProps {
   maxLength?: number; // Add maxLength as a prop
   size?: any;
   sx?: any;
+  label?: any;
+  backgroundColor?: any;
 }
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -34,6 +37,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       placeholder={props.placeholder}
       value={props.value}
       type={props.type}
+      label={props.label}
       inputProps={{
         maxLength: props.maxLength,
       }}

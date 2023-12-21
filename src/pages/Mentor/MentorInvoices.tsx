@@ -46,19 +46,23 @@ const MentorInvoices = () => {
 
   const getAllInvoices = async (type: string) => {
     setIsLoading(true);
-    await getInvioces().then((res) => {
-      setTableData(res);
-      setIsLoading(false);
-    });
+    await getInvioces()
+      .then((res) => {
+        setTableData(res);
+        setIsLoading(false);
+      })
+      .catch((e) => console.log(e.Error));
   };
 
   useEffect(() => {
     if (activeTab === "5" || activeTab === "4") {
       setIsLoading(true);
-      getInvioces().then((res) => {
-        setTableData(res);
-        setIsLoading(false);
-      });
+      getInvioces()
+        .then((res) => {
+          setTableData(res);
+          setIsLoading(false);
+        })
+        .catch((e) => console.log(e.Error));
     }
   }, [activeTab]);
 
