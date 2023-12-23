@@ -64,6 +64,8 @@ import ValidateLinkedIn from "./pages/AuthFlow/Login/ValidateLinked";
 import MentorSearch from "./components/Student-Dashboard/MentorSearch/Index";
 import MentorAppointmentBooking from "./components/Student-Dashboard/Mentor_Booking/MentorAppBook";
 import { Return } from "./pages/Payment/Return";
+import { ReturnSubscriptionPage } from "./components/PaymentCompo/ReturnSubscriptionPage";
+
 import { CheckoutForm } from "./pages/Payment/Checkout";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminThemeCustomization from "./pages/Admin/themes";
@@ -76,6 +78,7 @@ import { IntlProvider } from "react-intl";
 import AdminMentors from "./pages/Admin/AdminMentors";
 import AdminStudents from "./pages/Admin/AdminStudents";
 import AdminLogin from "./pages/Admin/AdminLogin";
+import { SubscriptionProvider } from "./Context/SubscriptionContext";
 
 const theme = createTheme({
   typography: {
@@ -241,18 +244,24 @@ function App() {
 
   // Define role-based routes
   const studentRoutes = (
-    <Routes>
-      <Route path="/dashboard" element={<StudentDashboardMain />} />
-      <Route path="/studentForm" element={<StudentForm />} />
-      <Route path="/profile" element={<StudentProfile />} />
-      <Route path="/paymentPlan" element={<PaymentPlan />} />
-      <Route path="/paymentPage" element={<PaymentPage />} />
-      <Route path="/findMentor" element={<MentorSearch />} />
-      <Route path="/bookAppointment" element={<MentorAppointmentBooking />} />
-      <Route path="/checkout" element={<CheckoutForm />} />
-      <Route path="/return" element={<Return />} />
-      <Route path="/*" element={<>Uh-oh! Invalid or unaccessible route</>} />
-    </Routes>
+    <SubscriptionProvider>
+      <Routes>
+        <Route path="/dashboard" element={<StudentDashboardMain />} />
+        <Route path="/studentForm" element={<StudentForm />} />
+        <Route path="/profile" element={<StudentProfile />} />
+        <Route path="/paymentPlan" element={<PaymentPlan />} />
+        <Route path="/paymentPage" element={<PaymentPage />} />
+        <Route path="/findMentor" element={<MentorSearch />} />
+        <Route path="/bookAppointment" element={<MentorAppointmentBooking />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/return" element={<Return />} />
+        <Route
+          path="/returnSubscription"
+          element={<ReturnSubscriptionPage />}
+        />
+        <Route path="/*" element={<>Uh-oh! Invalid or unaccessible route</>} />
+      </Routes>
+    </SubscriptionProvider>
   );
 
   const mentorRoutes = (
