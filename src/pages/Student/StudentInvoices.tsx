@@ -41,18 +41,22 @@ const StudentInvoices = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getStudentInvoices().then((res) => {
-      setTableData(res);
-      setIsLoading(false);
-    });
+    getStudentInvoices()
+      .then((res) => {
+        setTableData(res);
+        setIsLoading(false);
+      })
+      .catch((e) => console.log(e));
   }, [activeTab]);
 
   const getAllInvoices = async (type: string) => {
     setIsLoading(true);
-    await getStudentInvoices().then((res) => {
-      setTableData(res);
-      setIsLoading(false);
-    });
+    await getStudentInvoices()
+      .then((res) => {
+        setTableData(res);
+        setIsLoading(false);
+      })
+      .catch((e) => console.log(e));
   };
 
   const handleShowDetails = (invoice: object) => {
