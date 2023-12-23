@@ -12,7 +12,7 @@ import {
   TopText,
 } from "./StudentProfileStyles";
 import { Autocomplete, Avatar, Box, Skeleton, TextField } from "@mui/material";
-import User from "../../Assets/Images/Mask1.png";
+import User from "../../Assets/Images/user.jpeg";
 import ButtonComp from "../Button";
 import BottomLink from "../BottomLink";
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ import {
   fetchImagesBLOB,
   uploadprofilepic,
   getUserById,
-  adminEditUser
+  adminEditUser,
 } from "../../api";
 import Loadercom from "../Loadercom";
 import SkeletonProfile from "../SkeletonLoader/SkeletonProfile";
@@ -76,14 +76,12 @@ const Basicinfo = () => {
 
     GetUserData()
       .then((e) => {
+        console.log(e);
         setSelectedCountry(e.personalDetails.current_country);
         console.log(e.personalDetails.current_country.name, "ccc");
         setAddress(e.personalDetails.address);
         setPhone(e.personalDetails.phone_no);
         setQualification(e.personalDetails.current_qualification);
-        setFirstname(e.profileDetails.first_name);
-        setLastname(e.profileDetails.last_name);
-        setEmail(e.profileDetails.email);
         setSelectedNationality(e.personalDetails.nationality);
         setImage(e.profileDetails.profilePic);
         // fetchImagesBLOB(e.profileDetails.profilePic.filename).then((e) => {
@@ -99,9 +97,10 @@ const Basicinfo = () => {
 
     getUserById(userData.id)
       .then((e) => {
-        setFirstname(e.profileDetails.first_name);
-        setLastname(e.profileDetails.last_name);
-        setEmail(e.profileDetails.email);
+        console.log(e);
+        setFirstname(e.data.first_name);
+        setLastname(e.data.last_name);
+        setEmail(e.data.email);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -172,16 +171,15 @@ const Basicinfo = () => {
         notifyError(e.message);
       }
     });
-    adminEditUser(userData.id,{
+    adminEditUser(userData.id, {
       first_name: firstname,
-      last_name: lastname
+      last_name: lastname,
     })
-    .then((e) => {
-    })
-    .catch((error) => {
-      console.error("Error updating the data", error);
-      setLoad(false);
-    });
+      .then((e) => {})
+      .catch((error) => {
+        console.error("Error updating the data", error);
+        setLoad(false);
+      });
   };
 
   return (
@@ -192,15 +190,15 @@ const Basicinfo = () => {
       ) : (
         <div>
           <ImageContainerpo>
-            {image && (
+            {
               <div>
                 <img
-                  src={image}
+                  src={image || User}
                   alt="profile-pic"
                   style={{ width: 70, height: 70, borderRadius: 15 }}
                 />
               </div>
-            )}
+            }
 
             <ButtonComp
               style={{ alignSelf: "center" }}
@@ -232,7 +230,7 @@ const Basicinfo = () => {
             onChange={handleImageUpload}
           />
           <ContainerForm>
-            <PositionProfileForm style={{ marginTop: "10px"}} >
+            <PositionProfileForm style={{ marginTop: "10px" }}>
               <ColumnStudentForm>
                 <LabelProfileb>First Name</LabelProfileb>
                 <TextInput
@@ -285,9 +283,9 @@ const Basicinfo = () => {
                     borderRadius: "15px",
                     borderWidth: "1.5px",
                     borderColor: "#D6D6D6",
-                    paddingTop:"18px",
-                    paddingBottom:"18px",
-                    marginTop:"-7px"
+                    paddingTop: "18px",
+                    paddingBottom: "18px",
+                    marginTop: "-7px",
                   },
                 }}
                 onChange={handleCountryChange}
@@ -317,9 +315,9 @@ const Basicinfo = () => {
                     borderRadius: "15px",
                     borderWidth: "1.5px",
                     borderColor: "#D6D6D6",
-                    paddingTop:"18px",
-                    paddingBottom:"18px",
-                    marginTop:"-7px"
+                    paddingTop: "18px",
+                    paddingBottom: "18px",
+                    marginTop: "-7px",
                   },
                 }}
                 onChange={(event, selectedValue: any) =>

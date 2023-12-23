@@ -318,6 +318,8 @@ export async function GetUserData() {
 
   let response = await axios.request(reqOptions);
   try {
+    console.log("RESPONSEEEEEEEEEEE");
+    console.log(response);
     return response.data;
   } catch (e) {
     // saving error
@@ -1238,6 +1240,7 @@ export async function getUserById(payload) {
 
   let response = await axios.request(reqOptions);
   try {
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return e.response.data;
