@@ -101,6 +101,7 @@ const MentorSearch = () => {
     }
   };
 
+  //Gets mentors based on country, gender and mentoring area option
   const getMentors = () => {
     setshowFilter(false);
     setLoading(true);
@@ -395,6 +396,9 @@ const MentorSearch = () => {
                         py: 1,
                         px: 2,
                       }}
+                      onClick={() =>
+                        navigate(`/bookAppointment?id=${mentor?.userId}`)
+                      }
                     >
                       Get Appointment
                     </Button>
@@ -404,6 +408,7 @@ const MentorSearch = () => {
             </Box>
           ))}
         </Box>
+
         {/* <ContainerDa>
           <ContainerDashboard>
             <Stack
