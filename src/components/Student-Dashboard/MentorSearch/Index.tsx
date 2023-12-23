@@ -1,40 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { ContainerDashboard } from '../StudentDahboardStyles';
+import React, { useEffect, useState } from "react";
+import { ContainerDashboard } from "../StudentDahboardStyles";
 import {
   PositionHeader,
   PositionImage,
   RightBorderDashboard,
   RightContainerDash,
-} from '../../StudentDashboard/StudentDashboardStyles';
+} from "../../StudentDashboard/StudentDashboardStyles";
 import {
   Box,
   Button,
   Dialog,
   DialogContent,
   Divider,
+  FormControl,
   Grid,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
   Stack,
+  TextField,
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import SearchFilter from './SearchFilter';
-import { GetCountryList, findMentors } from '../../../api';
-import { notifyError } from '../../Toastifycom';
-import picture from '../../../Assets/Images/user.jpeg';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ReviewsIcon from '@mui/icons-material/Reviews';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import MoneyIcon from '@mui/icons-material/Money';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import Spinner from '../../Spinner';
-import { Container } from '../../../pages/AuthFlow/AuthStyles';
-import Footer from '../../Footer';
-import { ContainerDa } from '../../StudentProfileDetails/StudentProfileStyles';
-import HeaderDashboard from '../../Header/HeaderDashboard';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import SearchFilter from "./SearchFilter";
+import { GetCountryList, findMentors } from "../../../api";
+import { notifyError } from "../../Toastifycom";
+import picture from "../../../Assets/Images/user.jpeg";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MoneyIcon from "@mui/icons-material/Money";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Spinner from "../../Spinner";
+import { Container } from "../../../pages/AuthFlow/AuthStyles";
+import Footer from "../../Footer";
+import { ContainerDa } from "../../StudentProfileDetails/StudentProfileStyles";
+import HeaderDashboard from "../../Header/HeaderDashboard";
+import { useNavigate } from "react-router-dom";
 
 type Mentor = {
   _id: string;
@@ -43,7 +49,10 @@ type Mentor = {
   firstName: string;
   lastName: string;
   countryOfResidence: string;
+  universityName: string;
   hourlyRate: number;
+  comment: string;
+  mentoringarea: any;
   user: Array<{
     attachments: Array<{
       attachmentPath: string;
@@ -58,14 +67,14 @@ type MentorList = Mentor[];
 const MentorSearch = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  const isMobile2 = useMediaQuery('(max-width: 1200px)');
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile2 = useMediaQuery("(max-width: 1200px)");
   const [showFilter, setshowFilter] = useState(false);
   const [filters, setFilters] = useState({
-    country: '',
-    gender: '',
-    course: '',
-    location: '',
+    country: "",
+    gender: "",
+    course: "",
+    location: "",
   });
   const [countries, setCountries] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -104,6 +113,7 @@ const MentorSearch = () => {
       findMentors(payload)
         .then((e) => {
           setMentorList(e);
+          console.log(e);
           setLoading(false);
         })
         .catch((err) => {
@@ -134,11 +144,267 @@ const MentorSearch = () => {
     }
   };
 
+  const [age, setAge] = React.useState("");
+
+  const handleAgeChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
   return (
     <>
       <Container>
         <HeaderDashboard />
-        <ContainerDa>
+        <Box
+          sx={{
+            backgroundColor: "#D1D2F4",
+            minHeight: "437px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ width: "min(1050px, 100%)" }}>
+            <Typography
+              variant="h3"
+              sx={{ textAlign: "left", marginBottom: 3, fontWeight: "bold" }}
+            >
+              All mentors
+            </Typography>
+            <Grid container sx={{ mb: 2 }}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: "15px",
+                    width: "100%",
+                  }}
+                  placeholder="Search by location or service"
+                >
+                  kekw
+                </TextField>
+              </Grid>
+            </Grid>
+            <Grid container columnGap={0.5}>
+              <Grid item xs={1.5}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Skills</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    sx={{ borderRadius: "15px", backgroundColor: "white" }}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={1.5}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Topics</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    sx={{ borderRadius: "15px", backgroundColor: "white" }}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={1.5}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Services
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    sx={{ borderRadius: "15px", backgroundColor: "white" }}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Locations
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    sx={{ borderRadius: "15px", backgroundColor: "white" }}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Universities
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    sx={{ borderRadius: "15px", backgroundColor: "white" }}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={2} sx={{ marginLeft: "auto" }}>
+                <FormControl fullWidth>
+                  <Button
+                    sx={{
+                      background: "white",
+                      borderRadius: "15px",
+                      py: 1.8,
+                      color: "#B8B8B8",
+                    }}
+                  >
+                    More Filters
+                  </Button>
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          {mentorList.map((mentor) => (
+            <Box
+              sx={{
+                width: "min(95%, 1100px)",
+                p: 2,
+                my: 2,
+                border: "0.5px solid #D1D2F4",
+                borderRadius: "15px",
+              }}
+            >
+              <Grid container sx={{ height: "100%" }}>
+                <Grid item xs={12} md={4} sx={{ height: "100%" }}>
+                  <img
+                    src={
+                      mentor?.user[0]?.attachments?.length > 0
+                        ? mentor?.user[0]?.attachments[0]?.attachmentPath
+                        : "https://mentorgrad.s3.us-west-2.amazonaws.com/dummy2.jpg"
+                    }
+                    style={{
+                      width: "350px",
+                      height: "350px",
+                      borderRadius: "15px",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={8} sx={{ px: 2, position: "relative" }}>
+                  <Box sx={{ display: "flex" }}>
+                    <Typography
+                      sx={{
+                        textAlign: "left",
+                        fontSize: "24px",
+                        fontWeight: 600,
+                        mx: 1,
+                      }}
+                    >{`${mentor?.firstName} ${mentor?.lastName}`}</Typography>
+                    <Typography
+                      sx={{
+                        textAlign: "left",
+                        fontSize: "18px",
+                        fontWeight: 400,
+                        mx: 1,
+                      }}
+                    >{`${mentor?.countryOfResidence}`}</Typography>
+                  </Box>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontSize: "36px",
+                      fontWeight: 600,
+                    }}
+                  >{`${mentor?.universityName}`}</Typography>
+                  <Grid container sx={{ textAlign: "left", mb: 2 }} gap={1}>
+                    {mentor?.mentoringarea.map(
+                      (field: { title?: string } | undefined) => (
+                        <Grid
+                          item
+                          key={field?.title}
+                          style={{
+                            backgroundColor: "#dcf5dc",
+                            fontWeight: 400,
+                            fontSize: "18px",
+                            borderRadius: "15px",
+                            padding: "10px",
+                          }}
+                        >
+                          {field?.title}
+                        </Grid>
+                      )
+                    )}
+                  </Grid>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontWeight: 400,
+                      fontSize: "20px",
+                    }}
+                  >
+                    {mentor?.comment}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "left",
+                      position: "absolute",
+                      bottom: "10px",
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        backgroundColor: "#C9F6EF",
+                        color: "black",
+                        py: 1,
+                        px: 2,
+                      }}
+                    >
+                      Get Appointment
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          ))}
+        </Box>
+        {/* <ContainerDa>
           <ContainerDashboard>
             <Stack
               flexDirection={'row'}
@@ -355,7 +621,7 @@ const MentorSearch = () => {
             )}
           </ContainerDashboard>
         </ContainerDa>
-        <Footer />
+        <Footer /> */}
       </Container>
     </>
   );
