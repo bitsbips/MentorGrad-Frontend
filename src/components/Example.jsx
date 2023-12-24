@@ -5,7 +5,7 @@ const RightBorder = styled.div`
    
    width: 70%;
 
-  background-color:  #FBFBFB;
+  background-color:  #fffff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   @media (max-width: 950px) {
@@ -24,7 +24,7 @@ const BorderWidth = styled.div`
 
 `
 const TopHeader = styled.div`
-    background-color: #F3F3F3;
+    background-color: #fffff;
     padding: 1%;
     border-bottom: 1px solid grey;
 `
@@ -101,7 +101,7 @@ const StyledInput = styled.input`
   border: 1.5px solid #D6D6D6;
   border-radius: 15px;
   padding: 12px 22px; /* Added padding to the right */
-  background-color: #FBFBFB;
+  background-color: #fffff;
   width: 60%;
   @media (max-width: 450px) {
     width: 100%;
@@ -111,7 +111,7 @@ const StyledSelect = styled.select`
    width: 60%;
         border-width: 1.5;
         border-radius: 15px;
-        background-color: #FBFBFB;
+        background-color: #fffff;
         padding: 3%;
         border-color: #D6D6D6;
         margin-top: 1%;

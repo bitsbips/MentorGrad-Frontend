@@ -150,7 +150,7 @@ const Passportinfo: FC = () => {
                                 sx={{
                                     width: '100%',
                                     borderRadius: '1px',
-                                    backgroundColor: '#F2F5F9',
+                                    backgroundColor: '#fffff',
                                     marginTop: '1%',
                                     '& fieldset': {
                                         borderRadius: "15px", borderWidth: '1.5px',

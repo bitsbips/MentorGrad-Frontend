@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   flex: 1;
-  background-color: #f5f5f5;
+  background-color: #fffff;
 `;
 export const Containerm = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
 `;
 export const Container = styled.div`
@@ -15,7 +15,7 @@ export const Container = styled.div`
   align-self: center;
   justify-content: center;
   align-items: center;
-  background-color: #f2f5f9;
+  background-color: #fffff;
   @media (max-width: 750px) {
     width: 90%;
     margin: auto;
@@ -23,7 +23,7 @@ export const Container = styled.div`
     align-self: center;
     justify-content: center;
     align-items: center;
-    background-color: #f2f5f9;
+    background-color: #fffff;
   }
   @media (max-width: 950px) {
     width: 90%;
@@ -32,12 +32,12 @@ export const Container = styled.div`
     align-self: center;
     justify-content: center;
     align-items: center;
-    background-color: #f2f5f9;
+    background-color: #fffff;
   }
 `;
 export const ContainerD = styled.div`
   width: 100%;
-  background-color: #f2f5f9;
+  background-color: #fffff;
   @media (max-width: 750px) {
     width: 100%;
   }
@@ -68,7 +68,7 @@ export const SubContainer = styled.div`
   align-self: center;
   justify-content: center;
   align-items: center;
-  background-color: #f2f5f9;
+  background-color: #fffff;
   position: relative;
   @media (max-width: 960px) {
     width: 100%;

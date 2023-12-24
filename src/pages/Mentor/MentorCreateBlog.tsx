@@ -351,7 +351,7 @@ const MentorCreateBlogs = (): JSX.Element => {
                   onChange={handleChange}
                   style={{
                     width: '100%',
-                    background: '#f2f5f9',
+                    background: '#fffff',
                     borderRadius: '12px',
                   }}
                 />

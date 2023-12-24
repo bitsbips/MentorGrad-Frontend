@@ -114,7 +114,7 @@ const PassportDetails: FC = () => {
                     sx={{
                         width: '100%',
                         borderRadius:2,
-                        backgroundColor: '#F2F5F9',
+                        backgroundColor: '#fffff',
                         marginTop: '1%',
                         fontSize:12,
 

@@ -17,13 +17,13 @@ import { Box, Tab, Tabs } from "@mui/material";
 
 const style = {
   width: "30%",
-  bgcolor: "#F2F5F9",
+  bgcolor: "#fffff",
   cursor: "pointer",
   marginTop: "0px",
 };
 const stylemobile = {
   width: "100%",
-  bgcolor: "#F2F5F9",
+  bgcolor: "#fffff",
   cursor: "pointer",
   marginTop: "0px",
 };
@@ -135,7 +135,7 @@ const StudentProfileAll: FC = () => {
     }
   };
   return (
-    <Box sx={{ background: "#f2f5f9" }}>
+    <Box sx={{ background: "#fffff" }}>
       <Box sx={{ marginBottom: "15px" }}>
         <Tabs
           value={Status}

@@ -48,7 +48,7 @@ import { GET_ALL_USERS } from '../../graphql/queries';
 import MentorInvoices from '../../pages/Mentor/MentorInvoices';
 const style = {
   width: '30%',
-  bgcolor: '#F2F5F9',
+  bgcolor: '#fffff',
   cursor: 'pointer',
   marginTop: '0px',
 };

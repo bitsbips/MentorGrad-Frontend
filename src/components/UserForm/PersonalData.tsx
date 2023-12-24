@@ -139,7 +139,7 @@ const PersonalData: FC = () => {
                     sx={{
                         width: '100%',
                         borderRadius: 5,
-                        backgroundColor: '#F2F5F9',
+                        backgroundColor: '#fffff',
                         marginTop: '1%',
                         '& fieldset': {
                             borderRadius: 2, borderWidth: '1.5px',
@@ -162,7 +162,7 @@ const PersonalData: FC = () => {
                     sx={{
                         width: '100%',
                         borderRadius: 5,
-                        backgroundColor: '#F2F5F9',
+                        backgroundColor: '#fffff',
                         marginTop: '1%',
                         '& fieldset': {
                             borderRadius: 2, borderWidth: '1.5px',
@@ -192,7 +192,7 @@ const PersonalData: FC = () => {
                             sx={{
                                 width: '100%',
                                 borderRadius: 5,
-                                backgroundColor: '#F2F5F9',
+                                backgroundColor: '#fffff',
                                 marginTop: '1%',
                                 '& fieldset': {
                                     borderRadius: 2, borderWidth: '1.5px',
@@ -216,7 +216,7 @@ const PersonalData: FC = () => {
                             sx={{
                                 width: '100%',
                                 borderRadius: 5,
-                                backgroundColor: '#F2F5F9',
+                                backgroundColor: '#fffff',
                                 marginTop: '1%',
                                 '& fieldset': {
                                     borderRadius: 2, borderWidth: '1.5px',
@@ -269,7 +269,7 @@ const PersonalData: FC = () => {
                     sx={{
                         width: '100%',
                         borderRadius: 10,
-                        backgroundColor: '#F2F5F9',
+                        backgroundColor: '#fffff',
                         marginTop: '1%',
                         '& fieldset': {
                             borderRadius: 2, borderWidth: '1.5px',

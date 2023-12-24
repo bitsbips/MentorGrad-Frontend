@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
 `;
 export const BackGround = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
   height: 100%;
 

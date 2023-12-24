@@ -78,7 +78,7 @@ export const ColDirection = styled.div`
 export const SearchBack = styled.div`
   width: 80%;
   padding: 2%;
-  background-color: #f2f5f9;
+  background-color: #fffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,7 +98,7 @@ export const SearchBar = styled.input`
   border-style: solid;
   border-width: 1px;
   border-color: white;
-  background-color: #fff;
+  background-color: #fffff;
   height: 44px;
   position: relative;
   padding-left: 44px;
@@ -297,7 +297,7 @@ export const NewsSubHeading = styled.p`
   }
 `;
 export const WorksBack = styled.div`
-  background: #f2f5f9;
+  background: #fffff;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
   border-radius: 15px;
   padding: 4%;
@@ -318,7 +318,7 @@ export const WorksBack = styled.div`
   }
 `;
 export const WorksBack1 = styled.div`
-  background: #f2f5f9;
+  background: #fffff;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
   border-radius: 15px;
   padding: 4%;
@@ -512,7 +512,7 @@ export const MembersCard = styled.div`
 `;
 
 export const MembersBack = styled.div`
-  background: #f2f5f9;
+  background: #fffff;
   border: 1px solid #7476d1;
   border-radius: 15px;
   padding: 2%;

@@ -16,13 +16,13 @@ import Spinner from "../../components/Spinner";
 
 const style = {
   width: "30%",
-  bgcolor: "#F2F5F9",
+  bgcolor: "#fffff",
   cursor: "pointer",
   marginTop: "0px",
 };
 const stylemobile = {
   width: "100%",
-  bgcolor: "#F2F5F9",
+  bgcolor: "#fffff",
   cursor: "pointer",
   marginTop: "0px",
 };

@@ -224,7 +224,7 @@ const MentorAppDetails: FC = () => {
                             sx={{
                                 width: '100%',
                                 borderRadius: 5,
-                                backgroundColor: '#F2F5F9',
+                                backgroundColor: '#fffff',
                                 marginTop: '1%',
                                 '& fieldset': {
                                     borderRadius: 1.5, borderWidth: '1.5px',

@@ -48,7 +48,7 @@ import StudentSubscriptionPage from "../../pages/Student/StudentSubsciptionPage"
 
 const style = {
   width: "25%",
-  bgcolor: "#F2F5F9",
+  bgcolor: "#fffff",
   cursor: "pointer",
   marginTop: "0px",
 };

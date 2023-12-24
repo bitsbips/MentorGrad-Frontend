@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
   padding: 15px;
 `;
 export const RightBorderDashboard = styled.div`
-  background-color: #f2f5f9; /* Set background color */
+  background-color: #fffff; /* Set background color */
   padding: 2%;
 
   /* box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.1); Add a subtle shadow */
