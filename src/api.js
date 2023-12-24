@@ -2,13 +2,13 @@ import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
 
-// const URL = "http://localhost:5001/api/v1/";
+const URL = "http://localhost:5001/api/v1/";
+export const IMGURL = "http://localhost:5001/api/v1/";
 // export const selfUrl = "http://localhost:3000"
-// export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const IMGURL =
-  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+// const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+// export const IMGURL =
+//   "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const selfUrl = "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
 
 // Chat Urls
