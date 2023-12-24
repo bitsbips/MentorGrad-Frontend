@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   BackCard,
   BackIconinfo,
@@ -22,6 +23,7 @@ const data = [
     background: "#F8BDEB4D",
     backicon: "#F8BDEB4D",
     icon: Users,
+    route: "/dashboard?tab=1",
   },
   {
     id: 1,
@@ -30,6 +32,7 @@ const data = [
     background: "#BEADFA4D",
     backicon: "#BEADFA4D",
     icon: Wallet,
+    route: "/dashboard?tab=1",
   },
   {
     id: 1,
@@ -38,15 +41,26 @@ const data = [
     background: "#3876BF4D",
     backicon: "#3876BF4D",
     icon: Appointment,
+    route: "/dashboard?tab=1",
   },
 ];
 const Cardsinfo = () => {
+  const navigate = useNavigate();
+  const [updateSidebar, setUpdateSidebar] = useState(false);
+
+
+  const handleCardClick = (route: string) => {
+    navigate(route);
+    setUpdateSidebar((prev) => !prev); // Toggle the state to trigger re-render
+  };
   return (
     <PositionCards>
       {data.map((data) => {
         return (
           <BackCard
             style={{ backgroundColor: data.background, borderRadius: "16px" }}
+            onClick={() => handleCardClick(data.route)}
+
           >
             <InsideCardWidth>
               <CardPosition>
