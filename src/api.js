@@ -2,13 +2,13 @@ import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
 
-const URL = "http://localhost:5001/api/v1/";
+// const URL = "http://localhost:5001/api/v1/";
 // export const selfUrl = "http://localhost:3000"
-export const IMGURL = "http://localhost:5001/api/v1/";
+// export const IMGURL = "http://localhost:5001/api/v1/";
 
-// const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-// export const IMGURL =
-//   "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+export const IMGURL =
+  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const selfUrl = "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
 
 // Chat Urls
@@ -1069,7 +1069,7 @@ export async function getStudentInvoices() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `invoice/getBySenderId/${userId}`,
+    url: URL + `invoice/getBySenderId/${userId}`,
     method: "GET",
     headers: headersList,
   };
@@ -1141,7 +1141,7 @@ export async function getSubscriptionByUserId() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: `http://localhost:5001/api/v1/` + `subscription/getSubscriptionByUserId`,
+    url: URL + `subscription/getSubscriptionByUserId`,
     method: "GET",
     headers: headersList,
   };
