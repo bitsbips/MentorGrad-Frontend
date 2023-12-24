@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   Describe,
   Features,
@@ -19,12 +19,43 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Button, Card, Divider, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ButtonComp from "../../components/Button";
+import { getSubscriptionByUserId } from "../../api";
+import Spinner from "../../components/Spinner";
+import { useSubscription } from "../../Context/SubscriptionContext";
 
 const dividerStyle = {
   border: "1.5px solid #7476D1", // Increase the border width to 2px
 };
 
 const PaymentPlanCard: FC<{ data: typeof PaymentData[0] }> = ({ data }) => {
+  const { useSubscriptionData, setSubscription } = useSubscription();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentSubscription, setCurrentSubscription] = useState();
+  const [title, setTitle] = useState();
+  const [paymentApproved, setPaymentApproved] = useState(false);
+
+  useEffect(() => {
+    getcurrentSubscription();
+  }, []);
+
+  const getcurrentSubscription = async () => {
+    try {
+      await getSubscriptionByUserId().then((res) => {
+        // console.log('Full API Response:', res.data);
+  
+        const subscriptionData = res.data;
+    
+        setSubscription(subscriptionData);
+        setTitle(res.data.plan);
+        setPaymentApproved(res.data.paymentApproved);
+      });
+
+    } catch (err) {
+      console.error('Error fetching subscription data:', err);
+    }
+  };
+
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -40,6 +71,24 @@ const PaymentPlanCard: FC<{ data: typeof PaymentData[0] }> = ({ data }) => {
     border: `2.2px solid ${isHovered ? "#7476D1" : "#fff"}`,
     borderRadius: 5,
   };
+
+  let buttonText = '';
+
+
+  if (paymentApproved) {
+    if (title === data.title) {
+      buttonText = 'Current';
+    } else if (title === data.title) {
+      buttonText = 'Current';
+    } else if (title === data.title) {
+      buttonText = 'Current';
+    }
+    else{
+      buttonText=data.buttonText;
+    }
+  }else{  
+    buttonText=data.buttonText;
+  }
 
   return (
     <Grid item xs={12} lg={3.8}>
@@ -75,7 +124,7 @@ const PaymentPlanCard: FC<{ data: typeof PaymentData[0] }> = ({ data }) => {
           <ButtonComp
             style={{ margin: "auto" }}
             fontSize={"12px"}
-            title="Upgrade"
+            title={buttonText}
             width={"80%"}
             onClick={() => navigate("/paymentPage", { state: { data } })}
           />
@@ -107,7 +156,10 @@ const StudentSubscriptionPage: FC = () => {
               justifyContent: "center",
             }}
           >
-            <Button variant="contained" sx={{ width: "100%", backgroundColor:'red' }}>
+            <Button
+              variant="contained"
+              sx={{ width: "100%", backgroundColor: "red" }}
+            >
               Cancel Plan
             </Button>
           </Grid>
