@@ -278,7 +278,7 @@ const Basicinfo = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 5,
-                  backgroundColor: "#F2F5F9",
+                  backgroundColor: "#fffff",
                   "& fieldset": {
                     borderRadius: "15px",
                     borderWidth: "1.5px",
@@ -310,7 +310,7 @@ const Basicinfo = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 5,
-                  backgroundColor: "#F2F5F9",
+                  backgroundColor: "#fffff",
                   "& fieldset": {
                     borderRadius: "15px",
                     borderWidth: "1.5px",

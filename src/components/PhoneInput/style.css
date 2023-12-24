@@ -992,7 +992,7 @@
 
 .react-tel-input .form-control {
     font-size: 14px;
-    background: #F2F5F9;
+    background: #ffffff;
     border: 1.5px solid #CACACA;
     border-radius:15px;
     outline: none;
@@ -1132,11 +1132,11 @@
 }
 
 .react-tel-input .country-list .country:hover {
-    background-color: #f1f1f1
+    background-color: #ffffff
 }
 
 .react-tel-input .country-list .country.highlight {
-    background-color: #f1f1f1
+    background-color: #ffffff
 }
 
 .react-tel-input .country-list .flag {
@@ -1152,7 +1152,7 @@
     z-index: 2;
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 10px 0 6px 10px
 }
 

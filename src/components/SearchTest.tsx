@@ -26,7 +26,7 @@ const ComboBox: React.FC<Props> = (props) => {
             sx={{
                 width: props.width,
                 borderRadius: 5,
-                backgroundColor: '#F2F5F9',
+                backgroundColor: '#fffff',
                 padding: props.padding,
                 marginTop: '1%',
                 '& fieldset': {

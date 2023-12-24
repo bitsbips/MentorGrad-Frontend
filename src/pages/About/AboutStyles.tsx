@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
 `;
 export const ColorContainer = styled.div`
@@ -500,7 +500,7 @@ export const BackCart12 = styled.div`
 `;
 
 export const BackCart = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   box-shadow: 0px 0px 15px rgba(163, 165, 233, 0.3);
   border-radius: 15px;
   width: 23.8%;

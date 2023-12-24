@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
 flex:1;
-background-color: #F5F5F5;
+background-color: #fffff;
 
 `;
 

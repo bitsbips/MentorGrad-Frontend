@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
   overflow-x: hidden;
 `;
 
 // HeaderCart
 export const HeaderCart = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   border-radius: 15px;
   width: 55%;
   margin-bottom: 2%;
@@ -29,7 +29,7 @@ export const IconBackHeader = styled.div`
   margin-left: 1%;
 `;
 export const ExperticeBack = styled.div`
-  background-color: #ededff;
+  background-color: #fffff;
   border-radius: 15px;
   justify-content: center;
   align-items: center;
@@ -378,7 +378,7 @@ export const MentorSubHeadingbtm = styled.p`
   }
 `;
 export const BackCartMentor = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   width: 22%;
   margin-left: 5%;
   margin-bottom: 5%;
@@ -395,7 +395,7 @@ export const BackCartMentor = styled.div`
   }
 `;
 export const BackCartMentorVideo = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
 
   border-radius: 15px;
   width: 35%;
@@ -452,7 +452,7 @@ export const RowDirectionMentorWrap = styled.div`
   margin: auto;
 `;
 export const SupportBack = styled.div`
-  background-color: #f4f4f4;
+  background-color: #fffff;
   flex: 1;
   margin-bottom: 6%;
 `;

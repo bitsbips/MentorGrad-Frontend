@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   width: 80%;
   margin: 0 auto !important;
   margin-top: 2% !important;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   }
 `;
 export const ContainerDa = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   width: 90%;
   margin: 0 auto !important;
   margin-top: 2% !important;
@@ -29,13 +29,13 @@ export const PositionProfile = styled.div`
 
 export const Border = styled.div`
   border: 1.2px solid #d6d6d6; /* Define the border style */
-  background-color: #f2f5f9; /* Set background color */
+  background-color: #fffff; /* Set background color */
   border-radius: 15px;
   /* box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.1); Add a subtle shadow */
 `;
 export const RightBorder = styled.div`
   border: 1.2px solid #d6d6d6; /* Define the border style */
-  background-color: #f2f5f9; /* Set background color */
+  background-color: #fffff; /* Set background color */
   border-radius: 15px;
   @media (max-width: 750px) {
     margin-bottom: 10%;
@@ -138,7 +138,7 @@ export const PositionProfileForm = styled.div`
 
 export const PaymentContainer = styled.div`
   border: 1.2px solid #d6d6d6; /* Define the border style */
-  background-color: #f2f5f9; /* Set background color */
+  background-color: #fffff; /* Set background color */
   border-radius: 15px;
   margin: auto;
   width: 80%;

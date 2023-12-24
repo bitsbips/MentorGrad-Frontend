@@ -25,7 +25,7 @@
 // // -webkit-appearance: menulist-button; /* Preserve the select dropdown icon in Webkit browsers */
 // //   border: 1.5px solid #d6d6d6; /* Set the border explicitly */
 // //   border-radius: 15px;
-// //   background-color: #f2f5f9;
+// //   background-color: #fffff;
 // //   font-size: 13px;
 // //     &:hover {
 // //     border: 1.5px solid #000; /* Set the border explicitly */

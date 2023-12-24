@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const ContainerDashboard = styled.div`
-  background-color: #F2F5F9;
+  background-color: #fffff;
   flex:1;
  
 `;

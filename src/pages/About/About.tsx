@@ -75,7 +75,7 @@ import styled from 'styled-components';
 import { Column, Row, RowAbout } from '../Home/HomeStyles';
 
 const AccordionStyle = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   width: 98%;
   border-radius: 15px;
 
@@ -196,7 +196,7 @@ const About = () => {
                           },
                         }}
                         style={{
-                          backgroundColor: '#F2F5F9',
+                          backgroundColor: '#fffff',
                           borderRadius: 10,
                           marginBottom: 10,
                         }}

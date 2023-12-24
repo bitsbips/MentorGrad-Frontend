@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #fcfcfc;
+  background-color: #ffffff;
   border-bottom: 1px solid #d6d6d6;
 }
 
@@ -19,7 +19,7 @@ body {
 
 .navbar {
   height: 60px;
-  background-color: #f2f5f9;
+  background-color: #ffffff;
   position: relative;
   z-index: 1000;
   width: 80%;
@@ -76,7 +76,7 @@ body {
 }
 
 .multi-drop-back {
-  background-color: #f2f5f9;
+  background-color: #ffffff;
 }
 
 .nav-elements ul a {
@@ -118,7 +118,7 @@ body {
     position: absolute;
     right: 0;
     top: 60px;
-    background-color: #f2f5f9;
+    background-color: #ffffff;
     width: 0px;
     height: calc(100vh - 60px);
     transition: all 0.3s ease-in;

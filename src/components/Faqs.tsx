@@ -13,7 +13,7 @@ import useMediaQuery from '../hooks/MediaQuery';
 
 
 const AccordionStyle = styled.div`
-background-color: #F2F5F9;
+background-color: #fffff;
 width: 75%;
 @media (max-width: 450px) {
 
@@ -97,7 +97,7 @@ export default function SimpleAccordion() {
                     {AccordionData.map((data, index) => {
                         return (
                             <Accordion className={classes.MuiAccordionroot}
-                                elevation={0} style={{ backgroundColor: '#F2F5F9' }}>
+                                elevation={0} style={{ backgroundColor: '#fffff' }}>
                                 <AccordionSummary className={classes.MuiAccordionSummaryExpanded}
                                     expandIcon={<ExpandMoreIcon style={{ color: '#7476D1' }} />}
                                     aria-controls="panel1a-content"

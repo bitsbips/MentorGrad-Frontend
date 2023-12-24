@@ -70,7 +70,7 @@ const StudentInvoices = () => {
         width: isMobile ? "100%" : "105%",
         margin: "auto",
         border: "1px solid #8C8C8C",
-        background: "#F2F5F9",
+        background: "#fffff",
         elevation: 0,
       }}
     >

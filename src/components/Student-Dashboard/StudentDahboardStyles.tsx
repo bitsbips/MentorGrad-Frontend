@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
-  background-color: #f2f5f9;
+  background-color: #fffff;
   flex: 1;
   @media (max-width: 768px) {
     margin: 0px 15px;
