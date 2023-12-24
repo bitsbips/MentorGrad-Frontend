@@ -61,6 +61,7 @@ export const StudentBooking = (): JSX.Element => {
   const [bookingDetails, setBookingDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+
   useEffect(() => {
     getAllBookings("ALL");
     getAllBookingstest();

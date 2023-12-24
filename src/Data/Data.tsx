@@ -398,6 +398,7 @@ export const PaymentData = [
     time: 'Monthly',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     price: 10,
+    buttonText:'upgrade',
     features: [
       {
         name: 'Lorem ipsum',
@@ -431,6 +432,7 @@ export const PaymentData = [
     time: '6 Months',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     price: 48,
+    buttonText:'upgrade',
     features: [
       {
         name: 'Lorem ipsum',
@@ -464,6 +466,7 @@ export const PaymentData = [
     time: 'Yearly',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     price: 72,
+    buttonText:'upgrade',
     features: [
       {
         name: 'Lorem ipsum',

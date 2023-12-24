@@ -2,13 +2,13 @@ import axios from "axios";
 import { Country, userTypes } from "./Data/Data";
 import { jwtDecode } from "./helper-functions";
 
-// const URL = "http://localhost:5001/api/v1/";
+const URL = "http://localhost:5001/api/v1/";
 // export const selfUrl = "http://localhost:3000"
-// export const IMGURL = "http://localhost:5001/api/v1/";
+export const IMGURL = "http://localhost:5001/api/v1/";
 
-const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
-export const IMGURL =
-  "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+// const URL = "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
+// export const IMGURL =
+//   "https://mentorgrad-backend-0908e17a7a7d.herokuapp.com/api/v1/";
 export const selfUrl = "https://mentorgrad-frontend-1ada3246f9bc.herokuapp.com";
 
 // Chat Urls
@@ -1083,7 +1083,7 @@ export async function getStudentInvoices() {
   }
 }
 
-export async function createSubscription() {
+export async function createSubscription(payload) {
   const token = localStorage.getItem("@storage_Key");
 
   let headersList = {
@@ -1095,6 +1095,7 @@ export async function createSubscription() {
     url: URL + `subscription/createSubscription`,
     method: "POST",
     headers: headersList,
+    data: payload
   };
 
   let response = await axios.request(reqOptions);
@@ -1131,6 +1132,8 @@ export async function approvePayment() {
 
 export async function getSubscriptionByUserId() {
   const token = localStorage.getItem("@storage_Key");
+  const userId = jwtDecode(localStorage.getItem("@storage_Key"))?.userId;
+
 
   let headersList = {
     Accept: "*/*",
@@ -1138,7 +1141,7 @@ export async function getSubscriptionByUserId() {
     "Content-Type": "application/json",
   };
   let reqOptions = {
-    url: URL + `subscription/getSubscriptionByUserId`,
+    url: `http://localhost:5001/api/v1/` + `subscription/getSubscriptionByUserId`,
     method: "GET",
     headers: headersList,
   };
